@@ -1,5 +1,6 @@
 PlayFab SDK for Objective-C Beta
 ========
+
 1. Overview:
 This is our Objective-C SDK for native OSX & iOS development. This SKD is currently in beta, so please let us know if you run into any issues. 
 
@@ -8,8 +9,8 @@ Happy Developing!
 2. Usage Instructions:
 ----
 There are two ways to get started:
-  1. Start with and add to our [example implemnetation project](/Objective_C_SDK/ExampleProject)
-  2. Import [our SDK](/Objective_C_SDK/PlayFabSDK) into an existing XCode project
+  1. Start with and add to our [example implemnetation project](/ExampleProject/)
+  2. Import [our SDK](/PlayFabSDK) into an existing XCode project
 
 3. PlayFab Configuration:
 ----
