@@ -182,7 +182,7 @@
 				AD5E8F911C935E2D00AFB4B0 /* PlayFabVersion.m */,
 			);
 			name = "PlayFab ObjC SDK";
-			path = "../../PlayFAB/PlayFab ObjC SDK Beta/PlayFab ObjC SDK";
+			path = ../PlayFabSDK;
 			sourceTree = "<group>";
 		};
 		AD5E8F7A1C935E2D00AFB4B0 /* JAGPropertyConverter */ = {
