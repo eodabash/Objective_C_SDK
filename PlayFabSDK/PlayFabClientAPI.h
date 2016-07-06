@@ -32,17 +32,15 @@ typedef void(^LoginWithKongregateCallback)(LoginResult* result, NSObject* userDa
 		
 typedef void(^LoginWithPlayFabCallback)(LoginResult* result, NSObject* userData);
 		
-typedef void(^LoginWithPSNCallback)(LoginResult* result, NSObject* userData);
-		
 typedef void(^LoginWithSteamCallback)(LoginResult* result, NSObject* userData);
-		
-typedef void(^LoginWithXboxCallback)(LoginResult* result, NSObject* userData);
 		
 typedef void(^RegisterPlayFabUserCallback)(RegisterPlayFabUserResult* result, NSObject* userData);
 		
 typedef void(^AddUsernamePasswordCallback)(AddUsernamePasswordResult* result, NSObject* userData);
 		
 typedef void(^GetAccountInfoCallback)(GetAccountInfoResult* result, NSObject* userData);
+		
+typedef void(^GetPlayerCombinedInfoCallback)(GetPlayerCombinedInfoResult* result, NSObject* userData);
 		
 typedef void(^GetPlayFabIDsFromFacebookIDsCallback)(GetPlayFabIDsFromFacebookIDsResult* result, NSObject* userData);
 		
@@ -51,8 +49,6 @@ typedef void(^GetPlayFabIDsFromGameCenterIDsCallback)(GetPlayFabIDsFromGameCente
 typedef void(^GetPlayFabIDsFromGoogleIDsCallback)(GetPlayFabIDsFromGoogleIDsResult* result, NSObject* userData);
 		
 typedef void(^GetPlayFabIDsFromKongregateIDsCallback)(GetPlayFabIDsFromKongregateIDsResult* result, NSObject* userData);
-		
-typedef void(^GetPlayFabIDsFromPSNAccountIDsCallback)(GetPlayFabIDsFromPSNAccountIDsResult* result, NSObject* userData);
 		
 typedef void(^GetPlayFabIDsFromSteamIDsCallback)(GetPlayFabIDsFromSteamIDsResult* result, NSObject* userData);
 		
@@ -72,11 +68,9 @@ typedef void(^LinkIOSDeviceIDCallback)(LinkIOSDeviceIDResult* result, NSObject* 
 		
 typedef void(^LinkKongregateCallback)(LinkKongregateAccountResult* result, NSObject* userData);
 		
-typedef void(^LinkPSNAccountCallback)(LinkPSNAccountResult* result, NSObject* userData);
-		
 typedef void(^LinkSteamAccountCallback)(LinkSteamAccountResult* result, NSObject* userData);
 		
-typedef void(^LinkXboxAccountCallback)(LinkXboxAccountResult* result, NSObject* userData);
+typedef void(^ReportPlayerCallback)(ReportPlayerClientResult* result, NSObject* userData);
 		
 typedef void(^SendAccountRecoveryEmailCallback)(SendAccountRecoveryEmailResult* result, NSObject* userData);
 		
@@ -94,11 +88,7 @@ typedef void(^UnlinkIOSDeviceIDCallback)(UnlinkIOSDeviceIDResult* result, NSObje
 		
 typedef void(^UnlinkKongregateCallback)(UnlinkKongregateAccountResult* result, NSObject* userData);
 		
-typedef void(^UnlinkPSNAccountCallback)(UnlinkPSNAccountResult* result, NSObject* userData);
-		
 typedef void(^UnlinkSteamAccountCallback)(UnlinkSteamAccountResult* result, NSObject* userData);
-		
-typedef void(^UnlinkXboxAccountCallback)(UnlinkXboxAccountResult* result, NSObject* userData);
 		
 typedef void(^UpdateUserTitleDisplayNameCallback)(UpdateUserTitleDisplayNameResult* result, NSObject* userData);
 		
@@ -115,6 +105,8 @@ typedef void(^GetLeaderboardAroundCurrentUserCallback)(GetLeaderboardAroundCurre
 typedef void(^GetLeaderboardAroundPlayerCallback)(GetLeaderboardAroundPlayerResult* result, NSObject* userData);
 		
 typedef void(^GetPlayerStatisticsCallback)(GetPlayerStatisticsResult* result, NSObject* userData);
+		
+typedef void(^GetPlayerStatisticVersionsCallback)(GetPlayerStatisticVersionsResult* result, NSObject* userData);
 		
 typedef void(^GetUserDataCallback)(GetUserDataResult* result, NSObject* userData);
 		
@@ -135,6 +127,8 @@ typedef void(^UpdateUserPublisherDataCallback)(UpdateUserDataResult* result, NSO
 typedef void(^UpdateUserStatisticsCallback)(UpdateUserStatisticsResult* result, NSObject* userData);
 		
 typedef void(^GetCatalogItemsCallback)(GetCatalogItemsResult* result, NSObject* userData);
+		
+typedef void(^GetPublisherDataCallback)(GetPublisherDataResult* result, NSObject* userData);
 		
 typedef void(^GetStoreItemsCallback)(GetStoreItemsResult* result, NSObject* userData);
 		
@@ -159,8 +153,6 @@ typedef void(^PayForPurchaseCallback)(PayForPurchaseResult* result, NSObject* us
 typedef void(^PurchaseItemCallback)(PurchaseItemResult* result, NSObject* userData);
 		
 typedef void(^RedeemCouponCallback)(RedeemCouponResult* result, NSObject* userData);
-		
-typedef void(^ReportPlayerCallback)(ReportPlayerClientResult* result, NSObject* userData);
 		
 typedef void(^StartPurchaseCallback)(StartPurchaseResult* result, NSObject* userData);
 		
@@ -198,11 +190,15 @@ typedef void(^ValidateGooglePlayPurchaseCallback)(ValidateGooglePlayPurchaseResu
 		
 typedef void(^LogEventCallback)(LogEventResult* result, NSObject* userData);
 		
+typedef void(^WriteCharacterEventCallback)(WriteEventResponse* result, NSObject* userData);
+		
+typedef void(^WritePlayerEventCallback)(WriteEventResponse* result, NSObject* userData);
+		
+typedef void(^WriteTitleEventCallback)(WriteEventResponse* result, NSObject* userData);
+		
 typedef void(^AddSharedGroupMembersCallback)(AddSharedGroupMembersResult* result, NSObject* userData);
 		
 typedef void(^CreateSharedGroupCallback)(CreateSharedGroupResult* result, NSObject* userData);
-		
-typedef void(^GetPublisherDataCallback)(GetPublisherDataResult* result, NSObject* userData);
 		
 typedef void(^GetSharedGroupDataCallback)(GetSharedGroupDataResult* result, NSObject* userData);
 		
@@ -210,9 +206,7 @@ typedef void(^RemoveSharedGroupMembersCallback)(RemoveSharedGroupMembersResult* 
 		
 typedef void(^UpdateSharedGroupDataCallback)(UpdateSharedGroupDataResult* result, NSObject* userData);
 		
-typedef void(^ConsumePSNEntitlementsCallback)(ConsumePSNEntitlementsResult* result, NSObject* userData);
-		
-typedef void(^RefreshPSNAuthTokenCallback)(EmptyResult* result, NSObject* userData);
+typedef void(^ExecuteCloudScriptCallback)(ExecuteCloudScriptResult* result, NSObject* userData);
 		
 typedef void(^GetCloudScriptUrlCallback)(GetCloudScriptUrlResult* result, NSObject* userData);
 		
@@ -282,17 +276,15 @@ typedef void(^AttributeInstallCallback)(AttributeInstallResult* result, NSObject
 		
 -(void) LoginWithPlayFab:(LoginWithPlayFabRequest*)request success:(LoginWithPlayFabCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
--(void) LoginWithPSN:(LoginWithPSNRequest*)request success:(LoginWithPSNCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
-		
 -(void) LoginWithSteam:(LoginWithSteamRequest*)request success:(LoginWithSteamCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
-		
--(void) LoginWithXbox:(LoginWithXboxRequest*)request success:(LoginWithXboxCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
 -(void) RegisterPlayFabUser:(RegisterPlayFabUserRequest*)request success:(RegisterPlayFabUserCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
 -(void) AddUsernamePassword:(AddUsernamePasswordRequest*)request success:(AddUsernamePasswordCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
 -(void) GetAccountInfo:(GetAccountInfoRequest*)request success:(GetAccountInfoCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
+		
+-(void) GetPlayerCombinedInfo:(GetPlayerCombinedInfoRequest*)request success:(GetPlayerCombinedInfoCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
 -(void) GetPlayFabIDsFromFacebookIDs:(GetPlayFabIDsFromFacebookIDsRequest*)request success:(GetPlayFabIDsFromFacebookIDsCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
@@ -301,8 +293,6 @@ typedef void(^AttributeInstallCallback)(AttributeInstallResult* result, NSObject
 -(void) GetPlayFabIDsFromGoogleIDs:(GetPlayFabIDsFromGoogleIDsRequest*)request success:(GetPlayFabIDsFromGoogleIDsCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
 -(void) GetPlayFabIDsFromKongregateIDs:(GetPlayFabIDsFromKongregateIDsRequest*)request success:(GetPlayFabIDsFromKongregateIDsCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
-		
--(void) GetPlayFabIDsFromPSNAccountIDs:(GetPlayFabIDsFromPSNAccountIDsRequest*)request success:(GetPlayFabIDsFromPSNAccountIDsCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
 -(void) GetPlayFabIDsFromSteamIDs:(GetPlayFabIDsFromSteamIDsRequest*)request success:(GetPlayFabIDsFromSteamIDsCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
@@ -322,11 +312,9 @@ typedef void(^AttributeInstallCallback)(AttributeInstallResult* result, NSObject
 		
 -(void) LinkKongregate:(LinkKongregateAccountRequest*)request success:(LinkKongregateCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
--(void) LinkPSNAccount:(LinkPSNAccountRequest*)request success:(LinkPSNAccountCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
-		
 -(void) LinkSteamAccount:(LinkSteamAccountRequest*)request success:(LinkSteamAccountCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
--(void) LinkXboxAccount:(LinkXboxAccountRequest*)request success:(LinkXboxAccountCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
+-(void) ReportPlayer:(ReportPlayerClientRequest*)request success:(ReportPlayerCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
 -(void) SendAccountRecoveryEmail:(SendAccountRecoveryEmailRequest*)request success:(SendAccountRecoveryEmailCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
@@ -344,11 +332,7 @@ typedef void(^AttributeInstallCallback)(AttributeInstallResult* result, NSObject
 		
 -(void) UnlinkKongregate:(UnlinkKongregateCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*) userData;
 		
--(void) UnlinkPSNAccount:(UnlinkPSNAccountCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*) userData;
-		
 -(void) UnlinkSteamAccount:(UnlinkSteamAccountCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*) userData;
-		
--(void) UnlinkXboxAccount:(UnlinkXboxAccountRequest*)request success:(UnlinkXboxAccountCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
 -(void) UpdateUserTitleDisplayName:(UpdateUserTitleDisplayNameRequest*)request success:(UpdateUserTitleDisplayNameCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
@@ -365,6 +349,8 @@ typedef void(^AttributeInstallCallback)(AttributeInstallResult* result, NSObject
 -(void) GetLeaderboardAroundPlayer:(GetLeaderboardAroundPlayerRequest*)request success:(GetLeaderboardAroundPlayerCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
 -(void) GetPlayerStatistics:(GetPlayerStatisticsRequest*)request success:(GetPlayerStatisticsCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
+		
+-(void) GetPlayerStatisticVersions:(GetPlayerStatisticVersionsRequest*)request success:(GetPlayerStatisticVersionsCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
 -(void) GetUserData:(GetUserDataRequest*)request success:(GetUserDataCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
@@ -385,6 +371,8 @@ typedef void(^AttributeInstallCallback)(AttributeInstallResult* result, NSObject
 -(void) UpdateUserStatistics:(UpdateUserStatisticsRequest*)request success:(UpdateUserStatisticsCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
 -(void) GetCatalogItems:(GetCatalogItemsRequest*)request success:(GetCatalogItemsCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
+		
+-(void) GetPublisherData:(GetPublisherDataRequest*)request success:(GetPublisherDataCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
 -(void) GetStoreItems:(GetStoreItemsRequest*)request success:(GetStoreItemsCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
@@ -409,8 +397,6 @@ typedef void(^AttributeInstallCallback)(AttributeInstallResult* result, NSObject
 -(void) PurchaseItem:(PurchaseItemRequest*)request success:(PurchaseItemCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
 -(void) RedeemCoupon:(RedeemCouponRequest*)request success:(RedeemCouponCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
-		
--(void) ReportPlayer:(ReportPlayerClientRequest*)request success:(ReportPlayerCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
 -(void) StartPurchase:(StartPurchaseRequest*)request success:(StartPurchaseCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
@@ -448,11 +434,15 @@ typedef void(^AttributeInstallCallback)(AttributeInstallResult* result, NSObject
 		
 -(void) LogEvent:(LogEventRequest*)request success:(LogEventCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
+-(void) WriteCharacterEvent:(WriteClientCharacterEventRequest*)request success:(WriteCharacterEventCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
+		
+-(void) WritePlayerEvent:(WriteClientPlayerEventRequest*)request success:(WritePlayerEventCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
+		
+-(void) WriteTitleEvent:(WriteTitleEventRequest*)request success:(WriteTitleEventCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
+		
 -(void) AddSharedGroupMembers:(AddSharedGroupMembersRequest*)request success:(AddSharedGroupMembersCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
 -(void) CreateSharedGroup:(CreateSharedGroupRequest*)request success:(CreateSharedGroupCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
-		
--(void) GetPublisherData:(GetPublisherDataRequest*)request success:(GetPublisherDataCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
 -(void) GetSharedGroupData:(GetSharedGroupDataRequest*)request success:(GetSharedGroupDataCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
@@ -460,9 +450,7 @@ typedef void(^AttributeInstallCallback)(AttributeInstallResult* result, NSObject
 		
 -(void) UpdateSharedGroupData:(UpdateSharedGroupDataRequest*)request success:(UpdateSharedGroupDataCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
--(void) ConsumePSNEntitlements:(ConsumePSNEntitlementsRequest*)request success:(ConsumePSNEntitlementsCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
-		
--(void) RefreshPSNAuthToken:(RefreshPSNAuthTokenRequest*)request success:(RefreshPSNAuthTokenCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
+-(void) ExecuteCloudScript:(ExecuteCloudScriptRequest*)request success:(ExecuteCloudScriptCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
 -(void) GetCloudScriptUrl:(GetCloudScriptUrlRequest*)request success:(GetCloudScriptUrlCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
@@ -529,17 +517,15 @@ typedef void(^AttributeInstallCallback)(AttributeInstallResult* result, NSObject
 		
 + (void) OnLoginWithPlayFabResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
-+ (void) OnLoginWithPSNResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
-		
 + (void) OnLoginWithSteamResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
-		
-+ (void) OnLoginWithXboxResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnRegisterPlayFabUserResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnAddUsernamePasswordResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnGetAccountInfoResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
+		
++ (void) OnGetPlayerCombinedInfoResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnGetPlayFabIDsFromFacebookIDsResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
@@ -548,8 +534,6 @@ typedef void(^AttributeInstallCallback)(AttributeInstallResult* result, NSObject
 + (void) OnGetPlayFabIDsFromGoogleIDsResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnGetPlayFabIDsFromKongregateIDsResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
-		
-+ (void) OnGetPlayFabIDsFromPSNAccountIDsResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnGetPlayFabIDsFromSteamIDsResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
@@ -569,11 +553,9 @@ typedef void(^AttributeInstallCallback)(AttributeInstallResult* result, NSObject
 		
 + (void) OnLinkKongregateResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
-+ (void) OnLinkPSNAccountResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
-		
 + (void) OnLinkSteamAccountResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
-+ (void) OnLinkXboxAccountResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
++ (void) OnReportPlayerResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnSendAccountRecoveryEmailResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
@@ -591,11 +573,7 @@ typedef void(^AttributeInstallCallback)(AttributeInstallResult* result, NSObject
 		
 + (void) OnUnlinkKongregateResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
-+ (void) OnUnlinkPSNAccountResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
-		
 + (void) OnUnlinkSteamAccountResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
-		
-+ (void) OnUnlinkXboxAccountResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnUpdateUserTitleDisplayNameResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
@@ -612,6 +590,8 @@ typedef void(^AttributeInstallCallback)(AttributeInstallResult* result, NSObject
 + (void) OnGetLeaderboardAroundPlayerResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnGetPlayerStatisticsResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
+		
++ (void) OnGetPlayerStatisticVersionsResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnGetUserDataResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
@@ -632,6 +612,8 @@ typedef void(^AttributeInstallCallback)(AttributeInstallResult* result, NSObject
 + (void) OnUpdateUserStatisticsResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnGetCatalogItemsResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
+		
++ (void) OnGetPublisherDataResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnGetStoreItemsResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
@@ -656,8 +638,6 @@ typedef void(^AttributeInstallCallback)(AttributeInstallResult* result, NSObject
 + (void) OnPurchaseItemResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnRedeemCouponResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
-		
-+ (void) OnReportPlayerResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnStartPurchaseResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
@@ -695,11 +675,15 @@ typedef void(^AttributeInstallCallback)(AttributeInstallResult* result, NSObject
 		
 + (void) OnLogEventResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
++ (void) OnWriteCharacterEventResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
+		
++ (void) OnWritePlayerEventResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
+		
++ (void) OnWriteTitleEventResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
+		
 + (void) OnAddSharedGroupMembersResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnCreateSharedGroupResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
-		
-+ (void) OnGetPublisherDataResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnGetSharedGroupDataResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
@@ -707,9 +691,7 @@ typedef void(^AttributeInstallCallback)(AttributeInstallResult* result, NSObject
 		
 + (void) OnUpdateSharedGroupDataResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
-+ (void) OnConsumePSNEntitlementsResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
-		
-+ (void) OnRefreshPSNAuthTokenResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
++ (void) OnExecuteCloudScriptResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnGetCloudScriptUrlResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		

@@ -1,6 +1,5 @@
 
 #include "PlayFabVersion.h"
 
-NSString * const PlayFabAPIRevision = @"";
-NSString * const PlayFabWindowsSDKVersion = @"0.0.151026";
-NSString * const PlayFabVersionString = @"ObjCSDK-0.0.151026-";
+NSString * const sdkVersion = @"0.0.160706";
+NSString * const versionString = @"ObjCSDK-0.0.160706";

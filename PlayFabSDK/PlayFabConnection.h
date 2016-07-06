@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 
-@interface PlayFabConnection : NSObject {
+@interface PlayFabConnection : NSObject <NSURLConnectionDelegate, NSURLConnectionDataDelegate> {
     NSURLConnection * internalConnection;
     //@property
     NSMutableData * container;

@@ -10,8 +10,7 @@
 
 //@interface PlayFabVersion : NSObject
 
-FOUNDATION_EXPORT NSString *const PlayFabAPIRevision;
-FOUNDATION_EXPORT NSString *const PlayFabWindowsSDKVersion;
-FOUNDATION_EXPORT NSString *const PlayFabVersionString;
+FOUNDATION_EXPORT NSString *const sdkVersion;
+FOUNDATION_EXPORT NSString *const versionString;
 
 //@end
