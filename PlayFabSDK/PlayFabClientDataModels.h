@@ -3,1330 +3,799 @@
 #import "PlayFabBaseModel.h"
 
 
-	
 
-	typedef enum
-	{
-		TradeStatusInvalid,
-		TradeStatusOpening,
-		TradeStatusOpen,
-		TradeStatusAccepting,
-		TradeStatusAccepted,
-		TradeStatusFilled,
-		TradeStatusCancelled
-	} TradeStatus;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	typedef enum
-	{
-		CurrencyAED,
-		CurrencyAFN,
-		CurrencyALL,
-		CurrencyAMD,
-		CurrencyANG,
-		CurrencyAOA,
-		CurrencyARS,
-		CurrencyAUD,
-		CurrencyAWG,
-		CurrencyAZN,
-		CurrencyBAM,
-		CurrencyBBD,
-		CurrencyBDT,
-		CurrencyBGN,
-		CurrencyBHD,
-		CurrencyBIF,
-		CurrencyBMD,
-		CurrencyBND,
-		CurrencyBOB,
-		CurrencyBRL,
-		CurrencyBSD,
-		CurrencyBTN,
-		CurrencyBWP,
-		CurrencyBYR,
-		CurrencyBZD,
-		CurrencyCAD,
-		CurrencyCDF,
-		CurrencyCHF,
-		CurrencyCLP,
-		CurrencyCNY,
-		CurrencyCOP,
-		CurrencyCRC,
-		CurrencyCUC,
-		CurrencyCUP,
-		CurrencyCVE,
-		CurrencyCZK,
-		CurrencyDJF,
-		CurrencyDKK,
-		CurrencyDOP,
-		CurrencyDZD,
-		CurrencyEGP,
-		CurrencyERN,
-		CurrencyETB,
-		CurrencyEUR,
-		CurrencyFJD,
-		CurrencyFKP,
-		CurrencyGBP,
-		CurrencyGEL,
-		CurrencyGGP,
-		CurrencyGHS,
-		CurrencyGIP,
-		CurrencyGMD,
-		CurrencyGNF,
-		CurrencyGTQ,
-		CurrencyGYD,
-		CurrencyHKD,
-		CurrencyHNL,
-		CurrencyHRK,
-		CurrencyHTG,
-		CurrencyHUF,
-		CurrencyIDR,
-		CurrencyILS,
-		CurrencyIMP,
-		CurrencyINR,
-		CurrencyIQD,
-		CurrencyIRR,
-		CurrencyISK,
-		CurrencyJEP,
-		CurrencyJMD,
-		CurrencyJOD,
-		CurrencyJPY,
-		CurrencyKES,
-		CurrencyKGS,
-		CurrencyKHR,
-		CurrencyKMF,
-		CurrencyKPW,
-		CurrencyKRW,
-		CurrencyKWD,
-		CurrencyKYD,
-		CurrencyKZT,
-		CurrencyLAK,
-		CurrencyLBP,
-		CurrencyLKR,
-		CurrencyLRD,
-		CurrencyLSL,
-		CurrencyLYD,
-		CurrencyMAD,
-		CurrencyMDL,
-		CurrencyMGA,
-		CurrencyMKD,
-		CurrencyMMK,
-		CurrencyMNT,
-		CurrencyMOP,
-		CurrencyMRO,
-		CurrencyMUR,
-		CurrencyMVR,
-		CurrencyMWK,
-		CurrencyMXN,
-		CurrencyMYR,
-		CurrencyMZN,
-		CurrencyNAD,
-		CurrencyNGN,
-		CurrencyNIO,
-		CurrencyNOK,
-		CurrencyNPR,
-		CurrencyNZD,
-		CurrencyOMR,
-		CurrencyPAB,
-		CurrencyPEN,
-		CurrencyPGK,
-		CurrencyPHP,
-		CurrencyPKR,
-		CurrencyPLN,
-		CurrencyPYG,
-		CurrencyQAR,
-		CurrencyRON,
-		CurrencyRSD,
-		CurrencyRUB,
-		CurrencyRWF,
-		CurrencySAR,
-		CurrencySBD,
-		CurrencySCR,
-		CurrencySDG,
-		CurrencySEK,
-		CurrencySGD,
-		CurrencySHP,
-		CurrencySLL,
-		CurrencySOS,
-		CurrencySPL,
-		CurrencySRD,
-		CurrencySTD,
-		CurrencySVC,
-		CurrencySYP,
-		CurrencySZL,
-		CurrencyTHB,
-		CurrencyTJS,
-		CurrencyTMT,
-		CurrencyTND,
-		CurrencyTOP,
-		CurrencyTRY,
-		CurrencyTTD,
-		CurrencyTVD,
-		CurrencyTWD,
-		CurrencyTZS,
-		CurrencyUAH,
-		CurrencyUGX,
-		CurrencyUSD,
-		CurrencyUYU,
-		CurrencyUZS,
-		CurrencyVEF,
-		CurrencyVND,
-		CurrencyVUV,
-		CurrencyWST,
-		CurrencyXAF,
-		CurrencyXCD,
-		CurrencyXDR,
-		CurrencyXOF,
-		CurrencyXPF,
-		CurrencyYER,
-		CurrencyZAR,
-		CurrencyZMW,
-		CurrencyZWD
-	} Currency;
-
-
-
-	typedef enum
-	{
-		RegionUSCentral,
-		RegionUSEast,
-		RegionEUWest,
-		RegionSingapore,
-		RegionJapan,
-		RegionBrazil,
-		RegionAustralia
-	} Region;
-
-
-
-
-
-
-
-
-
-	typedef enum
-	{
-		TitleActivationStatusNone,
-		TitleActivationStatusActivatedTitleKey,
-		TitleActivationStatusPendingSteam,
-		TitleActivationStatusActivatedSteam,
-		TitleActivationStatusRevokedSteam
-	} TitleActivationStatus;
-
-
-
-
-
-
-
-
-
-
-
-	typedef enum
-	{
-		UserOriginationOrganic,
-		UserOriginationSteam,
-		UserOriginationGoogle,
-		UserOriginationAmazon,
-		UserOriginationFacebook,
-		UserOriginationKongregate,
-		UserOriginationGamersFirst,
-		UserOriginationUnknown,
-		UserOriginationIOS,
-		UserOriginationLoadTest,
-		UserOriginationAndroid,
-		UserOriginationPSN,
-		UserOriginationGameCenter,
-		UserOriginationCustomId,
-		UserOriginationXboxLive,
-		UserOriginationParse
-	} UserOrigination;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	typedef enum
-	{
-		UserDataPermissionPrivate,
-		UserDataPermissionPublic
-	} UserDataPermission;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	typedef enum
-	{
-		MatchmakeStatusComplete,
-		MatchmakeStatusWaiting,
-		MatchmakeStatusGameNotFound
-	} MatchmakeStatus;
-
-
-
-
-
-
-
-
-	typedef enum
-	{
-		TransactionStatusCreateCart,
-		TransactionStatusInit,
-		TransactionStatusApproved,
-		TransactionStatusSucceeded,
-		TransactionStatusFailedByProvider,
-		TransactionStatusDisputePending,
-		TransactionStatusRefundPending,
-		TransactionStatusRefunded,
-		TransactionStatusRefundFailed,
-		TransactionStatusChargedBack,
-		TransactionStatusFailedByUber,
-		TransactionStatusFailedByPlayFab,
-		TransactionStatusRevoked,
-		TransactionStatusTradePending,
-		TransactionStatusTraded,
-		TransactionStatusUpgraded,
-		TransactionStatusStackPending,
-		TransactionStatusStacked,
-		TransactionStatusOther,
-		TransactionStatusFailed
-	} TransactionStatus;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+typedef enum
+{
+    TradeStatusInvalid,
+    TradeStatusOpening,
+    TradeStatusOpen,
+    TradeStatusAccepting,
+    TradeStatusAccepted,
+    TradeStatusFilled,
+    TradeStatusCancelled
+} TradeStatus;
+
+typedef enum
+{
+    CloudScriptRevisionOptionLive,
+    CloudScriptRevisionOptionLatest,
+    CloudScriptRevisionOptionSpecific
+} CloudScriptRevisionOption;
+
+typedef enum
+{
+    CurrencyAED,
+    CurrencyAFN,
+    CurrencyALL,
+    CurrencyAMD,
+    CurrencyANG,
+    CurrencyAOA,
+    CurrencyARS,
+    CurrencyAUD,
+    CurrencyAWG,
+    CurrencyAZN,
+    CurrencyBAM,
+    CurrencyBBD,
+    CurrencyBDT,
+    CurrencyBGN,
+    CurrencyBHD,
+    CurrencyBIF,
+    CurrencyBMD,
+    CurrencyBND,
+    CurrencyBOB,
+    CurrencyBRL,
+    CurrencyBSD,
+    CurrencyBTN,
+    CurrencyBWP,
+    CurrencyBYR,
+    CurrencyBZD,
+    CurrencyCAD,
+    CurrencyCDF,
+    CurrencyCHF,
+    CurrencyCLP,
+    CurrencyCNY,
+    CurrencyCOP,
+    CurrencyCRC,
+    CurrencyCUC,
+    CurrencyCUP,
+    CurrencyCVE,
+    CurrencyCZK,
+    CurrencyDJF,
+    CurrencyDKK,
+    CurrencyDOP,
+    CurrencyDZD,
+    CurrencyEGP,
+    CurrencyERN,
+    CurrencyETB,
+    CurrencyEUR,
+    CurrencyFJD,
+    CurrencyFKP,
+    CurrencyGBP,
+    CurrencyGEL,
+    CurrencyGGP,
+    CurrencyGHS,
+    CurrencyGIP,
+    CurrencyGMD,
+    CurrencyGNF,
+    CurrencyGTQ,
+    CurrencyGYD,
+    CurrencyHKD,
+    CurrencyHNL,
+    CurrencyHRK,
+    CurrencyHTG,
+    CurrencyHUF,
+    CurrencyIDR,
+    CurrencyILS,
+    CurrencyIMP,
+    CurrencyINR,
+    CurrencyIQD,
+    CurrencyIRR,
+    CurrencyISK,
+    CurrencyJEP,
+    CurrencyJMD,
+    CurrencyJOD,
+    CurrencyJPY,
+    CurrencyKES,
+    CurrencyKGS,
+    CurrencyKHR,
+    CurrencyKMF,
+    CurrencyKPW,
+    CurrencyKRW,
+    CurrencyKWD,
+    CurrencyKYD,
+    CurrencyKZT,
+    CurrencyLAK,
+    CurrencyLBP,
+    CurrencyLKR,
+    CurrencyLRD,
+    CurrencyLSL,
+    CurrencyLYD,
+    CurrencyMAD,
+    CurrencyMDL,
+    CurrencyMGA,
+    CurrencyMKD,
+    CurrencyMMK,
+    CurrencyMNT,
+    CurrencyMOP,
+    CurrencyMRO,
+    CurrencyMUR,
+    CurrencyMVR,
+    CurrencyMWK,
+    CurrencyMXN,
+    CurrencyMYR,
+    CurrencyMZN,
+    CurrencyNAD,
+    CurrencyNGN,
+    CurrencyNIO,
+    CurrencyNOK,
+    CurrencyNPR,
+    CurrencyNZD,
+    CurrencyOMR,
+    CurrencyPAB,
+    CurrencyPEN,
+    CurrencyPGK,
+    CurrencyPHP,
+    CurrencyPKR,
+    CurrencyPLN,
+    CurrencyPYG,
+    CurrencyQAR,
+    CurrencyRON,
+    CurrencyRSD,
+    CurrencyRUB,
+    CurrencyRWF,
+    CurrencySAR,
+    CurrencySBD,
+    CurrencySCR,
+    CurrencySDG,
+    CurrencySEK,
+    CurrencySGD,
+    CurrencySHP,
+    CurrencySLL,
+    CurrencySOS,
+    CurrencySPL,
+    CurrencySRD,
+    CurrencySTD,
+    CurrencySVC,
+    CurrencySYP,
+    CurrencySZL,
+    CurrencyTHB,
+    CurrencyTJS,
+    CurrencyTMT,
+    CurrencyTND,
+    CurrencyTOP,
+    CurrencyTRY,
+    CurrencyTTD,
+    CurrencyTVD,
+    CurrencyTWD,
+    CurrencyTZS,
+    CurrencyUAH,
+    CurrencyUGX,
+    CurrencyUSD,
+    CurrencyUYU,
+    CurrencyUZS,
+    CurrencyVEF,
+    CurrencyVND,
+    CurrencyVUV,
+    CurrencyWST,
+    CurrencyXAF,
+    CurrencyXCD,
+    CurrencyXDR,
+    CurrencyXOF,
+    CurrencyXPF,
+    CurrencyYER,
+    CurrencyZAR,
+    CurrencyZMW,
+    CurrencyZWD
+} Currency;
+
+typedef enum
+{
+    RegionUSCentral,
+    RegionUSEast,
+    RegionEUWest,
+    RegionSingapore,
+    RegionJapan,
+    RegionBrazil,
+    RegionAustralia
+} Region;
+
+typedef enum
+{
+    GameInstanceStateOpen,
+    GameInstanceStateClosed
+} GameInstanceState;
+
+typedef enum
+{
+    TitleActivationStatusNone,
+    TitleActivationStatusActivatedTitleKey,
+    TitleActivationStatusPendingSteam,
+    TitleActivationStatusActivatedSteam,
+    TitleActivationStatusRevokedSteam
+} TitleActivationStatus;
+
+typedef enum
+{
+    UserOriginationOrganic,
+    UserOriginationSteam,
+    UserOriginationGoogle,
+    UserOriginationAmazon,
+    UserOriginationFacebook,
+    UserOriginationKongregate,
+    UserOriginationGamersFirst,
+    UserOriginationUnknown,
+    UserOriginationIOS,
+    UserOriginationLoadTest,
+    UserOriginationAndroid,
+    UserOriginationPSN,
+    UserOriginationGameCenter,
+    UserOriginationCustomId,
+    UserOriginationXboxLive,
+    UserOriginationParse
+} UserOrigination;
+
+typedef enum
+{
+    UserDataPermissionPrivate,
+    UserDataPermissionPublic
+} UserDataPermission;
+
+typedef enum
+{
+    MatchmakeStatusComplete,
+    MatchmakeStatusWaiting,
+    MatchmakeStatusGameNotFound,
+    MatchmakeStatusNoAvailableSlots,
+    MatchmakeStatusSessionClosed
+} MatchmakeStatus;
+
+typedef enum
+{
+    TransactionStatusCreateCart,
+    TransactionStatusInit,
+    TransactionStatusApproved,
+    TransactionStatusSucceeded,
+    TransactionStatusFailedByProvider,
+    TransactionStatusDisputePending,
+    TransactionStatusRefundPending,
+    TransactionStatusRefunded,
+    TransactionStatusRefundFailed,
+    TransactionStatusChargedBack,
+    TransactionStatusFailedByUber,
+    TransactionStatusFailedByPlayFab,
+    TransactionStatusRevoked,
+    TransactionStatusTradePending,
+    TransactionStatusTraded,
+    TransactionStatusUpgraded,
+    TransactionStatusStackPending,
+    TransactionStatusStacked,
+    TransactionStatusOther,
+    TransactionStatusFailed
+} TransactionStatus;
 
 //predeclare all non-enum classes
 
 @class AcceptTradeRequest;
 
-
 @class AcceptTradeResponse;
-
 
 @class AddFriendRequest;
 
-
 @class AddFriendResult;
-
 
 @class AddSharedGroupMembersRequest;
 
-
 @class AddSharedGroupMembersResult;
-
 
 @class AddUsernamePasswordRequest;
 
-
 @class AddUsernamePasswordResult;
-
 
 @class AddUserVirtualCurrencyRequest;
 
-
 @class AndroidDevicePushNotificationRegistrationRequest;
-
 
 @class AndroidDevicePushNotificationRegistrationResult;
 
-
 @class AttributeInstallRequest;
-
 
 @class AttributeInstallResult;
 
-
 @class CancelTradeRequest;
-
 
 @class CancelTradeResponse;
 
-
 @class CartItem;
-
 
 @class CatalogItem;
 
-
 @class CatalogItemBundleInfo;
-
 
 @class CatalogItemConsumableInfo;
 
-
 @class CatalogItemContainerInfo;
 
+@class CharacterInventory;
 
 @class CharacterLeaderboardEntry;
 
-
 @class CharacterResult;
-
 
 @class ConfirmPurchaseRequest;
 
-
 @class ConfirmPurchaseResult;
-
 
 @class ConsumeItemRequest;
 
-
 @class ConsumeItemResult;
-
-
-@class ConsumePSNEntitlementsRequest;
-
-
-@class ConsumePSNEntitlementsResult;
-
 
 @class CreateSharedGroupRequest;
 
-
 @class CreateSharedGroupResult;
-
-
 
 @class CurrentGamesRequest;
 
-
 @class CurrentGamesResult;
-
 
 @class EmptyResult;
 
+@class ExecuteCloudScriptRequest;
+
+@class ExecuteCloudScriptResult;
 
 @class FacebookPlayFabIdPair;
 
-
 @class FriendInfo;
-
 
 @class GameCenterPlayFabIdPair;
 
-
 @class GameInfo;
-
 
 @class GameServerRegionsRequest;
 
-
 @class GameServerRegionsResult;
-
 
 @class GetAccountInfoRequest;
 
-
 @class GetAccountInfoResult;
-
 
 @class GetCatalogItemsRequest;
 
-
 @class GetCatalogItemsResult;
-
 
 @class GetCharacterDataRequest;
 
-
 @class GetCharacterDataResult;
-
 
 @class GetCharacterInventoryRequest;
 
-
 @class GetCharacterInventoryResult;
-
 
 @class GetCharacterLeaderboardRequest;
 
-
 @class GetCharacterLeaderboardResult;
-
 
 @class GetCharacterStatisticsRequest;
 
-
 @class GetCharacterStatisticsResult;
-
 
 @class GetCloudScriptUrlRequest;
 
-
 @class GetCloudScriptUrlResult;
-
 
 @class GetContentDownloadUrlRequest;
 
-
 @class GetContentDownloadUrlResult;
-
 
 @class GetFriendLeaderboardAroundCurrentUserRequest;
 
-
 @class GetFriendLeaderboardAroundCurrentUserResult;
-
 
 @class GetFriendLeaderboardAroundPlayerRequest;
 
-
 @class GetFriendLeaderboardAroundPlayerResult;
-
 
 @class GetFriendLeaderboardRequest;
 
-
 @class GetFriendsListRequest;
-
 
 @class GetFriendsListResult;
 
-
 @class GetLeaderboardAroundCharacterRequest;
-
 
 @class GetLeaderboardAroundCharacterResult;
 
-
 @class GetLeaderboardAroundCurrentUserRequest;
-
 
 @class GetLeaderboardAroundCurrentUserResult;
 
-
 @class GetLeaderboardAroundPlayerRequest;
-
 
 @class GetLeaderboardAroundPlayerResult;
 
-
 @class GetLeaderboardForUsersCharactersRequest;
-
 
 @class GetLeaderboardForUsersCharactersResult;
 
-
 @class GetLeaderboardRequest;
-
 
 @class GetLeaderboardResult;
 
-
 @class GetPhotonAuthenticationTokenRequest;
-
 
 @class GetPhotonAuthenticationTokenResult;
 
+@class GetPlayerCombinedInfoRequest;
+
+@class GetPlayerCombinedInfoRequestParams;
+
+@class GetPlayerCombinedInfoResult;
+
+@class GetPlayerCombinedInfoResultPayload;
 
 @class GetPlayerStatisticsRequest;
 
-
 @class GetPlayerStatisticsResult;
 
+@class GetPlayerStatisticVersionsRequest;
+
+@class GetPlayerStatisticVersionsResult;
 
 @class GetPlayerTradesRequest;
 
-
 @class GetPlayerTradesResponse;
-
 
 @class GetPlayFabIDsFromFacebookIDsRequest;
 
-
 @class GetPlayFabIDsFromFacebookIDsResult;
-
 
 @class GetPlayFabIDsFromGameCenterIDsRequest;
 
-
 @class GetPlayFabIDsFromGameCenterIDsResult;
-
 
 @class GetPlayFabIDsFromGoogleIDsRequest;
 
-
 @class GetPlayFabIDsFromGoogleIDsResult;
-
 
 @class GetPlayFabIDsFromKongregateIDsRequest;
 
-
 @class GetPlayFabIDsFromKongregateIDsResult;
-
-
-@class GetPlayFabIDsFromPSNAccountIDsRequest;
-
-
-@class GetPlayFabIDsFromPSNAccountIDsResult;
-
 
 @class GetPlayFabIDsFromSteamIDsRequest;
 
-
 @class GetPlayFabIDsFromSteamIDsResult;
-
 
 @class GetPublisherDataRequest;
 
-
 @class GetPublisherDataResult;
-
 
 @class GetPurchaseRequest;
 
-
 @class GetPurchaseResult;
-
 
 @class GetSharedGroupDataRequest;
 
-
 @class GetSharedGroupDataResult;
-
 
 @class GetStoreItemsRequest;
 
-
 @class GetStoreItemsResult;
-
 
 @class GetTitleDataRequest;
 
-
 @class GetTitleDataResult;
-
 
 @class GetTitleNewsRequest;
 
-
 @class GetTitleNewsResult;
-
 
 @class GetTradeStatusRequest;
 
-
 @class GetTradeStatusResponse;
-
 
 @class GetUserCombinedInfoRequest;
 
-
 @class GetUserCombinedInfoResult;
-
 
 @class GetUserDataRequest;
 
-
 @class GetUserDataResult;
-
 
 @class GetUserInventoryRequest;
 
-
 @class GetUserInventoryResult;
-
 
 @class GetUserStatisticsRequest;
 
-
 @class GetUserStatisticsResult;
-
 
 @class GooglePlayFabIdPair;
 
-
 @class GrantCharacterToUserRequest;
-
 
 @class GrantCharacterToUserResult;
 
-
 @class ItemInstance;
-
 
 @class ItemPurchaseRequest;
 
-
 @class KongregatePlayFabIdPair;
-
 
 @class LinkAndroidDeviceIDRequest;
 
-
 @class LinkAndroidDeviceIDResult;
-
 
 @class LinkCustomIDRequest;
 
-
 @class LinkCustomIDResult;
-
 
 @class LinkFacebookAccountRequest;
 
-
 @class LinkFacebookAccountResult;
-
 
 @class LinkGameCenterAccountRequest;
 
-
 @class LinkGameCenterAccountResult;
-
 
 @class LinkGoogleAccountRequest;
 
-
 @class LinkGoogleAccountResult;
-
 
 @class LinkIOSDeviceIDRequest;
 
-
 @class LinkIOSDeviceIDResult;
-
 
 @class LinkKongregateAccountRequest;
 
-
 @class LinkKongregateAccountResult;
-
-
-@class LinkPSNAccountRequest;
-
-
-@class LinkPSNAccountResult;
-
 
 @class LinkSteamAccountRequest;
 
-
 @class LinkSteamAccountResult;
-
-
-@class LinkXboxAccountRequest;
-
-
-@class LinkXboxAccountResult;
-
 
 @class ListUsersCharactersRequest;
 
-
 @class ListUsersCharactersResult;
-
 
 @class LogEventRequest;
 
-
 @class LogEventResult;
-
 
 @class LoginResult;
 
-
 @class LoginWithAndroidDeviceIDRequest;
-
 
 @class LoginWithCustomIDRequest;
 
-
 @class LoginWithEmailAddressRequest;
-
 
 @class LoginWithFacebookRequest;
 
-
 @class LoginWithGameCenterRequest;
-
 
 @class LoginWithGoogleAccountRequest;
 
-
 @class LoginWithIOSDeviceIDRequest;
-
 
 @class LoginWithKongregateRequest;
 
-
 @class LoginWithPlayFabRequest;
-
-
-@class LoginWithPSNRequest;
-
 
 @class LoginWithSteamRequest;
 
-
-@class LoginWithXboxRequest;
-
+@class LogStatement;
 
 @class MatchmakeRequest;
 
-
 @class MatchmakeResult;
-
-
 
 @class ModifyUserVirtualCurrencyResult;
 
-
 @class OpenTradeRequest;
-
 
 @class OpenTradeResponse;
 
-
 @class PayForPurchaseRequest;
-
 
 @class PayForPurchaseResult;
 
-
 @class PaymentOption;
-
 
 @class PlayerLeaderboardEntry;
 
-
-@class PSNAccountPlayFabIdPair;
-
+@class PlayerStatisticVersion;
 
 @class PurchaseItemRequest;
 
-
 @class PurchaseItemResult;
-
 
 @class RedeemCouponRequest;
 
-
 @class RedeemCouponResult;
-
-
-@class RefreshPSNAuthTokenRequest;
-
-
 
 @class RegionInfo;
 
-
 @class RegisterForIOSPushNotificationRequest;
-
 
 @class RegisterForIOSPushNotificationResult;
 
-
 @class RegisterPlayFabUserRequest;
-
 
 @class RegisterPlayFabUserResult;
 
-
 @class RemoveFriendRequest;
-
 
 @class RemoveFriendResult;
 
-
 @class RemoveSharedGroupMembersRequest;
-
 
 @class RemoveSharedGroupMembersResult;
 
-
 @class ReportPlayerClientRequest;
-
 
 @class ReportPlayerClientResult;
 
-
 @class RestoreIOSPurchasesRequest;
-
 
 @class RestoreIOSPurchasesResult;
 
-
 @class RunCloudScriptRequest;
-
 
 @class RunCloudScriptResult;
 
+@class ScriptExecutionError;
 
 @class SendAccountRecoveryEmailRequest;
 
-
 @class SendAccountRecoveryEmailResult;
-
 
 @class SetFriendTagsRequest;
 
-
 @class SetFriendTagsResult;
-
 
 @class SharedGroupDataRecord;
 
-
 @class StartGameRequest;
-
 
 @class StartGameResult;
 
-
 @class StartPurchaseRequest;
-
 
 @class StartPurchaseResult;
 
+@class StatisticNameVersion;
 
 @class StatisticUpdate;
 
-
 @class StatisticValue;
-
 
 @class SteamPlayFabIdPair;
 
-
 @class StoreItem;
-
 
 @class SubtractUserVirtualCurrencyRequest;
 
-
-
 @class TitleNewsItem;
-
 
 @class TradeInfo;
 
-
-
-
 @class UnlinkAndroidDeviceIDRequest;
-
 
 @class UnlinkAndroidDeviceIDResult;
 
-
 @class UnlinkCustomIDRequest;
-
 
 @class UnlinkCustomIDResult;
 
-
 @class UnlinkFacebookAccountRequest;
-
 
 @class UnlinkFacebookAccountResult;
 
-
 @class UnlinkGameCenterAccountRequest;
-
 
 @class UnlinkGameCenterAccountResult;
 
-
 @class UnlinkGoogleAccountRequest;
-
 
 @class UnlinkGoogleAccountResult;
 
-
 @class UnlinkIOSDeviceIDRequest;
-
 
 @class UnlinkIOSDeviceIDResult;
 
-
 @class UnlinkKongregateAccountRequest;
-
 
 @class UnlinkKongregateAccountResult;
 
-
-@class UnlinkPSNAccountRequest;
-
-
-@class UnlinkPSNAccountResult;
-
-
 @class UnlinkSteamAccountRequest;
-
 
 @class UnlinkSteamAccountResult;
 
-
-@class UnlinkXboxAccountRequest;
-
-
-@class UnlinkXboxAccountResult;
-
-
 @class UnlockContainerInstanceRequest;
-
 
 @class UnlockContainerItemRequest;
 
-
 @class UnlockContainerItemResult;
-
 
 @class UpdateCharacterDataRequest;
 
-
 @class UpdateCharacterDataResult;
-
 
 @class UpdateCharacterStatisticsRequest;
 
-
 @class UpdateCharacterStatisticsResult;
-
 
 @class UpdatePlayerStatisticsRequest;
 
-
 @class UpdatePlayerStatisticsResult;
-
 
 @class UpdateSharedGroupDataRequest;
 
-
 @class UpdateSharedGroupDataResult;
-
 
 @class UpdateUserDataRequest;
 
-
 @class UpdateUserDataResult;
-
 
 @class UpdateUserStatisticsRequest;
 
-
 @class UpdateUserStatisticsResult;
-
 
 @class UpdateUserTitleDisplayNameRequest;
 
-
 @class UpdateUserTitleDisplayNameResult;
-
 
 @class UserAccountInfo;
 
-
 @class UserAndroidDeviceInfo;
-
 
 @class UserCustomIdInfo;
 
-
-
 @class UserDataRecord;
-
 
 @class UserFacebookInfo;
 
-
 @class UserGameCenterInfo;
-
 
 @class UserGoogleInfo;
 
-
 @class UserIosDeviceInfo;
-
 
 @class UserKongregateInfo;
 
-
-
 @class UserPrivateAccountInfo;
-
 
 @class UserPsnInfo;
 
-
 @class UserSettings;
-
 
 @class UserSteamInfo;
 
-
 @class UserTitleInfo;
-
 
 @class UserXboxInfo;
 
-
 @class ValidateAmazonReceiptRequest;
-
 
 @class ValidateAmazonReceiptResult;
 
-
 @class ValidateGooglePlayPurchaseRequest;
-
 
 @class ValidateGooglePlayPurchaseResult;
 
-
 @class ValidateIOSReceiptRequest;
-
 
 @class ValidateIOSReceiptResult;
 
-
 @class VirtualCurrencyRechargeTime;
 
+@class WriteClientCharacterEventRequest;
 
+@class WriteClientPlayerEventRequest;
 
+@class WriteEventResponse;
+
+@class WriteTitleEventRequest;
 
 
 
@@ -1334,7 +803,7 @@
 
 
 /// <summary>
-/// Player who opened trade.
+/// Player who opened the trade.
 /// </summary>
 @property NSString* OfferingPlayerId; 
 
@@ -1344,13 +813,11 @@
 @property NSString* TradeId; 
 
 /// <summary>
-/// Items from the accepting player's inventory in exchange for the offered items in the trade. In the case of a gift, this will be null.
+/// Items from the accepting player's or guild's inventory in exchange for the offered items in the trade. In the case of a gift, this will be null.
 /// </summary>
 @property NSArray* AcceptedInventoryInstanceIds; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -1361,13 +828,11 @@
 /// Details about trade which was just accepted.
 /// </summary>
 @property TradeInfo* Trade; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -1393,10 +858,8 @@
 /// Title-specific display name of the user to attempt to add to the local user's friend list.
 /// </summary>
 @property NSString* FriendTitleDisplayName; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -1407,13 +870,11 @@
 /// True if the friend request was processed successfully.
 /// </summary>
 @property bool Created; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -1429,22 +890,18 @@
 /// An array of unique PlayFab assigned ID of the user on whom the operation will be performed.
 /// </summary>
 @property NSArray* PlayFabIds; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
 @interface AddSharedGroupMembersResult : PlayFabBaseModel
-
 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -1462,13 +919,11 @@
 @property NSString* Email; 
 
 /// <summary>
-/// Password for the PlayFab account (6-30 characters)
+/// Password for the PlayFab account (6-100 characters)
 /// </summary>
 @property NSString* Password; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -1479,13 +934,11 @@
 /// PlayFab unique user name.
 /// </summary>
 @property NSString* Username; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -1501,10 +954,8 @@
 /// Amount to be added to the user balance of the specified virtual currency.
 /// </summary>
 @property NSNumber* Amount; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -1524,23 +975,19 @@
 /// <summary>
 /// Message to display when confirming push notification.
 /// </summary>
-@property NSString* ConfirmationMessege; 
-
+@property NSString* ConfirmationMessage; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
 @interface AndroidDevicePushNotificationRegistrationResult : PlayFabBaseModel
-
 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -1556,22 +1003,18 @@
 /// The Android Id for this Android device.
 /// </summary>
 @property NSString* Android_Id; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
 @interface AttributeInstallResult : PlayFabBaseModel
-
 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -1582,10 +1025,8 @@
 /// Trade identifier.
 /// </summary>
 @property NSString* TradeId; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -1596,13 +1037,11 @@
 /// Details about trade which was just canceled.
 /// </summary>
 @property TradeInfo* Trade; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -1648,10 +1087,8 @@
 /// Amount of each applicable virtual currency which will be received as a result of purchasing this catalog item.
 /// </summary>
 @property NSDictionary* VCAmount; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -1740,10 +1177,8 @@
 /// URL to the item image. For Facebook purchase to display the image on the item purchase page, this must be set to an HTTP URL.
 /// </summary>
 @property NSString* ItemImageUrl; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -1764,10 +1199,8 @@
 /// virtual currency types and balances which will be added to the player inventory when the bundle is added
 /// </summary>
 @property NSDictionary* BundledVirtualCurrencies; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -1788,10 +1221,8 @@
 /// all inventory item instances in the player inventory sharing a non-null UsagePeriodGroup have their UsagePeriod values added together, and share the result - when that period has elapsed, all the items in the group will be removed
 /// </summary>
 @property NSString* UsagePeriodGroup; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -1820,10 +1251,25 @@
 /// virtual currency types and balances which will be added to the player inventory when the container is unlocked
 /// </summary>
 @property NSDictionary* VirtualCurrencyContents; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
+@end
 
+
+@interface CharacterInventory : PlayFabBaseModel
+
+
+/// <summary>
+/// The id of this character.
+/// </summary>
+@property NSString* CharacterId; 
+
+/// <summary>
+/// The inventory of this character.
+/// </summary>
+@property NSArray* Inventory; 
+/**/
+-(id)initWithDictionary:(NSDictionary*)properties;
 @end
 
 
@@ -1864,10 +1310,8 @@
 /// User's overall position in the leaderboard.
 /// </summary>
 @property NSNumber* Position; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -1888,13 +1332,11 @@
 /// The type-string that was given to this character on creation.
 /// </summary>
 @property NSString* CharacterType; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -1905,10 +1347,8 @@
 /// Purchase order identifier returned from StartPurchase.
 /// </summary>
 @property NSString* OrderId; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -1929,13 +1369,11 @@
 /// Array of items purchased.
 /// </summary>
 @property NSArray* Items; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -1956,10 +1394,8 @@
 /// Unique PlayFab assigned ID for a specific character owned by a user
 /// </summary>
 @property NSString* CharacterId; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -1975,49 +1411,11 @@
 /// Number of uses remaining on the item.
 /// </summary>
 @property NSNumber* RemainingUses; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
-@end
-
-
-@interface ConsumePSNEntitlementsRequest : PlayFabBaseModel
-
-
-/// <summary>
-/// Which catalog to match granted entitlements against. If null, defaults to title default catalog
-/// </summary>
-@property NSString* CatalogVersion; 
-
-/// <summary>
-/// Id of the PSN service label to consume entitlements from
-/// </summary>
-@property NSNumber* ServiceLabel; 
-
-/**/
--(id)initWithDictionary:(NSDictionary*)properties;
-
-@end
-
-
-@interface ConsumePSNEntitlementsResult : PlayFabBaseModel
-
-
-/// <summary>
-/// Array of items granted to the player as a result of consuming entitlements.
-/// </summary>
-@property NSArray* ItemsGranted; 
-
-/*
-@property NSObject* Request;
-@property NSObject* CustomData;
-*/
--(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -2028,10 +1426,8 @@
 /// Unique identifier for the shared group (a random identifier will be assigned, if one is not specified).
 /// </summary>
 @property NSString* SharedGroupId; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -2042,13 +1438,11 @@
 /// Unique identifier for the shared group.
 /// </summary>
 @property NSString* SharedGroupId; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -2074,10 +1468,8 @@
 /// statistic name to find statistic-based matches (optional)
 /// </summary>
 @property NSString* StatisticName; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -2098,25 +1490,102 @@
 /// number of games running
 /// </summary>
 @property NSNumber* GameCount; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
 @interface EmptyResult : PlayFabBaseModel
 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
+@end
 
+
+@interface ExecuteCloudScriptRequest : PlayFabBaseModel
+
+
+/// <summary>
+/// The name of the CloudScript function to execute
+/// </summary>
+@property NSString* FunctionName; 
+
+/// <summary>
+/// Object that is passed in to the function as the first argument
+/// </summary>
+@property NSDictionary* FunctionParameter; 
+
+/// <summary>
+/// Option for which revision of the CloudScript to execute. 'Latest' executes the most recently created revision, 'Live' executes the current live, published revision, and 'Specific' executes the specified revision. The default value is 'Specific', if the SpeificRevision parameter is specified, otherwise it is 'Live'.
+/// </summary>
+@property CloudScriptRevisionOption RevisionSelection; 
+
+/// <summary>
+/// The specivic revision to execute, when RevisionSelection is set to 'Specific'
+/// </summary>
+@property NSNumber* SpecificRevision; 
+
+/// <summary>
+/// Generate a 'player_executed_cloudscript' PlayStream event containing the results of the function execution and other contextual information. This event will show up in the PlayStream debugger console for the player in Game Manager.
+/// </summary>
+@property bool GeneratePlayStreamEvent; 
+/**/
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
+@interface ExecuteCloudScriptResult : PlayFabBaseModel
+
+
+/// <summary>
+/// The name of the function that executed
+/// </summary>
+@property NSString* FunctionName; 
+
+/// <summary>
+/// The revision of the CloudScript that executed
+/// </summary>
+@property NSNumber* Revision; 
+
+/// <summary>
+/// The object returned from the CloudScript function, if any
+/// </summary>
+@property NSDictionary* FunctionResult; 
+
+/// <summary>
+/// Entries logged during the function execution. These include both entries logged in the function code using log.info() and log.error() and error entries for API and HTTP request failures.
+/// </summary>
+@property NSArray* Logs; 
+
+@property NSNumber* ExecutionTimeSeconds; 
+
+@property NSNumber* MemoryConsumedBytes; 
+
+/// <summary>
+/// Number of PlayFab API requests issued by the CloudScript function
+/// </summary>
+@property NSNumber* APIRequestsIssued; 
+
+/// <summary>
+/// Number of external HTTP requests issued by the CloudScript function
+/// </summary>
+@property NSNumber* HttpRequestsIssued; 
+
+/// <summary>
+/// Information about the error, if any, that occured during execution
+/// </summary>
+@property ScriptExecutionError* Error; 
+/*
+@property NSObject* Request;
+@property NSObject* CustomData;
+*/
+-(id)initWithDictionary:(NSDictionary*)properties;
 @end
 
 
@@ -2132,10 +1601,8 @@
 /// Unique PlayFab identifier for a user, or null if no PlayFab account is linked to the Facebook identifier.
 /// </summary>
 @property NSString* PlayFabId; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -2181,10 +1648,8 @@
 /// Available Game Center information (if the user and PlayFab friend are also connected in Game Center).
 /// </summary>
 @property UserGameCenterInfo* GameCenterInfo; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -2200,10 +1665,8 @@
 /// Unique PlayFab identifier for a user, or null if no PlayFab account is linked to the Game Center identifier.
 /// </summary>
 @property NSString* PlayFabId; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -2253,11 +1716,14 @@
 /// <summary>
 /// game specific string denoting server configuration
 /// </summary>
-@property NSString* GameServerState; 
+@property GameInstanceState GameServerState; 
 
+/// <summary>
+/// game session custom data
+/// </summary>
+@property NSString* GameServerData; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -2273,10 +1739,8 @@
 /// Unique identifier for the title, found in the Settings > Game Properties section of the PlayFab developer site when a title has been selected
 /// </summary>
 @property NSString* TitleId; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -2287,13 +1751,11 @@
 /// array of regions found matching the request parameters
 /// </summary>
 @property NSArray* Regions; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -2319,10 +1781,8 @@
 /// Title-specific username for the account to find (if no Email is set).
 /// </summary>
 @property NSString* TitleDisplayName; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -2333,13 +1793,11 @@
 /// Account information for the local user.
 /// </summary>
 @property UserAccountInfo* AccountInfo; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -2350,10 +1808,8 @@
 /// Which catalog is being requested.
 /// </summary>
 @property NSString* CatalogVersion; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -2361,16 +1817,14 @@
 
 
 /// <summary>
-/// Array of inventory objects.
+/// Array of items which can be purchased.
 /// </summary>
 @property NSArray* Catalog; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -2396,10 +1850,8 @@
 /// The version that currently exists according to the caller. The call will return the data for all of the keys if the version in the system is greater than this.
 /// </summary>
 @property NSNumber* IfChangedFromDataVersion; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -2420,23 +1872,16 @@
 /// Indicates the current version of the data that has been set. This is incremented with every set call for that type of data (read-only, internal, etc). This version can be provided in Get calls to find updated data.
 /// </summary>
 @property NSNumber* DataVersion; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
 @interface GetCharacterInventoryRequest : PlayFabBaseModel
 
-
-/// <summary>
-/// Unique PlayFab assigned ID of the user on whom the operation will be performed.
-/// </summary>
-@property NSString* PlayFabId; 
 
 /// <summary>
 /// Unique PlayFab assigned ID for a specific character owned by a user
@@ -2447,20 +1892,13 @@
 /// Used to limit results to only those from a specific catalog version.
 /// </summary>
 @property NSString* CatalogVersion; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
 @interface GetCharacterInventoryResult : PlayFabBaseModel
 
-
-/// <summary>
-/// PlayFab unique identifier of the user whose character inventory is being returned.
-/// </summary>
-@property NSString* PlayFabId; 
 
 /// <summary>
 /// Unique identifier of the character for this inventory.
@@ -2481,13 +1919,11 @@
 /// Array of remaining times and timestamps for virtual currencies.
 /// </summary>
 @property NSDictionary* VirtualCurrencyRechargeTimes; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -2513,10 +1949,8 @@
 /// Maximum number of entries to retrieve. Default 10, maximum 100.
 /// </summary>
 @property NSNumber* MaxResultsCount; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -2527,13 +1961,11 @@
 /// Ordered list of leaderboard entries.
 /// </summary>
 @property NSArray* Leaderboard; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -2544,10 +1976,8 @@
 /// Unique PlayFab assigned ID for a specific character owned by a user
 /// </summary>
 @property NSString* CharacterId; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -2558,13 +1988,11 @@
 /// The requested character statistics.
 /// </summary>
 @property NSDictionary* CharacterStatistics; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -2580,10 +2008,8 @@
 /// Specifies whether the URL returned should be the one for the most recently uploaded Revision of the Cloud Script (true), or the Revision most recently set to live (false). Defaults to false.
 /// </summary>
 @property bool Testing; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -2594,13 +2020,11 @@
 /// URL of the Cloud Script logic server.
 /// </summary>
 @property NSString* Url; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -2621,10 +2045,8 @@
 /// True if download through CDN. CDN provides better download bandwidth and time. However, if you want latest, non-cached version of the content, set this to false. Default is true.
 /// </summary>
 @property bool ThruCDN; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -2635,13 +2057,11 @@
 /// URL for downloading content via HTTP GET or HEAD method. The URL will expire in 1 hour.
 /// </summary>
 @property NSString* URL; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -2667,10 +2087,8 @@
 /// Indicates whether Facebook friends should be included in the response. Default is true.
 /// </summary>
 @property bool IncludeFacebookFriends; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -2681,13 +2099,11 @@
 /// Ordered listing of users and their positions in the requested leaderboard.
 /// </summary>
 @property NSArray* Leaderboard; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -2718,10 +2134,8 @@
 /// Indicates whether Facebook friends should be included in the response. Default is true.
 /// </summary>
 @property bool IncludeFacebookFriends; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -2732,13 +2146,11 @@
 /// Ordered listing of users and their positions in the requested leaderboard.
 /// </summary>
 @property NSArray* Leaderboard; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -2769,10 +2181,8 @@
 /// Indicates whether Facebook friends should be included in the response. Default is true.
 /// </summary>
 @property bool IncludeFacebookFriends; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -2788,10 +2198,8 @@
 /// Indicates whether Facebook friends should be included in the response. Default is true.
 /// </summary>
 @property bool IncludeFacebookFriends; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -2802,13 +2210,11 @@
 /// Array of friends found.
 /// </summary>
 @property NSArray* Friends; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -2834,10 +2240,8 @@
 /// Maximum number of entries to retrieve. Default 10, maximum 100.
 /// </summary>
 @property NSNumber* MaxResultsCount; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -2848,13 +2252,11 @@
 /// Ordered list of leaderboard entries.
 /// </summary>
 @property NSArray* Leaderboard; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -2870,10 +2272,8 @@
 /// Maximum number of entries to retrieve. Default 10, maximum 100.
 /// </summary>
 @property NSNumber* MaxResultsCount; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -2884,13 +2284,11 @@
 /// Ordered listing of users and their positions in the requested leaderboard.
 /// </summary>
 @property NSArray* Leaderboard; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -2911,10 +2309,8 @@
 /// Maximum number of entries to retrieve. Default 10, maximum 100.
 /// </summary>
 @property NSNumber* MaxResultsCount; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -2925,13 +2321,11 @@
 /// Ordered listing of users and their positions in the requested leaderboard.
 /// </summary>
 @property NSArray* Leaderboard; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -2947,10 +2341,8 @@
 /// Maximum number of entries to retrieve.
 /// </summary>
 @property NSNumber* MaxResultsCount; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -2961,13 +2353,11 @@
 /// Ordered list of leaderboard entries.
 /// </summary>
 @property NSArray* Leaderboard; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -2988,10 +2378,8 @@
 /// Maximum number of entries to retrieve. Default 10, maximum 100.
 /// </summary>
 @property NSNumber* MaxResultsCount; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -3002,13 +2390,11 @@
 /// Ordered listing of users and their positions in the requested leaderboard.
 /// </summary>
 @property NSArray* Leaderboard; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -3019,10 +2405,8 @@
 /// The Photon applicationId for the game you wish to log into.
 /// </summary>
 @property NSString* PhotonApplicationId; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -3033,13 +2417,190 @@
 /// The Photon authentication token for this game-session.
 /// </summary>
 @property NSString* PhotonCustomAuthenticationToken; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
+@end
 
+
+@interface GetPlayerCombinedInfoRequest : PlayFabBaseModel
+
+
+/// <summary>
+/// PlayFabId of the user whose data will be returned. If not filled included, we return the data for the calling player. 
+/// </summary>
+@property NSString* PlayFabId; 
+
+/// <summary>
+/// Flags for which pieces of info to return for the user.
+/// </summary>
+@property GetPlayerCombinedInfoRequestParams InfoRequestParameters; 
+/**/
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
+@interface GetPlayerCombinedInfoRequestParams : PlayFabBaseModel
+
+
+/// <summary>
+/// Whether to get the player's account Info. Defaults to false
+/// </summary>
+@property bool GetUserAccountInfo; 
+
+/// <summary>
+/// Whether to get the player's inventory. Defaults to false
+/// </summary>
+@property bool GetUserInventory; 
+
+/// <summary>
+/// Whether to get the player's virtual currency balances. Defaults to false
+/// </summary>
+@property bool GetUserVirtualCurrency; 
+
+/// <summary>
+/// Whether to get the player's custom data. Defaults to false
+/// </summary>
+@property bool GetUserData; 
+
+/// <summary>
+/// Specific keys to search for in the custom data. Leave null to get all keys. Has no effect if UserDataKeys is false
+/// </summary>
+@property NSArray* UserDataKeys; 
+
+/// <summary>
+/// Whether to get the player's read only data. Defaults to false
+/// </summary>
+@property bool GetUserReadOnlyData; 
+
+/// <summary>
+/// Specific keys to search for in the custom data. Leave null to get all keys. Has no effect if GetUserReadOnlyData is false
+/// </summary>
+@property NSArray* UserReadOnlyDataKeys; 
+
+/// <summary>
+/// Whether to get character inventories. Defaults to false.
+/// </summary>
+@property bool GetCharacterInventories; 
+
+/// <summary>
+/// Whether to get the list of characters. Defaults to false.
+/// </summary>
+@property bool GetCharacterList; 
+
+/// <summary>
+/// Whether to get title data. Defaults to false.
+/// </summary>
+@property bool GetTitleData; 
+
+/// <summary>
+/// Specific keys to search for in the custom data. Leave null to get all keys. Has no effect if GetTitleData is false
+/// </summary>
+@property NSArray* TitleDataKeys; 
+
+/// <summary>
+/// Whether to get player statistics. Defaults to false.
+/// </summary>
+@property bool GetPlayerStatistics; 
+
+/// <summary>
+/// Specific statistics to retrieve. Leave null to get all keys. Has no effect if GetPlayerStatistics is false
+/// </summary>
+@property NSArray* PlayerStatisticNames; 
+/**/
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
+@interface GetPlayerCombinedInfoResult : PlayFabBaseModel
+
+
+/// <summary>
+/// Unique PlayFab assigned ID of the user on whom the operation will be performed.
+/// </summary>
+@property NSString* PlayFabId; 
+
+/// <summary>
+/// Results for requested info.
+/// </summary>
+@property GetPlayerCombinedInfoResultPayload* InfoResultPayload; 
+/*
+@property NSObject* Request;
+@property NSObject* CustomData;
+*/
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
+@interface GetPlayerCombinedInfoResultPayload : PlayFabBaseModel
+
+
+/// <summary>
+/// Account information for the user. This is always retrieved.
+/// </summary>
+@property UserAccountInfo* AccountInfo; 
+
+/// <summary>
+/// Array of inventory items in the user's current inventory.
+/// </summary>
+@property NSArray* UserInventory; 
+
+/// <summary>
+/// Dictionary of virtual currency balance(s) belonging to the user.
+/// </summary>
+@property NSDictionary* UserVirtualCurrency; 
+
+/// <summary>
+/// Dictionary of remaining times and timestamps for virtual currencies.
+/// </summary>
+@property NSDictionary* UserVirtualCurrencyRechargeTimes; 
+
+/// <summary>
+/// User specific custom data.
+/// </summary>
+@property NSDictionary* UserData; 
+
+/// <summary>
+/// The version of the UserData that was returned.
+/// </summary>
+@property NSNumber* UserDataVersion; 
+
+/// <summary>
+/// User specific read-only data.
+/// </summary>
+@property NSDictionary* UserReadOnlyData; 
+
+/// <summary>
+/// The version of the Read-Only UserData that was returned.
+/// </summary>
+@property NSNumber* UserReadOnlyDataVersion; 
+
+/// <summary>
+/// List of characters for the user.
+/// </summary>
+@property NSArray* CharacterList; 
+
+/// <summary>
+/// Inventories for each character for the user.
+/// </summary>
+@property NSArray* CharacterInventories; 
+
+/// <summary>
+/// Title data for this title.
+/// </summary>
+@property NSDictionary* TitleData; 
+
+/// <summary>
+/// List of statistics for this player.
+/// </summary>
+@property NSArray* PlayerStatistics; 
+/*
+@property NSObject* Request;
+@property NSObject* CustomData;
+*/
+-(id)initWithDictionary:(NSDictionary*)properties;
 @end
 
 
@@ -3047,13 +2608,16 @@
 
 
 /// <summary>
-/// statistics to return
+/// statistics to return (current version will be returned for each)
 /// </summary>
 @property NSArray* StatisticNames; 
 
+/// <summary>
+/// statistics to return, if StatisticNames is not set (only statistics which have a version matching that provided will be returned)
+/// </summary>
+@property NSArray* StatisticNameVersions; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -3064,13 +2628,38 @@
 /// User statistics for the requested user.
 /// </summary>
 @property NSArray* Statistics; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
+@end
 
+
+@interface GetPlayerStatisticVersionsRequest : PlayFabBaseModel
+
+
+/// <summary>
+/// unique name of the statistic
+/// </summary>
+@property NSString* StatisticName; 
+/**/
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
+@interface GetPlayerStatisticVersionsResult : PlayFabBaseModel
+
+
+/// <summary>
+/// version change history of the statistic
+/// </summary>
+@property NSArray* StatisticVersions; 
+/*
+@property NSObject* Request;
+@property NSObject* CustomData;
+*/
+-(id)initWithDictionary:(NSDictionary*)properties;
 @end
 
 
@@ -3081,10 +2670,8 @@
 /// Returns only trades with the given status. If null, returns all trades.
 /// </summary>
 @property TradeStatus StatusFilter; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -3100,13 +2687,11 @@
 /// History of trades which this player has accepted.
 /// </summary>
 @property NSArray* AcceptedTrades; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -3117,10 +2702,8 @@
 /// Array of unique Facebook identifiers for which the title needs to get PlayFab identifiers.
 /// </summary>
 @property NSArray* FacebookIDs; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -3131,13 +2714,11 @@
 /// Mapping of Facebook identifiers to PlayFab identifiers.
 /// </summary>
 @property NSArray* Data; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -3148,10 +2729,8 @@
 /// Array of unique Game Center identifiers (the Player Identifier) for which the title needs to get PlayFab identifiers.
 /// </summary>
 @property NSArray* GameCenterIDs; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -3162,13 +2741,11 @@
 /// Mapping of Game Center identifiers to PlayFab identifiers.
 /// </summary>
 @property NSArray* Data; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -3179,10 +2756,8 @@
 /// Array of unique Google identifiers (Google+ user IDs) for which the title needs to get PlayFab identifiers.
 /// </summary>
 @property NSArray* GoogleIDs; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -3193,13 +2768,11 @@
 /// Mapping of Google identifiers to PlayFab identifiers.
 /// </summary>
 @property NSArray* Data; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -3210,10 +2783,8 @@
 /// Array of unique Kongregate identifiers (Kongregate's user_id) for which the title needs to get PlayFab identifiers.
 /// </summary>
 @property NSArray* KongregateIDs; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -3224,49 +2795,11 @@
 /// Mapping of Kongregate identifiers to PlayFab identifiers.
 /// </summary>
 @property NSArray* Data; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
-@end
-
-
-@interface GetPlayFabIDsFromPSNAccountIDsRequest : PlayFabBaseModel
-
-
-/// <summary>
-/// Array of unique PlayStation Network identifiers for which the title needs to get PlayFab identifiers.
-/// </summary>
-@property NSArray* PSNAccountIDs; 
-
-/// <summary>
-/// Id of the PSN issuer environment. If null, defaults to 256 (production)
-/// </summary>
-@property NSNumber* IssuerId; 
-
-/**/
--(id)initWithDictionary:(NSDictionary*)properties;
-
-@end
-
-
-@interface GetPlayFabIDsFromPSNAccountIDsResult : PlayFabBaseModel
-
-
-/// <summary>
-/// Mapping of PlayStation Network identifiers to PlayFab identifiers.
-/// </summary>
-@property NSArray* Data; 
-
-/*
-@property NSObject* Request;
-@property NSObject* CustomData;
-*/
--(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -3282,10 +2815,8 @@
 /// Array of unique Steam identifiers (Steam profile IDs) for which the title needs to get PlayFab identifiers.
 /// </summary>
 @property NSArray* SteamStringIDs; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -3296,13 +2827,11 @@
 /// Mapping of Steam identifiers to PlayFab identifiers.
 /// </summary>
 @property NSArray* Data; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -3313,10 +2842,8 @@
 ///  array of keys to get back data from the Publisher data blob, set by the admin tools
 /// </summary>
 @property NSArray* Keys; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -3327,13 +2854,11 @@
 /// a dictionary object of key / value pairs
 /// </summary>
 @property NSDictionary* Data; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -3344,10 +2869,8 @@
 /// Purchase order identifier.
 /// </summary>
 @property NSString* OrderId; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -3383,13 +2906,11 @@
 /// Array of items purchased.
 /// </summary>
 @property NSArray* Items; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -3410,10 +2931,8 @@
 /// If true, return the list of all members of the shared group.
 /// </summary>
 @property bool GetMembers; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -3429,13 +2948,11 @@
 /// List of PlayFabId identifiers for the members of this group, if requested.
 /// </summary>
 @property NSArray* Members; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -3443,18 +2960,16 @@
 
 
 /// <summary>
-/// Unqiue identifier for the store which is being requested.
-/// </summary>
-@property NSString* StoreId; 
-
-/// <summary>
-/// Catalog version for the requested store items. If null, defaults to most recent catalog.
+/// catalog version to store items from. Use default catalog version if null
 /// </summary>
 @property NSString* CatalogVersion; 
 
+/// <summary>
+/// Unqiue identifier for the store which is being requested.
+/// </summary>
+@property NSString* StoreId; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -3462,16 +2977,14 @@
 
 
 /// <summary>
-/// Array of store items.
+/// Array of items which can be purchased from this store.
 /// </summary>
 @property NSArray* Store; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -3482,10 +2995,8 @@
 /// Specific keys to search for in the title data (leave null to get all keys)
 /// </summary>
 @property NSArray* Keys; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -3496,13 +3007,11 @@
 /// a dictionary object of key / value pairs
 /// </summary>
 @property NSDictionary* Data; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -3513,10 +3022,8 @@
 /// Limits the results to the last n entries. Defaults to 10 if not set.
 /// </summary>
 @property NSNumber* Count; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -3527,13 +3034,11 @@
 /// Array of news items.
 /// </summary>
 @property NSArray* News; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -3549,10 +3054,8 @@
 /// Trade identifier as returned by OpenTradeOffer.
 /// </summary>
 @property NSString* TradeId; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -3563,13 +3066,11 @@
 /// Information about the requested trade.
 /// </summary>
 @property TradeInfo* Trade; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -3630,10 +3131,8 @@
 /// User read-only custom data keys to return. If set to null, all keys will be returned. For users other than yourself, only public data will be returned.
 /// </summary>
 @property NSArray* ReadOnlyDataKeys; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -3684,13 +3183,11 @@
 /// The version of the Read-Only UserData that was returned.
 /// </summary>
 @property NSNumber* ReadOnlyDataVersion; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -3703,7 +3200,7 @@
 @property NSArray* Keys; 
 
 /// <summary>
-/// Unique PlayFab identifier of the user to load data for. Optional, defaults to yourself if not set.
+/// Unique PlayFab identifier of the user to load data for. Optional, defaults to yourself if not set. When specified to a PlayFab id of another player, then this will only return public keys for that account.
 /// </summary>
 @property NSString* PlayFabId; 
 
@@ -3711,10 +3208,8 @@
 /// The version that currently exists according to the caller. The call will return the data for all of the keys if the version in the system is greater than this.
 /// </summary>
 @property NSNumber* IfChangedFromDataVersion; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -3730,22 +3225,18 @@
 /// Indicates the current version of the data that has been set. This is incremented with every set call for that type of data (read-only, internal, etc). This version can be provided in Get calls to find updated data.
 /// </summary>
 @property NSNumber* DataVersion; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
 @interface GetUserInventoryRequest : PlayFabBaseModel
 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -3753,7 +3244,7 @@
 
 
 /// <summary>
-/// Array of inventory items in the user's current inventory.
+/// Array of inventory items belonging to the user.
 /// </summary>
 @property NSArray* Inventory; 
 
@@ -3766,22 +3257,18 @@
 /// Array of remaining times and timestamps for virtual currencies.
 /// </summary>
 @property NSDictionary* VirtualCurrencyRechargeTimes; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
 @interface GetUserStatisticsRequest : PlayFabBaseModel
 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -3792,13 +3279,11 @@
 /// User statistics for the active title.
 /// </summary>
 @property NSDictionary* UserStatistics; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -3814,10 +3299,8 @@
 /// Unique PlayFab identifier for a user, or null if no PlayFab account is linked to the Google identifier.
 /// </summary>
 @property NSString* PlayFabId; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -3838,10 +3321,8 @@
 /// Non-unique display name of the character being granted.
 /// </summary>
 @property NSString* CharacterName; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -3862,13 +3343,11 @@
 /// Indicates whether this character was created successfully.
 /// </summary>
 @property bool Result; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -3952,10 +3431,8 @@
 /// A set of custom key-value pairs on the inventory item.
 /// </summary>
 @property NSDictionary* CustomData; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -3981,10 +3458,8 @@
 /// Items to be upgraded as a result of this purchase (upgraded items are hidden, as they are "replaced" by the new items).
 /// </summary>
 @property NSArray* UpgradeFromItems; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -4000,10 +3475,8 @@
 /// Unique PlayFab identifier for a user, or null if no PlayFab account is linked to the Kongregate identifier.
 /// </summary>
 @property NSString* PlayFabId; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -4024,22 +3497,18 @@
 /// Specific model of the user's device.
 /// </summary>
 @property NSString* AndroidDevice; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
 @interface LinkAndroidDeviceIDResult : PlayFabBaseModel
-
 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -4050,22 +3519,18 @@
 /// Custom unique identifier for the user, generated by the title.
 /// </summary>
 @property NSString* CustomId; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
 @interface LinkCustomIDResult : PlayFabBaseModel
-
 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -4076,27 +3541,18 @@
 /// Unique identifier from Facebook for the user.
 /// </summary>
 @property NSString* AccessToken; 
-
-/// <summary>
-/// If this Facebook account is already linked to a Playfab account, this will unlink the old account before linking the new one. Be careful when using this call, as it may orphan the old account. Defaults to false.
-/// </summary>
-@property bool ForceLink; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
 @interface LinkFacebookAccountResult : PlayFabBaseModel
-
 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -4107,22 +3563,18 @@
 /// Game Center identifier for the player account to be linked.
 /// </summary>
 @property NSString* GameCenterId; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
 @interface LinkGameCenterAccountResult : PlayFabBaseModel
-
 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -4130,25 +3582,21 @@
 
 
 /// <summary>
-/// Unique token from Google Play for the user.
+/// Unique token (https://developers.google.com/android/reference/com/google/android/gms/auth/GoogleAuthUtil#public-methods) from Google Play for the user.
 /// </summary>
 @property NSString* AccessToken; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
 @interface LinkGoogleAccountResult : PlayFabBaseModel
-
 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -4169,22 +3617,18 @@
 /// Specific model of the user's device.
 /// </summary>
 @property NSString* DeviceModel; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
 @interface LinkIOSDeviceIDResult : PlayFabBaseModel
-
 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -4200,58 +3644,18 @@
 /// Valid session auth ticket issued by Kongregate
 /// </summary>
 @property NSString* AuthTicket; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
 @interface LinkKongregateAccountResult : PlayFabBaseModel
 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
-@end
-
-
-@interface LinkPSNAccountRequest : PlayFabBaseModel
-
-
-/// <summary>
-/// Authentication code provided by the PlayStation Network.
-/// </summary>
-@property NSString* AuthCode; 
-
-/// <summary>
-/// Redirect URI supplied to PSN when requesting an auth code
-/// </summary>
-@property NSString* RedirectUri; 
-
-/// <summary>
-/// Id of the PSN issuer environment. If null, defaults to 256 (production)
-/// </summary>
-@property NSNumber* IssuerId; 
-
-/**/
--(id)initWithDictionary:(NSDictionary*)properties;
-
-@end
-
-
-@interface LinkPSNAccountResult : PlayFabBaseModel
-
-
-/*
-@property NSObject* Request;
-@property NSObject* CustomData;
-*/
--(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -4262,48 +3666,18 @@
 /// Authentication token for the user, returned as a byte array from Steam, and converted to a string (for example, the byte 0x08 should become "08").
 /// </summary>
 @property NSString* SteamTicket; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
 @interface LinkSteamAccountResult : PlayFabBaseModel
 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
-@end
-
-
-@interface LinkXboxAccountRequest : PlayFabBaseModel
-
-
-/// <summary>
-/// Token provided by the Xbox Live SDK/XDK method GetTokenAndSignatureAsync("POST", "https://playfabapi.com", "").
-/// </summary>
-@property NSString* XboxToken; 
-
-/**/
--(id)initWithDictionary:(NSDictionary*)properties;
-
-@end
-
-
-@interface LinkXboxAccountResult : PlayFabBaseModel
-
-
-/*
-@property NSObject* Request;
-@property NSObject* CustomData;
-*/
--(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -4314,10 +3688,8 @@
 /// Unique PlayFab assigned ID of the user on whom the operation will be performed.
 /// </summary>
 @property NSString* PlayFabId; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -4328,13 +3700,11 @@
 /// The requested list of characters.
 /// </summary>
 @property NSArray* Characters; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -4360,22 +3730,18 @@
 /// Flag to set event Body as profile details in the Redshift database as well as a standard event.
 /// </summary>
 @property bool ProfileSetEvent; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
 @interface LogEventResult : PlayFabBaseModel
-
 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -4407,12 +3773,15 @@
 /// </summary>
 @property NSDate* LastLoginTime; 
 
+/// <summary>
+/// Results for requested info.
+/// </summary>
+@property GetPlayerCombinedInfoResultPayload* InfoResultPayload; 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -4444,9 +3813,12 @@
 /// </summary>
 @property bool CreateAccount; 
 
+/// <summary>
+/// Flags for which pieces of info to return for the user.
+/// </summary>
+@property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -4468,9 +3840,12 @@
 /// </summary>
 @property bool CreateAccount; 
 
+/// <summary>
+/// Flags for which pieces of info to return for the user.
+/// </summary>
+@property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -4488,13 +3863,16 @@
 @property NSString* Email; 
 
 /// <summary>
-/// Password for the PlayFab account (6-30 characters)
+/// Password for the PlayFab account (6-100 characters)
 /// </summary>
 @property NSString* Password; 
 
+/// <summary>
+/// Flags for which pieces of info to return for the user.
+/// </summary>
+@property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -4516,9 +3894,12 @@
 /// </summary>
 @property bool CreateAccount; 
 
+/// <summary>
+/// Flags for which pieces of info to return for the user.
+/// </summary>
+@property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -4540,9 +3921,12 @@
 /// </summary>
 @property bool CreateAccount; 
 
+/// <summary>
+/// Flags for which pieces of info to return for the user.
+/// </summary>
+@property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -4555,7 +3939,7 @@
 @property NSString* TitleId; 
 
 /// <summary>
-/// Unique token from Google Play for the user.
+/// Unique token (https://developers.google.com/android/reference/com/google/android/gms/auth/GoogleAuthUtil#public-methods) from Google Play for the user.
 /// </summary>
 @property NSString* AccessToken; 
 
@@ -4569,9 +3953,12 @@
 /// </summary>
 @property NSString* PublisherId; 
 
+/// <summary>
+/// Flags for which pieces of info to return for the user.
+/// </summary>
+@property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -4599,13 +3986,16 @@
 @property NSString* DeviceModel; 
 
 /// <summary>
+/// Flags for which pieces of info to return for the user.
+/// </summary>
+@property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
+
+/// <summary>
 /// Automatically create a PlayFab account if one is not currently linked to this iOS device.
 /// </summary>
 @property bool CreateAccount; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -4632,9 +4022,12 @@
 /// </summary>
 @property bool CreateAccount; 
 
+/// <summary>
+/// Flags for which pieces of info to return for the user.
+/// </summary>
+@property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -4652,47 +4045,16 @@
 @property NSString* Username; 
 
 /// <summary>
-/// Password for the PlayFab account (6-30 characters)
+/// Password for the PlayFab account (6-100 characters)
 /// </summary>
 @property NSString* Password; 
 
+/// <summary>
+/// Flags for which pieces of info to return for the user.
+/// </summary>
+@property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
-@end
-
-
-@interface LoginWithPSNRequest : PlayFabBaseModel
-
-
-/// <summary>
-/// Unique identifier for the title, found in the Settings > Game Properties section of the PlayFab developer site when a title has been selected
-/// </summary>
-@property NSString* TitleId; 
-
-/// <summary>
-/// Auth code provided by the PSN OAuth provider.
-/// </summary>
-@property NSString* AuthCode; 
-
-/// <summary>
-/// Redirect URI supplied to PSN when requesting an auth code
-/// </summary>
-@property NSString* RedirectUri; 
-
-/// <summary>
-/// Id of the PSN issuer environment. If null, defaults to 256 (production)
-/// </summary>
-@property NSNumber* IssuerId; 
-
-/// <summary>
-/// Automatically create a PlayFab account if one is not currently linked to this PSN account.
-/// </summary>
-@property bool CreateAccount; 
-
-/**/
--(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -4714,33 +4076,31 @@
 /// </summary>
 @property bool CreateAccount; 
 
+/// <summary>
+/// Flags for which pieces of info to return for the user.
+/// </summary>
+@property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
-@interface LoginWithXboxRequest : PlayFabBaseModel
+@interface LogStatement : PlayFabBaseModel
 
 
 /// <summary>
-/// Unique identifier for the title, found in the Settings > Game Properties section of the PlayFab developer site when a title has been selected
+/// 'Debug', 'Info', or 'Error'
 /// </summary>
-@property NSString* TitleId; 
+@property NSString* Level; 
+
+@property NSString* Message; 
 
 /// <summary>
-/// Token provided by the Xbox Live SDK/XDK method GetTokenAndSignatureAsync("POST", "https://playfabapi.com", "").
+/// Optional object accompanying the message as contextual information
 /// </summary>
-@property NSString* XboxToken; 
-
-/// <summary>
-/// Automatically create a PlayFab account if one is not currently linked to this Xbox Live account.
-/// </summary>
-@property bool CreateAccount; 
-
+@property NSDictionary* Data; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -4778,13 +4138,16 @@
 @property NSString* CharacterId; 
 
 /// <summary>
+/// start a game session if one with an open slot is not found. Defaults to true
+/// </summary>
+@property bool StartNewIfNoneFound; 
+
+/// <summary>
 /// [deprecated]
 /// </summary>
 @property bool EnableQueue; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -4825,13 +4188,11 @@
 /// result of match making process
 /// </summary>
 @property MatchmakeStatus Status; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -4857,13 +4218,11 @@
 /// Balance of the virtual currency after modification.
 /// </summary>
 @property NSNumber* Balance; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -4881,13 +4240,11 @@
 @property NSArray* RequestedCatalogItemIds; 
 
 /// <summary>
-/// Players who are allowed to accept the trade. If null, the trade may be accepted by any player.
+/// Players who are allowed to accept the trade. If null, the trade may be accepted by any player. If empty, the trade may not be accepted by any player.
 /// </summary>
 @property NSArray* AllowedPlayerIds; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -4898,13 +4255,11 @@
 /// The information about the trade that was just opened.
 /// </summary>
 @property TradeInfo* Trade; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -4930,10 +4285,8 @@
 /// Payment provider transaction identifier. Required for Facebook Payments.
 /// </summary>
 @property NSString* ProviderTransactionId; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -4984,13 +4337,11 @@
 /// Current virtual currency totals for the user.
 /// </summary>
 @property NSDictionary* VirtualCurrency; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -5016,10 +4367,8 @@
 /// Amount of existing credit the user has with the provider.
 /// </summary>
 @property NSNumber* StoreCredit; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -5045,29 +4394,45 @@
 /// User's overall position in the leaderboard.
 /// </summary>
 @property NSNumber* Position; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
-@interface PSNAccountPlayFabIdPair : PlayFabBaseModel
+@interface PlayerStatisticVersion : PlayFabBaseModel
 
 
 /// <summary>
-/// Unique PlayStation Network identifier for a user.
+/// name of the statistic when the version became active
 /// </summary>
-@property NSString* PSNAccountId; 
+@property NSString* StatisticName; 
 
 /// <summary>
-/// Unique PlayFab identifier for a user, or null if no PlayFab account is linked to the PlayStation Network identifier.
+/// version of the statistic
 /// </summary>
-@property NSString* PlayFabId; 
+@property NSNumber* Version; 
 
+/// <summary>
+/// time at which the statistic version was scheduled to become active, based on the configured ResetInterval
+/// </summary>
+@property NSDate* ScheduledActivationTime; 
+
+/// <summary>
+/// time when the statistic version became active
+/// </summary>
+@property NSDate* ActivationTime; 
+
+/// <summary>
+/// time at which the statistic version was scheduled to become inactive, based on the configured ResetInterval
+/// </summary>
+@property NSDate* ScheduledDeactivationTime; 
+
+/// <summary>
+/// time when the statistic version became inactive due to statistic version incrementing
+/// </summary>
+@property NSDate* DeactivationTime; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -5103,10 +4468,8 @@
 /// Unique PlayFab assigned ID for a specific character owned by a user
 /// </summary>
 @property NSString* CharacterId; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -5117,13 +4480,11 @@
 /// Details for the items purchased.
 /// </summary>
 @property NSArray* Items; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -5139,10 +4500,8 @@
 /// Catalog version of the coupon.
 /// </summary>
 @property NSString* CatalogVersion; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -5153,37 +4512,11 @@
 /// Items granted to the player as a result of redeeming the coupon.
 /// </summary>
 @property NSArray* GrantedItems; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
-@end
-
-
-@interface RefreshPSNAuthTokenRequest : PlayFabBaseModel
-
-
-/// <summary>
-/// Auth code returned by PSN OAuth system.
-/// </summary>
-@property NSString* AuthCode; 
-
-/// <summary>
-/// Redirect URI supplied to PSN when requesting an auth code
-/// </summary>
-@property NSString* RedirectUri; 
-
-/// <summary>
-/// Id of the PSN issuer environment. If null, defaults to 256 (production)
-/// </summary>
-@property NSNumber* IssuerId; 
-
-/**/
--(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -5209,10 +4542,8 @@
 /// url to ping to get roundtrip time
 /// </summary>
 @property NSString* PingUrl; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -5233,22 +4564,18 @@
 /// Message to display when confirming push notification.
 /// </summary>
 @property NSString* ConfirmationMessage; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
 @interface RegisterForIOSPushNotificationResult : PlayFabBaseModel
-
 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -5271,7 +4598,7 @@
 @property NSString* Email; 
 
 /// <summary>
-/// Password for the PlayFab account (6-30 characters)
+/// Password for the PlayFab account (6-100 characters)
 /// </summary>
 @property NSString* Password; 
 
@@ -5289,10 +4616,8 @@
 /// [Deprecated - The Origination of a user is determined by the API call used to create the account. In the case of RegisterPlayFabUser, it will be Organic.
 /// </summary>
 @property NSString* Origination; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -5318,13 +4643,11 @@
 /// Settings specific to this user.
 /// </summary>
 @property UserSettings* SettingsForUser; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -5335,22 +4658,18 @@
 /// PlayFab identifier of the friend account which is to be removed.
 /// </summary>
 @property NSString* FriendPlayFabId; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
 @interface RemoveFriendResult : PlayFabBaseModel
-
 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -5366,22 +4685,18 @@
 /// An array of unique PlayFab assigned ID of the user on whom the operation will be performed.
 /// </summary>
 @property NSArray* PlayFabIds; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
 @interface RemoveSharedGroupMembersResult : PlayFabBaseModel
-
 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -5397,10 +4712,8 @@
 /// Optional additional comment by reporting player.
 /// </summary>
 @property NSString* Comment; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -5416,13 +4729,11 @@
 /// The number of remaining reports which may be filed today.
 /// </summary>
 @property NSNumber* SubmissionsRemaining; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -5433,22 +4744,18 @@
 /// Base64 encoded receipt data, passed back by the App Store as a result of a successful purchase.
 /// </summary>
 @property NSString* ReceiptData; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
 @interface RestoreIOSPurchasesResult : PlayFabBaseModel
-
 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -5469,10 +4776,8 @@
 /// json-encoded parameters to pass into the action (If you use this, don't use Params)
 /// </summary>
 @property NSString* ParamsEncoded; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -5513,13 +4818,33 @@
 /// time this script took to run, in seconds
 /// </summary>
 @property NSNumber* ExecutionTime; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
+@end
 
+
+@interface ScriptExecutionError : PlayFabBaseModel
+
+
+/// <summary>
+/// Error code, such as CloudScriptNotFound, JavascriptException, CloudScriptFunctionArgumentSizeExceeded, CloudScriptAPIRequestCountExceeded, CloudScriptAPIRequestError, or CloudScriptHTTPRequestError
+/// </summary>
+@property NSString* Error; 
+
+/// <summary>
+/// Details about the error
+/// </summary>
+@property NSString* Message; 
+
+/// <summary>
+/// Point during the execution of the script at which the error occurred, if any
+/// </summary>
+@property NSString* StackTrace; 
+/**/
+-(id)initWithDictionary:(NSDictionary*)properties;
 @end
 
 
@@ -5540,22 +4865,18 @@
 /// Deprecated - unused
 /// </summary>
 @property NSString* PublisherId; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
 @interface SendAccountRecoveryEmailResult : PlayFabBaseModel
-
 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -5571,22 +4892,18 @@
 /// Array of tags to set on the friend account.
 /// </summary>
 @property NSArray* Tags; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
 @interface SetFriendTagsResult : PlayFabBaseModel
-
 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -5612,10 +4929,8 @@
 /// Indicates whether this data can be read by all users (public) or only members of the group (private).
 /// </summary>
 @property UserDataPermission Permission; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -5651,10 +4966,8 @@
 /// custom command line argument when starting game server process
 /// </summary>
 @property NSString* CustomCommandLineData; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -5690,13 +5003,11 @@
 /// password required to log into the server
 /// </summary>
 @property NSString* Password; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -5717,10 +5028,8 @@
 /// Array of items to purchase.
 /// </summary>
 @property NSArray* Items; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -5746,13 +5055,28 @@
 /// Current virtual currency totals for the user.
 /// </summary>
 @property NSDictionary* VirtualCurrencyBalances; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
+@end
 
+
+@interface StatisticNameVersion : PlayFabBaseModel
+
+
+/// <summary>
+/// unique name of the statistic
+/// </summary>
+@property NSString* StatisticName; 
+
+/// <summary>
+/// the version of the statistic to be returned
+/// </summary>
+@property NSNumber* Version; 
+/**/
+-(id)initWithDictionary:(NSDictionary*)properties;
 @end
 
 
@@ -5773,10 +5097,8 @@
 /// statistic value for the player
 /// </summary>
 @property NSNumber* Value; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -5796,11 +5118,9 @@
 /// <summary>
 /// for updates to an existing statistic value for a player, the version of the statistic when it was loaded
 /// </summary>
-@property NSString* Version; 
-
+@property NSNumber* Version; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -5821,10 +5141,8 @@
 /// Unique PlayFab identifier for a user, or null if no PlayFab account is linked to the Steam identifier.
 /// </summary>
 @property NSString* PlayFabId; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -5848,10 +5166,8 @@
 /// override prices for this item for specific currencies
 /// </summary>
 @property NSDictionary* RealCurrencyPrices; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -5867,10 +5183,8 @@
 /// Amount to be subtracted from the user balance of the specified virtual currency.
 /// </summary>
 @property NSNumber* Amount; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -5896,10 +5210,8 @@
 /// News item text.
 /// </summary>
 @property NSString* Body; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -5970,10 +5282,8 @@
 /// If set, The UTC time when this trade was made invalid.
 /// </summary>
 @property NSDate* InvalidatedAt; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -5984,22 +5294,18 @@
 /// Android device identifier for the user's device. If not specified, the most recently signed in Android Device ID will be used.
 /// </summary>
 @property NSString* AndroidDeviceId; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
 @interface UnlinkAndroidDeviceIDResult : PlayFabBaseModel
-
 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -6010,85 +5316,69 @@
 /// Custom unique identifier for the user, generated by the title. If not specified, the most recently signed in Custom ID will be used.
 /// </summary>
 @property NSString* CustomId; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
 @interface UnlinkCustomIDResult : PlayFabBaseModel
 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
 @interface UnlinkFacebookAccountRequest : PlayFabBaseModel
 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
 @interface UnlinkFacebookAccountResult : PlayFabBaseModel
 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
 @interface UnlinkGameCenterAccountRequest : PlayFabBaseModel
 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
 @interface UnlinkGameCenterAccountResult : PlayFabBaseModel
 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
 @interface UnlinkGoogleAccountRequest : PlayFabBaseModel
 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
 @interface UnlinkGoogleAccountResult : PlayFabBaseModel
-
 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -6099,111 +5389,52 @@
 /// Vendor-specific iOS identifier for the user's device. If not specified, the most recently signed in iOS Device ID will be used.
 /// </summary>
 @property NSString* DeviceId; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
 @interface UnlinkIOSDeviceIDResult : PlayFabBaseModel
 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
 @interface UnlinkKongregateAccountRequest : PlayFabBaseModel
 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
 @interface UnlinkKongregateAccountResult : PlayFabBaseModel
 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
-@end
-
-
-@interface UnlinkPSNAccountRequest : PlayFabBaseModel
-
-
-/**/
--(id)initWithDictionary:(NSDictionary*)properties;
-
-@end
-
-
-@interface UnlinkPSNAccountResult : PlayFabBaseModel
-
-
-/*
-@property NSObject* Request;
-@property NSObject* CustomData;
-*/
--(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
 @interface UnlinkSteamAccountRequest : PlayFabBaseModel
 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
 @interface UnlinkSteamAccountResult : PlayFabBaseModel
 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
-@end
-
-
-@interface UnlinkXboxAccountRequest : PlayFabBaseModel
-
-
-/// <summary>
-/// Token provided by the Xbox Live SDK/XDK method GetTokenAndSignatureAsync("POST", "https://playfabapi.com", "").
-/// </summary>
-@property NSString* XboxToken; 
-
-/**/
--(id)initWithDictionary:(NSDictionary*)properties;
-
-@end
-
-
-@interface UnlinkXboxAccountResult : PlayFabBaseModel
-
-
-/*
-@property NSObject* Request;
-@property NSObject* CustomData;
-*/
--(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -6229,10 +5460,8 @@
 /// Specifies the catalog version that should be used to determine container contents.  If unspecified, uses catalog associated with the item instance.
 /// </summary>
 @property NSString* CatalogVersion; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -6253,10 +5482,8 @@
 /// Unique PlayFab assigned ID for a specific character owned by a user
 /// </summary>
 @property NSString* CharacterId; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -6282,13 +5509,11 @@
 /// Virtual currency granted to the player as a result of unlocking the container.
 /// </summary>
 @property NSDictionary* VirtualCurrency; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -6314,10 +5539,8 @@
 /// Permission to be applied to all user data keys written in this request. Defaults to "private" if not set.
 /// </summary>
 @property UserDataPermission Permission; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -6328,13 +5551,11 @@
 /// Indicates the current version of the data that has been set. This is incremented with every set call for that type of data (read-only, internal, etc). This version can be provided in Get calls to find updated data.
 /// </summary>
 @property NSNumber* DataVersion; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -6350,22 +5571,18 @@
 /// Statistics to be updated with the provided values.
 /// </summary>
 @property NSDictionary* CharacterStatistics; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
 @interface UpdateCharacterStatisticsResult : PlayFabBaseModel
-
 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -6376,22 +5593,18 @@
 /// Statistics to be updated with the provided values
 /// </summary>
 @property NSArray* Statistics; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
 @interface UpdatePlayerStatisticsResult : PlayFabBaseModel
-
 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -6417,22 +5630,18 @@
 /// Permission to be applied to all user data keys in this request.
 /// </summary>
 @property UserDataPermission Permission; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
 @interface UpdateSharedGroupDataResult : PlayFabBaseModel
-
 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -6450,13 +5659,11 @@
 @property NSArray* KeysToRemove; 
 
 /// <summary>
-/// Permission to be applied to all user data keys written in this request. Defaults to "private" if not set.
+/// Permission to be applied to all user data keys written in this request. Defaults to "private" if not set. This is used for requests by one player for information about another player; those requests will only return Public keys.
 /// </summary>
 @property UserDataPermission Permission; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -6467,13 +5674,11 @@
 /// Indicates the current version of the data that has been set. This is incremented with every set call for that type of data (read-only, internal, etc). This version can be provided in Get calls to find updated data.
 /// </summary>
 @property NSNumber* DataVersion; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -6481,25 +5686,21 @@
 
 
 /// <summary>
-/// Statistics to be updated with the provided values.
+/// Statistics to be updated with the provided values. UserStatistics object must follow the Key(string), Value(int) pattern.
 /// </summary>
 @property NSDictionary* UserStatistics; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
 @interface UpdateUserStatisticsResult : PlayFabBaseModel
-
 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -6510,10 +5711,8 @@
 /// New title display name for the user - must be between 3 and 25 characters.
 /// </summary>
 @property NSString* DisplayName; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -6524,13 +5723,11 @@
 /// Current title display name for the user (this will be the original display name if the rename attempt failed).
 /// </summary>
 @property NSString* DisplayName; 
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -6611,10 +5808,8 @@
 /// Custom ID information, if a custom ID has been assigned
 /// </summary>
 @property UserCustomIdInfo* CustomIdInfo; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -6625,10 +5820,8 @@
 /// Android device ID
 /// </summary>
 @property NSString* AndroidDeviceId; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -6639,10 +5832,8 @@
 /// Custom ID
 /// </summary>
 @property NSString* CustomId; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -6660,13 +5851,11 @@
 @property NSDate* LastUpdated; 
 
 /// <summary>
-/// Indicates whether this data can be read by all users (public) or only the user (private).
+/// Indicates whether this data can be read by all users (public) or only the user (private). This is used for GetUserData requests being made by one player about another player.
 /// </summary>
 @property UserDataPermission Permission; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -6682,10 +5871,8 @@
 /// Facebook full name
 /// </summary>
 @property NSString* FullName; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -6696,10 +5883,8 @@
 /// Gamecenter identifier
 /// </summary>
 @property NSString* GameCenterId; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -6725,10 +5910,8 @@
 /// Gender information of the Google account
 /// </summary>
 @property NSString* GoogleGender; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -6739,10 +5922,8 @@
 /// iOS device ID
 /// </summary>
 @property NSString* IosDeviceId; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -6758,10 +5939,8 @@
 /// Kongregate Username
 /// </summary>
 @property NSString* KongregateName; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -6772,10 +5951,8 @@
 /// user email address
 /// </summary>
 @property NSString* Email; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -6791,10 +5968,8 @@
 /// PSN online ID
 /// </summary>
 @property NSString* PsnOnlineId; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -6805,10 +5980,8 @@
 /// Boolean for whether this player is eligible for ad tracking.
 /// </summary>
 @property bool NeedsAttribution; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -6834,10 +6007,8 @@
 /// what stage of game ownership the user is listed as being in, from Steam
 /// </summary>
 @property TitleActivationStatus SteamActivationStatus; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -6873,10 +6044,8 @@
 /// boolean indicating whether or not the user is currently banned for a title
 /// </summary>
 @property bool isBanned; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -6887,10 +6056,8 @@
 /// XBox user ID
 /// </summary>
 @property NSString* XboxUserId; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -6921,22 +6088,18 @@
 /// Amount of the stated currency paid for the object.
 /// </summary>
 @property NSNumber* PurchasePrice; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
 @interface ValidateAmazonReceiptResult : PlayFabBaseModel
-
 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -6962,22 +6125,18 @@
 /// Amount of the stated currency paid for the object.
 /// </summary>
 @property NSNumber* PurchasePrice; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
 @interface ValidateGooglePlayPurchaseResult : PlayFabBaseModel
-
 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -6998,22 +6157,18 @@
 /// Amount of the stated currency paid for the object.
 /// </summary>
 @property NSNumber* PurchasePrice; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
 @interface ValidateIOSReceiptResult : PlayFabBaseModel
-
 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
 
 
@@ -7034,8 +6189,93 @@
 /// Maximum value to which the regenerating currency will automatically increment. Note that it can exceed this value through use of the AddUserVirtualCurrency API call. However, it will not regenerate automatically until it has fallen below this value.
 /// </summary>
 @property NSNumber* RechargeMax; 
-
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
-
 @end
+
+
+@interface WriteClientCharacterEventRequest : PlayFabBaseModel
+
+
+/// <summary>
+/// Unique PlayFab assigned ID for a specific character owned by a user
+/// </summary>
+@property NSString* CharacterId; 
+
+/// <summary>
+/// The name of the event, within the namespace scoped to the title. The naming convention is up to the caller, but it commonly follows the subject_verb_object pattern (e.g. player_logged_in).
+/// </summary>
+@property NSString* EventName; 
+
+/// <summary>
+/// The time (in UTC) associated with this event. The value dafaults to the current time.
+/// </summary>
+@property NSDate* Timestamp; 
+
+/// <summary>
+/// Custom event properties. Each property consists of a name (string) and a value (JSON object).
+/// </summary>
+@property NSDictionary* Body; 
+/**/
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
+@interface WriteClientPlayerEventRequest : PlayFabBaseModel
+
+
+/// <summary>
+/// The name of the event, within the namespace scoped to the title. The naming convention is up to the caller, but it commonly follows the subject_verb_object pattern (e.g. player_logged_in).
+/// </summary>
+@property NSString* EventName; 
+
+/// <summary>
+/// The time (in UTC) associated with this event. The value dafaults to the current time.
+/// </summary>
+@property NSDate* Timestamp; 
+
+/// <summary>
+/// Custom data properties associated with the event. Each property consists of a name (string) and a value (JSON object).
+/// </summary>
+@property NSDictionary* Body; 
+/**/
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
+@interface WriteEventResponse : PlayFabBaseModel
+
+
+/// <summary>
+/// The unique identifier of the event. This can be used to retrieve the event's properties using the GetEvent API. The values of this identifier consist of ASCII characters and are not constrained to any particular format.
+/// </summary>
+@property NSString* EventId; 
+/*
+@property NSObject* Request;
+@property NSObject* CustomData;
+*/
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
+@interface WriteTitleEventRequest : PlayFabBaseModel
+
+
+/// <summary>
+/// The name of the event, within the namespace scoped to the title. The naming convention is up to the caller, but it commonly follows the subject_verb_object pattern (e.g. player_logged_in).
+/// </summary>
+@property NSString* EventName; 
+
+/// <summary>
+/// The time (in UTC) associated with this event. The value dafaults to the current time.
+/// </summary>
+@property NSDate* Timestamp; 
+
+/// <summary>
+/// Custom event properties. Each property consists of a name (string) and a value (JSON object).
+/// </summary>
+@property NSDictionary* Body; 
+/**/
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+

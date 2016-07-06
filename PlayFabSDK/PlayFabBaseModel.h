@@ -2,7 +2,7 @@
 //  ModelBase.h
 //  PlayFab Obj-C SDK
 //
-//  Created by William Burgers on 2/03/16.
+//  Created by Jackdaw on 2/03/16.
 //  Copyright (c) 2016 PlayFab, Inc. All rights reserved.
 //
 //  Basic class for data models, used for parsing to and from the server.
