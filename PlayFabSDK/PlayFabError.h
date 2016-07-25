@@ -119,7 +119,6 @@
 		PlayFabErrorInvalidReportDate = 1111,
 		PlayFabErrorReportNotAvailable = 1112,
 		PlayFabErrorDatabaseThroughputExceeded = 1113,
-		PlayFabErrorInvalidLobbyId = 1114,
 		PlayFabErrorInvalidGameTicket = 1115,
 		PlayFabErrorExpiredGameTicket = 1116,
 		PlayFabErrorGameTicketDoesNotMatchLobby = 1117,
@@ -238,7 +237,9 @@
 		PlayFabErrorVirtualCurrencyCodeExists = 1230,
 		PlayFabErrorTitleNewsItemCountLimitExceeded = 1231,
 		PlayFabErrorInvalidTwitchToken = 1232,
-		PlayFabErrorTwitchResponseError = 1233
+		PlayFabErrorTwitchResponseError = 1233,
+		PlayFabErrorProfaneDisplayName = 1234,
+		PlayFabErrorUserAlreadyAdded = 1235
     } PlayFabErrorCode;
 
     @interface PlayFabError : PlayFabBaseModel
