@@ -38,6 +38,8 @@ typedef void(^LoginWithTwitchCallback)(LoginResult* result, NSObject* userData);
 		
 typedef void(^RegisterPlayFabUserCallback)(RegisterPlayFabUserResult* result, NSObject* userData);
 		
+typedef void(^AddGenericIDCallback)(AddGenericIDResult* result, NSObject* userData);
+		
 typedef void(^AddUsernamePasswordCallback)(AddUsernamePasswordResult* result, NSObject* userData);
 		
 typedef void(^GetAccountInfoCallback)(GetAccountInfoResult* result, NSObject* userData);
@@ -47,6 +49,8 @@ typedef void(^GetPlayerCombinedInfoCallback)(GetPlayerCombinedInfoResult* result
 typedef void(^GetPlayFabIDsFromFacebookIDsCallback)(GetPlayFabIDsFromFacebookIDsResult* result, NSObject* userData);
 		
 typedef void(^GetPlayFabIDsFromGameCenterIDsCallback)(GetPlayFabIDsFromGameCenterIDsResult* result, NSObject* userData);
+		
+typedef void(^GetPlayFabIDsFromGenericIDsCallback)(GetPlayFabIDsFromGenericIDsResult* result, NSObject* userData);
 		
 typedef void(^GetPlayFabIDsFromGoogleIDsCallback)(GetPlayFabIDsFromGoogleIDsResult* result, NSObject* userData);
 		
@@ -75,6 +79,8 @@ typedef void(^LinkKongregateCallback)(LinkKongregateAccountResult* result, NSObj
 typedef void(^LinkSteamAccountCallback)(LinkSteamAccountResult* result, NSObject* userData);
 		
 typedef void(^LinkTwitchCallback)(LinkTwitchAccountResult* result, NSObject* userData);
+		
+typedef void(^RemoveGenericIDCallback)(RemoveGenericIDResult* result, NSObject* userData);
 		
 typedef void(^ReportPlayerCallback)(ReportPlayerClientResult* result, NSObject* userData);
 		
@@ -256,6 +262,8 @@ typedef void(^OpenTradeCallback)(OpenTradeResponse* result, NSObject* userData);
 		
 typedef void(^AttributeInstallCallback)(AttributeInstallResult* result, NSObject* userData);
 		
+typedef void(^GetPlayerSegmentsCallback)(GetPlayerSegmentsResult* result, NSObject* userData);
+		
 
 + (PlayFabClientAPI*) GetInstance;
 
@@ -290,6 +298,8 @@ typedef void(^AttributeInstallCallback)(AttributeInstallResult* result, NSObject
 		
 -(void) RegisterPlayFabUser:(RegisterPlayFabUserRequest*)request success:(RegisterPlayFabUserCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
+-(void) AddGenericID:(AddGenericIDRequest*)request success:(AddGenericIDCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
+		
 -(void) AddUsernamePassword:(AddUsernamePasswordRequest*)request success:(AddUsernamePasswordCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
 -(void) GetAccountInfo:(GetAccountInfoRequest*)request success:(GetAccountInfoCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
@@ -299,6 +309,8 @@ typedef void(^AttributeInstallCallback)(AttributeInstallResult* result, NSObject
 -(void) GetPlayFabIDsFromFacebookIDs:(GetPlayFabIDsFromFacebookIDsRequest*)request success:(GetPlayFabIDsFromFacebookIDsCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
 -(void) GetPlayFabIDsFromGameCenterIDs:(GetPlayFabIDsFromGameCenterIDsRequest*)request success:(GetPlayFabIDsFromGameCenterIDsCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
+		
+-(void) GetPlayFabIDsFromGenericIDs:(GetPlayFabIDsFromGenericIDsRequest*)request success:(GetPlayFabIDsFromGenericIDsCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
 -(void) GetPlayFabIDsFromGoogleIDs:(GetPlayFabIDsFromGoogleIDsRequest*)request success:(GetPlayFabIDsFromGoogleIDsCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
@@ -327,6 +339,8 @@ typedef void(^AttributeInstallCallback)(AttributeInstallResult* result, NSObject
 -(void) LinkSteamAccount:(LinkSteamAccountRequest*)request success:(LinkSteamAccountCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
 -(void) LinkTwitch:(LinkTwitchAccountRequest*)request success:(LinkTwitchCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
+		
+-(void) RemoveGenericID:(RemoveGenericIDRequest*)request success:(RemoveGenericIDCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
 -(void) ReportPlayer:(ReportPlayerClientRequest*)request success:(ReportPlayerCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
@@ -508,6 +522,8 @@ typedef void(^AttributeInstallCallback)(AttributeInstallResult* result, NSObject
 		
 -(void) AttributeInstall:(AttributeInstallRequest*)request success:(AttributeInstallCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
+-(void) GetPlayerSegments:(GetPlayerSegmentsCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*) userData;
+		
 
     //private:
 /*
@@ -539,6 +555,8 @@ typedef void(^AttributeInstallCallback)(AttributeInstallResult* result, NSObject
 		
 + (void) OnRegisterPlayFabUserResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
++ (void) OnAddGenericIDResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
+		
 + (void) OnAddUsernamePasswordResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnGetAccountInfoResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
@@ -548,6 +566,8 @@ typedef void(^AttributeInstallCallback)(AttributeInstallResult* result, NSObject
 + (void) OnGetPlayFabIDsFromFacebookIDsResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnGetPlayFabIDsFromGameCenterIDsResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
+		
++ (void) OnGetPlayFabIDsFromGenericIDsResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnGetPlayFabIDsFromGoogleIDsResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
@@ -576,6 +596,8 @@ typedef void(^AttributeInstallCallback)(AttributeInstallResult* result, NSObject
 + (void) OnLinkSteamAccountResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnLinkTwitchResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
+		
++ (void) OnRemoveGenericIDResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnReportPlayerResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
@@ -756,6 +778,8 @@ typedef void(^AttributeInstallCallback)(AttributeInstallResult* result, NSObject
 + (void) OnOpenTradeResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnAttributeInstallResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
+		
++ (void) OnGetPlayerSegmentsResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
  */
 
