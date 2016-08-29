@@ -251,7 +251,9 @@
         PlayFabErrorSessionLogNotFound = 1244,
         PlayFabErrorInvalidSearchTerm = 1245,
         PlayFabErrorTwoFactorAuthenticationTokenRequired = 1246,
-        PlayFabErrorGameServerHostCountLimitExceeded = 1247
+        PlayFabErrorGameServerHostCountLimitExceeded = 1247,
+        PlayFabErrorPlayerTagCountLimitExceeded = 1248,
+        PlayFabErrorRequestAlreadyRunning = 1249
     } PlayFabErrorCode;
 
     @interface PlayFabError : PlayFabBaseModel

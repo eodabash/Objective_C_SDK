@@ -444,6 +444,8 @@
     
     self.ItemImageUrl = [properties valueForKey:@"ItemImageUrl"];
     
+    self.IsLimitedEdition = [[properties valueForKey:@"IsLimitedEdition"] boolValue];
+    
 
     return self;
 }
@@ -2332,6 +2334,52 @@
     return self;
 }
 @end
+@implementation GetPlayerTagsRequest
+
+
+-(id)initWithDictionary:(NSDictionary*)properties
+{
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+
+    
+    self.PlayFabId = [properties valueForKey:@"PlayFabId"];
+    
+    self.Namespace = [properties valueForKey:@"Namespace"];
+    
+
+    return self;
+}
+@end
+@implementation GetPlayerTagsResult
+
+
+-(id)initWithDictionary:(NSDictionary*)properties
+{
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+
+    
+    self.PlayFabId = [properties valueForKey:@"PlayFabId"];
+    
+    if ([properties objectForKey:@"Tags"]){
+    NSArray* member_list = [properties objectForKey:@"Tags"];
+    NSMutableArray* mutable_storage = [NSMutableArray new];
+    for(int i=0;i<[member_list count];i++){
+        [mutable_storage addObject:[member_list objectAtIndex:i]];
+    }
+    self.Tags = [mutable_storage copy];
+}
+
+    
+
+    return self;
+}
+@end
 @implementation GetPlayerTradesRequest
 
 
@@ -2970,6 +3018,14 @@
     self.Store = [mutable_storage copy];
 }
 
+    
+    self.Source = (SourceType)[properties valueForKey:@"Source"];
+    
+    self.CatalogVersion = [properties valueForKey:@"CatalogVersion"];
+    
+    self.StoreId = [properties valueForKey:@"StoreId"];
+    
+    self.MarketingData = [[StoreMarketingModel new] initWithDictionary:[properties objectForKey:@"MarketingData"]];
     
 
     return self;
@@ -5347,6 +5403,31 @@
     self.RealCurrencyPrices = [mutable_storage copy];
 }
 
+    
+    self.CustomData = [properties valueForKey:@"CustomData"];
+    
+    self.DisplayPosition = [properties valueForKey:@"DisplayPosition"];
+    
+
+    return self;
+}
+@end
+@implementation StoreMarketingModel
+
+
+-(id)initWithDictionary:(NSDictionary*)properties
+{
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+
+    
+    self.DisplayName = [properties valueForKey:@"DisplayName"];
+    
+    self.Description = [properties valueForKey:@"Description"];
+    
+    self.Metadata = [properties valueForKey:@"Metadata"];
     
 
     return self;

@@ -243,6 +243,16 @@ typedef enum
 
 typedef enum
 {
+    SourceTypeAdmin,
+    SourceTypeBackEnd,
+    SourceTypeGameClient,
+    SourceTypeGameServer,
+    SourceTypePartner,
+    SourceTypeStream
+} SourceType;
+
+typedef enum
+{
     MatchmakeStatusComplete,
     MatchmakeStatusWaiting,
     MatchmakeStatusGameNotFound,
@@ -457,6 +467,10 @@ typedef enum
 @class GetPlayerStatisticVersionsRequest;
 
 @class GetPlayerStatisticVersionsResult;
+
+@class GetPlayerTagsRequest;
+
+@class GetPlayerTagsResult;
 
 @class GetPlayerTradesRequest;
 
@@ -709,6 +723,8 @@ typedef enum
 @class SteamPlayFabIdPair;
 
 @class StoreItem;
+
+@class StoreMarketingModel;
 
 @class SubtractUserVirtualCurrencyRequest;
 
@@ -1244,6 +1260,11 @@ typedef enum
 /// URL to the item image. For Facebook purchase to display the image on the item purchase page, this must be set to an HTTP URL.
 /// </summary>
 @property NSString* ItemImageUrl; 
+
+/// <summary>
+/// if true, then only a fixed number can ever be granted.
+/// </summary>
+@property bool IsLimitedEdition; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -2836,6 +2857,43 @@ typedef enum
 @end
 
 
+@interface GetPlayerTagsRequest : PlayFabBaseModel
+
+
+/// <summary>
+/// Unique PlayFab assigned ID of the user on whom the operation will be performed.
+/// </summary>
+@property NSString* PlayFabId; 
+
+/// <summary>
+/// Optional namespace to filter results by
+/// </summary>
+@property NSString* Namespace; 
+/**/
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
+@interface GetPlayerTagsResult : PlayFabBaseModel
+
+
+/// <summary>
+/// Unique PlayFab assigned ID of the user on whom the operation will be performed.
+/// </summary>
+@property NSString* PlayFabId; 
+
+/// <summary>
+/// Canonical tags (including namespace and tag's name) for the requested user
+/// </summary>
+@property NSArray* Tags; 
+/*
+@property NSObject* Request;
+@property NSObject* CustomData;
+*/
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
 @interface GetPlayerTradesRequest : PlayFabBaseModel
 
 
@@ -3232,6 +3290,26 @@ typedef enum
 /// Array of items which can be purchased from this store.
 /// </summary>
 @property NSArray* Store; 
+
+/// <summary>
+/// How the store was last updated (Admin or a third party).
+/// </summary>
+@property SourceType Source; 
+
+/// <summary>
+/// The base catalog that this store is a part of.
+/// </summary>
+@property NSString* CatalogVersion; 
+
+/// <summary>
+/// The ID of this store.
+/// </summary>
+@property NSString* StoreId; 
+
+/// <summary>
+/// Additional data about the store.
+/// </summary>
+@property StoreMarketingModel* MarketingData; 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
@@ -5481,19 +5559,54 @@ typedef enum
 
 
 /// <summary>
-/// unique identifier of the item as it exists in the catalog - note that this must exactly match the ItemId from the catalog
+/// Unique identifier of the item as it exists in the catalog - note that this must exactly match the ItemId from the catalog
 /// </summary>
 @property NSString* ItemId; 
 
 /// <summary>
-/// price of this item in virtual currencies and "RM" (the base Real Money purchase price, in USD pennies)
+/// Override prices for this item in virtual currencies and "RM" (the base Real Money purchase price, in USD pennies)
 /// </summary>
 @property NSDictionary* VirtualCurrencyPrices; 
 
 /// <summary>
-/// override prices for this item for specific currencies
+/// Override prices for this item for specific currencies
 /// </summary>
 @property NSDictionary* RealCurrencyPrices; 
+
+/// <summary>
+/// Store specific custom data. The data only exists as part of this store; it is not transferred to item instances
+/// </summary>
+@property NSDictionary* CustomData; 
+
+/// <summary>
+/// Intended display position for this item. Note that 0 is the first position
+/// </summary>
+@property NSNumber* DisplayPosition; 
+/**/
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
+/// <summary>
+/// Marketing data about a specific store
+/// </summary>
+@interface StoreMarketingModel : PlayFabBaseModel
+
+
+/// <summary>
+/// Display name of a store as it will appear to users.
+/// </summary>
+@property NSString* DisplayName; 
+
+/// <summary>
+/// Tagline for a store.
+/// </summary>
+@property NSString* Description; 
+
+/// <summary>
+/// Custom data about a store.
+/// </summary>
+@property NSDictionary* Metadata; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
