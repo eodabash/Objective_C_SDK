@@ -446,6 +446,8 @@
     
     self.IsLimitedEdition = [[properties valueForKey:@"IsLimitedEdition"] boolValue];
     
+    self.InitialLimitedEditionCount = [properties valueForKey:@"InitialLimitedEditionCount"];
+    
 
     return self;
 }
@@ -942,6 +944,8 @@
 
     
     self.ExecutionTimeSeconds = [properties valueForKey:@"ExecutionTimeSeconds"];
+    
+    self.ProcessorTimeSeconds = [properties valueForKey:@"ProcessorTimeSeconds"];
     
     self.MemoryConsumedBytes = [properties valueForKey:@"MemoryConsumedBytes"];
     
@@ -3630,6 +3634,8 @@
     
     self.AndroidDevice = [properties valueForKey:@"AndroidDevice"];
     
+    self.ForceLink = [[properties valueForKey:@"ForceLink"] boolValue];
+    
 
     return self;
 }
@@ -3661,6 +3667,8 @@
 
     
     self.CustomId = [properties valueForKey:@"CustomId"];
+    
+    self.ForceLink = [[properties valueForKey:@"ForceLink"] boolValue];
     
 
     return self;
@@ -3694,6 +3702,8 @@
     
     self.AccessToken = [properties valueForKey:@"AccessToken"];
     
+    self.ForceLink = [[properties valueForKey:@"ForceLink"] boolValue];
+    
 
     return self;
 }
@@ -3726,6 +3736,8 @@
     
     self.GameCenterId = [properties valueForKey:@"GameCenterId"];
     
+    self.ForceLink = [[properties valueForKey:@"ForceLink"] boolValue];
+    
 
     return self;
 }
@@ -3757,6 +3769,8 @@
 
     
     self.AccessToken = [properties valueForKey:@"AccessToken"];
+    
+    self.ForceLink = [[properties valueForKey:@"ForceLink"] boolValue];
     
 
     return self;
@@ -3794,6 +3808,8 @@
     
     self.DeviceModel = [properties valueForKey:@"DeviceModel"];
     
+    self.ForceLink = [[properties valueForKey:@"ForceLink"] boolValue];
+    
 
     return self;
 }
@@ -3828,6 +3844,8 @@
     
     self.AuthTicket = [properties valueForKey:@"AuthTicket"];
     
+    self.ForceLink = [[properties valueForKey:@"ForceLink"] boolValue];
+    
 
     return self;
 }
@@ -3860,6 +3878,8 @@
     
     self.SteamTicket = [properties valueForKey:@"SteamTicket"];
     
+    self.ForceLink = [[properties valueForKey:@"ForceLink"] boolValue];
+    
 
     return self;
 }
@@ -3891,6 +3911,8 @@
 
     
     self.AccessToken = [properties valueForKey:@"AccessToken"];
+    
+    self.ForceLink = [[properties valueForKey:@"ForceLink"] boolValue];
     
 
     return self;
