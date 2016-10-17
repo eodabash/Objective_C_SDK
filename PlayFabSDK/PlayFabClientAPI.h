@@ -10,7 +10,6 @@
 
 @property (nonatomic) NSString* mUserSessionTicket;
 
-@property (nonatomic) NSString* logicServerURL;
 		
 typedef void(^GetPhotonAuthenticationTokenCallback)(GetPhotonAuthenticationTokenResult* result, NSObject* userData);
 		
@@ -108,13 +107,9 @@ typedef void(^UpdateUserTitleDisplayNameCallback)(UpdateUserTitleDisplayNameResu
 		
 typedef void(^GetFriendLeaderboardCallback)(GetLeaderboardResult* result, NSObject* userData);
 		
-typedef void(^GetFriendLeaderboardAroundCurrentUserCallback)(GetFriendLeaderboardAroundCurrentUserResult* result, NSObject* userData);
-		
 typedef void(^GetFriendLeaderboardAroundPlayerCallback)(GetFriendLeaderboardAroundPlayerResult* result, NSObject* userData);
 		
 typedef void(^GetLeaderboardCallback)(GetLeaderboardResult* result, NSObject* userData);
-		
-typedef void(^GetLeaderboardAroundCurrentUserCallback)(GetLeaderboardAroundCurrentUserResult* result, NSObject* userData);
 		
 typedef void(^GetLeaderboardAroundPlayerCallback)(GetLeaderboardAroundPlayerResult* result, NSObject* userData);
 		
@@ -130,15 +125,11 @@ typedef void(^GetUserPublisherReadOnlyDataCallback)(GetUserDataResult* result, N
 		
 typedef void(^GetUserReadOnlyDataCallback)(GetUserDataResult* result, NSObject* userData);
 		
-typedef void(^GetUserStatisticsCallback)(GetUserStatisticsResult* result, NSObject* userData);
-		
 typedef void(^UpdatePlayerStatisticsCallback)(UpdatePlayerStatisticsResult* result, NSObject* userData);
 		
 typedef void(^UpdateUserDataCallback)(UpdateUserDataResult* result, NSObject* userData);
 		
 typedef void(^UpdateUserPublisherDataCallback)(UpdateUserDataResult* result, NSObject* userData);
-		
-typedef void(^UpdateUserStatisticsCallback)(UpdateUserStatisticsResult* result, NSObject* userData);
 		
 typedef void(^GetCatalogItemsCallback)(GetCatalogItemsResult* result, NSObject* userData);
 		
@@ -204,8 +195,6 @@ typedef void(^AndroidDevicePushNotificationRegistrationCallback)(AndroidDevicePu
 		
 typedef void(^ValidateGooglePlayPurchaseCallback)(ValidateGooglePlayPurchaseResult* result, NSObject* userData);
 		
-typedef void(^LogEventCallback)(LogEventResult* result, NSObject* userData);
-		
 typedef void(^WriteCharacterEventCallback)(WriteEventResponse* result, NSObject* userData);
 		
 typedef void(^WritePlayerEventCallback)(WriteEventResponse* result, NSObject* userData);
@@ -223,10 +212,6 @@ typedef void(^RemoveSharedGroupMembersCallback)(RemoveSharedGroupMembersResult* 
 typedef void(^UpdateSharedGroupDataCallback)(UpdateSharedGroupDataResult* result, NSObject* userData);
 		
 typedef void(^ExecuteCloudScriptCallback)(ExecuteCloudScriptResult* result, NSObject* userData);
-		
-typedef void(^GetCloudScriptUrlCallback)(GetCloudScriptUrlResult* result, NSObject* userData);
-		
-typedef void(^RunCloudScriptCallback)(RunCloudScriptResult* result, NSObject* userData);
 		
 typedef void(^GetContentDownloadUrlCallback)(GetContentDownloadUrlResult* result, NSObject* userData);
 		
@@ -372,13 +357,9 @@ typedef void(^GetPlayerTagsCallback)(GetPlayerTagsResult* result, NSObject* user
 		
 -(void) GetFriendLeaderboard:(GetFriendLeaderboardRequest*)request success:(GetFriendLeaderboardCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
--(void) GetFriendLeaderboardAroundCurrentUser:(GetFriendLeaderboardAroundCurrentUserRequest*)request success:(GetFriendLeaderboardAroundCurrentUserCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
-		
 -(void) GetFriendLeaderboardAroundPlayer:(GetFriendLeaderboardAroundPlayerRequest*)request success:(GetFriendLeaderboardAroundPlayerCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
 -(void) GetLeaderboard:(GetLeaderboardRequest*)request success:(GetLeaderboardCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
-		
--(void) GetLeaderboardAroundCurrentUser:(GetLeaderboardAroundCurrentUserRequest*)request success:(GetLeaderboardAroundCurrentUserCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
 -(void) GetLeaderboardAroundPlayer:(GetLeaderboardAroundPlayerRequest*)request success:(GetLeaderboardAroundPlayerCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
@@ -394,15 +375,11 @@ typedef void(^GetPlayerTagsCallback)(GetPlayerTagsResult* result, NSObject* user
 		
 -(void) GetUserReadOnlyData:(GetUserDataRequest*)request success:(GetUserReadOnlyDataCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
--(void) GetUserStatistics:(GetUserStatisticsCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*) userData;
-		
 -(void) UpdatePlayerStatistics:(UpdatePlayerStatisticsRequest*)request success:(UpdatePlayerStatisticsCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
 -(void) UpdateUserData:(UpdateUserDataRequest*)request success:(UpdateUserDataCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
 -(void) UpdateUserPublisherData:(UpdateUserDataRequest*)request success:(UpdateUserPublisherDataCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
-		
--(void) UpdateUserStatistics:(UpdateUserStatisticsRequest*)request success:(UpdateUserStatisticsCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
 -(void) GetCatalogItems:(GetCatalogItemsRequest*)request success:(GetCatalogItemsCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
@@ -468,8 +445,6 @@ typedef void(^GetPlayerTagsCallback)(GetPlayerTagsResult* result, NSObject* user
 		
 -(void) ValidateGooglePlayPurchase:(ValidateGooglePlayPurchaseRequest*)request success:(ValidateGooglePlayPurchaseCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
--(void) LogEvent:(LogEventRequest*)request success:(LogEventCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
-		
 -(void) WriteCharacterEvent:(WriteClientCharacterEventRequest*)request success:(WriteCharacterEventCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
 -(void) WritePlayerEvent:(WriteClientPlayerEventRequest*)request success:(WritePlayerEventCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
@@ -487,10 +462,6 @@ typedef void(^GetPlayerTagsCallback)(GetPlayerTagsResult* result, NSObject* user
 -(void) UpdateSharedGroupData:(UpdateSharedGroupDataRequest*)request success:(UpdateSharedGroupDataCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
 -(void) ExecuteCloudScript:(ExecuteCloudScriptRequest*)request success:(ExecuteCloudScriptCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
-		
--(void) GetCloudScriptUrl:(GetCloudScriptUrlRequest*)request success:(GetCloudScriptUrlCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
-		
--(void) RunCloudScript:(RunCloudScriptRequest*)request success:(RunCloudScriptCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
 -(void) GetContentDownloadUrl:(GetContentDownloadUrlRequest*)request success:(GetContentDownloadUrlCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
@@ -633,13 +604,9 @@ typedef void(^GetPlayerTagsCallback)(GetPlayerTagsResult* result, NSObject* user
 		
 + (void) OnGetFriendLeaderboardResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
-+ (void) OnGetFriendLeaderboardAroundCurrentUserResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
-		
 + (void) OnGetFriendLeaderboardAroundPlayerResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnGetLeaderboardResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
-		
-+ (void) OnGetLeaderboardAroundCurrentUserResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnGetLeaderboardAroundPlayerResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
@@ -655,15 +622,11 @@ typedef void(^GetPlayerTagsCallback)(GetPlayerTagsResult* result, NSObject* user
 		
 + (void) OnGetUserReadOnlyDataResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
-+ (void) OnGetUserStatisticsResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
-		
 + (void) OnUpdatePlayerStatisticsResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnUpdateUserDataResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnUpdateUserPublisherDataResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
-		
-+ (void) OnUpdateUserStatisticsResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnGetCatalogItemsResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
@@ -729,8 +692,6 @@ typedef void(^GetPlayerTagsCallback)(GetPlayerTagsResult* result, NSObject* user
 		
 + (void) OnValidateGooglePlayPurchaseResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
-+ (void) OnLogEventResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
-		
 + (void) OnWriteCharacterEventResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnWritePlayerEventResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
@@ -748,10 +709,6 @@ typedef void(^GetPlayerTagsCallback)(GetPlayerTagsResult* result, NSObject* user
 + (void) OnUpdateSharedGroupDataResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnExecuteCloudScriptResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
-		
-+ (void) OnGetCloudScriptUrlResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
-		
-+ (void) OnRunCloudScriptResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnGetContentDownloadUrlResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		

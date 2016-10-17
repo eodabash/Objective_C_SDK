@@ -2228,49 +2228,6 @@ if(model.SettingsForUser.NeedsAttribution)
 
     [connection postURL:[NSString stringWithFormat:@"%@%@",[PlayFabClientAPI GetURL],@"/Client/GetFriendLeaderboard"] body:jsonString authType:@"X-Authorization" authKey:self.mUserSessionTicket];
 }
--(void) GetFriendLeaderboardAroundCurrentUser:(GetFriendLeaderboardAroundCurrentUserRequest*)request success:(GetFriendLeaderboardAroundCurrentUserCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData
-{
-    
-    
-    NSString *jsonString = [request JSONStringWithClass:[GetFriendLeaderboardAroundCurrentUserRequest class]];
-    
-    PlayFabConnection * connection = [PlayFabConnection new];//[[MyConnection alloc]initWithRequest:req];
-    [connection setCompletionBlock:^(id obj, NSError *err) {
-        NSData * data = obj;
-        if (!err) {
-            //NSLog(@"connection success response: %@",(NSString*)data);
-            NSError *e = nil;
-            NSDictionary *JSON = [NSJSONSerialization JSONObjectWithData:data options:0 error: &e];
-
-            NSString* playfab_error = [JSON valueForKey:@"error"];
-            if (playfab_error != nil) {
-                //if there was an "error" object in the JSON:
-                PlayFabError *playfab_error_object = [[PlayFabError new] initWithDictionary:JSON];
-                errorCallback (playfab_error_object, userData);
-            } else {
-                NSDictionary *class_data = [JSON valueForKey:@"data"];
-                GetFriendLeaderboardAroundCurrentUserResult *model = [[GetFriendLeaderboardAroundCurrentUserResult new] initWithDictionary:class_data];
-                
-                callback (model, userData);
-            }
-        } else { //Connection Error:
-            NSError *e = nil;
-            NSLog(@"connection error response: %@",data);
-            PlayFabError *model;
-            if (data != nil) {
-                NSDictionary *JSON = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers error: &e];
-                JAGPropertyConverter *converter = [JAGPropertyConverter new];
-                model = [converter composeModelFromObject:JSON];
-            } else {
-                model = [PlayFabError new];
-                model.error = @"unknown, data empty.";
-            }
-        errorCallback (model, userData);
-        }
-    }];
-
-    [connection postURL:[NSString stringWithFormat:@"%@%@",[PlayFabClientAPI GetURL],@"/Client/GetFriendLeaderboardAroundCurrentUser"] body:jsonString authType:@"X-Authorization" authKey:self.mUserSessionTicket];
-}
 -(void) GetFriendLeaderboardAroundPlayer:(GetFriendLeaderboardAroundPlayerRequest*)request success:(GetFriendLeaderboardAroundPlayerCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData
 {
     
@@ -2356,49 +2313,6 @@ if(model.SettingsForUser.NeedsAttribution)
     }];
 
     [connection postURL:[NSString stringWithFormat:@"%@%@",[PlayFabClientAPI GetURL],@"/Client/GetLeaderboard"] body:jsonString authType:@"X-Authorization" authKey:self.mUserSessionTicket];
-}
--(void) GetLeaderboardAroundCurrentUser:(GetLeaderboardAroundCurrentUserRequest*)request success:(GetLeaderboardAroundCurrentUserCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData
-{
-    
-    
-    NSString *jsonString = [request JSONStringWithClass:[GetLeaderboardAroundCurrentUserRequest class]];
-    
-    PlayFabConnection * connection = [PlayFabConnection new];//[[MyConnection alloc]initWithRequest:req];
-    [connection setCompletionBlock:^(id obj, NSError *err) {
-        NSData * data = obj;
-        if (!err) {
-            //NSLog(@"connection success response: %@",(NSString*)data);
-            NSError *e = nil;
-            NSDictionary *JSON = [NSJSONSerialization JSONObjectWithData:data options:0 error: &e];
-
-            NSString* playfab_error = [JSON valueForKey:@"error"];
-            if (playfab_error != nil) {
-                //if there was an "error" object in the JSON:
-                PlayFabError *playfab_error_object = [[PlayFabError new] initWithDictionary:JSON];
-                errorCallback (playfab_error_object, userData);
-            } else {
-                NSDictionary *class_data = [JSON valueForKey:@"data"];
-                GetLeaderboardAroundCurrentUserResult *model = [[GetLeaderboardAroundCurrentUserResult new] initWithDictionary:class_data];
-                
-                callback (model, userData);
-            }
-        } else { //Connection Error:
-            NSError *e = nil;
-            NSLog(@"connection error response: %@",data);
-            PlayFabError *model;
-            if (data != nil) {
-                NSDictionary *JSON = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers error: &e];
-                JAGPropertyConverter *converter = [JAGPropertyConverter new];
-                model = [converter composeModelFromObject:JSON];
-            } else {
-                model = [PlayFabError new];
-                model.error = @"unknown, data empty.";
-            }
-        errorCallback (model, userData);
-        }
-    }];
-
-    [connection postURL:[NSString stringWithFormat:@"%@%@",[PlayFabClientAPI GetURL],@"/Client/GetLeaderboardAroundCurrentUser"] body:jsonString authType:@"X-Authorization" authKey:self.mUserSessionTicket];
 }
 -(void) GetLeaderboardAroundPlayer:(GetLeaderboardAroundPlayerRequest*)request success:(GetLeaderboardAroundPlayerCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData
 {
@@ -2701,49 +2615,6 @@ if(model.SettingsForUser.NeedsAttribution)
 
     [connection postURL:[NSString stringWithFormat:@"%@%@",[PlayFabClientAPI GetURL],@"/Client/GetUserReadOnlyData"] body:jsonString authType:@"X-Authorization" authKey:self.mUserSessionTicket];
 }
--(void) GetUserStatistics:(GetUserStatisticsCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*) userData
-{
-    
-    
-    NSString *jsonString = @"{}";
-    
-    PlayFabConnection * connection = [PlayFabConnection new];//[[MyConnection alloc]initWithRequest:req];
-    [connection setCompletionBlock:^(id obj, NSError *err) {
-        NSData * data = obj;
-        if (!err) {
-            //NSLog(@"connection success response: %@",(NSString*)data);
-            NSError *e = nil;
-            NSDictionary *JSON = [NSJSONSerialization JSONObjectWithData:data options:0 error: &e];
-
-            NSString* playfab_error = [JSON valueForKey:@"error"];
-            if (playfab_error != nil) {
-                //if there was an "error" object in the JSON:
-                PlayFabError *playfab_error_object = [[PlayFabError new] initWithDictionary:JSON];
-                errorCallback (playfab_error_object, userData);
-            } else {
-                NSDictionary *class_data = [JSON valueForKey:@"data"];
-                GetUserStatisticsResult *model = [[GetUserStatisticsResult new] initWithDictionary:class_data];
-                
-                callback (model, userData);
-            }
-        } else { //Connection Error:
-            NSError *e = nil;
-            NSLog(@"connection error response: %@",data);
-            PlayFabError *model;
-            if (data != nil) {
-                NSDictionary *JSON = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers error: &e];
-                JAGPropertyConverter *converter = [JAGPropertyConverter new];
-                model = [converter composeModelFromObject:JSON];
-            } else {
-                model = [PlayFabError new];
-                model.error = @"unknown, data empty.";
-            }
-        errorCallback (model, userData);
-        }
-    }];
-
-    [connection postURL:[NSString stringWithFormat:@"%@%@",[PlayFabClientAPI GetURL],@"/Client/GetUserStatistics"] body:jsonString authType:@"X-Authorization" authKey:self.mUserSessionTicket];
-}
 -(void) UpdatePlayerStatistics:(UpdatePlayerStatisticsRequest*)request success:(UpdatePlayerStatisticsCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData
 {
     
@@ -2872,49 +2743,6 @@ if(model.SettingsForUser.NeedsAttribution)
     }];
 
     [connection postURL:[NSString stringWithFormat:@"%@%@",[PlayFabClientAPI GetURL],@"/Client/UpdateUserPublisherData"] body:jsonString authType:@"X-Authorization" authKey:self.mUserSessionTicket];
-}
--(void) UpdateUserStatistics:(UpdateUserStatisticsRequest*)request success:(UpdateUserStatisticsCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData
-{
-    
-    
-    NSString *jsonString = [request JSONStringWithClass:[UpdateUserStatisticsRequest class]];
-    
-    PlayFabConnection * connection = [PlayFabConnection new];//[[MyConnection alloc]initWithRequest:req];
-    [connection setCompletionBlock:^(id obj, NSError *err) {
-        NSData * data = obj;
-        if (!err) {
-            //NSLog(@"connection success response: %@",(NSString*)data);
-            NSError *e = nil;
-            NSDictionary *JSON = [NSJSONSerialization JSONObjectWithData:data options:0 error: &e];
-
-            NSString* playfab_error = [JSON valueForKey:@"error"];
-            if (playfab_error != nil) {
-                //if there was an "error" object in the JSON:
-                PlayFabError *playfab_error_object = [[PlayFabError new] initWithDictionary:JSON];
-                errorCallback (playfab_error_object, userData);
-            } else {
-                NSDictionary *class_data = [JSON valueForKey:@"data"];
-                UpdateUserStatisticsResult *model = [[UpdateUserStatisticsResult new] initWithDictionary:class_data];
-                
-                callback (model, userData);
-            }
-        } else { //Connection Error:
-            NSError *e = nil;
-            NSLog(@"connection error response: %@",data);
-            PlayFabError *model;
-            if (data != nil) {
-                NSDictionary *JSON = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers error: &e];
-                JAGPropertyConverter *converter = [JAGPropertyConverter new];
-                model = [converter composeModelFromObject:JSON];
-            } else {
-                model = [PlayFabError new];
-                model.error = @"unknown, data empty.";
-            }
-        errorCallback (model, userData);
-        }
-    }];
-
-    [connection postURL:[NSString stringWithFormat:@"%@%@",[PlayFabClientAPI GetURL],@"/Client/UpdateUserStatistics"] body:jsonString authType:@"X-Authorization" authKey:self.mUserSessionTicket];
 }
 -(void) GetCatalogItems:(GetCatalogItemsRequest*)request success:(GetCatalogItemsCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData
 {
@@ -4292,49 +4120,6 @@ if(model.SettingsForUser.NeedsAttribution)
 
     [connection postURL:[NSString stringWithFormat:@"%@%@",[PlayFabClientAPI GetURL],@"/Client/ValidateGooglePlayPurchase"] body:jsonString authType:@"X-Authorization" authKey:self.mUserSessionTicket];
 }
--(void) LogEvent:(LogEventRequest*)request success:(LogEventCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData
-{
-    
-    
-    NSString *jsonString = [request JSONStringWithClass:[LogEventRequest class]];
-    
-    PlayFabConnection * connection = [PlayFabConnection new];//[[MyConnection alloc]initWithRequest:req];
-    [connection setCompletionBlock:^(id obj, NSError *err) {
-        NSData * data = obj;
-        if (!err) {
-            //NSLog(@"connection success response: %@",(NSString*)data);
-            NSError *e = nil;
-            NSDictionary *JSON = [NSJSONSerialization JSONObjectWithData:data options:0 error: &e];
-
-            NSString* playfab_error = [JSON valueForKey:@"error"];
-            if (playfab_error != nil) {
-                //if there was an "error" object in the JSON:
-                PlayFabError *playfab_error_object = [[PlayFabError new] initWithDictionary:JSON];
-                errorCallback (playfab_error_object, userData);
-            } else {
-                NSDictionary *class_data = [JSON valueForKey:@"data"];
-                LogEventResult *model = [[LogEventResult new] initWithDictionary:class_data];
-                
-                callback (model, userData);
-            }
-        } else { //Connection Error:
-            NSError *e = nil;
-            NSLog(@"connection error response: %@",data);
-            PlayFabError *model;
-            if (data != nil) {
-                NSDictionary *JSON = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers error: &e];
-                JAGPropertyConverter *converter = [JAGPropertyConverter new];
-                model = [converter composeModelFromObject:JSON];
-            } else {
-                model = [PlayFabError new];
-                model.error = @"unknown, data empty.";
-            }
-        errorCallback (model, userData);
-        }
-    }];
-
-    [connection postURL:[NSString stringWithFormat:@"%@%@",[PlayFabClientAPI GetURL],@"/Client/LogEvent"] body:jsonString authType:@"X-Authorization" authKey:self.mUserSessionTicket];
-}
 -(void) WriteCharacterEvent:(WriteClientCharacterEventRequest*)request success:(WriteCharacterEventCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData
 {
     
@@ -4721,93 +4506,6 @@ if(model.SettingsForUser.NeedsAttribution)
     }];
 
     [connection postURL:[NSString stringWithFormat:@"%@%@",[PlayFabClientAPI GetURL],@"/Client/ExecuteCloudScript"] body:jsonString authType:@"X-Authorization" authKey:self.mUserSessionTicket];
-}
--(void) GetCloudScriptUrl:(GetCloudScriptUrlRequest*)request success:(GetCloudScriptUrlCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData
-{
-    
-    
-    NSString *jsonString = [request JSONStringWithClass:[GetCloudScriptUrlRequest class]];
-    
-    PlayFabConnection * connection = [PlayFabConnection new];//[[MyConnection alloc]initWithRequest:req];
-    [connection setCompletionBlock:^(id obj, NSError *err) {
-        NSData * data = obj;
-        if (!err) {
-            //NSLog(@"connection success response: %@",(NSString*)data);
-            NSError *e = nil;
-            NSDictionary *JSON = [NSJSONSerialization JSONObjectWithData:data options:0 error: &e];
-
-            NSString* playfab_error = [JSON valueForKey:@"error"];
-            if (playfab_error != nil) {
-                //if there was an "error" object in the JSON:
-                PlayFabError *playfab_error_object = [[PlayFabError new] initWithDictionary:JSON];
-                errorCallback (playfab_error_object, userData);
-            } else {
-                NSDictionary *class_data = [JSON valueForKey:@"data"];
-                GetCloudScriptUrlResult *model = [[GetCloudScriptUrlResult new] initWithDictionary:class_data];
-                if ([class_data valueForKey:@"Url"])
-            self.logicServerURL = [class_data valueForKey:@"Url"];
-                callback (model, userData);
-            }
-        } else { //Connection Error:
-            NSError *e = nil;
-            NSLog(@"connection error response: %@",data);
-            PlayFabError *model;
-            if (data != nil) {
-                NSDictionary *JSON = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers error: &e];
-                JAGPropertyConverter *converter = [JAGPropertyConverter new];
-                model = [converter composeModelFromObject:JSON];
-            } else {
-                model = [PlayFabError new];
-                model.error = @"unknown, data empty.";
-            }
-        errorCallback (model, userData);
-        }
-    }];
-
-    [connection postURL:[NSString stringWithFormat:@"%@%@",[PlayFabClientAPI GetURL],@"/Client/GetCloudScriptUrl"] body:jsonString authType:@"X-Authorization" authKey:self.mUserSessionTicket];
-}
--(void) RunCloudScript:(RunCloudScriptRequest*)request success:(RunCloudScriptCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData
-{
-    
-    
-    NSString *jsonString = [request JSONStringWithClass:[RunCloudScriptRequest class]];
-    
-    PlayFabConnection * connection = [PlayFabConnection new];//[[MyConnection alloc]initWithRequest:req];
-    [connection setCompletionBlock:^(id obj, NSError *err) {
-        NSData * data = obj;
-        if (!err) {
-            //NSLog(@"connection success response: %@",(NSString*)data);
-            NSError *e = nil;
-            NSDictionary *JSON = [NSJSONSerialization JSONObjectWithData:data options:0 error: &e];
-
-            NSString* playfab_error = [JSON valueForKey:@"error"];
-            if (playfab_error != nil) {
-                //if there was an "error" object in the JSON:
-                PlayFabError *playfab_error_object = [[PlayFabError new] initWithDictionary:JSON];
-                errorCallback (playfab_error_object, userData);
-            } else {
-                NSDictionary *class_data = [JSON valueForKey:@"data"];
-                RunCloudScriptResult *model = [[RunCloudScriptResult new] initWithDictionary:class_data];
-                
-                callback (model, userData);
-            }
-        } else { //Connection Error:
-            NSError *e = nil;
-            NSLog(@"connection error response: %@",data);
-            PlayFabError *model;
-            if (data != nil) {
-                NSDictionary *JSON = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers error: &e];
-                JAGPropertyConverter *converter = [JAGPropertyConverter new];
-                model = [converter composeModelFromObject:JSON];
-            } else {
-                model = [PlayFabError new];
-                model.error = @"unknown, data empty.";
-            }
-        errorCallback (model, userData);
-        }
-    }];
-
-    [connection postURL:[NSString stringWithFormat:@"%@%@",[PlayFabClientAPI GetURL],@"/Client/RunCloudScript"] body:jsonString authType:@"X-Authorization" authKey:self.mUserSessionTicket];
 }
 -(void) GetContentDownloadUrl:(GetContentDownloadUrlRequest*)request success:(GetContentDownloadUrlCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData
 {

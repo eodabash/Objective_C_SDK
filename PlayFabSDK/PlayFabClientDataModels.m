@@ -269,6 +269,8 @@
     
     self.Android_Id = [properties valueForKey:@"Android_Id"];
     
+    self.Adid = [properties valueForKey:@"Adid"];
+    
 
     return self;
 }
@@ -1471,42 +1473,6 @@
     return self;
 }
 @end
-@implementation GetCloudScriptUrlRequest
-
-
--(id)initWithDictionary:(NSDictionary*)properties
-{
-    self = [super init];
-    if (!self) {
-        return nil;
-    }
-
-    
-    self.Version = [properties valueForKey:@"Version"];
-    
-    self.Testing = [[properties valueForKey:@"Testing"] boolValue];
-    
-
-    return self;
-}
-@end
-@implementation GetCloudScriptUrlResult
-
-
--(id)initWithDictionary:(NSDictionary*)properties
-{
-    self = [super init];
-    if (!self) {
-        return nil;
-    }
-
-    
-    self.Url = [properties valueForKey:@"Url"];
-    
-
-    return self;
-}
-@end
 @implementation GetContentDownloadUrlRequest
 
 
@@ -1540,54 +1506,6 @@
 
     
     self.URL = [properties valueForKey:@"URL"];
-    
-
-    return self;
-}
-@end
-@implementation GetFriendLeaderboardAroundCurrentUserRequest
-
-
--(id)initWithDictionary:(NSDictionary*)properties
-{
-    self = [super init];
-    if (!self) {
-        return nil;
-    }
-
-    
-    self.StatisticName = [properties valueForKey:@"StatisticName"];
-    
-    self.MaxResultsCount = [properties valueForKey:@"MaxResultsCount"];
-    
-    self.IncludeSteamFriends = [[properties valueForKey:@"IncludeSteamFriends"] boolValue];
-    
-    self.IncludeFacebookFriends = [[properties valueForKey:@"IncludeFacebookFriends"] boolValue];
-    
-
-    return self;
-}
-@end
-@implementation GetFriendLeaderboardAroundCurrentUserResult
-
-
--(id)initWithDictionary:(NSDictionary*)properties
-{
-    self = [super init];
-    if (!self) {
-        return nil;
-    }
-
-    
-    if ([properties objectForKey:@"Leaderboard"]){
-    NSArray* member_list = [properties objectForKey:@"Leaderboard"];
-    NSMutableArray* mutable_storage = [NSMutableArray new];
-    for(int i=0;i<[member_list count];i++){
-        [mutable_storage addObject:[[PlayerLeaderboardEntry new] initWithDictionary:[member_list objectAtIndex:i]]];
-    }
-    self.Leaderboard = [mutable_storage copy];
-}
-
     
 
     return self;
@@ -1751,50 +1669,6 @@
     NSMutableArray* mutable_storage = [NSMutableArray new];
     for(int i=0;i<[member_list count];i++){
         [mutable_storage addObject:[[CharacterLeaderboardEntry new] initWithDictionary:[member_list objectAtIndex:i]]];
-    }
-    self.Leaderboard = [mutable_storage copy];
-}
-
-    
-
-    return self;
-}
-@end
-@implementation GetLeaderboardAroundCurrentUserRequest
-
-
--(id)initWithDictionary:(NSDictionary*)properties
-{
-    self = [super init];
-    if (!self) {
-        return nil;
-    }
-
-    
-    self.StatisticName = [properties valueForKey:@"StatisticName"];
-    
-    self.MaxResultsCount = [properties valueForKey:@"MaxResultsCount"];
-    
-
-    return self;
-}
-@end
-@implementation GetLeaderboardAroundCurrentUserResult
-
-
--(id)initWithDictionary:(NSDictionary*)properties
-{
-    self = [super init];
-    if (!self) {
-        return nil;
-    }
-
-    
-    if ([properties objectForKey:@"Leaderboard"]){
-    NSArray* member_list = [properties objectForKey:@"Leaderboard"];
-    NSMutableArray* mutable_storage = [NSMutableArray new];
-    for(int i=0;i<[member_list count];i++){
-        [mutable_storage addObject:[[PlayerLeaderboardEntry new] initWithDictionary:[member_list objectAtIndex:i]]];
     }
     self.Leaderboard = [mutable_storage copy];
 }
@@ -2697,16 +2571,6 @@
     }
 
     
-    if ([properties objectForKey:@"SteamIDs"]){
-    NSArray* member_list = [properties objectForKey:@"SteamIDs"];
-    NSMutableArray* mutable_storage = [NSMutableArray new];
-    for(int i=0;i<[member_list count];i++){
-        [mutable_storage addObject:[member_list objectAtIndex:i]];
-    }
-    self.SteamIDs = [mutable_storage copy];
-}
-
-    
     if ([properties objectForKey:@"SteamStringIDs"]){
     NSArray* member_list = [properties objectForKey:@"SteamStringIDs"];
     NSMutableArray* mutable_storage = [NSMutableArray new];
@@ -3437,46 +3301,6 @@
     return self;
 }
 @end
-@implementation GetUserStatisticsRequest
-
-
--(id)initWithDictionary:(NSDictionary*)properties
-{
-    self = [super init];
-    if (!self) {
-        return nil;
-    }
-
-    
-
-    return self;
-}
-@end
-@implementation GetUserStatisticsResult
-
-
--(id)initWithDictionary:(NSDictionary*)properties
-{
-    self = [super init];
-    if (!self) {
-        return nil;
-    }
-
-    
-    if ([properties objectForKey:@"UserStatistics"]){
-    NSDictionary* member_list = [properties objectForKey:@"UserStatistics"];
-    NSMutableDictionary* mutable_storage = [NSMutableDictionary new];
-    for(NSString* key in member_list){
-        [mutable_storage setValue:[member_list objectForKey:key] forKey:key];
-    }
-    self.UserStatistics = [mutable_storage copy];
-}
-
-    
-
-    return self;
-}
-@end
 @implementation GooglePlayFabIdPair
 
 
@@ -4007,52 +3831,6 @@
     return self;
 }
 @end
-@implementation LogEventRequest
-
-
--(id)initWithDictionary:(NSDictionary*)properties
-{
-    self = [super init];
-    if (!self) {
-        return nil;
-    }
-
-    
-    self.Timestamp = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"Timestamp"]];
-    
-    self.EventName = [properties valueForKey:@"EventName"];
-    
-    if ([properties objectForKey:@"Body"]){
-    NSDictionary* member_list = [properties objectForKey:@"Body"];
-    NSMutableDictionary* mutable_storage = [NSMutableDictionary new];
-    for(NSString* key in member_list){
-        [mutable_storage setValue:[member_list objectForKey:key] forKey:key];
-    }
-    self.Body = [mutable_storage copy];
-}
-
-    
-    self.ProfileSetEvent = [[properties valueForKey:@"ProfileSetEvent"] boolValue];
-    
-
-    return self;
-}
-@end
-@implementation LogEventResult
-
-
--(id)initWithDictionary:(NSDictionary*)properties
-{
-    self = [super init];
-    if (!self) {
-        return nil;
-    }
-
-    
-
-    return self;
-}
-@end
 @implementation LoginResult
 
 
@@ -4215,8 +3993,6 @@
     self.AccessToken = [properties valueForKey:@"AccessToken"];
     
     self.CreateAccount = [[properties valueForKey:@"CreateAccount"] boolValue];
-    
-    self.PublisherId = [properties valueForKey:@"PublisherId"];
     
     self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
     
@@ -4392,8 +4168,6 @@
     self.StartNewIfNoneFound = [[properties valueForKey:@"StartNewIfNoneFound"] boolValue];
     
     self.TagFilter = [[CollectionFilter new] initWithDictionary:[properties objectForKey:@"TagFilter"]];
-    
-    self.EnableQueue = [[properties valueForKey:@"EnableQueue"] boolValue];
     
 
     return self;
@@ -4838,8 +4612,6 @@
     
     self.DisplayName = [properties valueForKey:@"DisplayName"];
     
-    self.Origination = [properties valueForKey:@"Origination"];
-    
 
     return self;
 }
@@ -5043,56 +4815,6 @@
     return self;
 }
 @end
-@implementation RunCloudScriptRequest
-
-
--(id)initWithDictionary:(NSDictionary*)properties
-{
-    self = [super init];
-    if (!self) {
-        return nil;
-    }
-
-    
-    self.ActionId = [properties valueForKey:@"ActionId"];
-    
-    self.Params = [properties valueForKey:@"Params"];
-    
-    self.ParamsEncoded = [properties valueForKey:@"ParamsEncoded"];
-    
-
-    return self;
-}
-@end
-@implementation RunCloudScriptResult
-
-
--(id)initWithDictionary:(NSDictionary*)properties
-{
-    self = [super init];
-    if (!self) {
-        return nil;
-    }
-
-    
-    self.ActionId = [properties valueForKey:@"ActionId"];
-    
-    self.Version = [properties valueForKey:@"Version"];
-    
-    self.Revision = [properties valueForKey:@"Revision"];
-    
-    self.Results = [properties valueForKey:@"Results"];
-    
-    self.ResultsEncoded = [properties valueForKey:@"ResultsEncoded"];
-    
-    self.ActionLog = [properties valueForKey:@"ActionLog"];
-    
-    self.ExecutionTime = [properties valueForKey:@"ExecutionTime"];
-    
-
-    return self;
-}
-@end
 @implementation ScriptExecutionError
 
 
@@ -5128,8 +4850,6 @@
     self.Email = [properties valueForKey:@"Email"];
     
     self.TitleId = [properties valueForKey:@"TitleId"];
-    
-    self.PublisherId = [properties valueForKey:@"PublisherId"];
     
 
     return self;
@@ -5416,8 +5136,6 @@
         return nil;
     }
 
-    
-    self.SteamId = [properties valueForKey:@"SteamId"];
     
     self.SteamStringId = [properties valueForKey:@"SteamStringId"];
     
@@ -6231,46 +5949,6 @@
 
     
     self.DataVersion = [properties valueForKey:@"DataVersion"];
-    
-
-    return self;
-}
-@end
-@implementation UpdateUserStatisticsRequest
-
-
--(id)initWithDictionary:(NSDictionary*)properties
-{
-    self = [super init];
-    if (!self) {
-        return nil;
-    }
-
-    
-    if ([properties objectForKey:@"UserStatistics"]){
-    NSDictionary* member_list = [properties objectForKey:@"UserStatistics"];
-    NSMutableDictionary* mutable_storage = [NSMutableDictionary new];
-    for(NSString* key in member_list){
-        [mutable_storage setValue:[member_list objectForKey:key] forKey:key];
-    }
-    self.UserStatistics = [mutable_storage copy];
-}
-
-    
-
-    return self;
-}
-@end
-@implementation UpdateUserStatisticsResult
-
-
--(id)initWithDictionary:(NSDictionary*)properties
-{
-    self = [super init];
-    if (!self) {
-        return nil;
-    }
-
     
 
     return self;

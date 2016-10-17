@@ -401,17 +401,9 @@ typedef enum
 
 @class GetCharacterStatisticsResult;
 
-@class GetCloudScriptUrlRequest;
-
-@class GetCloudScriptUrlResult;
-
 @class GetContentDownloadUrlRequest;
 
 @class GetContentDownloadUrlResult;
-
-@class GetFriendLeaderboardAroundCurrentUserRequest;
-
-@class GetFriendLeaderboardAroundCurrentUserResult;
 
 @class GetFriendLeaderboardAroundPlayerRequest;
 
@@ -426,10 +418,6 @@ typedef enum
 @class GetLeaderboardAroundCharacterRequest;
 
 @class GetLeaderboardAroundCharacterResult;
-
-@class GetLeaderboardAroundCurrentUserRequest;
-
-@class GetLeaderboardAroundCurrentUserResult;
 
 @class GetLeaderboardAroundPlayerRequest;
 
@@ -549,10 +537,6 @@ typedef enum
 
 @class GetUserInventoryResult;
 
-@class GetUserStatisticsRequest;
-
-@class GetUserStatisticsResult;
-
 @class GooglePlayFabIdPair;
 
 @class GrantCharacterToUserRequest;
@@ -604,10 +588,6 @@ typedef enum
 @class ListUsersCharactersRequest;
 
 @class ListUsersCharactersResult;
-
-@class LogEventRequest;
-
-@class LogEventResult;
 
 @class LoginResult;
 
@@ -692,10 +672,6 @@ typedef enum
 @class RestoreIOSPurchasesRequest;
 
 @class RestoreIOSPurchasesResult;
-
-@class RunCloudScriptRequest;
-
-@class RunCloudScriptResult;
 
 @class ScriptExecutionError;
 
@@ -798,10 +774,6 @@ typedef enum
 @class UpdateUserDataRequest;
 
 @class UpdateUserDataResult;
-
-@class UpdateUserStatisticsRequest;
-
-@class UpdateUserStatisticsResult;
 
 @class UpdateUserTitleDisplayNameRequest;
 
@@ -1086,9 +1058,14 @@ typedef enum
 @property NSString* Idfa; 
 
 /// <summary>
-/// The Android Id for this Android device.
+/// The android advertising id. This field is deprecated in favor of Adid for clarity.
 /// </summary>
 @property NSString* Android_Id; 
+
+/// <summary>
+/// The adid for this device.
+/// </summary>
+@property NSString* Adid; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -2181,38 +2158,6 @@ typedef enum
 @end
 
 
-@interface GetCloudScriptUrlRequest : PlayFabBaseModel
-
-
-/// <summary>
-/// Cloud Script Version to use. Defaults to 1.
-/// </summary>
-@property NSNumber* Version; 
-
-/// <summary>
-/// Specifies whether the URL returned should be the one for the most recently uploaded Revision of the Cloud Script (true), or the Revision most recently set to live (false). Defaults to false.
-/// </summary>
-@property bool Testing; 
-/**/
--(id)initWithDictionary:(NSDictionary*)properties;
-@end
-
-
-@interface GetCloudScriptUrlResult : PlayFabBaseModel
-
-
-/// <summary>
-/// URL of the Cloud Script logic server.
-/// </summary>
-@property NSString* Url; 
-/*
-@property NSObject* Request;
-@property NSObject* CustomData;
-*/
--(id)initWithDictionary:(NSDictionary*)properties;
-@end
-
-
 @interface GetContentDownloadUrlRequest : PlayFabBaseModel
 
 
@@ -2242,48 +2187,6 @@ typedef enum
 /// URL for downloading content via HTTP GET or HEAD method. The URL will expire in 1 hour.
 /// </summary>
 @property NSString* URL; 
-/*
-@property NSObject* Request;
-@property NSObject* CustomData;
-*/
--(id)initWithDictionary:(NSDictionary*)properties;
-@end
-
-
-@interface GetFriendLeaderboardAroundCurrentUserRequest : PlayFabBaseModel
-
-
-/// <summary>
-/// Statistic used to rank players for this leaderboard.
-/// </summary>
-@property NSString* StatisticName; 
-
-/// <summary>
-/// Maximum number of entries to retrieve. Default 10, maximum 100.
-/// </summary>
-@property NSNumber* MaxResultsCount; 
-
-/// <summary>
-/// Indicates whether Steam service friends should be included in the response. Default is true.
-/// </summary>
-@property bool IncludeSteamFriends; 
-
-/// <summary>
-/// Indicates whether Facebook friends should be included in the response. Default is true.
-/// </summary>
-@property bool IncludeFacebookFriends; 
-/**/
--(id)initWithDictionary:(NSDictionary*)properties;
-@end
-
-
-@interface GetFriendLeaderboardAroundCurrentUserResult : PlayFabBaseModel
-
-
-/// <summary>
-/// Ordered listing of users and their positions in the requested leaderboard.
-/// </summary>
-@property NSArray* Leaderboard; 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
@@ -2435,38 +2338,6 @@ typedef enum
 
 /// <summary>
 /// Ordered list of leaderboard entries.
-/// </summary>
-@property NSArray* Leaderboard; 
-/*
-@property NSObject* Request;
-@property NSObject* CustomData;
-*/
--(id)initWithDictionary:(NSDictionary*)properties;
-@end
-
-
-@interface GetLeaderboardAroundCurrentUserRequest : PlayFabBaseModel
-
-
-/// <summary>
-/// Statistic used to rank players for this leaderboard.
-/// </summary>
-@property NSString* StatisticName; 
-
-/// <summary>
-/// Maximum number of entries to retrieve. Default 10, maximum 100.
-/// </summary>
-@property NSNumber* MaxResultsCount; 
-/**/
--(id)initWithDictionary:(NSDictionary*)properties;
-@end
-
-
-@interface GetLeaderboardAroundCurrentUserResult : PlayFabBaseModel
-
-
-/// <summary>
-/// Ordered listing of users and their positions in the requested leaderboard.
 /// </summary>
 @property NSArray* Leaderboard; 
 /*
@@ -3078,11 +2949,6 @@ typedef enum
 
 
 /// <summary>
-/// Deprecated: Please use SteamStringIDs
-/// </summary>
-@property NSArray* SteamIDs; 
-
-/// <summary>
 /// Array of unique Steam identifiers (Steam profile IDs) for which the title needs to get PlayFab identifiers.
 /// </summary>
 @property NSArray* SteamStringIDs; 
@@ -3630,28 +3496,6 @@ typedef enum
 @end
 
 
-@interface GetUserStatisticsRequest : PlayFabBaseModel
-
-/**/
--(id)initWithDictionary:(NSDictionary*)properties;
-@end
-
-
-@interface GetUserStatisticsResult : PlayFabBaseModel
-
-
-/// <summary>
-/// User statistics for the active title.
-/// </summary>
-@property NSDictionary* UserStatistics; 
-/*
-@property NSObject* Request;
-@property NSObject* CustomData;
-*/
--(id)initWithDictionary:(NSDictionary*)properties;
-@end
-
-
 @interface GooglePlayFabIdPair : PlayFabBaseModel
 
 
@@ -4140,43 +3984,6 @@ typedef enum
 @end
 
 
-@interface LogEventRequest : PlayFabBaseModel
-
-
-/// <summary>
-/// Optional timestamp for this event. If null, the a timestamp is auto-assigned to the event on the server.
-/// </summary>
-@property NSDate* Timestamp; 
-
-/// <summary>
-/// A unique event name which will be used as the table name in the Redshift database. The name will be made lower case, and cannot not contain spaces. The use of underscores is recommended, for readability. Events also cannot match reserved terms. The PlayFab reserved terms are 'log_in' and 'purchase', 'create' and 'request', while the Redshift reserved terms can be found here: http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html.
-/// </summary>
-@property NSString* EventName; 
-
-/// <summary>
-/// Contains all the data for this event. Event Values can be strings, booleans or numerics (float, double, integer, long) and must be consistent on a per-event basis (if the Value for Key 'A' in Event 'Foo' is an integer the first time it is sent, it must be an integer in all subsequent 'Foo' events). As with event names, Keys must also not use reserved words (see above). Finally, the size of the Body for an event must be less than 32KB (UTF-8 format).
-/// </summary>
-@property NSDictionary* Body; 
-
-/// <summary>
-/// Flag to set event Body as profile details in the Redshift database as well as a standard event.
-/// </summary>
-@property bool ProfileSetEvent; 
-/**/
--(id)initWithDictionary:(NSDictionary*)properties;
-@end
-
-
-@interface LogEventResult : PlayFabBaseModel
-
-/*
-@property NSObject* Request;
-@property NSObject* CustomData;
-*/
--(id)initWithDictionary:(NSDictionary*)properties;
-@end
-
-
 @interface LoginResult : PlayFabBaseModel
 
 
@@ -4379,11 +4186,6 @@ typedef enum
 /// Automatically create a PlayFab account if one is not currently linked to this Google account.
 /// </summary>
 @property bool CreateAccount; 
-
-/// <summary>
-/// Deprecated - Do not use
-/// </summary>
-@property NSString* PublisherId; 
 
 /// <summary>
 /// Flags for which pieces of info to return for the user.
@@ -4605,11 +4407,6 @@ typedef enum
 /// Filter to include and/or exclude Game Server Instances associated with certain Tags
 /// </summary>
 @property CollectionFilter* TagFilter; 
-
-/// <summary>
-/// Deprecated - Do not use
-/// </summary>
-@property bool EnableQueue; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -5080,11 +4877,6 @@ typedef enum
 /// An optional parameter for setting the display name for this title.
 /// </summary>
 @property NSString* DisplayName; 
-
-/// <summary>
-/// The Origination of a user is determined by the API call used to create the account. In the case of RegisterPlayFabUser, it will be Organic.
-/// </summary>
-@property NSString* Origination; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -5250,73 +5042,6 @@ typedef enum
 @end
 
 
-@interface RunCloudScriptRequest : PlayFabBaseModel
-
-
-/// <summary>
-/// server action to trigger
-/// </summary>
-@property NSString* ActionId; 
-
-/// <summary>
-/// parameters to pass into the action (If you use this, don't use ParamsEncoded)
-/// </summary>
-@property NSDictionary* Params; 
-
-/// <summary>
-/// json-encoded parameters to pass into the action (If you use this, don't use Params)
-/// </summary>
-@property NSString* ParamsEncoded; 
-/**/
--(id)initWithDictionary:(NSDictionary*)properties;
-@end
-
-
-@interface RunCloudScriptResult : PlayFabBaseModel
-
-
-/// <summary>
-/// id of Cloud Script run
-/// </summary>
-@property NSString* ActionId; 
-
-/// <summary>
-/// version of Cloud Script run
-/// </summary>
-@property NSNumber* Version; 
-
-/// <summary>
-/// revision of Cloud Script run
-/// </summary>
-@property NSNumber* Revision; 
-
-/// <summary>
-/// return values from the server action as a dynamic object
-/// </summary>
-@property NSDictionary* Results; 
-
-/// <summary>
-/// return values from the server action as a JSON encoded string
-/// </summary>
-@property NSString* ResultsEncoded; 
-
-/// <summary>
-/// any log statements generated during the run of this action
-/// </summary>
-@property NSString* ActionLog; 
-
-/// <summary>
-/// time this script took to run, in seconds
-/// </summary>
-@property NSNumber* ExecutionTime; 
-/*
-@property NSObject* Request;
-@property NSObject* CustomData;
-*/
--(id)initWithDictionary:(NSDictionary*)properties;
-@end
-
-
 @interface ScriptExecutionError : PlayFabBaseModel
 
 
@@ -5351,11 +5076,6 @@ typedef enum
 /// Unique identifier for the title, found in the Settings > Game Properties section of the PlayFab developer site when a title has been selected.
 /// </summary>
 @property NSString* TitleId; 
-
-/// <summary>
-/// Deprecated - Do not use
-/// </summary>
-@property NSString* PublisherId; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -5617,11 +5337,6 @@ typedef enum
 
 @interface SteamPlayFabIdPair : PlayFabBaseModel
 
-
-/// <summary>
-/// Deprecated: Please use SteamStringId
-/// </summary>
-@property NSNumber* SteamId; 
 
 /// <summary>
 /// Unique Steam identifier for a user.
@@ -6234,28 +5949,6 @@ typedef enum
 /// Indicates the current version of the data that has been set. This is incremented with every set call for that type of data (read-only, internal, etc). This version can be provided in Get calls to find updated data.
 /// </summary>
 @property NSNumber* DataVersion; 
-/*
-@property NSObject* Request;
-@property NSObject* CustomData;
-*/
--(id)initWithDictionary:(NSDictionary*)properties;
-@end
-
-
-@interface UpdateUserStatisticsRequest : PlayFabBaseModel
-
-
-/// <summary>
-/// Statistics to be updated with the provided values. UserStatistics object must follow the Key(string), Value(int) pattern.
-/// </summary>
-@property NSDictionary* UserStatistics; 
-/**/
--(id)initWithDictionary:(NSDictionary*)properties;
-@end
-
-
-@interface UpdateUserStatisticsResult : PlayFabBaseModel
-
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
