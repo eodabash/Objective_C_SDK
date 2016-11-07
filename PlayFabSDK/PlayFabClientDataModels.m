@@ -1089,6 +1089,10 @@
     
     self.LastHeartbeat = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"LastHeartbeat"]];
     
+    self.ServerHostname = [properties valueForKey:@"ServerHostname"];
+    
+    self.ServerPort = [properties valueForKey:@"ServerPort"];
+    
 
     return self;
 }
@@ -4500,6 +4504,8 @@
     self.CouponCode = [properties valueForKey:@"CouponCode"];
     
     self.CatalogVersion = [properties valueForKey:@"CatalogVersion"];
+    
+    self.CharacterId = [properties valueForKey:@"CharacterId"];
     
 
     return self;
