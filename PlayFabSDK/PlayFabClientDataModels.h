@@ -525,10 +525,6 @@ typedef enum
 
 @class GetTradeStatusResponse;
 
-@class GetUserCombinedInfoRequest;
-
-@class GetUserCombinedInfoResult;
-
 @class GetUserDataRequest;
 
 @class GetUserDataResult;
@@ -2532,7 +2528,7 @@ typedef enum
 @property bool GetUserData; 
 
 /// <summary>
-/// Specific keys to search for in the custom data. Leave null to get all keys. Has no effect if UserDataKeys is false
+/// Specific keys to search for in the custom data. Leave null to get all keys. Has no effect if GetUserData is false
 /// </summary>
 @property NSArray* UserDataKeys; 
 
@@ -3307,123 +3303,6 @@ typedef enum
 /// Information about the requested trade.
 /// </summary>
 @property TradeInfo* Trade; 
-/*
-@property NSObject* Request;
-@property NSObject* CustomData;
-*/
--(id)initWithDictionary:(NSDictionary*)properties;
-@end
-
-
-@interface GetUserCombinedInfoRequest : PlayFabBaseModel
-
-
-/// <summary>
-/// Unique PlayFab identifier of the user whose info is being requested. Optional, defaults to the authenticated user if no other lookup identifier set.
-/// </summary>
-@property NSString* PlayFabId; 
-
-/// <summary>
-/// PlayFab Username for the account to find (if no PlayFabId is specified).
-/// </summary>
-@property NSString* Username; 
-
-/// <summary>
-/// User email address for the account to find (if no Username is specified).
-/// </summary>
-@property NSString* Email; 
-
-/// <summary>
-/// Title-specific username for the account to find (if no Email is set).
-/// </summary>
-@property NSString* TitleDisplayName; 
-
-/// <summary>
-/// If set to false, account info will not be returned. Defaults to true.
-/// </summary>
-@property bool GetAccountInfo; 
-
-/// <summary>
-/// If set to false, inventory will not be returned. Defaults to true. Inventory will never be returned for users other than yourself.
-/// </summary>
-@property bool GetInventory; 
-
-/// <summary>
-/// If set to false, virtual currency balances will not be returned. Defaults to true. Currency balances will never be returned for users other than yourself.
-/// </summary>
-@property bool GetVirtualCurrency; 
-
-/// <summary>
-/// If set to false, custom user data will not be returned. Defaults to true.
-/// </summary>
-@property bool GetUserData; 
-
-/// <summary>
-/// User custom data keys to return. If set to null, all keys will be returned. For users other than yourself, only public data will be returned.
-/// </summary>
-@property NSArray* UserDataKeys; 
-
-/// <summary>
-/// If set to false, read-only user data will not be returned. Defaults to true.
-/// </summary>
-@property bool GetReadOnlyData; 
-
-/// <summary>
-/// User read-only custom data keys to return. If set to null, all keys will be returned. For users other than yourself, only public data will be returned.
-/// </summary>
-@property NSArray* ReadOnlyDataKeys; 
-/**/
--(id)initWithDictionary:(NSDictionary*)properties;
-@end
-
-
-@interface GetUserCombinedInfoResult : PlayFabBaseModel
-
-
-/// <summary>
-/// Unique PlayFab identifier of the owner of the combined info.
-/// </summary>
-@property NSString* PlayFabId; 
-
-/// <summary>
-/// Account information for the user.
-/// </summary>
-@property UserAccountInfo* AccountInfo; 
-
-/// <summary>
-/// Array of inventory items in the user's current inventory.
-/// </summary>
-@property NSArray* Inventory; 
-
-/// <summary>
-/// Array of virtual currency balance(s) belonging to the user.
-/// </summary>
-@property NSDictionary* VirtualCurrency; 
-
-/// <summary>
-/// Array of remaining times and timestamps for virtual currencies.
-/// </summary>
-@property NSDictionary* VirtualCurrencyRechargeTimes; 
-
-/// <summary>
-/// User specific custom data.
-/// </summary>
-@property NSDictionary* Data; 
-
-/// <summary>
-/// The version of the UserData that was returned.
-/// </summary>
-@property NSNumber* DataVersion; 
-
-/// <summary>
-/// User specific read-only data.
-/// </summary>
-@property NSDictionary* ReadOnlyData; 
-
-/// <summary>
-/// The version of the Read-Only UserData that was returned.
-/// </summary>
-@property NSNumber* ReadOnlyDataVersion; 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;

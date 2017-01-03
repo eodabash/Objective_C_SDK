@@ -59,8 +59,6 @@ typedef void(^GetPlayFabIDsFromSteamIDsCallback)(GetPlayFabIDsFromSteamIDsResult
 		
 typedef void(^GetPlayFabIDsFromTwitchIDsCallback)(GetPlayFabIDsFromTwitchIDsResult* result, NSObject* userData);
 		
-typedef void(^GetUserCombinedInfoCallback)(GetUserCombinedInfoResult* result, NSObject* userData);
-		
 typedef void(^LinkAndroidDeviceIDCallback)(LinkAndroidDeviceIDResult* result, NSObject* userData);
 		
 typedef void(^LinkCustomIDCallback)(LinkCustomIDResult* result, NSObject* userData);
@@ -309,8 +307,6 @@ typedef void(^GetPlayerTagsCallback)(GetPlayerTagsResult* result, NSObject* user
 		
 -(void) GetPlayFabIDsFromTwitchIDs:(GetPlayFabIDsFromTwitchIDsRequest*)request success:(GetPlayFabIDsFromTwitchIDsCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
--(void) GetUserCombinedInfo:(GetUserCombinedInfoRequest*)request success:(GetUserCombinedInfoCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
-		
 -(void) LinkAndroidDeviceID:(LinkAndroidDeviceIDRequest*)request success:(LinkAndroidDeviceIDCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
 -(void) LinkCustomID:(LinkCustomIDRequest*)request success:(LinkCustomIDCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
@@ -555,8 +551,6 @@ typedef void(^GetPlayerTagsCallback)(GetPlayerTagsResult* result, NSObject* user
 + (void) OnGetPlayFabIDsFromSteamIDsResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnGetPlayFabIDsFromTwitchIDsResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
-		
-+ (void) OnGetUserCombinedInfoResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnLinkAndroidDeviceIDResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
