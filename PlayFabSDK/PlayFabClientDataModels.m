@@ -3502,6 +3502,8 @@
     }
 
     
+    self.ServerAuthCode = [properties valueForKey:@"ServerAuthCode"];
+    
     self.AccessToken = [properties valueForKey:@"AccessToken"];
     
     self.ForceLink = [[properties valueForKey:@"ForceLink"] boolValue];
@@ -3868,6 +3870,8 @@
     
     self.TitleId = [properties valueForKey:@"TitleId"];
     
+    self.ServerAuthCode = [properties valueForKey:@"ServerAuthCode"];
+    
     self.AccessToken = [properties valueForKey:@"AccessToken"];
     
     self.CreateAccount = [[properties valueForKey:@"CreateAccount"] boolValue];
@@ -4098,6 +4102,25 @@
     self.BalanceChange = [properties valueForKey:@"BalanceChange"];
     
     self.Balance = [properties valueForKey:@"Balance"];
+    
+
+    return self;
+}
+@end
+@implementation NameIdentifier
+
+
+-(id)initWithDictionary:(NSDictionary*)properties
+{
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+
+    
+    self.Name = [properties valueForKey:@"Name"];
+    
+    self.Id = [properties valueForKey:@"Id"];
     
 
     return self;

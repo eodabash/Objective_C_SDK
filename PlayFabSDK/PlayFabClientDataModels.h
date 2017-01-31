@@ -617,6 +617,8 @@ typedef enum
 
 @class ModifyUserVirtualCurrencyResult;
 
+@class NameIdentifier;
+
 @class OpenTradeRequest;
 
 @class OpenTradeResponse;
@@ -3700,7 +3702,12 @@ typedef enum
 
 
 /// <summary>
-/// Unique token (https://developers.google.com/android/reference/com/google/android/gms/auth/GoogleAuthUtil#public-methods) from Google Play for the user.
+/// Server authentication code obtained on the client by calling getServerAuthCode() (https://developers.google.com/identity/sign-in/android/offline-access) from Google Play for the user.
+/// </summary>
+@property NSString* ServerAuthCode; 
+
+/// <summary>
+/// OAuth 2.0 access token obtained on the client by calling the getAccessToken() Google client API.
 /// </summary>
 @property NSString* AccessToken; 
 
@@ -4067,7 +4074,12 @@ typedef enum
 @property NSString* TitleId; 
 
 /// <summary>
-/// Unique token (https://developers.google.com/android/reference/com/google/android/gms/auth/GoogleAuthUtil#public-methods) from Google Play for the user.
+/// OAuth 2.0 server authentication code obtained on the client by calling the getServerAuthCode() (https://developers.google.com/identity/sign-in/android/offline-access) Google client API.
+/// </summary>
+@property NSString* ServerAuthCode; 
+
+/// <summary>
+/// OAuth 2.0 access token obtained on the client by calling the getAccessToken() Google client API.
 /// </summary>
 @property NSString* AccessToken; 
 
@@ -4372,6 +4384,20 @@ typedef enum
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
+/// <summary>
+/// Identifier by either name or ID. Note that a name may change due to renaming, or reused after being deleted. ID is immutable and unique.
+/// </summary>
+@interface NameIdentifier : PlayFabBaseModel
+
+
+@property NSString* Name; 
+
+@property NSString* Id; 
+/**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
 
