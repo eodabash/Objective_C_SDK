@@ -47,6 +47,27 @@
     return self;
 }
 @end
+@implementation AdCampaignAttribution
+
+
+-(id)initWithDictionary:(NSDictionary*)properties
+{
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+
+    
+    self.Platform = [properties valueForKey:@"Platform"];
+    
+    self.CampaignId = [properties valueForKey:@"CampaignId"];
+    
+    self.AttributedAt = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"AttributedAt"]];
+    
+
+    return self;
+}
+@end
 @implementation AddFriendRequest
 
 
@@ -266,8 +287,6 @@
 
     
     self.Idfa = [properties valueForKey:@"Idfa"];
-    
-    self.Android_Id = [properties valueForKey:@"Android_Id"];
     
     self.Adid = [properties valueForKey:@"Adid"];
     
@@ -1536,6 +1555,10 @@
     
     self.IncludeFacebookFriends = [[properties valueForKey:@"IncludeFacebookFriends"] boolValue];
     
+    self.Version = [properties valueForKey:@"Version"];
+    
+    self.UseSpecificVersion = [[properties valueForKey:@"UseSpecificVersion"] boolValue];
+    
 
     return self;
 }
@@ -1561,6 +1584,10 @@
 }
 
     
+    self.Version = [properties valueForKey:@"Version"];
+    
+    self.NextReset = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"NextReset"]];
+    
 
     return self;
 }
@@ -1585,6 +1612,10 @@
     self.IncludeSteamFriends = [[properties valueForKey:@"IncludeSteamFriends"] boolValue];
     
     self.IncludeFacebookFriends = [[properties valueForKey:@"IncludeFacebookFriends"] boolValue];
+    
+    self.Version = [properties valueForKey:@"Version"];
+    
+    self.UseSpecificVersion = [[properties valueForKey:@"UseSpecificVersion"] boolValue];
     
 
     return self;
@@ -1699,6 +1730,10 @@
     
     self.MaxResultsCount = [properties valueForKey:@"MaxResultsCount"];
     
+    self.Version = [properties valueForKey:@"Version"];
+    
+    self.UseSpecificVersion = [[properties valueForKey:@"UseSpecificVersion"] boolValue];
+    
 
     return self;
 }
@@ -1723,6 +1758,10 @@
     self.Leaderboard = [mutable_storage copy];
 }
 
+    
+    self.Version = [properties valueForKey:@"Version"];
+    
+    self.NextReset = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"NextReset"]];
     
 
     return self;
@@ -1789,6 +1828,10 @@
     
     self.MaxResultsCount = [properties valueForKey:@"MaxResultsCount"];
     
+    self.Version = [properties valueForKey:@"Version"];
+    
+    self.UseSpecificVersion = [[properties valueForKey:@"UseSpecificVersion"] boolValue];
+    
 
     return self;
 }
@@ -1813,6 +1856,10 @@
     self.Leaderboard = [mutable_storage copy];
 }
 
+    
+    self.Version = [properties valueForKey:@"Version"];
+    
+    self.NextReset = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"NextReset"]];
     
 
     return self;
@@ -3179,6 +3226,42 @@
     return self;
 }
 @end
+@implementation GetWindowsHelloChallengeRequest
+
+
+-(id)initWithDictionary:(NSDictionary*)properties
+{
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+
+    
+    self.TitleId = [properties valueForKey:@"TitleId"];
+    
+    self.PublicKeyHint = [properties valueForKey:@"PublicKeyHint"];
+    
+
+    return self;
+}
+@end
+@implementation GetWindowsHelloChallengeResponse
+
+
+-(id)initWithDictionary:(NSDictionary*)properties
+{
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+
+    
+    self.Challenge = [properties valueForKey:@"Challenge"];
+    
+
+    return self;
+}
+@end
 @implementation GooglePlayFabIdPair
 
 
@@ -3669,6 +3752,44 @@
     return self;
 }
 @end
+@implementation LinkWindowsHelloAccountRequest
+
+
+-(id)initWithDictionary:(NSDictionary*)properties
+{
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+
+    
+    self.UserName = [properties valueForKey:@"UserName"];
+    
+    self.PublicKey = [properties valueForKey:@"PublicKey"];
+    
+    self.DeviceName = [properties valueForKey:@"DeviceName"];
+    
+    self.ForceLink = [[properties valueForKey:@"ForceLink"] boolValue];
+    
+
+    return self;
+}
+@end
+@implementation LinkWindowsHelloAccountResponse
+
+
+-(id)initWithDictionary:(NSDictionary*)properties
+{
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+
+    
+
+    return self;
+}
+@end
 @implementation ListUsersCharactersRequest
 
 
@@ -4003,6 +4124,29 @@
     return self;
 }
 @end
+@implementation LoginWithWindowsHelloRequest
+
+
+-(id)initWithDictionary:(NSDictionary*)properties
+{
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+
+    
+    self.TitleId = [properties valueForKey:@"TitleId"];
+    
+    self.ChallengeSignature = [properties valueForKey:@"ChallengeSignature"];
+    
+    self.PublicKeyHint = [properties valueForKey:@"PublicKeyHint"];
+    
+    self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
+    
+
+    return self;
+}
+@end
 @implementation LogStatement
 
 
@@ -4304,6 +4448,204 @@
     
     self.Position = [properties valueForKey:@"Position"];
     
+    self.Profile = [[PlayerProfile new] initWithDictionary:[properties objectForKey:@"Profile"]];
+    
+
+    return self;
+}
+@end
+@implementation PlayerLinkedAccount
+
+
+-(id)initWithDictionary:(NSDictionary*)properties
+{
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+
+    
+    self.Platform = (LoginIdentityProvider)[properties valueForKey:@"Platform"];
+    
+    self.PlatformUserId = [properties valueForKey:@"PlatformUserId"];
+    
+    self.Username = [properties valueForKey:@"Username"];
+    
+    self.Email = [properties valueForKey:@"Email"];
+    
+
+    return self;
+}
+@end
+@implementation PlayerLocation
+
+
+-(id)initWithDictionary:(NSDictionary*)properties
+{
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+
+    
+    self.pfContinentCode = (ContinentCode)[properties valueForKey:@"ContinentCode"];
+    
+    self.pfCountryCode = (CountryCode)[properties valueForKey:@"CountryCode"];
+    
+    self.City = [properties valueForKey:@"City"];
+    
+    self.Latitude = [properties valueForKey:@"Latitude"];
+    
+    self.Longitude = [properties valueForKey:@"Longitude"];
+    
+
+    return self;
+}
+@end
+@implementation PlayerProfile
+
+
+-(id)initWithDictionary:(NSDictionary*)properties
+{
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+
+    
+    self.PlayerId = [properties valueForKey:@"PlayerId"];
+    
+    self.TitleId = [properties valueForKey:@"TitleId"];
+    
+    self.DisplayName = [properties valueForKey:@"DisplayName"];
+    
+    self.PublisherId = [properties valueForKey:@"PublisherId"];
+    
+    self.Origination = (LoginIdentityProvider)[properties valueForKey:@"Origination"];
+    
+    self.Created = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"Created"]];
+    
+    self.LastLogin = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"LastLogin"]];
+    
+    self.BannedUntil = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"BannedUntil"]];
+    
+    self.AvatarUrl = [properties valueForKey:@"AvatarUrl"];
+    
+    if ([properties objectForKey:@"Statistics"]){
+    NSDictionary* member_list = [properties objectForKey:@"Statistics"];
+    NSMutableDictionary* mutable_storage = [NSMutableDictionary new];
+    for(NSString* key in member_list){
+        [mutable_storage setValue:[member_list objectForKey:key] forKey:key];
+    }
+    self.Statistics = [mutable_storage copy];
+}
+
+    
+    self.TotalValueToDateInUSD = [properties valueForKey:@"TotalValueToDateInUSD"];
+    
+    if ([properties objectForKey:@"ValuesToDate"]){
+    NSDictionary* member_list = [properties objectForKey:@"ValuesToDate"];
+    NSMutableDictionary* mutable_storage = [NSMutableDictionary new];
+    for(NSString* key in member_list){
+        [mutable_storage setValue:[member_list objectForKey:key] forKey:key];
+    }
+    self.ValuesToDate = [mutable_storage copy];
+}
+
+    
+    if ([properties objectForKey:@"Tags"]){
+    NSArray* member_list = [properties objectForKey:@"Tags"];
+    NSMutableArray* mutable_storage = [NSMutableArray new];
+    for(int i=0;i<[member_list count];i++){
+        [mutable_storage addObject:[member_list objectAtIndex:i]];
+    }
+    self.Tags = [mutable_storage copy];
+}
+
+    
+    if ([properties objectForKey:@"Locations"]){
+    NSDictionary* member_list = [properties objectForKey:@"Locations"];
+    NSMutableDictionary* mutable_storage = [NSMutableDictionary new];
+    for(NSString* key in member_list){
+        [mutable_storage setValue:[[PlayerLocation new] initWithDictionary:[member_list objectForKey:key]] forKey:key];
+    }
+    self.Locations = [mutable_storage copy];
+}
+
+    
+    if ([properties objectForKey:@"VirtualCurrencyBalances"]){
+    NSDictionary* member_list = [properties objectForKey:@"VirtualCurrencyBalances"];
+    NSMutableDictionary* mutable_storage = [NSMutableDictionary new];
+    for(NSString* key in member_list){
+        [mutable_storage setValue:[member_list objectForKey:key] forKey:key];
+    }
+    self.VirtualCurrencyBalances = [mutable_storage copy];
+}
+
+    
+    if ([properties objectForKey:@"AdCampaignAttributions"]){
+    NSArray* member_list = [properties objectForKey:@"AdCampaignAttributions"];
+    NSMutableArray* mutable_storage = [NSMutableArray new];
+    for(int i=0;i<[member_list count];i++){
+        [mutable_storage addObject:[[AdCampaignAttribution new] initWithDictionary:[member_list objectAtIndex:i]]];
+    }
+    self.AdCampaignAttributions = [mutable_storage copy];
+}
+
+    
+    if ([properties objectForKey:@"PushNotificationRegistrations"]){
+    NSArray* member_list = [properties objectForKey:@"PushNotificationRegistrations"];
+    NSMutableArray* mutable_storage = [NSMutableArray new];
+    for(int i=0;i<[member_list count];i++){
+        [mutable_storage addObject:[[PushNotificationRegistration new] initWithDictionary:[member_list objectAtIndex:i]]];
+    }
+    self.PushNotificationRegistrations = [mutable_storage copy];
+}
+
+    
+    if ([properties objectForKey:@"LinkedAccounts"]){
+    NSArray* member_list = [properties objectForKey:@"LinkedAccounts"];
+    NSMutableArray* mutable_storage = [NSMutableArray new];
+    for(int i=0;i<[member_list count];i++){
+        [mutable_storage addObject:[[PlayerLinkedAccount new] initWithDictionary:[member_list objectAtIndex:i]]];
+    }
+    self.LinkedAccounts = [mutable_storage copy];
+}
+
+    
+    if ([properties objectForKey:@"PlayerStatistics"]){
+    NSArray* member_list = [properties objectForKey:@"PlayerStatistics"];
+    NSMutableArray* mutable_storage = [NSMutableArray new];
+    for(int i=0;i<[member_list count];i++){
+        [mutable_storage addObject:[[PlayerStatistic new] initWithDictionary:[member_list objectAtIndex:i]]];
+    }
+    self.PlayerStatistics = [mutable_storage copy];
+}
+
+    
+
+    return self;
+}
+@end
+@implementation PlayerStatistic
+
+
+-(id)initWithDictionary:(NSDictionary*)properties
+{
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+
+    
+    self.Id = [properties valueForKey:@"Id"];
+    
+    self.StatisticVersion = [properties valueForKey:@"StatisticVersion"];
+    
+    self.StatisticValue = [properties valueForKey:@"StatisticValue"];
+    
+    self.Name = [properties valueForKey:@"Name"];
+    
 
     return self;
 }
@@ -4382,6 +4724,25 @@
     self.Items = [mutable_storage copy];
 }
 
+    
+
+    return self;
+}
+@end
+@implementation PushNotificationRegistration
+
+
+-(id)initWithDictionary:(NSDictionary*)properties
+{
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+
+    
+    self.Platform = (PushNotificationPlatform)[properties valueForKey:@"Platform"];
+    
+    self.NotificationEndpointARN = [properties valueForKey:@"NotificationEndpointARN"];
     
 
     return self;
@@ -4537,6 +4898,31 @@
     self.Username = [properties valueForKey:@"Username"];
     
     self.SettingsForUser = [[UserSettings new] initWithDictionary:[properties objectForKey:@"SettingsForUser"]];
+    
+
+    return self;
+}
+@end
+@implementation RegisterWithWindowsHelloRequest
+
+
+-(id)initWithDictionary:(NSDictionary*)properties
+{
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+
+    
+    self.TitleId = [properties valueForKey:@"TitleId"];
+    
+    self.UserName = [properties valueForKey:@"UserName"];
+    
+    self.PublicKey = [properties valueForKey:@"PublicKey"];
+    
+    self.DeviceName = [properties valueForKey:@"DeviceName"];
+    
+    self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
     
 
     return self;
@@ -5528,6 +5914,38 @@
     return self;
 }
 @end
+@implementation UnlinkWindowsHelloAccountRequest
+
+
+-(id)initWithDictionary:(NSDictionary*)properties
+{
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+
+    
+    self.PublicKeyHint = [properties valueForKey:@"PublicKeyHint"];
+    
+
+    return self;
+}
+@end
+@implementation UnlinkWindowsHelloAccountResponse
+
+
+-(id)initWithDictionary:(NSDictionary*)properties
+{
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+
+    
+
+    return self;
+}
+@end
 @implementation UnlockContainerInstanceRequest
 
 
@@ -5606,6 +6024,23 @@
     self.VirtualCurrency = [mutable_storage copy];
 }
 
+    
+
+    return self;
+}
+@end
+@implementation UpdateAvatarUrlRequest
+
+
+-(id)initWithDictionary:(NSDictionary*)properties
+{
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+
+    
+    self.ImageUrl = [properties valueForKey:@"ImageUrl"];
     
 
     return self;
@@ -6187,6 +6622,8 @@
     
     self.isBanned = [[properties valueForKey:@"isBanned"] boolValue];
     
+    self.AvatarUrl = [properties valueForKey:@"AvatarUrl"];
+    
 
     return self;
 }
@@ -6327,6 +6764,44 @@
 }
 @end
 @implementation ValidateIOSReceiptResult
+
+
+-(id)initWithDictionary:(NSDictionary*)properties
+{
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+
+    
+
+    return self;
+}
+@end
+@implementation ValidateWindowsReceiptRequest
+
+
+-(id)initWithDictionary:(NSDictionary*)properties
+{
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+
+    
+    self.Receipt = [properties valueForKey:@"Receipt"];
+    
+    self.CatalogVersion = [properties valueForKey:@"CatalogVersion"];
+    
+    self.CurrencyCode = [properties valueForKey:@"CurrencyCode"];
+    
+    self.PurchasePrice = [properties valueForKey:@"PurchasePrice"];
+    
+
+    return self;
+}
+@end
+@implementation ValidateWindowsReceiptResult
 
 
 -(id)initWithDictionary:(NSDictionary*)properties

@@ -24,6 +24,270 @@ typedef enum
 
 typedef enum
 {
+    ContinentCodeAF,
+    ContinentCodeAN,
+    ContinentCodeAS,
+    ContinentCodeEU,
+    ContinentCodeNA,
+    ContinentCodeOC,
+    ContinentCodeSA
+} ContinentCode;
+
+typedef enum
+{
+    CountryCodeAF,
+    CountryCodeAX,
+    CountryCodeAL,
+    CountryCodeDZ,
+    CountryCodeAS,
+    CountryCodeAD,
+    CountryCodeAO,
+    CountryCodeAI,
+    CountryCodeAQ,
+    CountryCodeAG,
+    CountryCodeAR,
+    CountryCodeAM,
+    CountryCodeAW,
+    CountryCodeAU,
+    CountryCodeAT,
+    CountryCodeAZ,
+    CountryCodeBS,
+    CountryCodeBH,
+    CountryCodeBD,
+    CountryCodeBB,
+    CountryCodeBY,
+    CountryCodeBE,
+    CountryCodeBZ,
+    CountryCodeBJ,
+    CountryCodeBM,
+    CountryCodeBT,
+    CountryCodeBO,
+    CountryCodeBQ,
+    CountryCodeBA,
+    CountryCodeBW,
+    CountryCodeBV,
+    CountryCodeBR,
+    CountryCodeIO,
+    CountryCodeBN,
+    CountryCodeBG,
+    CountryCodeBF,
+    CountryCodeBI,
+    CountryCodeKH,
+    CountryCodeCM,
+    CountryCodeCA,
+    CountryCodeCV,
+    CountryCodeKY,
+    CountryCodeCF,
+    CountryCodeTD,
+    CountryCodeCL,
+    CountryCodeCN,
+    CountryCodeCX,
+    CountryCodeCC,
+    CountryCodeCO,
+    CountryCodeKM,
+    CountryCodeCG,
+    CountryCodeCD,
+    CountryCodeCK,
+    CountryCodeCR,
+    CountryCodeCI,
+    CountryCodeHR,
+    CountryCodeCU,
+    CountryCodeCW,
+    CountryCodeCY,
+    CountryCodeCZ,
+    CountryCodeDK,
+    CountryCodeDJ,
+    CountryCodeDM,
+    CountryCodeDO,
+    CountryCodeEC,
+    CountryCodeEG,
+    CountryCodeSV,
+    CountryCodeGQ,
+    CountryCodeER,
+    CountryCodeEE,
+    CountryCodeET,
+    CountryCodeFK,
+    CountryCodeFO,
+    CountryCodeFJ,
+    CountryCodeFI,
+    CountryCodeFR,
+    CountryCodeGF,
+    CountryCodePF,
+    CountryCodeTF,
+    CountryCodeGA,
+    CountryCodeGM,
+    CountryCodeGE,
+    CountryCodeDE,
+    CountryCodeGH,
+    CountryCodeGI,
+    CountryCodeGR,
+    CountryCodeGL,
+    CountryCodeGD,
+    CountryCodeGP,
+    CountryCodeGU,
+    CountryCodeGT,
+    CountryCodeGG,
+    CountryCodeGN,
+    CountryCodeGW,
+    CountryCodeGY,
+    CountryCodeHT,
+    CountryCodeHM,
+    CountryCodeVA,
+    CountryCodeHN,
+    CountryCodeHK,
+    CountryCodeHU,
+    CountryCodeIS,
+    CountryCodeIN,
+    CountryCodeID,
+    CountryCodeIR,
+    CountryCodeIQ,
+    CountryCodeIE,
+    CountryCodeIM,
+    CountryCodeIL,
+    CountryCodeIT,
+    CountryCodeJM,
+    CountryCodeJP,
+    CountryCodeJE,
+    CountryCodeJO,
+    CountryCodeKZ,
+    CountryCodeKE,
+    CountryCodeKI,
+    CountryCodeKP,
+    CountryCodeKR,
+    CountryCodeKW,
+    CountryCodeKG,
+    CountryCodeLA,
+    CountryCodeLV,
+    CountryCodeLB,
+    CountryCodeLS,
+    CountryCodeLR,
+    CountryCodeLY,
+    CountryCodeLI,
+    CountryCodeLT,
+    CountryCodeLU,
+    CountryCodeMO,
+    CountryCodeMK,
+    CountryCodeMG,
+    CountryCodeMW,
+    CountryCodeMY,
+    CountryCodeMV,
+    CountryCodeML,
+    CountryCodeMT,
+    CountryCodeMH,
+    CountryCodeMQ,
+    CountryCodeMR,
+    CountryCodeMU,
+    CountryCodeYT,
+    CountryCodeMX,
+    CountryCodeFM,
+    CountryCodeMD,
+    CountryCodeMC,
+    CountryCodeMN,
+    CountryCodeME,
+    CountryCodeMS,
+    CountryCodeMA,
+    CountryCodeMZ,
+    CountryCodeMM,
+    CountryCodeNA,
+    CountryCodeNR,
+    CountryCodeNP,
+    CountryCodeNL,
+    CountryCodeNC,
+    CountryCodeNZ,
+    CountryCodeNI,
+    CountryCodeNE,
+    CountryCodeNG,
+    CountryCodeNU,
+    CountryCodeNF,
+    CountryCodeMP,
+    CountryCodeNO,
+    CountryCodeOM,
+    CountryCodePK,
+    CountryCodePW,
+    CountryCodePS,
+    CountryCodePA,
+    CountryCodePG,
+    CountryCodePY,
+    CountryCodePE,
+    CountryCodePH,
+    CountryCodePN,
+    CountryCodePL,
+    CountryCodePT,
+    CountryCodePR,
+    CountryCodeQA,
+    CountryCodeRE,
+    CountryCodeRO,
+    CountryCodeRU,
+    CountryCodeRW,
+    CountryCodeBL,
+    CountryCodeSH,
+    CountryCodeKN,
+    CountryCodeLC,
+    CountryCodeMF,
+    CountryCodePM,
+    CountryCodeVC,
+    CountryCodeWS,
+    CountryCodeSM,
+    CountryCodeST,
+    CountryCodeSA,
+    CountryCodeSN,
+    CountryCodeRS,
+    CountryCodeSC,
+    CountryCodeSL,
+    CountryCodeSG,
+    CountryCodeSX,
+    CountryCodeSK,
+    CountryCodeSI,
+    CountryCodeSB,
+    CountryCodeSO,
+    CountryCodeZA,
+    CountryCodeGS,
+    CountryCodeSS,
+    CountryCodeES,
+    CountryCodeLK,
+    CountryCodeSD,
+    CountryCodeSR,
+    CountryCodeSJ,
+    CountryCodeSZ,
+    CountryCodeSE,
+    CountryCodeCH,
+    CountryCodeSY,
+    CountryCodeTW,
+    CountryCodeTJ,
+    CountryCodeTZ,
+    CountryCodeTH,
+    CountryCodeTL,
+    CountryCodeTG,
+    CountryCodeTK,
+    CountryCodeTO,
+    CountryCodeTT,
+    CountryCodeTN,
+    CountryCodeTR,
+    CountryCodeTM,
+    CountryCodeTC,
+    CountryCodeTV,
+    CountryCodeUG,
+    CountryCodeUA,
+    CountryCodeAE,
+    CountryCodeGB,
+    CountryCodeUS,
+    CountryCodeUM,
+    CountryCodeUY,
+    CountryCodeUZ,
+    CountryCodeVU,
+    CountryCodeVE,
+    CountryCodeVN,
+    CountryCodeVG,
+    CountryCodeVI,
+    CountryCodeWF,
+    CountryCodeEH,
+    CountryCodeYE,
+    CountryCodeZM,
+    CountryCodeZW
+} CountryCode;
+
+typedef enum
+{
     CurrencyAED,
     CurrencyAFN,
     CurrencyALL,
@@ -232,7 +496,8 @@ typedef enum
     UserOriginationCustomId,
     UserOriginationXboxLive,
     UserOriginationParse,
-    UserOriginationTwitch
+    UserOriginationTwitch,
+    UserOriginationWindowsHello
 } UserOrigination;
 
 typedef enum
@@ -240,6 +505,30 @@ typedef enum
     UserDataPermissionPrivate,
     UserDataPermissionPublic
 } UserDataPermission;
+
+typedef enum
+{
+    LoginIdentityProviderUnknown,
+    LoginIdentityProviderPlayFab,
+    LoginIdentityProviderCustom,
+    LoginIdentityProviderGameCenter,
+    LoginIdentityProviderGooglePlay,
+    LoginIdentityProviderSteam,
+    LoginIdentityProviderXBoxLive,
+    LoginIdentityProviderPSN,
+    LoginIdentityProviderKongregate,
+    LoginIdentityProviderFacebook,
+    LoginIdentityProviderIOSDevice,
+    LoginIdentityProviderAndroidDevice,
+    LoginIdentityProviderTwitch,
+    LoginIdentityProviderWindowsHello
+} LoginIdentityProvider;
+
+typedef enum
+{
+    PushNotificationPlatformApplePushNotificationService,
+    PushNotificationPlatformGoogleCloudMessaging
+} PushNotificationPlatform;
 
 typedef enum
 {
@@ -288,6 +577,8 @@ typedef enum
 @class AcceptTradeRequest;
 
 @class AcceptTradeResponse;
+
+@class AdCampaignAttribution;
 
 @class AddFriendRequest;
 
@@ -533,6 +824,10 @@ typedef enum
 
 @class GetUserInventoryResult;
 
+@class GetWindowsHelloChallengeRequest;
+
+@class GetWindowsHelloChallengeResponse;
+
 @class GooglePlayFabIdPair;
 
 @class GrantCharacterToUserRequest;
@@ -581,6 +876,10 @@ typedef enum
 
 @class LinkTwitchAccountResult;
 
+@class LinkWindowsHelloAccountRequest;
+
+@class LinkWindowsHelloAccountResponse;
+
 @class ListUsersCharactersRequest;
 
 @class ListUsersCharactersResult;
@@ -609,6 +908,8 @@ typedef enum
 
 @class LoginWithTwitchRequest;
 
+@class LoginWithWindowsHelloRequest;
+
 @class LogStatement;
 
 @class MatchmakeRequest;
@@ -631,11 +932,21 @@ typedef enum
 
 @class PlayerLeaderboardEntry;
 
+@class PlayerLinkedAccount;
+
+@class PlayerLocation;
+
+@class PlayerProfile;
+
+@class PlayerStatistic;
+
 @class PlayerStatisticVersion;
 
 @class PurchaseItemRequest;
 
 @class PurchaseItemResult;
+
+@class PushNotificationRegistration;
 
 @class RedeemCouponRequest;
 
@@ -650,6 +961,8 @@ typedef enum
 @class RegisterPlayFabUserRequest;
 
 @class RegisterPlayFabUserResult;
+
+@class RegisterWithWindowsHelloRequest;
 
 @class RemoveFriendRequest;
 
@@ -747,11 +1060,17 @@ typedef enum
 
 @class UnlinkTwitchAccountResult;
 
+@class UnlinkWindowsHelloAccountRequest;
+
+@class UnlinkWindowsHelloAccountResponse;
+
 @class UnlockContainerInstanceRequest;
 
 @class UnlockContainerItemRequest;
 
 @class UnlockContainerItemResult;
+
+@class UpdateAvatarUrlRequest;
 
 @class UpdateCharacterDataRequest;
 
@@ -821,6 +1140,10 @@ typedef enum
 
 @class ValidateIOSReceiptResult;
 
+@class ValidateWindowsReceiptRequest;
+
+@class ValidateWindowsReceiptResult;
+
 @class VirtualCurrencyRechargeTime;
 
 @class WriteClientCharacterEventRequest;
@@ -866,6 +1189,28 @@ typedef enum
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
+@interface AdCampaignAttribution : PlayFabBaseModel
+
+
+/// <summary>
+/// Attribution network name
+/// </summary>
+@property NSString* Platform; 
+
+/// <summary>
+/// Attribution campaign identifier
+/// </summary>
+@property NSString* CampaignId; 
+
+/// <summary>
+/// UTC time stamp of attribution
+/// </summary>
+@property NSDate* AttributedAt; 
+/**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
 
@@ -1054,11 +1399,6 @@ typedef enum
 /// The IdentifierForAdvertisers for iOS Devices.
 /// </summary>
 @property NSString* Idfa; 
-
-/// <summary>
-/// The android advertising id. This field is deprecated in favor of Adid for clarity.
-/// </summary>
-@property NSString* Android_Id; 
 
 /// <summary>
 /// The adid for this device.
@@ -2230,6 +2570,16 @@ typedef enum
 /// Indicates whether Facebook friends should be included in the response. Default is true.
 /// </summary>
 @property bool IncludeFacebookFriends; 
+
+/// <summary>
+/// The version of the leaderboard to get, when UseSpecificVersion is true.
+/// </summary>
+@property NSNumber* Version; 
+
+/// <summary>
+/// If true, uses the specified version. If false, gets the most recent version.
+/// </summary>
+@property bool UseSpecificVersion; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -2242,6 +2592,16 @@ typedef enum
 /// Ordered listing of users and their positions in the requested leaderboard.
 /// </summary>
 @property NSArray* Leaderboard; 
+
+/// <summary>
+/// The version of the leaderboard returned.
+/// </summary>
+@property NSNumber* Version; 
+
+/// <summary>
+/// The time the next scheduled reset will occur. Null if the leaderboard does not reset on a schedule.
+/// </summary>
+@property NSDate* NextReset; 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
@@ -2277,6 +2637,16 @@ typedef enum
 /// Indicates whether Facebook friends should be included in the response. Default is true.
 /// </summary>
 @property bool IncludeFacebookFriends; 
+
+/// <summary>
+/// The version of the leaderboard to get, when UseSpecificVersion is true.
+/// </summary>
+@property NSNumber* Version; 
+
+/// <summary>
+/// If true, uses the specified version. If false, gets the most recent version.
+/// </summary>
+@property bool UseSpecificVersion; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -2373,6 +2743,16 @@ typedef enum
 /// Maximum number of entries to retrieve. Default 10, maximum 100.
 /// </summary>
 @property NSNumber* MaxResultsCount; 
+
+/// <summary>
+/// The version of the leaderboard to get, when UseSpecificVersion is true.
+/// </summary>
+@property NSNumber* Version; 
+
+/// <summary>
+/// If true, uses the specified version. If false, gets the most recent version.
+/// </summary>
+@property bool UseSpecificVersion; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -2385,6 +2765,16 @@ typedef enum
 /// Ordered listing of users and their positions in the requested leaderboard.
 /// </summary>
 @property NSArray* Leaderboard; 
+
+/// <summary>
+/// The version of the leaderboard returned.
+/// </summary>
+@property NSNumber* Version; 
+
+/// <summary>
+/// The time the next scheduled reset will occur. Null if the leaderboard does not reset on a schedule.
+/// </summary>
+@property NSDate* NextReset; 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
@@ -2442,6 +2832,16 @@ typedef enum
 /// Maximum number of entries to retrieve. Default 10, maximum 100.
 /// </summary>
 @property NSNumber* MaxResultsCount; 
+
+/// <summary>
+/// The version of the leaderboard to get, when UseSpecificVersion is true.
+/// </summary>
+@property NSNumber* Version; 
+
+/// <summary>
+/// If true, uses the specified version. If false, gets the most recent version.
+/// </summary>
+@property bool UseSpecificVersion; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -2454,6 +2854,16 @@ typedef enum
 /// Ordered listing of users and their positions in the requested leaderboard.
 /// </summary>
 @property NSArray* Leaderboard; 
+
+/// <summary>
+/// The version of the leaderboard returned.
+/// </summary>
+@property NSNumber* Version; 
+
+/// <summary>
+/// The time the next scheduled reset will occur. Null if the leaderboard does not reset on a schedule.
+/// </summary>
+@property NSDate* NextReset; 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
@@ -3387,6 +3797,38 @@ typedef enum
 @end
 
 
+@interface GetWindowsHelloChallengeRequest : PlayFabBaseModel
+
+
+/// <summary>
+/// Unique identifier for the title, found in the Settings > Game Properties section of the PlayFab developer site when a title has been selected.
+/// </summary>
+@property NSString* TitleId; 
+
+/// <summary>
+/// SHA256 hash of the PublicKey generated by Windows Hello.
+/// </summary>
+@property NSString* PublicKeyHint; 
+/**/
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
+@interface GetWindowsHelloChallengeResponse : PlayFabBaseModel
+
+
+/// <summary>
+/// Server generated challenge to be signed by the user.
+/// </summary>
+@property NSString* Challenge; 
+/*
+@property NSObject* Request;
+@property NSObject* CustomData;
+*/
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
 @interface GooglePlayFabIdPair : PlayFabBaseModel
 
 
@@ -3853,6 +4295,43 @@ typedef enum
 @end
 
 
+@interface LinkWindowsHelloAccountRequest : PlayFabBaseModel
+
+
+/// <summary>
+/// Player's user named used by Windows Hello.
+/// </summary>
+@property NSString* UserName; 
+
+/// <summary>
+/// PublicKey generated by Windows Hello.
+/// </summary>
+@property NSString* PublicKey; 
+
+/// <summary>
+/// Device name.
+/// </summary>
+@property NSString* DeviceName; 
+
+/// <summary>
+/// If another user is already linked to the account, unlink the other user and re-link.
+/// </summary>
+@property bool ForceLink; 
+/**/
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
+@interface LinkWindowsHelloAccountResponse : PlayFabBaseModel
+
+/*
+@property NSObject* Request;
+@property NSObject* CustomData;
+*/
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
 @interface ListUsersCharactersRequest : PlayFabBaseModel
 
 
@@ -4247,6 +4726,33 @@ typedef enum
 @end
 
 
+@interface LoginWithWindowsHelloRequest : PlayFabBaseModel
+
+
+/// <summary>
+/// Unique identifier for the title, found in the Settings > Game Properties section of the PlayFab developer site when a title has been selected.
+/// </summary>
+@property NSString* TitleId; 
+
+/// <summary>
+/// The signed response from the user for the Challenge.
+/// </summary>
+@property NSString* ChallengeSignature; 
+
+/// <summary>
+/// SHA256 hash of the PublicKey generated by Windows Hello.
+/// </summary>
+@property NSString* PublicKeyHint; 
+
+/// <summary>
+/// Flags for which pieces of info to return for the user.
+/// </summary>
+@property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
+/**/
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
 @interface LogStatement : PlayFabBaseModel
 
 
@@ -4575,6 +5081,199 @@ typedef enum
 /// User's overall position in the leaderboard.
 /// </summary>
 @property NSNumber* Position; 
+
+/// <summary>
+/// The profile of the user, if requested. Note that this profile may have sensitive fields scrubbed.
+/// </summary>
+@property PlayerProfile* Profile; 
+/**/
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
+@interface PlayerLinkedAccount : PlayFabBaseModel
+
+
+/// <summary>
+/// Authentication platform
+/// </summary>
+@property LoginIdentityProvider Platform; 
+
+/// <summary>
+/// Platform user identifier
+/// </summary>
+@property NSString* PlatformUserId; 
+
+/// <summary>
+/// Linked account's username
+/// </summary>
+@property NSString* Username; 
+
+/// <summary>
+/// Linked account's email
+/// </summary>
+@property NSString* Email; 
+/**/
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
+@interface PlayerLocation : PlayFabBaseModel
+
+
+/// <summary>
+/// The two-character continent code for this location
+/// </summary>
+@property ContinentCode pfContinentCode; 
+
+/// <summary>
+/// The two-character ISO 3166-1 country code for the country associated with the location
+/// </summary>
+@property CountryCode pfCountryCode; 
+
+/// <summary>
+/// City of the player's geographic location.
+/// </summary>
+@property NSString* City; 
+
+/// <summary>
+/// Latitude coordinate of the player's geographic location.
+/// </summary>
+@property NSNumber* Latitude; 
+
+/// <summary>
+/// Longitude coordinate of the player's geographic location.
+/// </summary>
+@property NSNumber* Longitude; 
+/**/
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
+@interface PlayerProfile : PlayFabBaseModel
+
+
+/// <summary>
+/// PlayFab Player ID
+/// </summary>
+@property NSString* PlayerId; 
+
+/// <summary>
+/// Title ID this profile applies to
+/// </summary>
+@property NSString* TitleId; 
+
+/// <summary>
+/// Player Display Name
+/// </summary>
+@property NSString* DisplayName; 
+
+/// <summary>
+/// Publisher this player belongs to
+/// </summary>
+@property NSString* PublisherId; 
+
+/// <summary>
+/// Player account origination
+/// </summary>
+@property LoginIdentityProvider Origination; 
+
+/// <summary>
+/// Player record created
+/// </summary>
+@property NSDate* Created; 
+
+/// <summary>
+/// Last login
+/// </summary>
+@property NSDate* LastLogin; 
+
+/// <summary>
+/// Banned until UTC Date. If permanent ban this is set for 20 years after the original ban date.
+/// </summary>
+@property NSDate* BannedUntil; 
+
+/// <summary>
+/// Image URL of the player's avatar.
+/// </summary>
+@property NSString* AvatarUrl; 
+
+/// <summary>
+/// Dictionary of player's statistics using only the latest version's value
+/// </summary>
+@property NSDictionary* Statistics; 
+
+/// <summary>
+/// A sum of player's total purchases in USD across all currencies.
+/// </summary>
+@property NSNumber* TotalValueToDateInUSD; 
+
+/// <summary>
+/// Dictionary of player's total purchases by currency.
+/// </summary>
+@property NSDictionary* ValuesToDate; 
+
+/// <summary>
+/// List of player's tags for segmentation.
+/// </summary>
+@property NSArray* Tags; 
+
+/// <summary>
+/// Dictionary of player's locations by type.
+/// </summary>
+@property NSDictionary* Locations; 
+
+/// <summary>
+/// Dictionary of player's virtual currency balances
+/// </summary>
+@property NSDictionary* VirtualCurrencyBalances; 
+
+/// <summary>
+/// Array of ad campaigns player has been attributed to
+/// </summary>
+@property NSArray* AdCampaignAttributions; 
+
+/// <summary>
+/// Array of configured push notification end points
+/// </summary>
+@property NSArray* PushNotificationRegistrations; 
+
+/// <summary>
+/// Array of third party accounts linked to this player
+/// </summary>
+@property NSArray* LinkedAccounts; 
+
+/// <summary>
+/// Array of player statistics
+/// </summary>
+@property NSArray* PlayerStatistics; 
+/**/
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
+@interface PlayerStatistic : PlayFabBaseModel
+
+
+/// <summary>
+/// Statistic ID
+/// </summary>
+@property NSString* Id; 
+
+/// <summary>
+/// Statistic version (0 if not a versioned statistic)
+/// </summary>
+@property NSNumber* StatisticVersion; 
+
+/// <summary>
+/// Current statistic value
+/// </summary>
+@property NSNumber* StatisticValue; 
+
+/// <summary>
+/// Statistic name
+/// </summary>
+@property NSString* Name; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -4665,6 +5364,23 @@ typedef enum
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
+@interface PushNotificationRegistration : PlayFabBaseModel
+
+
+/// <summary>
+/// Push notification platform
+/// </summary>
+@property PushNotificationPlatform Platform; 
+
+/// <summary>
+/// Notification configured endpoint
+/// </summary>
+@property NSString* NotificationEndpointARN; 
+/**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
 
@@ -4828,6 +5544,38 @@ typedef enum
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
+@interface RegisterWithWindowsHelloRequest : PlayFabBaseModel
+
+
+/// <summary>
+/// Unique identifier for the title, found in the Settings > Game Properties section of the PlayFab developer site when a title has been selected.
+/// </summary>
+@property NSString* TitleId; 
+
+/// <summary>
+/// Player's user named used by Windows Hello.
+/// </summary>
+@property NSString* UserName; 
+
+/// <summary>
+/// PublicKey generated by Windows Hello.
+/// </summary>
+@property NSString* PublicKey; 
+
+/// <summary>
+/// Device name.
+/// </summary>
+@property NSString* DeviceName; 
+
+/// <summary>
+/// Flags for which pieces of info to return for the user.
+/// </summary>
+@property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
+/**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
 
@@ -5633,6 +6381,28 @@ typedef enum
 @end
 
 
+@interface UnlinkWindowsHelloAccountRequest : PlayFabBaseModel
+
+
+/// <summary>
+/// SHA256 hash of the PublicKey generated by Windows Hello.
+/// </summary>
+@property NSString* PublicKeyHint; 
+/**/
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
+@interface UnlinkWindowsHelloAccountResponse : PlayFabBaseModel
+
+/*
+@property NSObject* Request;
+@property NSObject* CustomData;
+*/
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
 @interface UnlockContainerInstanceRequest : PlayFabBaseModel
 
 
@@ -5708,6 +6478,18 @@ typedef enum
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
+@interface UpdateAvatarUrlRequest : PlayFabBaseModel
+
+
+/// <summary>
+/// URL of the avatar image. If empty, it removes the existing avatar URL.
+/// </summary>
+@property NSString* ImageUrl; 
+/**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
 
@@ -6222,6 +7004,11 @@ typedef enum
 /// boolean indicating whether or not the user is currently banned for a title
 /// </summary>
 @property bool isBanned; 
+
+/// <summary>
+/// URL to the player's avatar.
+/// </summary>
+@property NSString* AvatarUrl; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -6358,6 +7145,43 @@ typedef enum
 
 
 @interface ValidateIOSReceiptResult : PlayFabBaseModel
+
+/*
+@property NSObject* Request;
+@property NSObject* CustomData;
+*/
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
+@interface ValidateWindowsReceiptRequest : PlayFabBaseModel
+
+
+/// <summary>
+/// XML Receipt returned by the Windows App Store in-app purchase API
+/// </summary>
+@property NSString* Receipt; 
+
+/// <summary>
+/// Catalog version to use when granting receipt item. If null, defaults to primary catalog.
+/// </summary>
+@property NSString* CatalogVersion; 
+
+/// <summary>
+/// Currency used for the purchase.
+/// </summary>
+@property NSString* CurrencyCode; 
+
+/// <summary>
+/// Amount of the stated currency paid for the object.
+/// </summary>
+@property NSNumber* PurchasePrice; 
+/**/
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
+@interface ValidateWindowsReceiptResult : PlayFabBaseModel
 
 /*
 @property NSObject* Request;

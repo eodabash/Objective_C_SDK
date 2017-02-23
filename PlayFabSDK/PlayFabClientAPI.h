@@ -13,6 +13,10 @@
 		
 typedef void(^GetPhotonAuthenticationTokenCallback)(GetPhotonAuthenticationTokenResult* result, NSObject* userData);
 		
+typedef void(^GetWindowsHelloChallengeCallback)(GetWindowsHelloChallengeResponse* result, NSObject* userData);
+		
+typedef void(^LinkWindowsHelloCallback)(LinkWindowsHelloAccountResponse* result, NSObject* userData);
+		
 typedef void(^LoginWithAndroidDeviceIDCallback)(LoginResult* result, NSObject* userData);
 		
 typedef void(^LoginWithCustomIDCallback)(LoginResult* result, NSObject* userData);
@@ -35,7 +39,13 @@ typedef void(^LoginWithSteamCallback)(LoginResult* result, NSObject* userData);
 		
 typedef void(^LoginWithTwitchCallback)(LoginResult* result, NSObject* userData);
 		
+typedef void(^LoginWithWindowsHelloCallback)(LoginResult* result, NSObject* userData);
+		
 typedef void(^RegisterPlayFabUserCallback)(RegisterPlayFabUserResult* result, NSObject* userData);
+		
+typedef void(^RegisterWithWindowsHelloCallback)(LoginResult* result, NSObject* userData);
+		
+typedef void(^UnlinkWindowsHelloCallback)(UnlinkWindowsHelloAccountResponse* result, NSObject* userData);
 		
 typedef void(^AddGenericIDCallback)(AddGenericIDResult* result, NSObject* userData);
 		
@@ -100,6 +110,8 @@ typedef void(^UnlinkKongregateCallback)(UnlinkKongregateAccountResult* result, N
 typedef void(^UnlinkSteamAccountCallback)(UnlinkSteamAccountResult* result, NSObject* userData);
 		
 typedef void(^UnlinkTwitchCallback)(UnlinkTwitchAccountResult* result, NSObject* userData);
+		
+typedef void(^UpdateAvatarUrlCallback)(EmptyResult* result, NSObject* userData);
 		
 typedef void(^UpdateUserTitleDisplayNameCallback)(UpdateUserTitleDisplayNameResult* result, NSObject* userData);
 		
@@ -251,6 +263,8 @@ typedef void(^GetPlayerSegmentsCallback)(GetPlayerSegmentsResult* result, NSObje
 		
 typedef void(^GetPlayerTagsCallback)(GetPlayerTagsResult* result, NSObject* userData);
 		
+typedef void(^ValidateWindowsStoreReceiptCallback)(ValidateWindowsReceiptResult* result, NSObject* userData);
+		
 
 + (PlayFabClientAPI*) GetInstance;
 
@@ -260,6 +274,10 @@ typedef void(^GetPlayerTagsCallback)(GetPlayerTagsResult* result, NSObject* user
         // ------------ Generated API calls
 		
 -(void) GetPhotonAuthenticationToken:(GetPhotonAuthenticationTokenRequest*)request success:(GetPhotonAuthenticationTokenCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
+		
+-(void) GetWindowsHelloChallenge:(GetWindowsHelloChallengeRequest*)request success:(GetWindowsHelloChallengeCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
+		
+-(void) LinkWindowsHello:(LinkWindowsHelloAccountRequest*)request success:(LinkWindowsHelloCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
 -(void) LoginWithAndroidDeviceID:(LoginWithAndroidDeviceIDRequest*)request success:(LoginWithAndroidDeviceIDCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
@@ -283,7 +301,13 @@ typedef void(^GetPlayerTagsCallback)(GetPlayerTagsResult* result, NSObject* user
 		
 -(void) LoginWithTwitch:(LoginWithTwitchRequest*)request success:(LoginWithTwitchCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
+-(void) LoginWithWindowsHello:(LoginWithWindowsHelloRequest*)request success:(LoginWithWindowsHelloCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
+		
 -(void) RegisterPlayFabUser:(RegisterPlayFabUserRequest*)request success:(RegisterPlayFabUserCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
+		
+-(void) RegisterWithWindowsHello:(RegisterWithWindowsHelloRequest*)request success:(RegisterWithWindowsHelloCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
+		
+-(void) UnlinkWindowsHello:(UnlinkWindowsHelloAccountRequest*)request success:(UnlinkWindowsHelloCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
 -(void) AddGenericID:(AddGenericIDRequest*)request success:(AddGenericIDCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
@@ -348,6 +372,8 @@ typedef void(^GetPlayerTagsCallback)(GetPlayerTagsResult* result, NSObject* user
 -(void) UnlinkSteamAccount:(UnlinkSteamAccountCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*) userData;
 		
 -(void) UnlinkTwitch:(UnlinkTwitchCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*) userData;
+		
+-(void) UpdateAvatarUrl:(UpdateAvatarUrlRequest*)request success:(UpdateAvatarUrlCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
 -(void) UpdateUserTitleDisplayName:(UpdateUserTitleDisplayNameRequest*)request success:(UpdateUserTitleDisplayNameCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
@@ -499,12 +525,18 @@ typedef void(^GetPlayerTagsCallback)(GetPlayerTagsResult* result, NSObject* user
 		
 -(void) GetPlayerTags:(GetPlayerTagsRequest*)request success:(GetPlayerTagsCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
+-(void) ValidateWindowsStoreReceipt:(ValidateWindowsReceiptRequest*)request success:(ValidateWindowsStoreReceiptCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
+		
 
     //private:
 /*
         // ------------ Generated result handlers
 		
 + (void) OnGetPhotonAuthenticationTokenResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
+		
++ (void) OnGetWindowsHelloChallengeResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
+		
++ (void) OnLinkWindowsHelloResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnLoginWithAndroidDeviceIDResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
@@ -528,7 +560,13 @@ typedef void(^GetPlayerTagsCallback)(GetPlayerTagsResult* result, NSObject* user
 		
 + (void) OnLoginWithTwitchResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
++ (void) OnLoginWithWindowsHelloResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
+		
 + (void) OnRegisterPlayFabUserResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
+		
++ (void) OnRegisterWithWindowsHelloResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
+		
++ (void) OnUnlinkWindowsHelloResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnAddGenericIDResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
@@ -593,6 +631,8 @@ typedef void(^GetPlayerTagsCallback)(GetPlayerTagsResult* result, NSObject* user
 + (void) OnUnlinkSteamAccountResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnUnlinkTwitchResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
+		
++ (void) OnUpdateAvatarUrlResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnUpdateUserTitleDisplayNameResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
@@ -743,6 +783,8 @@ typedef void(^GetPlayerTagsCallback)(GetPlayerTagsResult* result, NSObject* user
 + (void) OnGetPlayerSegmentsResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnGetPlayerTagsResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
+		
++ (void) OnValidateWindowsStoreReceiptResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
  */
 
