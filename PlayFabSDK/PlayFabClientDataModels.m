@@ -47,7 +47,7 @@
     return self;
 }
 @end
-@implementation AdCampaignAttribution
+@implementation AdCampaignAttributionModel
 
 
 -(id)initWithDictionary:(NSDictionary*)properties
@@ -1559,6 +1559,8 @@
     
     self.UseSpecificVersion = [[properties valueForKey:@"UseSpecificVersion"] boolValue];
     
+    self.ProfileConstraints = [[PlayerProfileViewConstraints new] initWithDictionary:[properties objectForKey:@"ProfileConstraints"]];
+    
 
     return self;
 }
@@ -1616,6 +1618,8 @@
     self.Version = [properties valueForKey:@"Version"];
     
     self.UseSpecificVersion = [[properties valueForKey:@"UseSpecificVersion"] boolValue];
+    
+    self.ProfileConstraints = [[PlayerProfileViewConstraints new] initWithDictionary:[properties objectForKey:@"ProfileConstraints"]];
     
 
     return self;
@@ -1734,6 +1738,8 @@
     
     self.UseSpecificVersion = [[properties valueForKey:@"UseSpecificVersion"] boolValue];
     
+    self.ProfileConstraints = [[PlayerProfileViewConstraints new] initWithDictionary:[properties objectForKey:@"ProfileConstraints"]];
+    
 
     return self;
 }
@@ -1831,6 +1837,8 @@
     self.Version = [properties valueForKey:@"Version"];
     
     self.UseSpecificVersion = [[properties valueForKey:@"UseSpecificVersion"] boolValue];
+    
+    self.ProfileConstraints = [[PlayerProfileViewConstraints new] initWithDictionary:[properties objectForKey:@"ProfileConstraints"]];
     
 
     return self;
@@ -3506,6 +3514,29 @@
     return self;
 }
 @end
+@implementation LinkedPlatformAccountModel
+
+
+-(id)initWithDictionary:(NSDictionary*)properties
+{
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+
+    
+    self.Platform = (LoginIdentityProvider)[properties valueForKey:@"Platform"];
+    
+    self.PlatformUserId = [properties valueForKey:@"PlatformUserId"];
+    
+    self.Username = [properties valueForKey:@"Username"];
+    
+    self.Email = [properties valueForKey:@"Email"];
+    
+
+    return self;
+}
+@end
 @implementation LinkFacebookAccountRequest
 
 
@@ -3827,6 +3858,31 @@
     self.Characters = [mutable_storage copy];
 }
 
+    
+
+    return self;
+}
+@end
+@implementation LocationModel
+
+
+-(id)initWithDictionary:(NSDictionary*)properties
+{
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+
+    
+    self.pfContinentCode = (ContinentCode)[properties valueForKey:@"ContinentCode"];
+    
+    self.pfCountryCode = (CountryCode)[properties valueForKey:@"CountryCode"];
+    
+    self.City = [properties valueForKey:@"City"];
+    
+    self.Latitude = [properties valueForKey:@"Latitude"];
+    
+    self.Longitude = [properties valueForKey:@"Longitude"];
     
 
     return self;
@@ -4448,13 +4504,13 @@
     
     self.Position = [properties valueForKey:@"Position"];
     
-    self.Profile = [[PlayerProfile new] initWithDictionary:[properties objectForKey:@"Profile"]];
+    self.Profile = [[PlayerProfileModel new] initWithDictionary:[properties objectForKey:@"Profile"]];
     
 
     return self;
 }
 @end
-@implementation PlayerLinkedAccount
+@implementation PlayerProfileModel
 
 
 -(id)initWithDictionary:(NSDictionary*)properties
@@ -4464,132 +4520,42 @@
         return nil;
     }
 
-    
-    self.Platform = (LoginIdentityProvider)[properties valueForKey:@"Platform"];
-    
-    self.PlatformUserId = [properties valueForKey:@"PlatformUserId"];
-    
-    self.Username = [properties valueForKey:@"Username"];
-    
-    self.Email = [properties valueForKey:@"Email"];
-    
-
-    return self;
-}
-@end
-@implementation PlayerLocation
-
-
--(id)initWithDictionary:(NSDictionary*)properties
-{
-    self = [super init];
-    if (!self) {
-        return nil;
-    }
-
-    
-    self.pfContinentCode = (ContinentCode)[properties valueForKey:@"ContinentCode"];
-    
-    self.pfCountryCode = (CountryCode)[properties valueForKey:@"CountryCode"];
-    
-    self.City = [properties valueForKey:@"City"];
-    
-    self.Latitude = [properties valueForKey:@"Latitude"];
-    
-    self.Longitude = [properties valueForKey:@"Longitude"];
-    
-
-    return self;
-}
-@end
-@implementation PlayerProfile
-
-
--(id)initWithDictionary:(NSDictionary*)properties
-{
-    self = [super init];
-    if (!self) {
-        return nil;
-    }
-
-    
-    self.PlayerId = [properties valueForKey:@"PlayerId"];
-    
-    self.TitleId = [properties valueForKey:@"TitleId"];
-    
-    self.DisplayName = [properties valueForKey:@"DisplayName"];
     
     self.PublisherId = [properties valueForKey:@"PublisherId"];
     
-    self.Origination = (LoginIdentityProvider)[properties valueForKey:@"Origination"];
+    self.TitleId = [properties valueForKey:@"TitleId"];
+    
+    self.PlayerId = [properties valueForKey:@"PlayerId"];
     
     self.Created = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"Created"]];
+    
+    self.Origination = (LoginIdentityProvider)[properties valueForKey:@"Origination"];
     
     self.LastLogin = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"LastLogin"]];
     
     self.BannedUntil = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"BannedUntil"]];
     
-    self.AvatarUrl = [properties valueForKey:@"AvatarUrl"];
-    
-    if ([properties objectForKey:@"Statistics"]){
-    NSDictionary* member_list = [properties objectForKey:@"Statistics"];
-    NSMutableDictionary* mutable_storage = [NSMutableDictionary new];
-    for(NSString* key in member_list){
-        [mutable_storage setValue:[member_list objectForKey:key] forKey:key];
-    }
-    self.Statistics = [mutable_storage copy];
-}
-
-    
-    self.TotalValueToDateInUSD = [properties valueForKey:@"TotalValueToDateInUSD"];
-    
-    if ([properties objectForKey:@"ValuesToDate"]){
-    NSDictionary* member_list = [properties objectForKey:@"ValuesToDate"];
-    NSMutableDictionary* mutable_storage = [NSMutableDictionary new];
-    for(NSString* key in member_list){
-        [mutable_storage setValue:[member_list objectForKey:key] forKey:key];
-    }
-    self.ValuesToDate = [mutable_storage copy];
-}
-
-    
-    if ([properties objectForKey:@"Tags"]){
-    NSArray* member_list = [properties objectForKey:@"Tags"];
+    if ([properties objectForKey:@"Locations"]){
+    NSArray* member_list = [properties objectForKey:@"Locations"];
     NSMutableArray* mutable_storage = [NSMutableArray new];
     for(int i=0;i<[member_list count];i++){
-        [mutable_storage addObject:[member_list objectAtIndex:i]];
-    }
-    self.Tags = [mutable_storage copy];
-}
-
-    
-    if ([properties objectForKey:@"Locations"]){
-    NSDictionary* member_list = [properties objectForKey:@"Locations"];
-    NSMutableDictionary* mutable_storage = [NSMutableDictionary new];
-    for(NSString* key in member_list){
-        [mutable_storage setValue:[[PlayerLocation new] initWithDictionary:[member_list objectForKey:key]] forKey:key];
+        [mutable_storage addObject:[[LocationModel new] initWithDictionary:[member_list objectAtIndex:i]]];
     }
     self.Locations = [mutable_storage copy];
 }
 
     
-    if ([properties objectForKey:@"VirtualCurrencyBalances"]){
-    NSDictionary* member_list = [properties objectForKey:@"VirtualCurrencyBalances"];
-    NSMutableDictionary* mutable_storage = [NSMutableDictionary new];
-    for(NSString* key in member_list){
-        [mutable_storage setValue:[member_list objectForKey:key] forKey:key];
-    }
-    self.VirtualCurrencyBalances = [mutable_storage copy];
-}
-
+    self.DisplayName = [properties valueForKey:@"DisplayName"];
     
-    if ([properties objectForKey:@"AdCampaignAttributions"]){
-    NSArray* member_list = [properties objectForKey:@"AdCampaignAttributions"];
+    self.AvatarUrl = [properties valueForKey:@"AvatarUrl"];
+    
+    if ([properties objectForKey:@"Tags"]){
+    NSArray* member_list = [properties objectForKey:@"Tags"];
     NSMutableArray* mutable_storage = [NSMutableArray new];
     for(int i=0;i<[member_list count];i++){
-        [mutable_storage addObject:[[AdCampaignAttribution new] initWithDictionary:[member_list objectAtIndex:i]]];
+        [mutable_storage addObject:[[TagModel new] initWithDictionary:[member_list objectAtIndex:i]]];
     }
-    self.AdCampaignAttributions = [mutable_storage copy];
+    self.Tags = [mutable_storage copy];
 }
 
     
@@ -4597,7 +4563,7 @@
     NSArray* member_list = [properties objectForKey:@"PushNotificationRegistrations"];
     NSMutableArray* mutable_storage = [NSMutableArray new];
     for(int i=0;i<[member_list count];i++){
-        [mutable_storage addObject:[[PushNotificationRegistration new] initWithDictionary:[member_list objectAtIndex:i]]];
+        [mutable_storage addObject:[[PushNotificationRegistrationModel new] initWithDictionary:[member_list objectAtIndex:i]]];
     }
     self.PushNotificationRegistrations = [mutable_storage copy];
 }
@@ -4607,19 +4573,51 @@
     NSArray* member_list = [properties objectForKey:@"LinkedAccounts"];
     NSMutableArray* mutable_storage = [NSMutableArray new];
     for(int i=0;i<[member_list count];i++){
-        [mutable_storage addObject:[[PlayerLinkedAccount new] initWithDictionary:[member_list objectAtIndex:i]]];
+        [mutable_storage addObject:[[LinkedPlatformAccountModel new] initWithDictionary:[member_list objectAtIndex:i]]];
     }
     self.LinkedAccounts = [mutable_storage copy];
 }
 
     
-    if ([properties objectForKey:@"PlayerStatistics"]){
-    NSArray* member_list = [properties objectForKey:@"PlayerStatistics"];
+    if ([properties objectForKey:@"AdCampaignAttributions"]){
+    NSArray* member_list = [properties objectForKey:@"AdCampaignAttributions"];
     NSMutableArray* mutable_storage = [NSMutableArray new];
     for(int i=0;i<[member_list count];i++){
-        [mutable_storage addObject:[[PlayerStatistic new] initWithDictionary:[member_list objectAtIndex:i]]];
+        [mutable_storage addObject:[[AdCampaignAttributionModel new] initWithDictionary:[member_list objectAtIndex:i]]];
     }
-    self.PlayerStatistics = [mutable_storage copy];
+    self.AdCampaignAttributions = [mutable_storage copy];
+}
+
+    
+    self.TotalValueToDateInUSD = [properties valueForKey:@"TotalValueToDateInUSD"];
+    
+    if ([properties objectForKey:@"ValuesToDate"]){
+    NSArray* member_list = [properties objectForKey:@"ValuesToDate"];
+    NSMutableArray* mutable_storage = [NSMutableArray new];
+    for(int i=0;i<[member_list count];i++){
+        [mutable_storage addObject:[[ValueToDateModel new] initWithDictionary:[member_list objectAtIndex:i]]];
+    }
+    self.ValuesToDate = [mutable_storage copy];
+}
+
+    
+    if ([properties objectForKey:@"VirtualCurrencyBalances"]){
+    NSArray* member_list = [properties objectForKey:@"VirtualCurrencyBalances"];
+    NSMutableArray* mutable_storage = [NSMutableArray new];
+    for(int i=0;i<[member_list count];i++){
+        [mutable_storage addObject:[[VirtualCurrencyBalanceModel new] initWithDictionary:[member_list objectAtIndex:i]]];
+    }
+    self.VirtualCurrencyBalances = [mutable_storage copy];
+}
+
+    
+    if ([properties objectForKey:@"Statistics"]){
+    NSArray* member_list = [properties objectForKey:@"Statistics"];
+    NSMutableArray* mutable_storage = [NSMutableArray new];
+    for(int i=0;i<[member_list count];i++){
+        [mutable_storage addObject:[[StatisticModel new] initWithDictionary:[member_list objectAtIndex:i]]];
+    }
+    self.Statistics = [mutable_storage copy];
 }
 
     
@@ -4627,7 +4625,7 @@
     return self;
 }
 @end
-@implementation PlayerStatistic
+@implementation PlayerProfileViewConstraints
 
 
 -(id)initWithDictionary:(NSDictionary*)properties
@@ -4638,13 +4636,33 @@
     }
 
     
-    self.Id = [properties valueForKey:@"Id"];
+    self.ShowDisplayName = [[properties valueForKey:@"ShowDisplayName"] boolValue];
     
-    self.StatisticVersion = [properties valueForKey:@"StatisticVersion"];
+    self.ShowCreated = [[properties valueForKey:@"ShowCreated"] boolValue];
     
-    self.StatisticValue = [properties valueForKey:@"StatisticValue"];
+    self.ShowOrigination = [[properties valueForKey:@"ShowOrigination"] boolValue];
     
-    self.Name = [properties valueForKey:@"Name"];
+    self.ShowLastLogin = [[properties valueForKey:@"ShowLastLogin"] boolValue];
+    
+    self.ShowBannedUntil = [[properties valueForKey:@"ShowBannedUntil"] boolValue];
+    
+    self.ShowStatistics = [[properties valueForKey:@"ShowStatistics"] boolValue];
+    
+    self.ShowCampaignAttributions = [[properties valueForKey:@"ShowCampaignAttributions"] boolValue];
+    
+    self.ShowPushNotificationRegistrations = [[properties valueForKey:@"ShowPushNotificationRegistrations"] boolValue];
+    
+    self.ShowLinkedAccounts = [[properties valueForKey:@"ShowLinkedAccounts"] boolValue];
+    
+    self.ShowTotalValueToDateInUsd = [[properties valueForKey:@"ShowTotalValueToDateInUsd"] boolValue];
+    
+    self.ShowValuesToDate = [[properties valueForKey:@"ShowValuesToDate"] boolValue];
+    
+    self.ShowTags = [[properties valueForKey:@"ShowTags"] boolValue];
+    
+    self.ShowLocations = [[properties valueForKey:@"ShowLocations"] boolValue];
+    
+    self.ShowAvatarUrl = [[properties valueForKey:@"ShowAvatarUrl"] boolValue];
     
 
     return self;
@@ -4729,7 +4747,7 @@
     return self;
 }
 @end
-@implementation PushNotificationRegistration
+@implementation PushNotificationRegistrationModel
 
 
 -(id)initWithDictionary:(NSDictionary*)properties
@@ -5354,6 +5372,27 @@
     return self;
 }
 @end
+@implementation StatisticModel
+
+
+-(id)initWithDictionary:(NSDictionary*)properties
+{
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+
+    
+    self.Name = [properties valueForKey:@"Name"];
+    
+    self.Version = [properties valueForKey:@"Version"];
+    
+    self.Value = [properties valueForKey:@"Value"];
+    
+
+    return self;
+}
+@end
 @implementation StatisticNameVersion
 
 
@@ -5510,6 +5549,23 @@
     self.VirtualCurrency = [properties valueForKey:@"VirtualCurrency"];
     
     self.Amount = [properties valueForKey:@"Amount"];
+    
+
+    return self;
+}
+@end
+@implementation TagModel
+
+
+-(id)initWithDictionary:(NSDictionary*)properties
+{
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+
+    
+    self.TagValue = [properties valueForKey:@"TagValue"];
     
 
     return self;
@@ -6811,6 +6867,46 @@
         return nil;
     }
 
+    
+
+    return self;
+}
+@end
+@implementation ValueToDateModel
+
+
+-(id)initWithDictionary:(NSDictionary*)properties
+{
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+
+    
+    self.Currency = [properties valueForKey:@"Currency"];
+    
+    self.TotalValue = [properties valueForKey:@"TotalValue"];
+    
+    self.TotalValueAsDecimal = [properties valueForKey:@"TotalValueAsDecimal"];
+    
+
+    return self;
+}
+@end
+@implementation VirtualCurrencyBalanceModel
+
+
+-(id)initWithDictionary:(NSDictionary*)properties
+{
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+
+    
+    self.Currency = [properties valueForKey:@"Currency"];
+    
+    self.TotalValue = [properties valueForKey:@"TotalValue"];
     
 
     return self;

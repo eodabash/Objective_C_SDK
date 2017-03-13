@@ -578,7 +578,7 @@ typedef enum
 
 @class AcceptTradeResponse;
 
-@class AdCampaignAttribution;
+@class AdCampaignAttributionModel;
 
 @class AddFriendRequest;
 
@@ -848,6 +848,8 @@ typedef enum
 
 @class LinkCustomIDResult;
 
+@class LinkedPlatformAccountModel;
+
 @class LinkFacebookAccountRequest;
 
 @class LinkFacebookAccountResult;
@@ -883,6 +885,8 @@ typedef enum
 @class ListUsersCharactersRequest;
 
 @class ListUsersCharactersResult;
+
+@class LocationModel;
 
 @class LoginResult;
 
@@ -932,13 +936,9 @@ typedef enum
 
 @class PlayerLeaderboardEntry;
 
-@class PlayerLinkedAccount;
+@class PlayerProfileModel;
 
-@class PlayerLocation;
-
-@class PlayerProfile;
-
-@class PlayerStatistic;
+@class PlayerProfileViewConstraints;
 
 @class PlayerStatisticVersion;
 
@@ -946,7 +946,7 @@ typedef enum
 
 @class PurchaseItemResult;
 
-@class PushNotificationRegistration;
+@class PushNotificationRegistrationModel;
 
 @class RedeemCouponRequest;
 
@@ -1004,6 +1004,8 @@ typedef enum
 
 @class StartPurchaseResult;
 
+@class StatisticModel;
+
 @class StatisticNameVersion;
 
 @class StatisticUpdate;
@@ -1017,6 +1019,8 @@ typedef enum
 @class StoreMarketingModel;
 
 @class SubtractUserVirtualCurrencyRequest;
+
+@class TagModel;
 
 @class TitleNewsItem;
 
@@ -1144,6 +1148,10 @@ typedef enum
 
 @class ValidateWindowsReceiptResult;
 
+@class ValueToDateModel;
+
+@class VirtualCurrencyBalanceModel;
+
 @class VirtualCurrencyRechargeTime;
 
 @class WriteClientCharacterEventRequest;
@@ -1193,7 +1201,7 @@ typedef enum
 @end
 
 
-@interface AdCampaignAttribution : PlayFabBaseModel
+@interface AdCampaignAttributionModel : PlayFabBaseModel
 
 
 /// <summary>
@@ -2580,6 +2588,11 @@ typedef enum
 /// If true, uses the specified version. If false, gets the most recent version.
 /// </summary>
 @property bool UseSpecificVersion; 
+
+/// <summary>
+/// If non-null, this determines which properties of the profile to return. If null, playfab will only include display names. On client, only ShowDisplayName, ShowStatistics, ShowAvatarUrl are allowed.
+/// </summary>
+@property PlayerProfileViewConstraints* ProfileConstraints; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -2647,6 +2660,11 @@ typedef enum
 /// If true, uses the specified version. If false, gets the most recent version.
 /// </summary>
 @property bool UseSpecificVersion; 
+
+/// <summary>
+/// If non-null, this determines which properties of the profile to return. If null, playfab will only include display names. On client, only ShowDisplayName, ShowStatistics, ShowAvatarUrl are allowed.
+/// </summary>
+@property PlayerProfileViewConstraints* ProfileConstraints; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -2753,6 +2771,11 @@ typedef enum
 /// If true, uses the specified version. If false, gets the most recent version.
 /// </summary>
 @property bool UseSpecificVersion; 
+
+/// <summary>
+/// If non-null, this determines which properties of the profile to return. If null, playfab will only include display names. On client, only ShowDisplayName, ShowStatistics, ShowAvatarUrl are allowed.
+/// </summary>
+@property PlayerProfileViewConstraints* ProfileConstraints; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -2842,6 +2865,11 @@ typedef enum
 /// If true, uses the specified version. If false, gets the most recent version.
 /// </summary>
 @property bool UseSpecificVersion; 
+
+/// <summary>
+/// If non-null, this determines which properties of the profile to return. If null, playfab will only include display names. On client, only ShowDisplayName, ShowStatistics, ShowAvatarUrl are allowed.
+/// </summary>
+@property PlayerProfileViewConstraints* ProfileConstraints; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -4086,6 +4114,33 @@ typedef enum
 @end
 
 
+@interface LinkedPlatformAccountModel : PlayFabBaseModel
+
+
+/// <summary>
+/// Authentication platform
+/// </summary>
+@property LoginIdentityProvider Platform; 
+
+/// <summary>
+/// Unique account identifier of the user on the platform
+/// </summary>
+@property NSString* PlatformUserId; 
+
+/// <summary>
+/// Linked account username of the user on the platform, if available
+/// </summary>
+@property NSString* Username; 
+
+/// <summary>
+/// Linked account email of the user on the platform, if available
+/// </summary>
+@property NSString* Email; 
+/**/
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
 @interface LinkFacebookAccountRequest : PlayFabBaseModel
 
 
@@ -4355,6 +4410,38 @@ typedef enum
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
+@interface LocationModel : PlayFabBaseModel
+
+
+/// <summary>
+/// The two-character continent code for this location
+/// </summary>
+@property ContinentCode pfContinentCode; 
+
+/// <summary>
+/// The two-character ISO 3166-1 country code for the country associated with the location
+/// </summary>
+@property CountryCode pfCountryCode; 
+
+/// <summary>
+/// City name.
+/// </summary>
+@property NSString* City; 
+
+/// <summary>
+/// Latitude coordinate of the geographic location.
+/// </summary>
+@property NSNumber* Latitude; 
+
+/// <summary>
+/// Longitude coordinate of the geographic location.
+/// </summary>
+@property NSNumber* Longitude; 
+/**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
 
@@ -5083,90 +5170,16 @@ typedef enum
 @property NSNumber* Position; 
 
 /// <summary>
-/// The profile of the user, if requested. Note that this profile may have sensitive fields scrubbed.
+/// The profile of the user, if requested.
 /// </summary>
-@property PlayerProfile* Profile; 
+@property PlayerProfileModel* Profile; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
 
 
-@interface PlayerLinkedAccount : PlayFabBaseModel
+@interface PlayerProfileModel : PlayFabBaseModel
 
-
-/// <summary>
-/// Authentication platform
-/// </summary>
-@property LoginIdentityProvider Platform; 
-
-/// <summary>
-/// Platform user identifier
-/// </summary>
-@property NSString* PlatformUserId; 
-
-/// <summary>
-/// Linked account's username
-/// </summary>
-@property NSString* Username; 
-
-/// <summary>
-/// Linked account's email
-/// </summary>
-@property NSString* Email; 
-/**/
--(id)initWithDictionary:(NSDictionary*)properties;
-@end
-
-
-@interface PlayerLocation : PlayFabBaseModel
-
-
-/// <summary>
-/// The two-character continent code for this location
-/// </summary>
-@property ContinentCode pfContinentCode; 
-
-/// <summary>
-/// The two-character ISO 3166-1 country code for the country associated with the location
-/// </summary>
-@property CountryCode pfCountryCode; 
-
-/// <summary>
-/// City of the player's geographic location.
-/// </summary>
-@property NSString* City; 
-
-/// <summary>
-/// Latitude coordinate of the player's geographic location.
-/// </summary>
-@property NSNumber* Latitude; 
-
-/// <summary>
-/// Longitude coordinate of the player's geographic location.
-/// </summary>
-@property NSNumber* Longitude; 
-/**/
--(id)initWithDictionary:(NSDictionary*)properties;
-@end
-
-
-@interface PlayerProfile : PlayFabBaseModel
-
-
-/// <summary>
-/// PlayFab Player ID
-/// </summary>
-@property NSString* PlayerId; 
-
-/// <summary>
-/// Title ID this profile applies to
-/// </summary>
-@property NSString* TitleId; 
-
-/// <summary>
-/// Player Display Name
-/// </summary>
-@property NSString* DisplayName; 
 
 /// <summary>
 /// Publisher this player belongs to
@@ -5174,9 +5187,14 @@ typedef enum
 @property NSString* PublisherId; 
 
 /// <summary>
-/// Player account origination
+/// Title ID this profile applies to
 /// </summary>
-@property LoginIdentityProvider Origination; 
+@property NSString* TitleId; 
+
+/// <summary>
+/// PlayFab Player ID
+/// </summary>
+@property NSString* PlayerId; 
 
 /// <summary>
 /// Player record created
@@ -5184,96 +5202,151 @@ typedef enum
 @property NSDate* Created; 
 
 /// <summary>
+/// Player account origination
+/// </summary>
+@property LoginIdentityProvider Origination; 
+
+/// <summary>
 /// Last login
 /// </summary>
 @property NSDate* LastLogin; 
 
 /// <summary>
-/// Banned until UTC Date. If permanent ban this is set for 20 years after the original ban date.
+/// If the player is currently banned, the UTC Date when the ban expires
 /// </summary>
 @property NSDate* BannedUntil; 
 
 /// <summary>
-/// Image URL of the player's avatar.
+/// List of geographic locations where the player has logged-in
+/// </summary>
+@property NSArray* Locations; 
+
+/// <summary>
+/// Player Display Name
+/// </summary>
+@property NSString* DisplayName; 
+
+/// <summary>
+/// Image URL of the player's avatar
 /// </summary>
 @property NSString* AvatarUrl; 
 
 /// <summary>
-/// Dictionary of player's statistics using only the latest version's value
-/// </summary>
-@property NSDictionary* Statistics; 
-
-/// <summary>
-/// A sum of player's total purchases in USD across all currencies.
-/// </summary>
-@property NSNumber* TotalValueToDateInUSD; 
-
-/// <summary>
-/// Dictionary of player's total purchases by currency.
-/// </summary>
-@property NSDictionary* ValuesToDate; 
-
-/// <summary>
-/// List of player's tags for segmentation.
+/// List of player's tags for segmentation
 /// </summary>
 @property NSArray* Tags; 
 
 /// <summary>
-/// Dictionary of player's locations by type.
-/// </summary>
-@property NSDictionary* Locations; 
-
-/// <summary>
-/// Dictionary of player's virtual currency balances
-/// </summary>
-@property NSDictionary* VirtualCurrencyBalances; 
-
-/// <summary>
-/// Array of ad campaigns player has been attributed to
-/// </summary>
-@property NSArray* AdCampaignAttributions; 
-
-/// <summary>
-/// Array of configured push notification end points
+/// List of configured end points registered for sending the player push notifications
 /// </summary>
 @property NSArray* PushNotificationRegistrations; 
 
 /// <summary>
-/// Array of third party accounts linked to this player
+/// List of third party accounts linked to this player
 /// </summary>
 @property NSArray* LinkedAccounts; 
 
 /// <summary>
-/// Array of player statistics
+/// List of advertising campaigns the player has been attributed to
 /// </summary>
-@property NSArray* PlayerStatistics; 
+@property NSArray* AdCampaignAttributions; 
+
+/// <summary>
+/// A sum of player's total purchases across all real-money currencies, converted to US Dollars equivalent
+/// </summary>
+@property NSNumber* TotalValueToDateInUSD; 
+
+/// <summary>
+/// List of player's total lifetime real-money purchases by currency
+/// </summary>
+@property NSArray* ValuesToDate; 
+
+/// <summary>
+/// List of player's virtual currency balances
+/// </summary>
+@property NSArray* VirtualCurrencyBalances; 
+
+/// <summary>
+/// List of leaderboard statistic values for the player
+/// </summary>
+@property NSArray* Statistics; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
 
 
-@interface PlayerStatistic : PlayFabBaseModel
+@interface PlayerProfileViewConstraints : PlayFabBaseModel
 
 
 /// <summary>
-/// Statistic ID
+/// Whether to show the display name. Defaults to false
 /// </summary>
-@property NSString* Id; 
+@property bool ShowDisplayName; 
 
 /// <summary>
-/// Statistic version (0 if not a versioned statistic)
+/// Whether to show the created date. Defaults to false
 /// </summary>
-@property NSNumber* StatisticVersion; 
+@property bool ShowCreated; 
 
 /// <summary>
-/// Current statistic value
+/// Whether to show origination. Defaults to false
 /// </summary>
-@property NSNumber* StatisticValue; 
+@property bool ShowOrigination; 
 
 /// <summary>
-/// Statistic name
+/// Whether to show the last login time. Defaults to false
 /// </summary>
-@property NSString* Name; 
+@property bool ShowLastLogin; 
+
+/// <summary>
+/// Whether to show the banned until time. Defaults to false
+/// </summary>
+@property bool ShowBannedUntil; 
+
+/// <summary>
+/// Whether to show statistics, the most recent version of each stat. Defaults to false
+/// </summary>
+@property bool ShowStatistics; 
+
+/// <summary>
+/// Whether to show campaign attributions. Defaults to false
+/// </summary>
+@property bool ShowCampaignAttributions; 
+
+/// <summary>
+/// Whether to show push notification registrations. Defaults to false
+/// </summary>
+@property bool ShowPushNotificationRegistrations; 
+
+/// <summary>
+/// Whether to show the linked accounts. Defaults to false
+/// </summary>
+@property bool ShowLinkedAccounts; 
+
+/// <summary>
+/// Whether to show the total value to date in usd. Defaults to false
+/// </summary>
+@property bool ShowTotalValueToDateInUsd; 
+
+/// <summary>
+/// Whether to show the values to date. Defaults to false
+/// </summary>
+@property bool ShowValuesToDate; 
+
+/// <summary>
+/// Whether to show tags. Defaults to false
+/// </summary>
+@property bool ShowTags; 
+
+/// <summary>
+/// Whether to show player's locations. Defaults to false
+/// </summary>
+@property bool ShowLocations; 
+
+/// <summary>
+/// Whether to show player's avatar URL. Defaults to false
+/// </summary>
+@property bool ShowAvatarUrl; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -5368,7 +5441,7 @@ typedef enum
 @end
 
 
-@interface PushNotificationRegistration : PlayFabBaseModel
+@interface PushNotificationRegistrationModel : PlayFabBaseModel
 
 
 /// <summary>
@@ -5942,6 +6015,28 @@ typedef enum
 @end
 
 
+@interface StatisticModel : PlayFabBaseModel
+
+
+/// <summary>
+/// Statistic name
+/// </summary>
+@property NSString* Name; 
+
+/// <summary>
+/// Statistic version (0 if not a versioned statistic)
+/// </summary>
+@property NSNumber* Version; 
+
+/// <summary>
+/// Statistic value
+/// </summary>
+@property NSNumber* Value; 
+/**/
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
 @interface StatisticNameVersion : PlayFabBaseModel
 
 
@@ -6092,6 +6187,18 @@ typedef enum
 /// Amount to be subtracted from the user balance of the specified virtual currency.
 /// </summary>
 @property NSNumber* Amount; 
+/**/
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
+@interface TagModel : PlayFabBaseModel
+
+
+/// <summary>
+/// Full value of the tag, including namespace
+/// </summary>
+@property NSString* TagValue; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -7187,6 +7294,45 @@ typedef enum
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
+@interface ValueToDateModel : PlayFabBaseModel
+
+
+/// <summary>
+/// ISO 4217 code of the currency used in the purchases
+/// </summary>
+@property NSString* Currency; 
+
+/// <summary>
+/// Total value of the purchases in a whole number of 1/100 monetary units. For example 999 indicates nine dollars and ninety-nine cents when Currency is 'USD')
+/// </summary>
+@property NSNumber* TotalValue; 
+
+/// <summary>
+/// Total value of the purchases in a string representation of decimal monetary units (e.g. '9.99' indicates nine dollars and ninety-nine cents when Currency is 'USD'))
+/// </summary>
+@property NSString* TotalValueAsDecimal; 
+/**/
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
+@interface VirtualCurrencyBalanceModel : PlayFabBaseModel
+
+
+/// <summary>
+/// Name of the virtual currency
+/// </summary>
+@property NSString* Currency; 
+
+/// <summary>
+/// Balance of the virtual currency
+/// </summary>
+@property NSNumber* TotalValue; 
+/**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
 
