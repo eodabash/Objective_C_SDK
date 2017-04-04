@@ -3618,8 +3618,6 @@
     
     self.ServerAuthCode = [properties valueForKey:@"ServerAuthCode"];
     
-    self.AccessToken = [properties valueForKey:@"AccessToken"];
-    
     self.ForceLink = [[properties valueForKey:@"ForceLink"] boolValue];
     
 
@@ -3959,6 +3957,10 @@
     
     self.CreateAccount = [[properties valueForKey:@"CreateAccount"] boolValue];
     
+    self.PlayerSecret = [properties valueForKey:@"PlayerSecret"];
+    
+    self.EncryptedRequest = [properties valueForKey:@"EncryptedRequest"];
+    
     self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
     
 
@@ -4048,8 +4050,6 @@
     self.TitleId = [properties valueForKey:@"TitleId"];
     
     self.ServerAuthCode = [properties valueForKey:@"ServerAuthCode"];
-    
-    self.AccessToken = [properties valueForKey:@"AccessToken"];
     
     self.CreateAccount = [[properties valueForKey:@"CreateAccount"] boolValue];
     

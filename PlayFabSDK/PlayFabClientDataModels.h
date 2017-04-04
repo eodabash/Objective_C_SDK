@@ -4204,11 +4204,6 @@ typedef enum
 @property NSString* ServerAuthCode; 
 
 /// <summary>
-/// OAuth 2.0 access token obtained on the client by calling the getAccessToken() Google client API.
-/// </summary>
-@property NSString* AccessToken; 
-
-/// <summary>
 /// If another user is already linked to the account, unlink the other user and re-link.
 /// </summary>
 @property bool ForceLink; 
@@ -4542,6 +4537,16 @@ typedef enum
 @property bool CreateAccount; 
 
 /// <summary>
+/// Player secret that is used to verify API request signatures
+/// </summary>
+@property NSString* PlayerSecret; 
+
+/// <summary>
+/// Base64 encoded body that is encrypted with the Title's public RSA key
+/// </summary>
+@property NSString* EncryptedRequest; 
+
+/// <summary>
 /// Flags for which pieces of info to return for the user.
 /// </summary>
 @property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
@@ -4643,11 +4648,6 @@ typedef enum
 /// OAuth 2.0 server authentication code obtained on the client by calling the getServerAuthCode() (https://developers.google.com/identity/sign-in/android/offline-access) Google client API.
 /// </summary>
 @property NSString* ServerAuthCode; 
-
-/// <summary>
-/// OAuth 2.0 access token obtained on the client by calling the getAccessToken() Google client API.
-/// </summary>
-@property NSString* AccessToken; 
 
 /// <summary>
 /// Automatically create a PlayFab account if one is not currently linked to this Google account.
