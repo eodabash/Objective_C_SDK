@@ -3924,8 +3924,6 @@
     }
 
     
-    self.TitleId = [properties valueForKey:@"TitleId"];
-    
     self.AndroidDeviceId = [properties valueForKey:@"AndroidDeviceId"];
     
     self.OS = [properties valueForKey:@"OS"];
@@ -3933,6 +3931,12 @@
     self.AndroidDevice = [properties valueForKey:@"AndroidDevice"];
     
     self.CreateAccount = [[properties valueForKey:@"CreateAccount"] boolValue];
+    
+    self.TitleId = [properties valueForKey:@"TitleId"];
+    
+    self.EncryptedRequest = [properties valueForKey:@"EncryptedRequest"];
+    
+    self.PlayerSecret = [properties valueForKey:@"PlayerSecret"];
     
     self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
     
@@ -3951,15 +3955,15 @@
     }
 
     
-    self.TitleId = [properties valueForKey:@"TitleId"];
-    
     self.CustomId = [properties valueForKey:@"CustomId"];
     
     self.CreateAccount = [[properties valueForKey:@"CreateAccount"] boolValue];
     
-    self.PlayerSecret = [properties valueForKey:@"PlayerSecret"];
+    self.TitleId = [properties valueForKey:@"TitleId"];
     
     self.EncryptedRequest = [properties valueForKey:@"EncryptedRequest"];
+    
+    self.PlayerSecret = [properties valueForKey:@"PlayerSecret"];
     
     self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
     
@@ -4001,11 +4005,15 @@
     }
 
     
-    self.TitleId = [properties valueForKey:@"TitleId"];
-    
     self.AccessToken = [properties valueForKey:@"AccessToken"];
     
     self.CreateAccount = [[properties valueForKey:@"CreateAccount"] boolValue];
+    
+    self.TitleId = [properties valueForKey:@"TitleId"];
+    
+    self.EncryptedRequest = [properties valueForKey:@"EncryptedRequest"];
+    
+    self.PlayerSecret = [properties valueForKey:@"PlayerSecret"];
     
     self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
     
@@ -4024,11 +4032,15 @@
     }
 
     
-    self.TitleId = [properties valueForKey:@"TitleId"];
-    
     self.PlayerId = [properties valueForKey:@"PlayerId"];
     
     self.CreateAccount = [[properties valueForKey:@"CreateAccount"] boolValue];
+    
+    self.TitleId = [properties valueForKey:@"TitleId"];
+    
+    self.EncryptedRequest = [properties valueForKey:@"EncryptedRequest"];
+    
+    self.PlayerSecret = [properties valueForKey:@"PlayerSecret"];
     
     self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
     
@@ -4047,11 +4059,15 @@
     }
 
     
-    self.TitleId = [properties valueForKey:@"TitleId"];
-    
     self.ServerAuthCode = [properties valueForKey:@"ServerAuthCode"];
     
     self.CreateAccount = [[properties valueForKey:@"CreateAccount"] boolValue];
+    
+    self.TitleId = [properties valueForKey:@"TitleId"];
+    
+    self.EncryptedRequest = [properties valueForKey:@"EncryptedRequest"];
+    
+    self.PlayerSecret = [properties valueForKey:@"PlayerSecret"];
     
     self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
     
@@ -4070,17 +4086,21 @@
     }
 
     
-    self.TitleId = [properties valueForKey:@"TitleId"];
-    
     self.DeviceId = [properties valueForKey:@"DeviceId"];
     
     self.OS = [properties valueForKey:@"OS"];
     
     self.DeviceModel = [properties valueForKey:@"DeviceModel"];
     
-    self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
-    
     self.CreateAccount = [[properties valueForKey:@"CreateAccount"] boolValue];
+    
+    self.TitleId = [properties valueForKey:@"TitleId"];
+    
+    self.EncryptedRequest = [properties valueForKey:@"EncryptedRequest"];
+    
+    self.PlayerSecret = [properties valueForKey:@"PlayerSecret"];
+    
+    self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
     
 
     return self;
@@ -4097,8 +4117,6 @@
     }
 
     
-    self.TitleId = [properties valueForKey:@"TitleId"];
-    
     self.KongregateId = [properties valueForKey:@"KongregateId"];
     
     self.AuthTicket = [properties valueForKey:@"AuthTicket"];
@@ -4106,6 +4124,12 @@
     self.CreateAccount = [[properties valueForKey:@"CreateAccount"] boolValue];
     
     self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
+    
+    self.TitleId = [properties valueForKey:@"TitleId"];
+    
+    self.EncryptedRequest = [properties valueForKey:@"EncryptedRequest"];
+    
+    self.PlayerSecret = [properties valueForKey:@"PlayerSecret"];
     
 
     return self;
@@ -4145,11 +4169,15 @@
     }
 
     
-    self.TitleId = [properties valueForKey:@"TitleId"];
-    
     self.SteamTicket = [properties valueForKey:@"SteamTicket"];
     
     self.CreateAccount = [[properties valueForKey:@"CreateAccount"] boolValue];
+    
+    self.TitleId = [properties valueForKey:@"TitleId"];
+    
+    self.EncryptedRequest = [properties valueForKey:@"EncryptedRequest"];
+    
+    self.PlayerSecret = [properties valueForKey:@"PlayerSecret"];
     
     self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
     
@@ -4168,11 +4196,15 @@
     }
 
     
-    self.TitleId = [properties valueForKey:@"TitleId"];
-    
     self.AccessToken = [properties valueForKey:@"AccessToken"];
     
     self.CreateAccount = [[properties valueForKey:@"CreateAccount"] boolValue];
+    
+    self.TitleId = [properties valueForKey:@"TitleId"];
+    
+    self.EncryptedRequest = [properties valueForKey:@"EncryptedRequest"];
+    
+    self.PlayerSecret = [properties valueForKey:@"PlayerSecret"];
     
     self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
     
@@ -4882,8 +4914,6 @@
     }
 
     
-    self.TitleId = [properties valueForKey:@"TitleId"];
-    
     self.Username = [properties valueForKey:@"Username"];
     
     self.Email = [properties valueForKey:@"Email"];
@@ -4893,6 +4923,14 @@
     self.RequireBothUsernameAndEmail = [[properties valueForKey:@"RequireBothUsernameAndEmail"] boolValue];
     
     self.DisplayName = [properties valueForKey:@"DisplayName"];
+    
+    self.TitleId = [properties valueForKey:@"TitleId"];
+    
+    self.EncryptedRequest = [properties valueForKey:@"EncryptedRequest"];
+    
+    self.PlayerSecret = [properties valueForKey:@"PlayerSecret"];
+    
+    self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
     
 
     return self;
@@ -4932,13 +4970,17 @@
     }
 
     
-    self.TitleId = [properties valueForKey:@"TitleId"];
-    
     self.UserName = [properties valueForKey:@"UserName"];
     
     self.PublicKey = [properties valueForKey:@"PublicKey"];
     
     self.DeviceName = [properties valueForKey:@"DeviceName"];
+    
+    self.TitleId = [properties valueForKey:@"TitleId"];
+    
+    self.EncryptedRequest = [properties valueForKey:@"EncryptedRequest"];
+    
+    self.PlayerSecret = [properties valueForKey:@"PlayerSecret"];
     
     self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
     
