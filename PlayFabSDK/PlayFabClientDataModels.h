@@ -2018,9 +2018,19 @@ typedef enum
 @property NSDictionary* FunctionResult; 
 
 /// <summary>
+/// Flag indicating if the FunctionResult was too large and was subsequently dropped from this event
+/// </summary>
+@property bool FunctionResultTooLarge; 
+
+/// <summary>
 /// Entries logged during the function execution. These include both entries logged in the function code using log.info() and log.error() and error entries for API and HTTP request failures.
 /// </summary>
 @property NSArray* Logs; 
+
+/// <summary>
+/// Flag indicating if the logs were too large and were subsequently dropped from this event
+/// </summary>
+@property bool LogsTooLarge; 
 
 @property NSNumber* ExecutionTimeSeconds; 
 
@@ -2042,7 +2052,7 @@ typedef enum
 @property NSNumber* HttpRequestsIssued; 
 
 /// <summary>
-/// Information about the error, if any, that occured during execution
+/// Information about the error, if any, that occurred during execution
 /// </summary>
 @property ScriptExecutionError* Error; 
 /*
@@ -4510,12 +4520,12 @@ typedef enum
 @property NSString* TitleId; 
 
 /// <summary>
-/// Base64 encoded body that is encrypted with the Title's public RSA key
+/// Base64 encoded body that is encrypted with the Title's public RSA key (Enterprise Only).
 /// </summary>
 @property NSString* EncryptedRequest; 
 
 /// <summary>
-/// Player secret that is used to verify API request signatures
+/// Player secret that is used to verify API request signatures (Enterprise Only).
 /// </summary>
 @property NSString* PlayerSecret; 
 
@@ -4547,12 +4557,12 @@ typedef enum
 @property NSString* TitleId; 
 
 /// <summary>
-/// Base64 encoded body that is encrypted with the Title's public RSA key
+/// Base64 encoded body that is encrypted with the Title's public RSA key (Enterprise Only).
 /// </summary>
 @property NSString* EncryptedRequest; 
 
 /// <summary>
-/// Player secret that is used to verify API request signatures
+/// Player secret that is used to verify API request signatures (Enterprise Only).
 /// </summary>
 @property NSString* PlayerSecret; 
 
@@ -4611,12 +4621,12 @@ typedef enum
 @property NSString* TitleId; 
 
 /// <summary>
-/// Base64 encoded body that is encrypted with the Title's public RSA key
+/// Base64 encoded body that is encrypted with the Title's public RSA key (Enterprise Only).
 /// </summary>
 @property NSString* EncryptedRequest; 
 
 /// <summary>
-/// Player secret that is used to verify API request signatures
+/// Player secret that is used to verify API request signatures (Enterprise Only).
 /// </summary>
 @property NSString* PlayerSecret; 
 
@@ -4648,12 +4658,12 @@ typedef enum
 @property NSString* TitleId; 
 
 /// <summary>
-/// Base64 encoded body that is encrypted with the Title's public RSA key
+/// Base64 encoded body that is encrypted with the Title's public RSA key (Enterprise Only).
 /// </summary>
 @property NSString* EncryptedRequest; 
 
 /// <summary>
-/// Player secret that is used to verify API request signatures
+/// Player secret that is used to verify API request signatures (Enterprise Only).
 /// </summary>
 @property NSString* PlayerSecret; 
 
@@ -4685,12 +4695,12 @@ typedef enum
 @property NSString* TitleId; 
 
 /// <summary>
-/// Base64 encoded body that is encrypted with the Title's public RSA key
+/// Base64 encoded body that is encrypted with the Title's public RSA key (Enterprise Only).
 /// </summary>
 @property NSString* EncryptedRequest; 
 
 /// <summary>
-/// Player secret that is used to verify API request signatures
+/// Player secret that is used to verify API request signatures (Enterprise Only).
 /// </summary>
 @property NSString* PlayerSecret; 
 
@@ -4732,12 +4742,12 @@ typedef enum
 @property NSString* TitleId; 
 
 /// <summary>
-/// Base64 encoded body that is encrypted with the Title's public RSA key
+/// Base64 encoded body that is encrypted with the Title's public RSA key (Enterprise Only).
 /// </summary>
 @property NSString* EncryptedRequest; 
 
 /// <summary>
-/// Player secret that is used to verify API request signatures
+/// Player secret that is used to verify API request signatures (Enterprise Only).
 /// </summary>
 @property NSString* PlayerSecret; 
 
@@ -4779,12 +4789,12 @@ typedef enum
 @property NSString* TitleId; 
 
 /// <summary>
-/// Base64 encoded body that is encrypted with the Title's public RSA key
+/// Base64 encoded body that is encrypted with the Title's public RSA key (Enterprise Only).
 /// </summary>
 @property NSString* EncryptedRequest; 
 
 /// <summary>
-/// Player secret that is used to verify API request signatures
+/// Player secret that is used to verify API request signatures (Enterprise Only).
 /// </summary>
 @property NSString* PlayerSecret; 
 /**/
@@ -4838,12 +4848,12 @@ typedef enum
 @property NSString* TitleId; 
 
 /// <summary>
-/// Base64 encoded body that is encrypted with the Title's public RSA key
+/// Base64 encoded body that is encrypted with the Title's public RSA key (Enterprise Only).
 /// </summary>
 @property NSString* EncryptedRequest; 
 
 /// <summary>
-/// Player secret that is used to verify API request signatures
+/// Player secret that is used to verify API request signatures (Enterprise Only).
 /// </summary>
 @property NSString* PlayerSecret; 
 
@@ -4875,12 +4885,12 @@ typedef enum
 @property NSString* TitleId; 
 
 /// <summary>
-/// Base64 encoded body that is encrypted with the Title's public RSA key
+/// Base64 encoded body that is encrypted with the Title's public RSA key (Enterprise Only).
 /// </summary>
 @property NSString* EncryptedRequest; 
 
 /// <summary>
-/// Player secret that is used to verify API request signatures
+/// Player secret that is used to verify API request signatures (Enterprise Only).
 /// </summary>
 @property NSString* PlayerSecret; 
 
@@ -5668,12 +5678,12 @@ typedef enum
 @property NSString* TitleId; 
 
 /// <summary>
-/// Base64 encoded body that is encrypted with the Title's public RSA key
+/// Base64 encoded body that is encrypted with the Title's public RSA key (Enterprise Only).
 /// </summary>
 @property NSString* EncryptedRequest; 
 
 /// <summary>
-/// Player secret that is used to verify API request signatures
+/// Player secret that is used to verify API request signatures (Enterprise Only).
 /// </summary>
 @property NSString* PlayerSecret; 
 
@@ -5740,12 +5750,12 @@ typedef enum
 @property NSString* TitleId; 
 
 /// <summary>
-/// Base64 encoded body that is encrypted with the Title's public RSA key
+/// Base64 encoded body that is encrypted with the Title's public RSA key (Enterprise Only).
 /// </summary>
 @property NSString* EncryptedRequest; 
 
 /// <summary>
-/// Player secret that is used to verify API request signatures
+/// Player secret that is used to verify API request signatures (Enterprise Only).
 /// </summary>
 @property NSString* PlayerSecret; 
 
@@ -6715,7 +6725,7 @@ typedef enum
 @property NSString* CharacterId; 
 
 /// <summary>
-/// Key-value pairs to be written to the custom data. Note that keys are trimmed of whitespace, are limited in size, and may not begin with a '!' character.
+/// Key-value pairs to be written to the custom data. Note that keys are trimmed of whitespace, are limited in size, and may not begin with a '!' character or be null.
 /// </summary>
 @property NSDictionary* Data; 
 
@@ -6806,7 +6816,7 @@ typedef enum
 @property NSString* SharedGroupId; 
 
 /// <summary>
-/// Key-value pairs to be written to the custom data. Note that keys are trimmed of whitespace, are limited in size, and may not begin with a '!' character.
+/// Key-value pairs to be written to the custom data. Note that keys are trimmed of whitespace, are limited in size, and may not begin with a '!' character or be null.
 /// </summary>
 @property NSDictionary* Data; 
 
@@ -6838,7 +6848,7 @@ typedef enum
 
 
 /// <summary>
-/// Key-value pairs to be written to the custom data. Note that keys are trimmed of whitespace, are limited in size, and may not begin with a '!' character.
+/// Key-value pairs to be written to the custom data. Note that keys are trimmed of whitespace, are limited in size, and may not begin with a '!' character or be null.
 /// </summary>
 @property NSDictionary* Data; 
 

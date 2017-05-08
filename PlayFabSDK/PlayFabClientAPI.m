@@ -1769,7 +1769,7 @@ if(model.SettingsForUser.NeedsAttribution)
         }
     }];
 
-    [connection postURL:[NSString stringWithFormat:@"%@%@",[PlayFabClientAPI GetURL],@"/Client/LinkWindowsHello"] body:jsonString authType:nil authKey:nil];
+    [connection postURL:[NSString stringWithFormat:@"%@%@",[PlayFabClientAPI GetURL],@"/Client/LinkWindowsHello"] body:jsonString authType:@"X-Authorization" authKey:self.mUserSessionTicket];
 }
 -(void) RemoveGenericID:(RemoveGenericIDRequest*)request success:(RemoveGenericIDCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData
 {
@@ -2328,7 +2328,7 @@ if(model.SettingsForUser.NeedsAttribution)
         }
     }];
 
-    [connection postURL:[NSString stringWithFormat:@"%@%@",[PlayFabClientAPI GetURL],@"/Client/UnlinkWindowsHello"] body:jsonString authType:nil authKey:nil];
+    [connection postURL:[NSString stringWithFormat:@"%@%@",[PlayFabClientAPI GetURL],@"/Client/UnlinkWindowsHello"] body:jsonString authType:@"X-Authorization" authKey:self.mUserSessionTicket];
 }
 -(void) UpdateAvatarUrl:(UpdateAvatarUrlRequest*)request success:(UpdateAvatarUrlCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData
 {
@@ -5639,7 +5639,7 @@ if(model.SettingsForUser.NeedsAttribution)
         }
     }];
 
-    [connection postURL:[NSString stringWithFormat:@"%@%@",[PlayFabClientAPI GetURL],@"/Client/ValidateWindowsStoreReceipt"] body:jsonString authType:nil authKey:nil];
+    [connection postURL:[NSString stringWithFormat:@"%@%@",[PlayFabClientAPI GetURL],@"/Client/ValidateWindowsStoreReceipt"] body:jsonString authType:@"X-Authorization" authKey:self.mUserSessionTicket];
 }
 
 @end

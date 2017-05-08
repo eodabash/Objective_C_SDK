@@ -954,6 +954,8 @@
     
     self.FunctionResult = [properties valueForKey:@"FunctionResult"];
     
+    self.FunctionResultTooLarge = [[properties valueForKey:@"FunctionResultTooLarge"] boolValue];
+    
     if ([properties objectForKey:@"Logs"]){
     NSArray* member_list = [properties objectForKey:@"Logs"];
     NSMutableArray* mutable_storage = [NSMutableArray new];
@@ -963,6 +965,8 @@
     self.Logs = [mutable_storage copy];
 }
 
+    
+    self.LogsTooLarge = [[properties valueForKey:@"LogsTooLarge"] boolValue];
     
     self.ExecutionTimeSeconds = [properties valueForKey:@"ExecutionTimeSeconds"];
     
