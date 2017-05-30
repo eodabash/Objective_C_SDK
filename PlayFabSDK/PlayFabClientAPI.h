@@ -51,6 +51,8 @@ typedef void(^GetAccountInfoCallback)(GetAccountInfoResult* result, NSObject* us
 		
 typedef void(^GetPlayerCombinedInfoCallback)(GetPlayerCombinedInfoResult* result, NSObject* userData);
 		
+typedef void(^GetPlayerProfileCallback)(GetPlayerProfileResult* result, NSObject* userData);
+		
 typedef void(^GetPlayFabIDsFromFacebookIDsCallback)(GetPlayFabIDsFromFacebookIDsResult* result, NSObject* userData);
 		
 typedef void(^GetPlayFabIDsFromGameCenterIDsCallback)(GetPlayFabIDsFromGameCenterIDsResult* result, NSObject* userData);
@@ -313,6 +315,8 @@ typedef void(^ValidateWindowsStoreReceiptCallback)(ValidateWindowsReceiptResult*
 		
 -(void) GetPlayerCombinedInfo:(GetPlayerCombinedInfoRequest*)request success:(GetPlayerCombinedInfoCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
+-(void) GetPlayerProfile:(GetPlayerProfileRequest*)request success:(GetPlayerProfileCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
+		
 -(void) GetPlayFabIDsFromFacebookIDs:(GetPlayFabIDsFromFacebookIDsRequest*)request success:(GetPlayFabIDsFromFacebookIDsCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
 -(void) GetPlayFabIDsFromGameCenterIDs:(GetPlayFabIDsFromGameCenterIDsRequest*)request success:(GetPlayFabIDsFromGameCenterIDsCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
@@ -571,6 +575,8 @@ typedef void(^ValidateWindowsStoreReceiptCallback)(ValidateWindowsReceiptResult*
 + (void) OnGetAccountInfoResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnGetPlayerCombinedInfoResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
+		
++ (void) OnGetPlayerProfileResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnGetPlayFabIDsFromFacebookIDsResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		

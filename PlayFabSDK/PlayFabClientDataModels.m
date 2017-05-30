@@ -1999,6 +1999,10 @@
 }
 
     
+    self.GetPlayerProfile = [[properties valueForKey:@"GetPlayerProfile"] boolValue];
+    
+    self.ProfileConstraints = [[PlayerProfileViewConstraints new] initWithDictionary:[properties objectForKey:@"ProfileConstraints"]];
+    
 
     return self;
 }
@@ -2128,6 +2132,44 @@
     self.PlayerStatistics = [mutable_storage copy];
 }
 
+    
+    self.PlayerProfile = [[PlayerProfileModel new] initWithDictionary:[properties objectForKey:@"PlayerProfile"]];
+    
+
+    return self;
+}
+@end
+@implementation GetPlayerProfileRequest
+
+
+-(id)initWithDictionary:(NSDictionary*)properties
+{
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+
+    
+    self.PlayFabId = [properties valueForKey:@"PlayFabId"];
+    
+    self.ProfileConstraints = [[PlayerProfileViewConstraints new] initWithDictionary:[properties objectForKey:@"ProfileConstraints"]];
+    
+
+    return self;
+}
+@end
+@implementation GetPlayerProfileResult
+
+
+-(id)initWithDictionary:(NSDictionary*)properties
+{
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+
+    
+    self.PlayerProfile = [[PlayerProfileModel new] initWithDictionary:[properties objectForKey:@"PlayerProfile"]];
     
 
     return self;
@@ -2810,16 +2852,6 @@
     self.TransactionStatus = [properties valueForKey:@"TransactionStatus"];
     
     self.PurchaseDate = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"PurchaseDate"]];
-    
-    if ([properties objectForKey:@"Items"]){
-    NSArray* member_list = [properties objectForKey:@"Items"];
-    NSMutableArray* mutable_storage = [NSMutableArray new];
-    for(int i=0;i<[member_list count];i++){
-        [mutable_storage addObject:[[ItemInstance new] initWithDictionary:[member_list objectAtIndex:i]]];
-    }
-    self.Items = [mutable_storage copy];
-}
-
     
 
     return self;

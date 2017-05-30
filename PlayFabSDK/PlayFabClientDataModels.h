@@ -734,6 +734,10 @@ typedef enum
 
 @class GetPlayerCombinedInfoResultPayload;
 
+@class GetPlayerProfileRequest;
+
+@class GetPlayerProfileResult;
+
 @class GetPlayerSegmentsRequest;
 
 @class GetPlayerSegmentsResult;
@@ -2018,7 +2022,7 @@ typedef enum
 @property NSDictionary* FunctionResult; 
 
 /// <summary>
-/// Flag indicating if the FunctionResult was too large and was subsequently dropped from this event
+/// Flag indicating if the FunctionResult was too large and was subsequently dropped from this event. This only occurs if the total event size is larger than 350KB.
 /// </summary>
 @property bool FunctionResultTooLarge; 
 
@@ -2028,7 +2032,7 @@ typedef enum
 @property NSArray* Logs; 
 
 /// <summary>
-/// Flag indicating if the logs were too large and were subsequently dropped from this event
+/// Flag indicating if the logs were too large and were subsequently dropped from this event. This only occurs if the total event size is larger than 350KB after the FunctionResult was removed.
 /// </summary>
 @property bool LogsTooLarge; 
 
@@ -3021,6 +3025,16 @@ typedef enum
 /// Specific statistics to retrieve. Leave null to get all keys. Has no effect if GetPlayerStatistics is false
 /// </summary>
 @property NSArray* PlayerStatisticNames; 
+
+/// <summary>
+/// Whether to get player profile. Defaults to false.
+/// </summary>
+@property bool GetPlayerProfile; 
+
+/// <summary>
+/// Specifies the properties to return from the player profile. Defaults to returning the player's display name.
+/// </summary>
+@property PlayerProfileViewConstraints* ProfileConstraints; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -3108,6 +3122,43 @@ typedef enum
 /// List of statistics for this player.
 /// </summary>
 @property NSArray* PlayerStatistics; 
+
+/// <summary>
+/// The profile of the players. This profile is not guaranteed to be up-to-date. For a new player, this profile will not exist.
+/// </summary>
+@property PlayerProfileModel* PlayerProfile; 
+/*
+@property NSObject* Request;
+@property NSObject* CustomData;
+*/
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
+@interface GetPlayerProfileRequest : PlayFabBaseModel
+
+
+/// <summary>
+/// Unique PlayFab assigned ID of the user on whom the operation will be performed.
+/// </summary>
+@property NSString* PlayFabId; 
+
+/// <summary>
+/// If non-null, this determines which properties of the profile to return. If null, playfab will only include display names. On client, only ShowDisplayName, ShowStatistics, ShowAvatarUrl are allowed.
+/// </summary>
+@property PlayerProfileViewConstraints* ProfileConstraints; 
+/**/
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
+@interface GetPlayerProfileResult : PlayFabBaseModel
+
+
+/// <summary>
+/// The profile of the player. This profile is not guaranteed to be up-to-date. For a new player, this profile will not exist.
+/// </summary>
+@property PlayerProfileModel* PlayerProfile; 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
@@ -3521,11 +3572,6 @@ typedef enum
 /// Date and time of the purchase.
 /// </summary>
 @property NSDate* PurchaseDate; 
-
-/// <summary>
-/// Array of items purchased.
-/// </summary>
-@property NSArray* Items; 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
@@ -5860,7 +5906,7 @@ typedef enum
 
 
 /// <summary>
-/// Indicates whether this action completed successfully.
+/// Deprecated: Always true
 /// </summary>
 @property bool Updated; 
 
