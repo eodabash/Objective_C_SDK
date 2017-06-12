@@ -189,12 +189,6 @@ typedef void(^RemoveFriendCallback)(RemoveFriendResult* result, NSObject* userDa
 		
 typedef void(^SetFriendTagsCallback)(SetFriendTagsResult* result, NSObject* userData);
 		
-typedef void(^RegisterForIOSPushNotificationCallback)(RegisterForIOSPushNotificationResult* result, NSObject* userData);
-		
-typedef void(^RestoreIOSPurchasesCallback)(RestoreIOSPurchasesResult* result, NSObject* userData);
-		
-typedef void(^ValidateIOSReceiptCallback)(ValidateIOSReceiptResult* result, NSObject* userData);
-		
 typedef void(^GetCurrentGamesCallback)(CurrentGamesResult* result, NSObject* userData);
 		
 typedef void(^GetGameServerRegionsCallback)(GameServerRegionsResult* result, NSObject* userData);
@@ -202,10 +196,6 @@ typedef void(^GetGameServerRegionsCallback)(GameServerRegionsResult* result, NSO
 typedef void(^MatchmakeCallback)(MatchmakeResult* result, NSObject* userData);
 		
 typedef void(^StartGameCallback)(StartGameResult* result, NSObject* userData);
-		
-typedef void(^AndroidDevicePushNotificationRegistrationCallback)(AndroidDevicePushNotificationRegistrationResult* result, NSObject* userData);
-		
-typedef void(^ValidateGooglePlayPurchaseCallback)(ValidateGooglePlayPurchaseResult* result, NSObject* userData);
 		
 typedef void(^WriteCharacterEventCallback)(WriteEventResponse* result, NSObject* userData);
 		
@@ -247,8 +237,6 @@ typedef void(^GetCharacterReadOnlyDataCallback)(GetCharacterDataResult* result, 
 		
 typedef void(^UpdateCharacterDataCallback)(UpdateCharacterDataResult* result, NSObject* userData);
 		
-typedef void(^ValidateAmazonIAPReceiptCallback)(ValidateAmazonReceiptResult* result, NSObject* userData);
-		
 typedef void(^AcceptTradeCallback)(AcceptTradeResponse* result, NSObject* userData);
 		
 typedef void(^CancelTradeCallback)(CancelTradeResponse* result, NSObject* userData);
@@ -264,6 +252,18 @@ typedef void(^AttributeInstallCallback)(AttributeInstallResult* result, NSObject
 typedef void(^GetPlayerSegmentsCallback)(GetPlayerSegmentsResult* result, NSObject* userData);
 		
 typedef void(^GetPlayerTagsCallback)(GetPlayerTagsResult* result, NSObject* userData);
+		
+typedef void(^AndroidDevicePushNotificationRegistrationCallback)(AndroidDevicePushNotificationRegistrationResult* result, NSObject* userData);
+		
+typedef void(^RegisterForIOSPushNotificationCallback)(RegisterForIOSPushNotificationResult* result, NSObject* userData);
+		
+typedef void(^RestoreIOSPurchasesCallback)(RestoreIOSPurchasesResult* result, NSObject* userData);
+		
+typedef void(^ValidateAmazonIAPReceiptCallback)(ValidateAmazonReceiptResult* result, NSObject* userData);
+		
+typedef void(^ValidateGooglePlayPurchaseCallback)(ValidateGooglePlayPurchaseResult* result, NSObject* userData);
+		
+typedef void(^ValidateIOSReceiptCallback)(ValidateIOSReceiptResult* result, NSObject* userData);
 		
 typedef void(^ValidateWindowsStoreReceiptCallback)(ValidateWindowsReceiptResult* result, NSObject* userData);
 		
@@ -453,12 +453,6 @@ typedef void(^ValidateWindowsStoreReceiptCallback)(ValidateWindowsReceiptResult*
 		
 -(void) SetFriendTags:(SetFriendTagsRequest*)request success:(SetFriendTagsCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
--(void) RegisterForIOSPushNotification:(RegisterForIOSPushNotificationRequest*)request success:(RegisterForIOSPushNotificationCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
-		
--(void) RestoreIOSPurchases:(RestoreIOSPurchasesRequest*)request success:(RestoreIOSPurchasesCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
-		
--(void) ValidateIOSReceipt:(ValidateIOSReceiptRequest*)request success:(ValidateIOSReceiptCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
-		
 -(void) GetCurrentGames:(CurrentGamesRequest*)request success:(GetCurrentGamesCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
 -(void) GetGameServerRegions:(GameServerRegionsRequest*)request success:(GetGameServerRegionsCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
@@ -466,10 +460,6 @@ typedef void(^ValidateWindowsStoreReceiptCallback)(ValidateWindowsReceiptResult*
 -(void) Matchmake:(MatchmakeRequest*)request success:(MatchmakeCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
 -(void) StartGame:(StartGameRequest*)request success:(StartGameCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
-		
--(void) AndroidDevicePushNotificationRegistration:(AndroidDevicePushNotificationRegistrationRequest*)request success:(AndroidDevicePushNotificationRegistrationCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
-		
--(void) ValidateGooglePlayPurchase:(ValidateGooglePlayPurchaseRequest*)request success:(ValidateGooglePlayPurchaseCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
 -(void) WriteCharacterEvent:(WriteClientCharacterEventRequest*)request success:(WriteCharacterEventCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
@@ -511,8 +501,6 @@ typedef void(^ValidateWindowsStoreReceiptCallback)(ValidateWindowsReceiptResult*
 		
 -(void) UpdateCharacterData:(UpdateCharacterDataRequest*)request success:(UpdateCharacterDataCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
--(void) ValidateAmazonIAPReceipt:(ValidateAmazonReceiptRequest*)request success:(ValidateAmazonIAPReceiptCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
-		
 -(void) AcceptTrade:(AcceptTradeRequest*)request success:(AcceptTradeCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
 -(void) CancelTrade:(CancelTradeRequest*)request success:(CancelTradeCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
@@ -528,6 +516,18 @@ typedef void(^ValidateWindowsStoreReceiptCallback)(ValidateWindowsReceiptResult*
 -(void) GetPlayerSegments:(GetPlayerSegmentsCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*) userData;
 		
 -(void) GetPlayerTags:(GetPlayerTagsRequest*)request success:(GetPlayerTagsCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
+		
+-(void) AndroidDevicePushNotificationRegistration:(AndroidDevicePushNotificationRegistrationRequest*)request success:(AndroidDevicePushNotificationRegistrationCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
+		
+-(void) RegisterForIOSPushNotification:(RegisterForIOSPushNotificationRequest*)request success:(RegisterForIOSPushNotificationCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
+		
+-(void) RestoreIOSPurchases:(RestoreIOSPurchasesRequest*)request success:(RestoreIOSPurchasesCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
+		
+-(void) ValidateAmazonIAPReceipt:(ValidateAmazonReceiptRequest*)request success:(ValidateAmazonIAPReceiptCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
+		
+-(void) ValidateGooglePlayPurchase:(ValidateGooglePlayPurchaseRequest*)request success:(ValidateGooglePlayPurchaseCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
+		
+-(void) ValidateIOSReceipt:(ValidateIOSReceiptRequest*)request success:(ValidateIOSReceiptCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
 -(void) ValidateWindowsStoreReceipt:(ValidateWindowsReceiptRequest*)request success:(ValidateWindowsStoreReceiptCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
@@ -714,12 +714,6 @@ typedef void(^ValidateWindowsStoreReceiptCallback)(ValidateWindowsReceiptResult*
 		
 + (void) OnSetFriendTagsResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
-+ (void) OnRegisterForIOSPushNotificationResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
-		
-+ (void) OnRestoreIOSPurchasesResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
-		
-+ (void) OnValidateIOSReceiptResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
-		
 + (void) OnGetCurrentGamesResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnGetGameServerRegionsResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
@@ -727,10 +721,6 @@ typedef void(^ValidateWindowsStoreReceiptCallback)(ValidateWindowsReceiptResult*
 + (void) OnMatchmakeResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnStartGameResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
-		
-+ (void) OnAndroidDevicePushNotificationRegistrationResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
-		
-+ (void) OnValidateGooglePlayPurchaseResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnWriteCharacterEventResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
@@ -772,8 +762,6 @@ typedef void(^ValidateWindowsStoreReceiptCallback)(ValidateWindowsReceiptResult*
 		
 + (void) OnUpdateCharacterDataResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
-+ (void) OnValidateAmazonIAPReceiptResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
-		
 + (void) OnAcceptTradeResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnCancelTradeResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
@@ -789,6 +777,18 @@ typedef void(^ValidateWindowsStoreReceiptCallback)(ValidateWindowsReceiptResult*
 + (void) OnGetPlayerSegmentsResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnGetPlayerTagsResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
+		
++ (void) OnAndroidDevicePushNotificationRegistrationResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
+		
++ (void) OnRegisterForIOSPushNotificationResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
+		
++ (void) OnRestoreIOSPurchasesResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
+		
++ (void) OnValidateAmazonIAPReceiptResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
+		
++ (void) OnValidateGooglePlayPurchaseResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
+		
++ (void) OnValidateIOSReceiptResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnValidateWindowsStoreReceiptResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
