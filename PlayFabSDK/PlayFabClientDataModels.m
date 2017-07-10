@@ -1561,8 +1561,6 @@
     
     self.Version = [properties valueForKey:@"Version"];
     
-    self.UseSpecificVersion = [[properties valueForKey:@"UseSpecificVersion"] boolValue];
-    
     self.ProfileConstraints = [[PlayerProfileViewConstraints new] initWithDictionary:[properties objectForKey:@"ProfileConstraints"]];
     
 
@@ -1620,8 +1618,6 @@
     self.IncludeFacebookFriends = [[properties valueForKey:@"IncludeFacebookFriends"] boolValue];
     
     self.Version = [properties valueForKey:@"Version"];
-    
-    self.UseSpecificVersion = [[properties valueForKey:@"UseSpecificVersion"] boolValue];
     
     self.ProfileConstraints = [[PlayerProfileViewConstraints new] initWithDictionary:[properties objectForKey:@"ProfileConstraints"]];
     
@@ -1740,8 +1736,6 @@
     
     self.Version = [properties valueForKey:@"Version"];
     
-    self.UseSpecificVersion = [[properties valueForKey:@"UseSpecificVersion"] boolValue];
-    
     self.ProfileConstraints = [[PlayerProfileViewConstraints new] initWithDictionary:[properties objectForKey:@"ProfileConstraints"]];
     
 
@@ -1839,8 +1833,6 @@
     self.MaxResultsCount = [properties valueForKey:@"MaxResultsCount"];
     
     self.Version = [properties valueForKey:@"Version"];
-    
-    self.UseSpecificVersion = [[properties valueForKey:@"UseSpecificVersion"] boolValue];
     
     self.ProfileConstraints = [[PlayerProfileViewConstraints new] initWithDictionary:[properties objectForKey:@"ProfileConstraints"]];
     
@@ -3113,6 +3105,42 @@
     self.News = [mutable_storage copy];
 }
 
+    
+
+    return self;
+}
+@end
+@implementation GetTitlePublicKeyRequest
+
+
+-(id)initWithDictionary:(NSDictionary*)properties
+{
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+
+    
+    self.TitleId = [properties valueForKey:@"TitleId"];
+    
+    self.TitleSharedSecret = [properties valueForKey:@"TitleSharedSecret"];
+    
+
+    return self;
+}
+@end
+@implementation GetTitlePublicKeyResult
+
+
+-(id)initWithDictionary:(NSDictionary*)properties
+{
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+
+    
+    self.RSAPublicKey = [properties valueForKey:@"RSAPublicKey"];
     
 
     return self;
@@ -5283,6 +5311,40 @@
 }
 @end
 @implementation SetFriendTagsResult
+
+
+-(id)initWithDictionary:(NSDictionary*)properties
+{
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+
+    
+
+    return self;
+}
+@end
+@implementation SetPlayerSecretRequest
+
+
+-(id)initWithDictionary:(NSDictionary*)properties
+{
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+
+    
+    self.PlayerSecret = [properties valueForKey:@"PlayerSecret"];
+    
+    self.EncryptedRequest = [properties valueForKey:@"EncryptedRequest"];
+    
+
+    return self;
+}
+@end
+@implementation SetPlayerSecretResult
 
 
 -(id)initWithDictionary:(NSDictionary*)properties

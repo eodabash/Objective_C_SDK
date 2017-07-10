@@ -13,6 +13,8 @@
 		
 typedef void(^GetPhotonAuthenticationTokenCallback)(GetPhotonAuthenticationTokenResult* result, NSObject* userData);
 		
+typedef void(^GetTitlePublicKeyCallback)(GetTitlePublicKeyResult* result, NSObject* userData);
+		
 typedef void(^GetWindowsHelloChallengeCallback)(GetWindowsHelloChallengeResponse* result, NSObject* userData);
 		
 typedef void(^LoginWithAndroidDeviceIDCallback)(LoginResult* result, NSObject* userData);
@@ -42,6 +44,8 @@ typedef void(^LoginWithWindowsHelloCallback)(LoginResult* result, NSObject* user
 typedef void(^RegisterPlayFabUserCallback)(RegisterPlayFabUserResult* result, NSObject* userData);
 		
 typedef void(^RegisterWithWindowsHelloCallback)(LoginResult* result, NSObject* userData);
+		
+typedef void(^SetPlayerSecretCallback)(SetPlayerSecretResult* result, NSObject* userData);
 		
 typedef void(^AddGenericIDCallback)(AddGenericIDResult* result, NSObject* userData);
 		
@@ -277,6 +281,8 @@ typedef void(^ValidateWindowsStoreReceiptCallback)(ValidateWindowsReceiptResult*
 		
 -(void) GetPhotonAuthenticationToken:(GetPhotonAuthenticationTokenRequest*)request success:(GetPhotonAuthenticationTokenCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
+-(void) GetTitlePublicKey:(GetTitlePublicKeyRequest*)request success:(GetTitlePublicKeyCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
+		
 -(void) GetWindowsHelloChallenge:(GetWindowsHelloChallengeRequest*)request success:(GetWindowsHelloChallengeCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
 -(void) LoginWithAndroidDeviceID:(LoginWithAndroidDeviceIDRequest*)request success:(LoginWithAndroidDeviceIDCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
@@ -306,6 +312,8 @@ typedef void(^ValidateWindowsStoreReceiptCallback)(ValidateWindowsReceiptResult*
 -(void) RegisterPlayFabUser:(RegisterPlayFabUserRequest*)request success:(RegisterPlayFabUserCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
 -(void) RegisterWithWindowsHello:(RegisterWithWindowsHelloRequest*)request success:(RegisterWithWindowsHelloCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
+		
+-(void) SetPlayerSecret:(SetPlayerSecretRequest*)request success:(SetPlayerSecretCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
 -(void) AddGenericID:(AddGenericIDRequest*)request success:(AddGenericIDCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
@@ -538,6 +546,8 @@ typedef void(^ValidateWindowsStoreReceiptCallback)(ValidateWindowsReceiptResult*
 		
 + (void) OnGetPhotonAuthenticationTokenResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
++ (void) OnGetTitlePublicKeyResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
+		
 + (void) OnGetWindowsHelloChallengeResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnLoginWithAndroidDeviceIDResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
@@ -567,6 +577,8 @@ typedef void(^ValidateWindowsStoreReceiptCallback)(ValidateWindowsReceiptResult*
 + (void) OnRegisterPlayFabUserResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnRegisterWithWindowsHelloResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
+		
++ (void) OnSetPlayerSecretResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnAddGenericIDResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		

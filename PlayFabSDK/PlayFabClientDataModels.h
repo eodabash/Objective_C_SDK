@@ -816,6 +816,10 @@ typedef enum
 
 @class GetTitleNewsResult;
 
+@class GetTitlePublicKeyRequest;
+
+@class GetTitlePublicKeyResult;
+
 @class GetTradeStatusRequest;
 
 @class GetTradeStatusResponse;
@@ -997,6 +1001,10 @@ typedef enum
 @class SetFriendTagsRequest;
 
 @class SetFriendTagsResult;
+
+@class SetPlayerSecretRequest;
+
+@class SetPlayerSecretResult;
 
 @class SharedGroupDataRecord;
 
@@ -2594,14 +2602,9 @@ typedef enum
 @property bool IncludeFacebookFriends; 
 
 /// <summary>
-/// The version of the leaderboard to get, when UseSpecificVersion is true.
+/// The version of the leaderboard to get.
 /// </summary>
 @property NSNumber* Version; 
-
-/// <summary>
-/// If true, uses the specified version. If false, gets the most recent version.
-/// </summary>
-@property bool UseSpecificVersion; 
 
 /// <summary>
 /// If non-null, this determines which properties of the profile to return. If null, playfab will only include display names. For API calls from the client, only ShowDisplayName, ShowAvatarUrl are allowed at this time.
@@ -2666,14 +2669,9 @@ typedef enum
 @property bool IncludeFacebookFriends; 
 
 /// <summary>
-/// The version of the leaderboard to get, when UseSpecificVersion is true.
+/// The version of the leaderboard to get.
 /// </summary>
 @property NSNumber* Version; 
-
-/// <summary>
-/// If true, uses the specified version. If false, gets the most recent version.
-/// </summary>
-@property bool UseSpecificVersion; 
 
 /// <summary>
 /// If non-null, this determines which properties of the profile to return. If null, playfab will only include display names. For API calls from the client, only ShowDisplayName, ShowAvatarUrl are allowed at this time.
@@ -2777,14 +2775,9 @@ typedef enum
 @property NSNumber* MaxResultsCount; 
 
 /// <summary>
-/// The version of the leaderboard to get, when UseSpecificVersion is true.
+/// The version of the leaderboard to get.
 /// </summary>
 @property NSNumber* Version; 
-
-/// <summary>
-/// If true, uses the specified version. If false, gets the most recent version.
-/// </summary>
-@property bool UseSpecificVersion; 
 
 /// <summary>
 /// If non-null, this determines which properties of the profile to return. If null, playfab will only include display names. For API calls from the client, only ShowDisplayName, ShowAvatarUrl are allowed at this time.
@@ -2871,14 +2864,9 @@ typedef enum
 @property NSNumber* MaxResultsCount; 
 
 /// <summary>
-/// The version of the leaderboard to get, when UseSpecificVersion is true.
+/// The version of the leaderboard to get.
 /// </summary>
 @property NSNumber* Version; 
-
-/// <summary>
-/// If true, uses the specified version. If false, gets the most recent version.
-/// </summary>
-@property bool UseSpecificVersion; 
 
 /// <summary>
 /// If non-null, this determines which properties of the profile to return. If null, playfab will only include display names. For API calls from the client, only ShowDisplayName, ShowAvatarUrl are allowed at this time.
@@ -3767,6 +3755,38 @@ typedef enum
 /// Array of news items.
 /// </summary>
 @property NSArray* News; 
+/*
+@property NSObject* Request;
+@property NSObject* CustomData;
+*/
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
+@interface GetTitlePublicKeyRequest : PlayFabBaseModel
+
+
+/// <summary>
+/// Unique identifier for the title, found in the Settings > Game Properties section of the PlayFab developer site when a title has been selected.
+/// </summary>
+@property NSString* TitleId; 
+
+/// <summary>
+/// The shared secret key for this title
+/// </summary>
+@property NSString* TitleSharedSecret; 
+/**/
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
+@interface GetTitlePublicKeyResult : PlayFabBaseModel
+
+
+/// <summary>
+/// Base64 encoded RSA CSP byte array blob containing the title's public RSA key
+/// </summary>
+@property NSString* RSAPublicKey; 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
@@ -6011,6 +6031,33 @@ typedef enum
 
 
 @interface SetFriendTagsResult : PlayFabBaseModel
+
+/*
+@property NSObject* Request;
+@property NSObject* CustomData;
+*/
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
+@interface SetPlayerSecretRequest : PlayFabBaseModel
+
+
+/// <summary>
+/// Player secret that is used to verify API request signatures (Enterprise Only).
+/// </summary>
+@property NSString* PlayerSecret; 
+
+/// <summary>
+/// Base64 encoded body that is encrypted with the Title's public RSA key (Enterprise Only).
+/// </summary>
+@property NSString* EncryptedRequest; 
+/**/
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
+@interface SetPlayerSecretResult : PlayFabBaseModel
 
 /*
 @property NSObject* Request;
