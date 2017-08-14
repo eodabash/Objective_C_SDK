@@ -480,6 +480,30 @@ typedef enum
 
 typedef enum
 {
+    LoginIdentityProviderUnknown,
+    LoginIdentityProviderPlayFab,
+    LoginIdentityProviderCustom,
+    LoginIdentityProviderGameCenter,
+    LoginIdentityProviderGooglePlay,
+    LoginIdentityProviderSteam,
+    LoginIdentityProviderXBoxLive,
+    LoginIdentityProviderPSN,
+    LoginIdentityProviderKongregate,
+    LoginIdentityProviderFacebook,
+    LoginIdentityProviderIOSDevice,
+    LoginIdentityProviderAndroidDevice,
+    LoginIdentityProviderTwitch,
+    LoginIdentityProviderWindowsHello
+} LoginIdentityProvider;
+
+typedef enum
+{
+    PushNotificationPlatformApplePushNotificationService,
+    PushNotificationPlatformGoogleCloudMessaging
+} PushNotificationPlatform;
+
+typedef enum
+{
     UserOriginationOrganic,
     UserOriginationSteam,
     UserOriginationGoogle,
@@ -505,30 +529,6 @@ typedef enum
     UserDataPermissionPrivate,
     UserDataPermissionPublic
 } UserDataPermission;
-
-typedef enum
-{
-    LoginIdentityProviderUnknown,
-    LoginIdentityProviderPlayFab,
-    LoginIdentityProviderCustom,
-    LoginIdentityProviderGameCenter,
-    LoginIdentityProviderGooglePlay,
-    LoginIdentityProviderSteam,
-    LoginIdentityProviderXBoxLive,
-    LoginIdentityProviderPSN,
-    LoginIdentityProviderKongregate,
-    LoginIdentityProviderFacebook,
-    LoginIdentityProviderIOSDevice,
-    LoginIdentityProviderAndroidDevice,
-    LoginIdentityProviderTwitch,
-    LoginIdentityProviderWindowsHello
-} LoginIdentityProvider;
-
-typedef enum
-{
-    PushNotificationPlatformApplePushNotificationService,
-    PushNotificationPlatformGoogleCloudMessaging
-} PushNotificationPlatform;
 
 typedef enum
 {
@@ -2134,6 +2134,11 @@ typedef enum
 /// Available Game Center information (if the user and PlayFab friend are also connected in Game Center).
 /// </summary>
 @property UserGameCenterInfo* GameCenterInfo; 
+
+/// <summary>
+/// The profile of the user, if requested.
+/// </summary>
+@property PlayerProfileModel* Profile; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -2607,7 +2612,7 @@ typedef enum
 @property NSNumber* Version; 
 
 /// <summary>
-/// If non-null, this determines which properties of the profile to return. If null, playfab will only include display names. For API calls from the client, only ShowDisplayName, ShowAvatarUrl are allowed at this time.
+/// If non-null, this determines which properties of the resulting player profiles to return. For API calls from the client, only the allowed client profile properties for the title may be requested. These allowed properties are configured in the Game Manager "Client Profile Options" tab in the "Settings" section.
 /// </summary>
 @property PlayerProfileViewConstraints* ProfileConstraints; 
 /**/
@@ -2674,7 +2679,7 @@ typedef enum
 @property NSNumber* Version; 
 
 /// <summary>
-/// If non-null, this determines which properties of the profile to return. If null, playfab will only include display names. For API calls from the client, only ShowDisplayName, ShowAvatarUrl are allowed at this time.
+/// If non-null, this determines which properties of the resulting player profiles to return. For API calls from the client, only the allowed client profile properties for the title may be requested. These allowed properties are configured in the Game Manager "Client Profile Options" tab in the "Settings" section.
 /// </summary>
 @property PlayerProfileViewConstraints* ProfileConstraints; 
 /**/
@@ -2694,6 +2699,11 @@ typedef enum
 /// Indicates whether Facebook friends should be included in the response. Default is true.
 /// </summary>
 @property bool IncludeFacebookFriends; 
+
+/// <summary>
+/// If non-null, this determines which properties of the resulting player profiles to return. For API calls from the client, only the allowed client profile properties for the title may be requested. These allowed properties are configured in the Game Manager "Client Profile Options" tab in the "Settings" section.
+/// </summary>
+@property PlayerProfileViewConstraints* ProfileConstraints; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -2780,7 +2790,7 @@ typedef enum
 @property NSNumber* Version; 
 
 /// <summary>
-/// If non-null, this determines which properties of the profile to return. If null, playfab will only include display names. For API calls from the client, only ShowDisplayName, ShowAvatarUrl are allowed at this time.
+/// If non-null, this determines which properties of the resulting player profiles to return. For API calls from the client, only the allowed client profile properties for the title may be requested. These allowed properties are configured in the Game Manager "Client Profile Options" tab in the "Settings" section.
 /// </summary>
 @property PlayerProfileViewConstraints* ProfileConstraints; 
 /**/
@@ -2869,7 +2879,7 @@ typedef enum
 @property NSNumber* Version; 
 
 /// <summary>
-/// If non-null, this determines which properties of the profile to return. If null, playfab will only include display names. For API calls from the client, only ShowDisplayName, ShowAvatarUrl are allowed at this time.
+/// If non-null, this determines which properties of the resulting player profiles to return. For API calls from the client, only the allowed client profile properties for the title may be requested. These allowed properties are configured in the Game Manager "Client Profile Options" tab in the "Settings" section.
 /// </summary>
 @property PlayerProfileViewConstraints* ProfileConstraints; 
 /**/
@@ -3132,7 +3142,7 @@ typedef enum
 @property NSString* PlayFabId; 
 
 /// <summary>
-/// If non-null, this determines which properties of the profile to return. If null, playfab will only include display names. For API calls from the client, only ShowDisplayName, ShowAvatarUrl are allowed at this time.
+/// If non-null, this determines which properties of the resulting player profiles to return. For API calls from the client, only the allowed client profile properties for the title may be requested. These allowed properties are configured in the Game Manager "Client Profile Options" tab in the "Settings" section.
 /// </summary>
 @property PlayerProfileViewConstraints* ProfileConstraints; 
 /**/

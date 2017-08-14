@@ -1038,6 +1038,8 @@
     
     self.GameCenterInfo = [[UserGameCenterInfo new] initWithDictionary:[properties objectForKey:@"GameCenterInfo"]];
     
+    self.Profile = [[PlayerProfileModel new] initWithDictionary:[properties objectForKey:@"Profile"]];
+    
 
     return self;
 }
@@ -1639,6 +1641,8 @@
     self.IncludeSteamFriends = [[properties valueForKey:@"IncludeSteamFriends"] boolValue];
     
     self.IncludeFacebookFriends = [[properties valueForKey:@"IncludeFacebookFriends"] boolValue];
+    
+    self.ProfileConstraints = [[PlayerProfileViewConstraints new] initWithDictionary:[properties objectForKey:@"ProfileConstraints"]];
     
 
     return self;
