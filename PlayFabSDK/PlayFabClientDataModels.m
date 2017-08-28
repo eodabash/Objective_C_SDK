@@ -784,6 +784,25 @@
     return self;
 }
 @end
+@implementation ContactEmailInfoModel
+
+
+-(id)initWithDictionary:(NSDictionary*)properties
+{
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+
+    
+    self.Name = [properties valueForKey:@"Name"];
+    
+    self.EmailAddress = [properties valueForKey:@"EmailAddress"];
+    
+
+    return self;
+}
+@end
 @implementation Container_Dictionary_String_String
 
 
@@ -1098,7 +1117,9 @@
     
     self.RunTime = [properties valueForKey:@"RunTime"];
     
-    self.GameServerState = (GameInstanceState)[properties valueForKey:@"GameServerState"];
+    self.GameServerState = [properties valueForKey:@"GameServerState"];
+    
+    self.GameServerStateEnum = (GameInstanceState)[properties valueForKey:@"GameServerStateEnum"];
     
     self.GameServerData = [properties valueForKey:@"GameServerData"];
     
@@ -4679,6 +4700,16 @@
 }
 
     
+    if ([properties objectForKey:@"ContactEmailAddresses"]){
+    NSArray* member_list = [properties objectForKey:@"ContactEmailAddresses"];
+    NSMutableArray* mutable_storage = [NSMutableArray new];
+    for(int i=0;i<[member_list count];i++){
+        [mutable_storage addObject:[[ContactEmailInfoModel new] initWithDictionary:[member_list objectAtIndex:i]]];
+    }
+    self.ContactEmailAddresses = [mutable_storage copy];
+}
+
+    
     if ([properties objectForKey:@"AdCampaignAttributions"]){
     NSArray* member_list = [properties objectForKey:@"AdCampaignAttributions"];
     NSMutableArray* mutable_storage = [NSMutableArray new];
@@ -4753,6 +4784,8 @@
     self.ShowPushNotificationRegistrations = [[properties valueForKey:@"ShowPushNotificationRegistrations"] boolValue];
     
     self.ShowLinkedAccounts = [[properties valueForKey:@"ShowLinkedAccounts"] boolValue];
+    
+    self.ShowContactEmailAddresses = [[properties valueForKey:@"ShowContactEmailAddresses"] boolValue];
     
     self.ShowTotalValueToDateInUsd = [[properties valueForKey:@"ShowTotalValueToDateInUsd"] boolValue];
     
@@ -5191,8 +5224,6 @@
         return nil;
     }
 
-    
-    self.Updated = [[properties valueForKey:@"Updated"] boolValue];
     
     self.SubmissionsRemaining = [properties valueForKey:@"SubmissionsRemaining"];
     

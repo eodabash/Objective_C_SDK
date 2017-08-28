@@ -636,6 +636,8 @@ typedef enum
 
 @class ConsumeItemResult;
 
+@class ContactEmailInfoModel;
+
 @class Container_Dictionary_String_String;
 
 @class CreateSharedGroupRequest;
@@ -1870,6 +1872,23 @@ typedef enum
 @end
 
 
+@interface ContactEmailInfoModel : PlayFabBaseModel
+
+
+/// <summary>
+/// The name of the email info data
+/// </summary>
+@property NSString* Name; 
+
+/// <summary>
+/// The email address
+/// </summary>
+@property NSString* EmailAddress; 
+/**/
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
 /// <summary>
 /// A data container
 /// </summary>
@@ -2207,7 +2226,12 @@ typedef enum
 /// <summary>
 /// game specific string denoting server configuration
 /// </summary>
-@property GameInstanceState GameServerState; 
+@property NSNumber* GameServerState; 
+
+/// <summary>
+/// game specific string denoting server configuration
+/// </summary>
+@property GameInstanceState GameServerStateEnum; 
 
 /// <summary>
 /// game session custom data
@@ -5413,6 +5437,11 @@ typedef enum
 @property NSArray* LinkedAccounts; 
 
 /// <summary>
+/// List of all contact email info associated with the player account
+/// </summary>
+@property NSArray* ContactEmailAddresses; 
+
+/// <summary>
 /// List of advertising campaigns the player has been attributed to
 /// </summary>
 @property NSArray* AdCampaignAttributions; 
@@ -5488,6 +5517,11 @@ typedef enum
 /// Whether to show the linked accounts. Defaults to false
 /// </summary>
 @property bool ShowLinkedAccounts; 
+
+/// <summary>
+/// Whether to show contact email addresses. Defaults to false
+/// </summary>
+@property bool ShowContactEmailAddresses; 
 
 /// <summary>
 /// Whether to show the total value to date in usd. Defaults to false
@@ -5934,11 +5968,6 @@ typedef enum
 
 @interface ReportPlayerClientResult : PlayFabBaseModel
 
-
-/// <summary>
-/// Deprecated: Always true
-/// </summary>
-@property bool Updated; 
 
 /// <summary>
 /// The number of remaining reports which may be filed today.
