@@ -12,10 +12,6 @@
     }
 
     
-    self.OfferingPlayerId = [properties valueForKey:@"OfferingPlayerId"];
-    
-    self.TradeId = [properties valueForKey:@"TradeId"];
-    
     if ([properties objectForKey:@"AcceptedInventoryInstanceIds"]){
     NSArray* member_list = [properties objectForKey:@"AcceptedInventoryInstanceIds"];
     NSMutableArray* mutable_storage = [NSMutableArray new];
@@ -25,6 +21,10 @@
     self.AcceptedInventoryInstanceIds = [mutable_storage copy];
 }
 
+    
+    self.OfferingPlayerId = [properties valueForKey:@"OfferingPlayerId"];
+    
+    self.TradeId = [properties valueForKey:@"TradeId"];
     
 
     return self;
@@ -58,11 +58,11 @@
     }
 
     
-    self.Platform = [properties valueForKey:@"Platform"];
+    self.AttributedAt = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"AttributedAt"]];
     
     self.CampaignId = [properties valueForKey:@"CampaignId"];
     
-    self.AttributedAt = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"AttributedAt"]];
+    self.Platform = [properties valueForKey:@"Platform"];
     
 
     return self;
@@ -79,13 +79,13 @@
     }
 
     
-    self.FriendPlayFabId = [properties valueForKey:@"FriendPlayFabId"];
-    
-    self.FriendUsername = [properties valueForKey:@"FriendUsername"];
-    
     self.FriendEmail = [properties valueForKey:@"FriendEmail"];
     
+    self.FriendPlayFabId = [properties valueForKey:@"FriendPlayFabId"];
+    
     self.FriendTitleDisplayName = [properties valueForKey:@"FriendTitleDisplayName"];
+    
+    self.FriendUsername = [properties valueForKey:@"FriendUsername"];
     
 
     return self;
@@ -151,8 +151,6 @@
     }
 
     
-    self.SharedGroupId = [properties valueForKey:@"SharedGroupId"];
-    
     if ([properties objectForKey:@"PlayFabIds"]){
     NSArray* member_list = [properties objectForKey:@"PlayFabIds"];
     NSMutableArray* mutable_storage = [NSMutableArray new];
@@ -162,6 +160,8 @@
     self.PlayFabIds = [mutable_storage copy];
 }
 
+    
+    self.SharedGroupId = [properties valueForKey:@"SharedGroupId"];
     
 
     return self;
@@ -193,11 +193,11 @@
     }
 
     
-    self.Username = [properties valueForKey:@"Username"];
-    
     self.Email = [properties valueForKey:@"Email"];
     
     self.Password = [properties valueForKey:@"Password"];
+    
+    self.Username = [properties valueForKey:@"Username"];
     
 
     return self;
@@ -231,9 +231,9 @@
     }
 
     
-    self.VirtualCurrency = [properties valueForKey:@"VirtualCurrency"];
-    
     self.Amount = [properties valueForKey:@"Amount"];
+    
+    self.VirtualCurrency = [properties valueForKey:@"VirtualCurrency"];
     
 
     return self;
@@ -250,11 +250,11 @@
     }
 
     
+    self.ConfirmationMessage = [properties valueForKey:@"ConfirmationMessage"];
+    
     self.DeviceToken = [properties valueForKey:@"DeviceToken"];
     
     self.SendPushNotificationConfirmation = [[properties valueForKey:@"SendPushNotificationConfirmation"] boolValue];
-    
-    self.ConfirmationMessage = [properties valueForKey:@"ConfirmationMessage"];
     
 
     return self;
@@ -286,9 +286,9 @@
     }
 
     
-    self.Idfa = [properties valueForKey:@"Idfa"];
-    
     self.Adid = [properties valueForKey:@"Adid"];
+    
+    self.Idfa = [properties valueForKey:@"Idfa"];
     
 
     return self;
@@ -354,25 +354,15 @@
     }
 
     
-    self.ItemId = [properties valueForKey:@"ItemId"];
-    
-    self.ItemClass = [properties valueForKey:@"ItemClass"];
-    
-    self.ItemInstanceId = [properties valueForKey:@"ItemInstanceId"];
+    self.Description = [properties valueForKey:@"Description"];
     
     self.DisplayName = [properties valueForKey:@"DisplayName"];
     
-    self.Description = [properties valueForKey:@"Description"];
+    self.ItemClass = [properties valueForKey:@"ItemClass"];
     
-    if ([properties objectForKey:@"VirtualCurrencyPrices"]){
-    NSDictionary* member_list = [properties objectForKey:@"VirtualCurrencyPrices"];
-    NSMutableDictionary* mutable_storage = [NSMutableDictionary new];
-    for(NSString* key in member_list){
-        [mutable_storage setValue:[member_list objectForKey:key] forKey:key];
-    }
-    self.VirtualCurrencyPrices = [mutable_storage copy];
-}
-
+    self.ItemId = [properties valueForKey:@"ItemId"];
+    
+    self.ItemInstanceId = [properties valueForKey:@"ItemInstanceId"];
     
     if ([properties objectForKey:@"RealCurrencyPrices"]){
     NSDictionary* member_list = [properties objectForKey:@"RealCurrencyPrices"];
@@ -394,6 +384,16 @@
 }
 
     
+    if ([properties objectForKey:@"VirtualCurrencyPrices"]){
+    NSDictionary* member_list = [properties objectForKey:@"VirtualCurrencyPrices"];
+    NSMutableDictionary* mutable_storage = [NSMutableDictionary new];
+    for(NSString* key in member_list){
+        [mutable_storage setValue:[member_list objectForKey:key] forKey:key];
+    }
+    self.VirtualCurrencyPrices = [mutable_storage copy];
+}
+
+    
 
     return self;
 }
@@ -409,25 +409,35 @@
     }
 
     
-    self.ItemId = [properties valueForKey:@"ItemId"];
+    self.Bundle = [[CatalogItemBundleInfo new] initWithDictionary:[properties objectForKey:@"Bundle"]];
     
-    self.ItemClass = [properties valueForKey:@"ItemClass"];
+    self.CanBecomeCharacter = [[properties valueForKey:@"CanBecomeCharacter"] boolValue];
     
     self.CatalogVersion = [properties valueForKey:@"CatalogVersion"];
     
-    self.DisplayName = [properties valueForKey:@"DisplayName"];
+    self.Consumable = [[CatalogItemConsumableInfo new] initWithDictionary:[properties objectForKey:@"Consumable"]];
+    
+    self.Container = [[CatalogItemContainerInfo new] initWithDictionary:[properties objectForKey:@"Container"]];
+    
+    self.CustomData = [properties valueForKey:@"CustomData"];
     
     self.Description = [properties valueForKey:@"Description"];
     
-    if ([properties objectForKey:@"VirtualCurrencyPrices"]){
-    NSDictionary* member_list = [properties objectForKey:@"VirtualCurrencyPrices"];
-    NSMutableDictionary* mutable_storage = [NSMutableDictionary new];
-    for(NSString* key in member_list){
-        [mutable_storage setValue:[member_list objectForKey:key] forKey:key];
-    }
-    self.VirtualCurrencyPrices = [mutable_storage copy];
-}
-
+    self.DisplayName = [properties valueForKey:@"DisplayName"];
+    
+    self.InitialLimitedEditionCount = [properties valueForKey:@"InitialLimitedEditionCount"];
+    
+    self.IsLimitedEdition = [[properties valueForKey:@"IsLimitedEdition"] boolValue];
+    
+    self.IsStackable = [[properties valueForKey:@"IsStackable"] boolValue];
+    
+    self.IsTradable = [[properties valueForKey:@"IsTradable"] boolValue];
+    
+    self.ItemClass = [properties valueForKey:@"ItemClass"];
+    
+    self.ItemId = [properties valueForKey:@"ItemId"];
+    
+    self.ItemImageUrl = [properties valueForKey:@"ItemImageUrl"];
     
     if ([properties objectForKey:@"RealCurrencyPrices"]){
     NSDictionary* member_list = [properties objectForKey:@"RealCurrencyPrices"];
@@ -449,25 +459,15 @@
 }
 
     
-    self.CustomData = [properties valueForKey:@"CustomData"];
-    
-    self.Consumable = [[CatalogItemConsumableInfo new] initWithDictionary:[properties objectForKey:@"Consumable"]];
-    
-    self.Container = [[CatalogItemContainerInfo new] initWithDictionary:[properties objectForKey:@"Container"]];
-    
-    self.Bundle = [[CatalogItemBundleInfo new] initWithDictionary:[properties objectForKey:@"Bundle"]];
-    
-    self.CanBecomeCharacter = [[properties valueForKey:@"CanBecomeCharacter"] boolValue];
-    
-    self.IsStackable = [[properties valueForKey:@"IsStackable"] boolValue];
-    
-    self.IsTradable = [[properties valueForKey:@"IsTradable"] boolValue];
-    
-    self.ItemImageUrl = [properties valueForKey:@"ItemImageUrl"];
-    
-    self.IsLimitedEdition = [[properties valueForKey:@"IsLimitedEdition"] boolValue];
-    
-    self.InitialLimitedEditionCount = [properties valueForKey:@"InitialLimitedEditionCount"];
+    if ([properties objectForKey:@"VirtualCurrencyPrices"]){
+    NSDictionary* member_list = [properties objectForKey:@"VirtualCurrencyPrices"];
+    NSMutableDictionary* mutable_storage = [NSMutableDictionary new];
+    for(NSString* key in member_list){
+        [mutable_storage setValue:[member_list objectForKey:key] forKey:key];
+    }
+    self.VirtualCurrencyPrices = [mutable_storage copy];
+}
+
     
 
     return self;
@@ -550,8 +550,6 @@
     }
 
     
-    self.KeyItemId = [properties valueForKey:@"KeyItemId"];
-    
     if ([properties objectForKey:@"ItemContents"]){
     NSArray* member_list = [properties objectForKey:@"ItemContents"];
     NSMutableArray* mutable_storage = [NSMutableArray new];
@@ -561,6 +559,8 @@
     self.ItemContents = [mutable_storage copy];
 }
 
+    
+    self.KeyItemId = [properties valueForKey:@"KeyItemId"];
     
     if ([properties objectForKey:@"ResultTableContents"]){
     NSArray* member_list = [properties objectForKey:@"ResultTableContents"];
@@ -624,19 +624,19 @@
     }
 
     
-    self.PlayFabId = [properties valueForKey:@"PlayFabId"];
-    
     self.CharacterId = [properties valueForKey:@"CharacterId"];
     
     self.CharacterName = [properties valueForKey:@"CharacterName"];
     
-    self.DisplayName = [properties valueForKey:@"DisplayName"];
-    
     self.CharacterType = [properties valueForKey:@"CharacterType"];
     
-    self.StatValue = [properties valueForKey:@"StatValue"];
+    self.DisplayName = [properties valueForKey:@"DisplayName"];
+    
+    self.PlayFabId = [properties valueForKey:@"PlayFabId"];
     
     self.Position = [properties valueForKey:@"Position"];
+    
+    self.StatValue = [properties valueForKey:@"StatValue"];
     
 
     return self;
@@ -674,16 +674,6 @@
     }
 
     
-    if ([properties objectForKey:@"Includes"]){
-    NSArray* member_list = [properties objectForKey:@"Includes"];
-    NSMutableArray* mutable_storage = [NSMutableArray new];
-    for(int i=0;i<[member_list count];i++){
-        [mutable_storage addObject:[[Container_Dictionary_String_String new] initWithDictionary:[member_list objectAtIndex:i]]];
-    }
-    self.Includes = [mutable_storage copy];
-}
-
-    
     if ([properties objectForKey:@"Excludes"]){
     NSArray* member_list = [properties objectForKey:@"Excludes"];
     NSMutableArray* mutable_storage = [NSMutableArray new];
@@ -691,6 +681,16 @@
         [mutable_storage addObject:[[Container_Dictionary_String_String new] initWithDictionary:[member_list objectAtIndex:i]]];
     }
     self.Excludes = [mutable_storage copy];
+}
+
+    
+    if ([properties objectForKey:@"Includes"]){
+    NSArray* member_list = [properties objectForKey:@"Includes"];
+    NSMutableArray* mutable_storage = [NSMutableArray new];
+    for(int i=0;i<[member_list count];i++){
+        [mutable_storage addObject:[[Container_Dictionary_String_String new] initWithDictionary:[member_list objectAtIndex:i]]];
+    }
+    self.Includes = [mutable_storage copy];
 }
 
     
@@ -726,10 +726,6 @@
     }
 
     
-    self.OrderId = [properties valueForKey:@"OrderId"];
-    
-    self.PurchaseDate = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"PurchaseDate"]];
-    
     if ([properties objectForKey:@"Items"]){
     NSArray* member_list = [properties objectForKey:@"Items"];
     NSMutableArray* mutable_storage = [NSMutableArray new];
@@ -739,6 +735,10 @@
     self.Items = [mutable_storage copy];
 }
 
+    
+    self.OrderId = [properties valueForKey:@"OrderId"];
+    
+    self.PurchaseDate = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"PurchaseDate"]];
     
 
     return self;
@@ -755,11 +755,11 @@
     }
 
     
-    self.ItemInstanceId = [properties valueForKey:@"ItemInstanceId"];
+    self.CharacterId = [properties valueForKey:@"CharacterId"];
     
     self.ConsumeCount = [properties valueForKey:@"ConsumeCount"];
     
-    self.CharacterId = [properties valueForKey:@"CharacterId"];
+    self.ItemInstanceId = [properties valueForKey:@"ItemInstanceId"];
     
 
     return self;
@@ -795,9 +795,9 @@
     }
 
     
-    self.Name = [properties valueForKey:@"Name"];
-    
     self.EmailAddress = [properties valueForKey:@"EmailAddress"];
+    
+    self.Name = [properties valueForKey:@"Name"];
     
 
     return self;
@@ -873,11 +873,11 @@
     }
 
     
-    self.pfRegion = (Region)[properties valueForKey:@"Region"];
-    
     self.BuildVersion = [properties valueForKey:@"BuildVersion"];
     
     self.GameMode = [properties valueForKey:@"GameMode"];
+    
+    self.pfRegion = (Region)[properties valueForKey:@"Region"];
     
     self.StatisticName = [properties valueForKey:@"StatisticName"];
     
@@ -898,6 +898,8 @@
     }
 
     
+    self.GameCount = [properties valueForKey:@"GameCount"];
+    
     if ([properties objectForKey:@"Games"]){
     NSArray* member_list = [properties objectForKey:@"Games"];
     NSMutableArray* mutable_storage = [NSMutableArray new];
@@ -909,8 +911,6 @@
 
     
     self.PlayerCount = [properties valueForKey:@"PlayerCount"];
-    
-    self.GameCount = [properties valueForKey:@"GameCount"];
     
 
     return self;
@@ -946,11 +946,11 @@
     
     self.FunctionParameter = [properties valueForKey:@"FunctionParameter"];
     
+    self.GeneratePlayStreamEvent = [[properties valueForKey:@"GeneratePlayStreamEvent"] boolValue];
+    
     self.RevisionSelection = (CloudScriptRevisionOption)[properties valueForKey:@"RevisionSelection"];
     
     self.SpecificRevision = [properties valueForKey:@"SpecificRevision"];
-    
-    self.GeneratePlayStreamEvent = [[properties valueForKey:@"GeneratePlayStreamEvent"] boolValue];
     
 
     return self;
@@ -967,13 +967,19 @@
     }
 
     
-    self.FunctionName = [properties valueForKey:@"FunctionName"];
+    self.APIRequestsIssued = [properties valueForKey:@"APIRequestsIssued"];
     
-    self.Revision = [properties valueForKey:@"Revision"];
+    self.Error = [[ScriptExecutionError new] initWithDictionary:[properties objectForKey:@"Error"]];
+    
+    self.ExecutionTimeSeconds = [properties valueForKey:@"ExecutionTimeSeconds"];
+    
+    self.FunctionName = [properties valueForKey:@"FunctionName"];
     
     self.FunctionResult = [properties valueForKey:@"FunctionResult"];
     
     self.FunctionResultTooLarge = [[properties valueForKey:@"FunctionResultTooLarge"] boolValue];
+    
+    self.HttpRequestsIssued = [properties valueForKey:@"HttpRequestsIssued"];
     
     if ([properties objectForKey:@"Logs"]){
     NSArray* member_list = [properties objectForKey:@"Logs"];
@@ -987,17 +993,11 @@
     
     self.LogsTooLarge = [[properties valueForKey:@"LogsTooLarge"] boolValue];
     
-    self.ExecutionTimeSeconds = [properties valueForKey:@"ExecutionTimeSeconds"];
+    self.MemoryConsumedBytes = [properties valueForKey:@"MemoryConsumedBytes"];
     
     self.ProcessorTimeSeconds = [properties valueForKey:@"ProcessorTimeSeconds"];
     
-    self.MemoryConsumedBytes = [properties valueForKey:@"MemoryConsumedBytes"];
-    
-    self.APIRequestsIssued = [properties valueForKey:@"APIRequestsIssued"];
-    
-    self.HttpRequestsIssued = [properties valueForKey:@"HttpRequestsIssued"];
-    
-    self.Error = [[ScriptExecutionError new] initWithDictionary:[properties objectForKey:@"Error"]];
+    self.Revision = [properties valueForKey:@"Revision"];
     
 
     return self;
@@ -1033,11 +1033,17 @@
     }
 
     
+    self.CurrentMatchmakerLobbyId = [properties valueForKey:@"CurrentMatchmakerLobbyId"];
+    
+    self.FacebookInfo = [[UserFacebookInfo new] initWithDictionary:[properties objectForKey:@"FacebookInfo"]];
+    
     self.FriendPlayFabId = [properties valueForKey:@"FriendPlayFabId"];
     
-    self.Username = [properties valueForKey:@"Username"];
+    self.GameCenterInfo = [[UserGameCenterInfo new] initWithDictionary:[properties objectForKey:@"GameCenterInfo"]];
     
-    self.TitleDisplayName = [properties valueForKey:@"TitleDisplayName"];
+    self.Profile = [[PlayerProfileModel new] initWithDictionary:[properties objectForKey:@"Profile"]];
+    
+    self.SteamInfo = [[UserSteamInfo new] initWithDictionary:[properties objectForKey:@"SteamInfo"]];
     
     if ([properties objectForKey:@"Tags"]){
     NSArray* member_list = [properties objectForKey:@"Tags"];
@@ -1049,15 +1055,9 @@
 }
 
     
-    self.CurrentMatchmakerLobbyId = [properties valueForKey:@"CurrentMatchmakerLobbyId"];
+    self.TitleDisplayName = [properties valueForKey:@"TitleDisplayName"];
     
-    self.FacebookInfo = [[UserFacebookInfo new] initWithDictionary:[properties objectForKey:@"FacebookInfo"]];
-    
-    self.SteamInfo = [[UserSteamInfo new] initWithDictionary:[properties objectForKey:@"SteamInfo"]];
-    
-    self.GameCenterInfo = [[UserGameCenterInfo new] initWithDictionary:[properties objectForKey:@"GameCenterInfo"]];
-    
-    self.Profile = [[PlayerProfileModel new] initWithDictionary:[properties objectForKey:@"Profile"]];
+    self.Username = [properties valueForKey:@"Username"];
     
 
     return self;
@@ -1093,15 +1093,19 @@
     }
 
     
-    self.pfRegion = (Region)[properties valueForKey:@"Region"];
-    
-    self.LobbyID = [properties valueForKey:@"LobbyID"];
-    
     self.BuildVersion = [properties valueForKey:@"BuildVersion"];
     
     self.GameMode = [properties valueForKey:@"GameMode"];
     
-    self.StatisticName = [properties valueForKey:@"StatisticName"];
+    self.GameServerData = [properties valueForKey:@"GameServerData"];
+    
+    self.GameServerState = [properties valueForKey:@"GameServerState"];
+    
+    self.GameServerStateEnum = (GameInstanceState)[properties valueForKey:@"GameServerStateEnum"];
+    
+    self.LastHeartbeat = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"LastHeartbeat"]];
+    
+    self.LobbyID = [properties valueForKey:@"LobbyID"];
     
     self.MaxPlayers = [properties valueForKey:@"MaxPlayers"];
     
@@ -1115,13 +1119,15 @@
 }
 
     
+    self.pfRegion = (Region)[properties valueForKey:@"Region"];
+    
     self.RunTime = [properties valueForKey:@"RunTime"];
     
-    self.GameServerState = [properties valueForKey:@"GameServerState"];
+    self.ServerHostname = [properties valueForKey:@"ServerHostname"];
     
-    self.GameServerStateEnum = (GameInstanceState)[properties valueForKey:@"GameServerStateEnum"];
+    self.ServerPort = [properties valueForKey:@"ServerPort"];
     
-    self.GameServerData = [properties valueForKey:@"GameServerData"];
+    self.StatisticName = [properties valueForKey:@"StatisticName"];
     
     if ([properties objectForKey:@"Tags"]){
     NSDictionary* member_list = [properties objectForKey:@"Tags"];
@@ -1132,12 +1138,6 @@
     self.Tags = [mutable_storage copy];
 }
 
-    
-    self.LastHeartbeat = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"LastHeartbeat"]];
-    
-    self.ServerHostname = [properties valueForKey:@"ServerHostname"];
-    
-    self.ServerPort = [properties valueForKey:@"ServerPort"];
     
 
     return self;
@@ -1236,13 +1236,13 @@
     }
 
     
-    self.PlayFabId = [properties valueForKey:@"PlayFabId"];
-    
-    self.Username = [properties valueForKey:@"Username"];
-    
     self.Email = [properties valueForKey:@"Email"];
     
+    self.PlayFabId = [properties valueForKey:@"PlayFabId"];
+    
     self.TitleDisplayName = [properties valueForKey:@"TitleDisplayName"];
+    
+    self.Username = [properties valueForKey:@"Username"];
     
 
     return self;
@@ -1318,9 +1318,9 @@
     }
 
     
-    self.PlayFabId = [properties valueForKey:@"PlayFabId"];
-    
     self.CharacterId = [properties valueForKey:@"CharacterId"];
+    
+    self.IfChangedFromDataVersion = [properties valueForKey:@"IfChangedFromDataVersion"];
     
     if ([properties objectForKey:@"Keys"]){
     NSArray* member_list = [properties objectForKey:@"Keys"];
@@ -1332,7 +1332,7 @@
 }
 
     
-    self.IfChangedFromDataVersion = [properties valueForKey:@"IfChangedFromDataVersion"];
+    self.PlayFabId = [properties valueForKey:@"PlayFabId"];
     
 
     return self;
@@ -1378,9 +1378,9 @@
     }
 
     
-    self.CharacterId = [properties valueForKey:@"CharacterId"];
-    
     self.CatalogVersion = [properties valueForKey:@"CatalogVersion"];
+    
+    self.CharacterId = [properties valueForKey:@"CharacterId"];
     
 
     return self;
@@ -1446,11 +1446,11 @@
     
     self.CharacterType = [properties valueForKey:@"CharacterType"];
     
-    self.StatisticName = [properties valueForKey:@"StatisticName"];
+    self.MaxResultsCount = [properties valueForKey:@"MaxResultsCount"];
     
     self.StartPosition = [properties valueForKey:@"StartPosition"];
     
-    self.MaxResultsCount = [properties valueForKey:@"MaxResultsCount"];
+    self.StatisticName = [properties valueForKey:@"StatisticName"];
     
 
     return self;
@@ -1534,9 +1534,9 @@
     }
 
     
-    self.Key = [properties valueForKey:@"Key"];
-    
     self.HttpMethod = [properties valueForKey:@"HttpMethod"];
+    
+    self.Key = [properties valueForKey:@"Key"];
     
     self.ThruCDN = [[properties valueForKey:@"ThruCDN"] boolValue];
     
@@ -1572,19 +1572,19 @@
     }
 
     
-    self.StatisticName = [properties valueForKey:@"StatisticName"];
+    self.IncludeFacebookFriends = [[properties valueForKey:@"IncludeFacebookFriends"] boolValue];
+    
+    self.IncludeSteamFriends = [[properties valueForKey:@"IncludeSteamFriends"] boolValue];
     
     self.MaxResultsCount = [properties valueForKey:@"MaxResultsCount"];
     
     self.PlayFabId = [properties valueForKey:@"PlayFabId"];
     
-    self.IncludeSteamFriends = [[properties valueForKey:@"IncludeSteamFriends"] boolValue];
+    self.ProfileConstraints = [[PlayerProfileViewConstraints new] initWithDictionary:[properties objectForKey:@"ProfileConstraints"]];
     
-    self.IncludeFacebookFriends = [[properties valueForKey:@"IncludeFacebookFriends"] boolValue];
+    self.StatisticName = [properties valueForKey:@"StatisticName"];
     
     self.Version = [properties valueForKey:@"Version"];
-    
-    self.ProfileConstraints = [[PlayerProfileViewConstraints new] initWithDictionary:[properties objectForKey:@"ProfileConstraints"]];
     
 
     return self;
@@ -1611,9 +1611,9 @@
 }
 
     
-    self.Version = [properties valueForKey:@"Version"];
-    
     self.NextReset = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"NextReset"]];
+    
+    self.Version = [properties valueForKey:@"Version"];
     
 
     return self;
@@ -1630,19 +1630,19 @@
     }
 
     
-    self.StatisticName = [properties valueForKey:@"StatisticName"];
-    
-    self.StartPosition = [properties valueForKey:@"StartPosition"];
-    
-    self.MaxResultsCount = [properties valueForKey:@"MaxResultsCount"];
+    self.IncludeFacebookFriends = [[properties valueForKey:@"IncludeFacebookFriends"] boolValue];
     
     self.IncludeSteamFriends = [[properties valueForKey:@"IncludeSteamFriends"] boolValue];
     
-    self.IncludeFacebookFriends = [[properties valueForKey:@"IncludeFacebookFriends"] boolValue];
-    
-    self.Version = [properties valueForKey:@"Version"];
+    self.MaxResultsCount = [properties valueForKey:@"MaxResultsCount"];
     
     self.ProfileConstraints = [[PlayerProfileViewConstraints new] initWithDictionary:[properties objectForKey:@"ProfileConstraints"]];
+    
+    self.StartPosition = [properties valueForKey:@"StartPosition"];
+    
+    self.StatisticName = [properties valueForKey:@"StatisticName"];
+    
+    self.Version = [properties valueForKey:@"Version"];
     
 
     return self;
@@ -1659,9 +1659,9 @@
     }
 
     
-    self.IncludeSteamFriends = [[properties valueForKey:@"IncludeSteamFriends"] boolValue];
-    
     self.IncludeFacebookFriends = [[properties valueForKey:@"IncludeFacebookFriends"] boolValue];
+    
+    self.IncludeSteamFriends = [[properties valueForKey:@"IncludeSteamFriends"] boolValue];
     
     self.ProfileConstraints = [[PlayerProfileViewConstraints new] initWithDictionary:[properties objectForKey:@"ProfileConstraints"]];
     
@@ -1705,13 +1705,13 @@
     }
 
     
-    self.StatisticName = [properties valueForKey:@"StatisticName"];
-    
     self.CharacterId = [properties valueForKey:@"CharacterId"];
     
     self.CharacterType = [properties valueForKey:@"CharacterType"];
     
     self.MaxResultsCount = [properties valueForKey:@"MaxResultsCount"];
+    
+    self.StatisticName = [properties valueForKey:@"StatisticName"];
     
 
     return self;
@@ -1753,15 +1753,15 @@
     }
 
     
+    self.MaxResultsCount = [properties valueForKey:@"MaxResultsCount"];
+    
     self.PlayFabId = [properties valueForKey:@"PlayFabId"];
+    
+    self.ProfileConstraints = [[PlayerProfileViewConstraints new] initWithDictionary:[properties objectForKey:@"ProfileConstraints"]];
     
     self.StatisticName = [properties valueForKey:@"StatisticName"];
     
-    self.MaxResultsCount = [properties valueForKey:@"MaxResultsCount"];
-    
     self.Version = [properties valueForKey:@"Version"];
-    
-    self.ProfileConstraints = [[PlayerProfileViewConstraints new] initWithDictionary:[properties objectForKey:@"ProfileConstraints"]];
     
 
     return self;
@@ -1788,9 +1788,9 @@
 }
 
     
-    self.Version = [properties valueForKey:@"Version"];
-    
     self.NextReset = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"NextReset"]];
+    
+    self.Version = [properties valueForKey:@"Version"];
     
 
     return self;
@@ -1807,9 +1807,9 @@
     }
 
     
-    self.StatisticName = [properties valueForKey:@"StatisticName"];
-    
     self.MaxResultsCount = [properties valueForKey:@"MaxResultsCount"];
+    
+    self.StatisticName = [properties valueForKey:@"StatisticName"];
     
 
     return self;
@@ -1851,15 +1851,15 @@
     }
 
     
-    self.StatisticName = [properties valueForKey:@"StatisticName"];
+    self.MaxResultsCount = [properties valueForKey:@"MaxResultsCount"];
+    
+    self.ProfileConstraints = [[PlayerProfileViewConstraints new] initWithDictionary:[properties objectForKey:@"ProfileConstraints"]];
     
     self.StartPosition = [properties valueForKey:@"StartPosition"];
     
-    self.MaxResultsCount = [properties valueForKey:@"MaxResultsCount"];
+    self.StatisticName = [properties valueForKey:@"StatisticName"];
     
     self.Version = [properties valueForKey:@"Version"];
-    
-    self.ProfileConstraints = [[PlayerProfileViewConstraints new] initWithDictionary:[properties objectForKey:@"ProfileConstraints"]];
     
 
     return self;
@@ -1886,9 +1886,9 @@
 }
 
     
-    self.Version = [properties valueForKey:@"Version"];
-    
     self.NextReset = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"NextReset"]];
+    
+    self.Version = [properties valueForKey:@"Version"];
     
 
     return self;
@@ -1939,9 +1939,9 @@
     }
 
     
-    self.PlayFabId = [properties valueForKey:@"PlayFabId"];
-    
     self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
+    
+    self.PlayFabId = [properties valueForKey:@"PlayFabId"];
     
 
     return self;
@@ -1958,53 +1958,25 @@
     }
 
     
-    self.GetUserAccountInfo = [[properties valueForKey:@"GetUserAccountInfo"] boolValue];
-    
-    self.GetUserInventory = [[properties valueForKey:@"GetUserInventory"] boolValue];
-    
-    self.GetUserVirtualCurrency = [[properties valueForKey:@"GetUserVirtualCurrency"] boolValue];
-    
-    self.GetUserData = [[properties valueForKey:@"GetUserData"] boolValue];
-    
-    if ([properties objectForKey:@"UserDataKeys"]){
-    NSArray* member_list = [properties objectForKey:@"UserDataKeys"];
-    NSMutableArray* mutable_storage = [NSMutableArray new];
-    for(int i=0;i<[member_list count];i++){
-        [mutable_storage addObject:[member_list objectAtIndex:i]];
-    }
-    self.UserDataKeys = [mutable_storage copy];
-}
-
-    
-    self.GetUserReadOnlyData = [[properties valueForKey:@"GetUserReadOnlyData"] boolValue];
-    
-    if ([properties objectForKey:@"UserReadOnlyDataKeys"]){
-    NSArray* member_list = [properties objectForKey:@"UserReadOnlyDataKeys"];
-    NSMutableArray* mutable_storage = [NSMutableArray new];
-    for(int i=0;i<[member_list count];i++){
-        [mutable_storage addObject:[member_list objectAtIndex:i]];
-    }
-    self.UserReadOnlyDataKeys = [mutable_storage copy];
-}
-
-    
     self.GetCharacterInventories = [[properties valueForKey:@"GetCharacterInventories"] boolValue];
     
     self.GetCharacterList = [[properties valueForKey:@"GetCharacterList"] boolValue];
     
-    self.GetTitleData = [[properties valueForKey:@"GetTitleData"] boolValue];
-    
-    if ([properties objectForKey:@"TitleDataKeys"]){
-    NSArray* member_list = [properties objectForKey:@"TitleDataKeys"];
-    NSMutableArray* mutable_storage = [NSMutableArray new];
-    for(int i=0;i<[member_list count];i++){
-        [mutable_storage addObject:[member_list objectAtIndex:i]];
-    }
-    self.TitleDataKeys = [mutable_storage copy];
-}
-
+    self.GetPlayerProfile = [[properties valueForKey:@"GetPlayerProfile"] boolValue];
     
     self.GetPlayerStatistics = [[properties valueForKey:@"GetPlayerStatistics"] boolValue];
+    
+    self.GetTitleData = [[properties valueForKey:@"GetTitleData"] boolValue];
+    
+    self.GetUserAccountInfo = [[properties valueForKey:@"GetUserAccountInfo"] boolValue];
+    
+    self.GetUserData = [[properties valueForKey:@"GetUserData"] boolValue];
+    
+    self.GetUserInventory = [[properties valueForKey:@"GetUserInventory"] boolValue];
+    
+    self.GetUserReadOnlyData = [[properties valueForKey:@"GetUserReadOnlyData"] boolValue];
+    
+    self.GetUserVirtualCurrency = [[properties valueForKey:@"GetUserVirtualCurrency"] boolValue];
     
     if ([properties objectForKey:@"PlayerStatisticNames"]){
     NSArray* member_list = [properties objectForKey:@"PlayerStatisticNames"];
@@ -2016,9 +1988,37 @@
 }
 
     
-    self.GetPlayerProfile = [[properties valueForKey:@"GetPlayerProfile"] boolValue];
-    
     self.ProfileConstraints = [[PlayerProfileViewConstraints new] initWithDictionary:[properties objectForKey:@"ProfileConstraints"]];
+    
+    if ([properties objectForKey:@"TitleDataKeys"]){
+    NSArray* member_list = [properties objectForKey:@"TitleDataKeys"];
+    NSMutableArray* mutable_storage = [NSMutableArray new];
+    for(int i=0;i<[member_list count];i++){
+        [mutable_storage addObject:[member_list objectAtIndex:i]];
+    }
+    self.TitleDataKeys = [mutable_storage copy];
+}
+
+    
+    if ([properties objectForKey:@"UserDataKeys"]){
+    NSArray* member_list = [properties objectForKey:@"UserDataKeys"];
+    NSMutableArray* mutable_storage = [NSMutableArray new];
+    for(int i=0;i<[member_list count];i++){
+        [mutable_storage addObject:[member_list objectAtIndex:i]];
+    }
+    self.UserDataKeys = [mutable_storage copy];
+}
+
+    
+    if ([properties objectForKey:@"UserReadOnlyDataKeys"]){
+    NSArray* member_list = [properties objectForKey:@"UserReadOnlyDataKeys"];
+    NSMutableArray* mutable_storage = [NSMutableArray new];
+    for(int i=0;i<[member_list count];i++){
+        [mutable_storage addObject:[member_list objectAtIndex:i]];
+    }
+    self.UserReadOnlyDataKeys = [mutable_storage copy];
+}
+
     
 
     return self;
@@ -2035,9 +2035,9 @@
     }
 
     
-    self.PlayFabId = [properties valueForKey:@"PlayFabId"];
-    
     self.InfoResultPayload = [[GetPlayerCombinedInfoResultPayload new] initWithDictionary:[properties objectForKey:@"InfoResultPayload"]];
+    
+    self.PlayFabId = [properties valueForKey:@"PlayFabId"];
     
 
     return self;
@@ -2056,6 +2056,60 @@
     
     self.AccountInfo = [[UserAccountInfo new] initWithDictionary:[properties objectForKey:@"AccountInfo"]];
     
+    if ([properties objectForKey:@"CharacterInventories"]){
+    NSArray* member_list = [properties objectForKey:@"CharacterInventories"];
+    NSMutableArray* mutable_storage = [NSMutableArray new];
+    for(int i=0;i<[member_list count];i++){
+        [mutable_storage addObject:[[CharacterInventory new] initWithDictionary:[member_list objectAtIndex:i]]];
+    }
+    self.CharacterInventories = [mutable_storage copy];
+}
+
+    
+    if ([properties objectForKey:@"CharacterList"]){
+    NSArray* member_list = [properties objectForKey:@"CharacterList"];
+    NSMutableArray* mutable_storage = [NSMutableArray new];
+    for(int i=0;i<[member_list count];i++){
+        [mutable_storage addObject:[[CharacterResult new] initWithDictionary:[member_list objectAtIndex:i]]];
+    }
+    self.CharacterList = [mutable_storage copy];
+}
+
+    
+    self.PlayerProfile = [[PlayerProfileModel new] initWithDictionary:[properties objectForKey:@"PlayerProfile"]];
+    
+    if ([properties objectForKey:@"PlayerStatistics"]){
+    NSArray* member_list = [properties objectForKey:@"PlayerStatistics"];
+    NSMutableArray* mutable_storage = [NSMutableArray new];
+    for(int i=0;i<[member_list count];i++){
+        [mutable_storage addObject:[[StatisticValue new] initWithDictionary:[member_list objectAtIndex:i]]];
+    }
+    self.PlayerStatistics = [mutable_storage copy];
+}
+
+    
+    if ([properties objectForKey:@"TitleData"]){
+    NSDictionary* member_list = [properties objectForKey:@"TitleData"];
+    NSMutableDictionary* mutable_storage = [NSMutableDictionary new];
+    for(NSString* key in member_list){
+        [mutable_storage setValue:[member_list objectForKey:key] forKey:key];
+    }
+    self.TitleData = [mutable_storage copy];
+}
+
+    
+    if ([properties objectForKey:@"UserData"]){
+    NSDictionary* member_list = [properties objectForKey:@"UserData"];
+    NSMutableDictionary* mutable_storage = [NSMutableDictionary new];
+    for(NSString* key in member_list){
+        [mutable_storage setValue:[[UserDataRecord new] initWithDictionary:[member_list objectForKey:key]] forKey:key];
+    }
+    self.UserData = [mutable_storage copy];
+}
+
+    
+    self.UserDataVersion = [properties valueForKey:@"UserDataVersion"];
+    
     if ([properties objectForKey:@"UserInventory"]){
     NSArray* member_list = [properties objectForKey:@"UserInventory"];
     NSMutableArray* mutable_storage = [NSMutableArray new];
@@ -2065,6 +2119,18 @@
     self.UserInventory = [mutable_storage copy];
 }
 
+    
+    if ([properties objectForKey:@"UserReadOnlyData"]){
+    NSDictionary* member_list = [properties objectForKey:@"UserReadOnlyData"];
+    NSMutableDictionary* mutable_storage = [NSMutableDictionary new];
+    for(NSString* key in member_list){
+        [mutable_storage setValue:[[UserDataRecord new] initWithDictionary:[member_list objectForKey:key]] forKey:key];
+    }
+    self.UserReadOnlyData = [mutable_storage copy];
+}
+
+    
+    self.UserReadOnlyDataVersion = [properties valueForKey:@"UserReadOnlyDataVersion"];
     
     if ([properties objectForKey:@"UserVirtualCurrency"]){
     NSDictionary* member_list = [properties objectForKey:@"UserVirtualCurrency"];
@@ -2085,72 +2151,6 @@
     self.UserVirtualCurrencyRechargeTimes = [mutable_storage copy];
 }
 
-    
-    if ([properties objectForKey:@"UserData"]){
-    NSDictionary* member_list = [properties objectForKey:@"UserData"];
-    NSMutableDictionary* mutable_storage = [NSMutableDictionary new];
-    for(NSString* key in member_list){
-        [mutable_storage setValue:[[UserDataRecord new] initWithDictionary:[member_list objectForKey:key]] forKey:key];
-    }
-    self.UserData = [mutable_storage copy];
-}
-
-    
-    self.UserDataVersion = [properties valueForKey:@"UserDataVersion"];
-    
-    if ([properties objectForKey:@"UserReadOnlyData"]){
-    NSDictionary* member_list = [properties objectForKey:@"UserReadOnlyData"];
-    NSMutableDictionary* mutable_storage = [NSMutableDictionary new];
-    for(NSString* key in member_list){
-        [mutable_storage setValue:[[UserDataRecord new] initWithDictionary:[member_list objectForKey:key]] forKey:key];
-    }
-    self.UserReadOnlyData = [mutable_storage copy];
-}
-
-    
-    self.UserReadOnlyDataVersion = [properties valueForKey:@"UserReadOnlyDataVersion"];
-    
-    if ([properties objectForKey:@"CharacterList"]){
-    NSArray* member_list = [properties objectForKey:@"CharacterList"];
-    NSMutableArray* mutable_storage = [NSMutableArray new];
-    for(int i=0;i<[member_list count];i++){
-        [mutable_storage addObject:[[CharacterResult new] initWithDictionary:[member_list objectAtIndex:i]]];
-    }
-    self.CharacterList = [mutable_storage copy];
-}
-
-    
-    if ([properties objectForKey:@"CharacterInventories"]){
-    NSArray* member_list = [properties objectForKey:@"CharacterInventories"];
-    NSMutableArray* mutable_storage = [NSMutableArray new];
-    for(int i=0;i<[member_list count];i++){
-        [mutable_storage addObject:[[CharacterInventory new] initWithDictionary:[member_list objectAtIndex:i]]];
-    }
-    self.CharacterInventories = [mutable_storage copy];
-}
-
-    
-    if ([properties objectForKey:@"TitleData"]){
-    NSDictionary* member_list = [properties objectForKey:@"TitleData"];
-    NSMutableDictionary* mutable_storage = [NSMutableDictionary new];
-    for(NSString* key in member_list){
-        [mutable_storage setValue:[member_list objectForKey:key] forKey:key];
-    }
-    self.TitleData = [mutable_storage copy];
-}
-
-    
-    if ([properties objectForKey:@"PlayerStatistics"]){
-    NSArray* member_list = [properties objectForKey:@"PlayerStatistics"];
-    NSMutableArray* mutable_storage = [NSMutableArray new];
-    for(int i=0;i<[member_list count];i++){
-        [mutable_storage addObject:[[StatisticValue new] initWithDictionary:[member_list objectAtIndex:i]]];
-    }
-    self.PlayerStatistics = [mutable_storage copy];
-}
-
-    
-    self.PlayerProfile = [[PlayerProfileModel new] initWithDictionary:[properties objectForKey:@"PlayerProfile"]];
     
 
     return self;
@@ -2345,9 +2345,9 @@
     }
 
     
-    self.PlayFabId = [properties valueForKey:@"PlayFabId"];
-    
     self.Namespace = [properties valueForKey:@"Namespace"];
+    
+    self.PlayFabId = [properties valueForKey:@"PlayFabId"];
     
 
     return self;
@@ -2408,16 +2408,6 @@
     }
 
     
-    if ([properties objectForKey:@"OpenedTrades"]){
-    NSArray* member_list = [properties objectForKey:@"OpenedTrades"];
-    NSMutableArray* mutable_storage = [NSMutableArray new];
-    for(int i=0;i<[member_list count];i++){
-        [mutable_storage addObject:[[TradeInfo new] initWithDictionary:[member_list objectAtIndex:i]]];
-    }
-    self.OpenedTrades = [mutable_storage copy];
-}
-
-    
     if ([properties objectForKey:@"AcceptedTrades"]){
     NSArray* member_list = [properties objectForKey:@"AcceptedTrades"];
     NSMutableArray* mutable_storage = [NSMutableArray new];
@@ -2425,6 +2415,16 @@
         [mutable_storage addObject:[[TradeInfo new] initWithDictionary:[member_list objectAtIndex:i]]];
     }
     self.AcceptedTrades = [mutable_storage copy];
+}
+
+    
+    if ([properties objectForKey:@"OpenedTrades"]){
+    NSArray* member_list = [properties objectForKey:@"OpenedTrades"];
+    NSMutableArray* mutable_storage = [NSMutableArray new];
+    for(int i=0;i<[member_list count];i++){
+        [mutable_storage addObject:[[TradeInfo new] initWithDictionary:[member_list objectAtIndex:i]]];
+    }
+    self.OpenedTrades = [mutable_storage copy];
 }
 
     
@@ -2864,11 +2864,11 @@
     
     self.PaymentProvider = [properties valueForKey:@"PaymentProvider"];
     
+    self.PurchaseDate = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"PurchaseDate"]];
+    
     self.TransactionId = [properties valueForKey:@"TransactionId"];
     
     self.TransactionStatus = [properties valueForKey:@"TransactionStatus"];
-    
-    self.PurchaseDate = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"PurchaseDate"]];
     
 
     return self;
@@ -2885,11 +2885,11 @@
     }
 
     
+    self.ABTestParent = [properties valueForKey:@"ABTestParent"];
+    
     self.Id = [properties valueForKey:@"Id"];
     
     self.Name = [properties valueForKey:@"Name"];
-    
-    self.ABTestParent = [properties valueForKey:@"ABTestParent"];
     
 
     return self;
@@ -2906,7 +2906,7 @@
     }
 
     
-    self.SharedGroupId = [properties valueForKey:@"SharedGroupId"];
+    self.GetMembers = [[properties valueForKey:@"GetMembers"] boolValue];
     
     if ([properties objectForKey:@"Keys"]){
     NSArray* member_list = [properties objectForKey:@"Keys"];
@@ -2918,7 +2918,7 @@
 }
 
     
-    self.GetMembers = [[properties valueForKey:@"GetMembers"] boolValue];
+    self.SharedGroupId = [properties valueForKey:@"SharedGroupId"];
     
 
     return self;
@@ -2989,6 +2989,12 @@
     }
 
     
+    self.CatalogVersion = [properties valueForKey:@"CatalogVersion"];
+    
+    self.MarketingData = [[StoreMarketingModel new] initWithDictionary:[properties objectForKey:@"MarketingData"]];
+    
+    self.Source = (SourceType)[properties valueForKey:@"Source"];
+    
     if ([properties objectForKey:@"Store"]){
     NSArray* member_list = [properties objectForKey:@"Store"];
     NSMutableArray* mutable_storage = [NSMutableArray new];
@@ -2999,13 +3005,7 @@
 }
 
     
-    self.Source = (SourceType)[properties valueForKey:@"Source"];
-    
-    self.CatalogVersion = [properties valueForKey:@"CatalogVersion"];
-    
     self.StoreId = [properties valueForKey:@"StoreId"];
-    
-    self.MarketingData = [[StoreMarketingModel new] initWithDictionary:[properties objectForKey:@"MarketingData"]];
     
 
     return self;
@@ -3218,6 +3218,8 @@
     }
 
     
+    self.IfChangedFromDataVersion = [properties valueForKey:@"IfChangedFromDataVersion"];
+    
     if ([properties objectForKey:@"Keys"]){
     NSArray* member_list = [properties objectForKey:@"Keys"];
     NSMutableArray* mutable_storage = [NSMutableArray new];
@@ -3229,8 +3231,6 @@
 
     
     self.PlayFabId = [properties valueForKey:@"PlayFabId"];
-    
-    self.IfChangedFromDataVersion = [properties valueForKey:@"IfChangedFromDataVersion"];
     
 
     return self;
@@ -3334,9 +3334,9 @@
     }
 
     
-    self.TitleId = [properties valueForKey:@"TitleId"];
-    
     self.PublicKeyHint = [properties valueForKey:@"PublicKeyHint"];
+    
+    self.TitleId = [properties valueForKey:@"TitleId"];
     
 
     return self;
@@ -3391,9 +3391,9 @@
     
     self.CatalogVersion = [properties valueForKey:@"CatalogVersion"];
     
-    self.ItemId = [properties valueForKey:@"ItemId"];
-    
     self.CharacterName = [properties valueForKey:@"CharacterName"];
+    
+    self.ItemId = [properties valueForKey:@"ItemId"];
     
 
     return self;
@@ -3431,31 +3431,7 @@
     }
 
     
-    self.ItemId = [properties valueForKey:@"ItemId"];
-    
-    self.ItemInstanceId = [properties valueForKey:@"ItemInstanceId"];
-    
-    self.ItemClass = [properties valueForKey:@"ItemClass"];
-    
-    self.PurchaseDate = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"PurchaseDate"]];
-    
-    self.Expiration = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"Expiration"]];
-    
-    self.RemainingUses = [properties valueForKey:@"RemainingUses"];
-    
-    self.UsesIncrementedBy = [properties valueForKey:@"UsesIncrementedBy"];
-    
     self.Annotation = [properties valueForKey:@"Annotation"];
-    
-    self.CatalogVersion = [properties valueForKey:@"CatalogVersion"];
-    
-    self.BundleParent = [properties valueForKey:@"BundleParent"];
-    
-    self.DisplayName = [properties valueForKey:@"DisplayName"];
-    
-    self.UnitCurrency = [properties valueForKey:@"UnitCurrency"];
-    
-    self.UnitPrice = [properties valueForKey:@"UnitPrice"];
     
     if ([properties objectForKey:@"BundleContents"]){
     NSArray* member_list = [properties objectForKey:@"BundleContents"];
@@ -3467,6 +3443,10 @@
 }
 
     
+    self.BundleParent = [properties valueForKey:@"BundleParent"];
+    
+    self.CatalogVersion = [properties valueForKey:@"CatalogVersion"];
+    
     if ([properties objectForKey:@"CustomData"]){
     NSDictionary* member_list = [properties objectForKey:@"CustomData"];
     NSMutableDictionary* mutable_storage = [NSMutableDictionary new];
@@ -3476,6 +3456,26 @@
     self.CustomData = [mutable_storage copy];
 }
 
+    
+    self.DisplayName = [properties valueForKey:@"DisplayName"];
+    
+    self.Expiration = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"Expiration"]];
+    
+    self.ItemClass = [properties valueForKey:@"ItemClass"];
+    
+    self.ItemId = [properties valueForKey:@"ItemId"];
+    
+    self.ItemInstanceId = [properties valueForKey:@"ItemInstanceId"];
+    
+    self.PurchaseDate = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"PurchaseDate"]];
+    
+    self.RemainingUses = [properties valueForKey:@"RemainingUses"];
+    
+    self.UnitCurrency = [properties valueForKey:@"UnitCurrency"];
+    
+    self.UnitPrice = [properties valueForKey:@"UnitPrice"];
+    
+    self.UsesIncrementedBy = [properties valueForKey:@"UsesIncrementedBy"];
     
 
     return self;
@@ -3492,11 +3492,11 @@
     }
 
     
+    self.Annotation = [properties valueForKey:@"Annotation"];
+    
     self.ItemId = [properties valueForKey:@"ItemId"];
     
     self.Quantity = [properties valueForKey:@"Quantity"];
-    
-    self.Annotation = [properties valueForKey:@"Annotation"];
     
     if ([properties objectForKey:@"UpgradeFromItems"]){
     NSArray* member_list = [properties objectForKey:@"UpgradeFromItems"];
@@ -3542,13 +3542,13 @@
     }
 
     
-    self.AndroidDeviceId = [properties valueForKey:@"AndroidDeviceId"];
-    
-    self.OS = [properties valueForKey:@"OS"];
-    
     self.AndroidDevice = [properties valueForKey:@"AndroidDevice"];
     
+    self.AndroidDeviceId = [properties valueForKey:@"AndroidDeviceId"];
+    
     self.ForceLink = [[properties valueForKey:@"ForceLink"] boolValue];
+    
+    self.OS = [properties valueForKey:@"OS"];
     
 
     return self;
@@ -3614,13 +3614,13 @@
     }
 
     
+    self.Email = [properties valueForKey:@"Email"];
+    
     self.Platform = (LoginIdentityProvider)[properties valueForKey:@"Platform"];
     
     self.PlatformUserId = [properties valueForKey:@"PlatformUserId"];
     
     self.Username = [properties valueForKey:@"Username"];
-    
-    self.Email = [properties valueForKey:@"Email"];
     
 
     return self;
@@ -3671,9 +3671,9 @@
     }
 
     
-    self.GameCenterId = [properties valueForKey:@"GameCenterId"];
-    
     self.ForceLink = [[properties valueForKey:@"ForceLink"] boolValue];
+    
+    self.GameCenterId = [properties valueForKey:@"GameCenterId"];
     
 
     return self;
@@ -3705,9 +3705,9 @@
     }
 
     
-    self.ServerAuthCode = [properties valueForKey:@"ServerAuthCode"];
-    
     self.ForceLink = [[properties valueForKey:@"ForceLink"] boolValue];
+    
+    self.ServerAuthCode = [properties valueForKey:@"ServerAuthCode"];
     
 
     return self;
@@ -3741,11 +3741,11 @@
     
     self.DeviceId = [properties valueForKey:@"DeviceId"];
     
-    self.OS = [properties valueForKey:@"OS"];
-    
     self.DeviceModel = [properties valueForKey:@"DeviceModel"];
     
     self.ForceLink = [[properties valueForKey:@"ForceLink"] boolValue];
+    
+    self.OS = [properties valueForKey:@"OS"];
     
 
     return self;
@@ -3777,11 +3777,11 @@
     }
 
     
-    self.KongregateId = [properties valueForKey:@"KongregateId"];
-    
     self.AuthTicket = [properties valueForKey:@"AuthTicket"];
     
     self.ForceLink = [[properties valueForKey:@"ForceLink"] boolValue];
+    
+    self.KongregateId = [properties valueForKey:@"KongregateId"];
     
 
     return self;
@@ -3813,9 +3813,9 @@
     }
 
     
-    self.SteamTicket = [properties valueForKey:@"SteamTicket"];
-    
     self.ForceLink = [[properties valueForKey:@"ForceLink"] boolValue];
+    
+    self.SteamTicket = [properties valueForKey:@"SteamTicket"];
     
 
     return self;
@@ -3881,13 +3881,13 @@
     }
 
     
-    self.UserName = [properties valueForKey:@"UserName"];
-    
-    self.PublicKey = [properties valueForKey:@"PublicKey"];
-    
     self.DeviceName = [properties valueForKey:@"DeviceName"];
     
     self.ForceLink = [[properties valueForKey:@"ForceLink"] boolValue];
+    
+    self.PublicKey = [properties valueForKey:@"PublicKey"];
+    
+    self.UserName = [properties valueForKey:@"UserName"];
     
 
     return self;
@@ -3961,11 +3961,11 @@
     }
 
     
+    self.City = [properties valueForKey:@"City"];
+    
     self.pfContinentCode = (ContinentCode)[properties valueForKey:@"ContinentCode"];
     
     self.pfCountryCode = (CountryCode)[properties valueForKey:@"CountryCode"];
-    
-    self.City = [properties valueForKey:@"City"];
     
     self.Latitude = [properties valueForKey:@"Latitude"];
     
@@ -3986,17 +3986,17 @@
     }
 
     
-    self.SessionTicket = [properties valueForKey:@"SessionTicket"];
-    
-    self.PlayFabId = [properties valueForKey:@"PlayFabId"];
-    
-    self.NewlyCreated = [[properties valueForKey:@"NewlyCreated"] boolValue];
-    
-    self.SettingsForUser = [[UserSettings new] initWithDictionary:[properties objectForKey:@"SettingsForUser"]];
+    self.InfoResultPayload = [[GetPlayerCombinedInfoResultPayload new] initWithDictionary:[properties objectForKey:@"InfoResultPayload"]];
     
     self.LastLoginTime = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"LastLoginTime"]];
     
-    self.InfoResultPayload = [[GetPlayerCombinedInfoResultPayload new] initWithDictionary:[properties objectForKey:@"InfoResultPayload"]];
+    self.NewlyCreated = [[properties valueForKey:@"NewlyCreated"] boolValue];
+    
+    self.PlayFabId = [properties valueForKey:@"PlayFabId"];
+    
+    self.SessionTicket = [properties valueForKey:@"SessionTicket"];
+    
+    self.SettingsForUser = [[UserSettings new] initWithDictionary:[properties objectForKey:@"SettingsForUser"]];
     
 
     return self;
@@ -4013,21 +4013,21 @@
     }
 
     
-    self.AndroidDeviceId = [properties valueForKey:@"AndroidDeviceId"];
-    
-    self.OS = [properties valueForKey:@"OS"];
-    
     self.AndroidDevice = [properties valueForKey:@"AndroidDevice"];
+    
+    self.AndroidDeviceId = [properties valueForKey:@"AndroidDeviceId"];
     
     self.CreateAccount = [[properties valueForKey:@"CreateAccount"] boolValue];
     
-    self.TitleId = [properties valueForKey:@"TitleId"];
-    
     self.EncryptedRequest = [properties valueForKey:@"EncryptedRequest"];
+    
+    self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
+    
+    self.OS = [properties valueForKey:@"OS"];
     
     self.PlayerSecret = [properties valueForKey:@"PlayerSecret"];
     
-    self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
+    self.TitleId = [properties valueForKey:@"TitleId"];
     
 
     return self;
@@ -4044,17 +4044,17 @@
     }
 
     
-    self.CustomId = [properties valueForKey:@"CustomId"];
-    
     self.CreateAccount = [[properties valueForKey:@"CreateAccount"] boolValue];
     
-    self.TitleId = [properties valueForKey:@"TitleId"];
+    self.CustomId = [properties valueForKey:@"CustomId"];
     
     self.EncryptedRequest = [properties valueForKey:@"EncryptedRequest"];
     
+    self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
+    
     self.PlayerSecret = [properties valueForKey:@"PlayerSecret"];
     
-    self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
+    self.TitleId = [properties valueForKey:@"TitleId"];
     
 
     return self;
@@ -4071,13 +4071,13 @@
     }
 
     
-    self.TitleId = [properties valueForKey:@"TitleId"];
-    
     self.Email = [properties valueForKey:@"Email"];
+    
+    self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
     
     self.Password = [properties valueForKey:@"Password"];
     
-    self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
+    self.TitleId = [properties valueForKey:@"TitleId"];
     
 
     return self;
@@ -4098,13 +4098,13 @@
     
     self.CreateAccount = [[properties valueForKey:@"CreateAccount"] boolValue];
     
-    self.TitleId = [properties valueForKey:@"TitleId"];
-    
     self.EncryptedRequest = [properties valueForKey:@"EncryptedRequest"];
+    
+    self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
     
     self.PlayerSecret = [properties valueForKey:@"PlayerSecret"];
     
-    self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
+    self.TitleId = [properties valueForKey:@"TitleId"];
     
 
     return self;
@@ -4121,17 +4121,17 @@
     }
 
     
-    self.PlayerId = [properties valueForKey:@"PlayerId"];
-    
     self.CreateAccount = [[properties valueForKey:@"CreateAccount"] boolValue];
-    
-    self.TitleId = [properties valueForKey:@"TitleId"];
     
     self.EncryptedRequest = [properties valueForKey:@"EncryptedRequest"];
     
+    self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
+    
+    self.PlayerId = [properties valueForKey:@"PlayerId"];
+    
     self.PlayerSecret = [properties valueForKey:@"PlayerSecret"];
     
-    self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
+    self.TitleId = [properties valueForKey:@"TitleId"];
     
 
     return self;
@@ -4148,17 +4148,17 @@
     }
 
     
-    self.ServerAuthCode = [properties valueForKey:@"ServerAuthCode"];
-    
     self.CreateAccount = [[properties valueForKey:@"CreateAccount"] boolValue];
-    
-    self.TitleId = [properties valueForKey:@"TitleId"];
     
     self.EncryptedRequest = [properties valueForKey:@"EncryptedRequest"];
     
+    self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
+    
     self.PlayerSecret = [properties valueForKey:@"PlayerSecret"];
     
-    self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
+    self.ServerAuthCode = [properties valueForKey:@"ServerAuthCode"];
+    
+    self.TitleId = [properties valueForKey:@"TitleId"];
     
 
     return self;
@@ -4175,21 +4175,21 @@
     }
 
     
-    self.DeviceId = [properties valueForKey:@"DeviceId"];
+    self.CreateAccount = [[properties valueForKey:@"CreateAccount"] boolValue];
     
-    self.OS = [properties valueForKey:@"OS"];
+    self.DeviceId = [properties valueForKey:@"DeviceId"];
     
     self.DeviceModel = [properties valueForKey:@"DeviceModel"];
     
-    self.CreateAccount = [[properties valueForKey:@"CreateAccount"] boolValue];
-    
-    self.TitleId = [properties valueForKey:@"TitleId"];
-    
     self.EncryptedRequest = [properties valueForKey:@"EncryptedRequest"];
+    
+    self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
+    
+    self.OS = [properties valueForKey:@"OS"];
     
     self.PlayerSecret = [properties valueForKey:@"PlayerSecret"];
     
-    self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
+    self.TitleId = [properties valueForKey:@"TitleId"];
     
 
     return self;
@@ -4206,19 +4206,19 @@
     }
 
     
-    self.KongregateId = [properties valueForKey:@"KongregateId"];
-    
     self.AuthTicket = [properties valueForKey:@"AuthTicket"];
     
     self.CreateAccount = [[properties valueForKey:@"CreateAccount"] boolValue];
     
-    self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
-    
-    self.TitleId = [properties valueForKey:@"TitleId"];
-    
     self.EncryptedRequest = [properties valueForKey:@"EncryptedRequest"];
     
+    self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
+    
+    self.KongregateId = [properties valueForKey:@"KongregateId"];
+    
     self.PlayerSecret = [properties valueForKey:@"PlayerSecret"];
+    
+    self.TitleId = [properties valueForKey:@"TitleId"];
     
 
     return self;
@@ -4235,13 +4235,13 @@
     }
 
     
-    self.TitleId = [properties valueForKey:@"TitleId"];
-    
-    self.Username = [properties valueForKey:@"Username"];
+    self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
     
     self.Password = [properties valueForKey:@"Password"];
     
-    self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
+    self.TitleId = [properties valueForKey:@"TitleId"];
+    
+    self.Username = [properties valueForKey:@"Username"];
     
 
     return self;
@@ -4258,17 +4258,17 @@
     }
 
     
-    self.SteamTicket = [properties valueForKey:@"SteamTicket"];
-    
     self.CreateAccount = [[properties valueForKey:@"CreateAccount"] boolValue];
-    
-    self.TitleId = [properties valueForKey:@"TitleId"];
     
     self.EncryptedRequest = [properties valueForKey:@"EncryptedRequest"];
     
+    self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
+    
     self.PlayerSecret = [properties valueForKey:@"PlayerSecret"];
     
-    self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
+    self.SteamTicket = [properties valueForKey:@"SteamTicket"];
+    
+    self.TitleId = [properties valueForKey:@"TitleId"];
     
 
     return self;
@@ -4289,13 +4289,13 @@
     
     self.CreateAccount = [[properties valueForKey:@"CreateAccount"] boolValue];
     
-    self.TitleId = [properties valueForKey:@"TitleId"];
-    
     self.EncryptedRequest = [properties valueForKey:@"EncryptedRequest"];
+    
+    self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
     
     self.PlayerSecret = [properties valueForKey:@"PlayerSecret"];
     
-    self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
+    self.TitleId = [properties valueForKey:@"TitleId"];
     
 
     return self;
@@ -4312,13 +4312,13 @@
     }
 
     
-    self.TitleId = [properties valueForKey:@"TitleId"];
-    
     self.ChallengeSignature = [properties valueForKey:@"ChallengeSignature"];
+    
+    self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
     
     self.PublicKeyHint = [properties valueForKey:@"PublicKeyHint"];
     
-    self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
+    self.TitleId = [properties valueForKey:@"TitleId"];
     
 
     return self;
@@ -4335,11 +4335,11 @@
     }
 
     
+    self.Data = [properties valueForKey:@"Data"];
+    
     self.Level = [properties valueForKey:@"Level"];
     
     self.Message = [properties valueForKey:@"Message"];
-    
-    self.Data = [properties valueForKey:@"Data"];
     
 
     return self;
@@ -4358,17 +4358,17 @@
     
     self.BuildVersion = [properties valueForKey:@"BuildVersion"];
     
-    self.pfRegion = (Region)[properties valueForKey:@"Region"];
+    self.CharacterId = [properties valueForKey:@"CharacterId"];
     
     self.GameMode = [properties valueForKey:@"GameMode"];
     
     self.LobbyId = [properties valueForKey:@"LobbyId"];
     
-    self.StatisticName = [properties valueForKey:@"StatisticName"];
-    
-    self.CharacterId = [properties valueForKey:@"CharacterId"];
+    self.pfRegion = (Region)[properties valueForKey:@"Region"];
     
     self.StartNewIfNoneFound = [[properties valueForKey:@"StartNewIfNoneFound"] boolValue];
+    
+    self.StatisticName = [properties valueForKey:@"StatisticName"];
     
     self.TagFilter = [[CollectionFilter new] initWithDictionary:[properties objectForKey:@"TagFilter"]];
     
@@ -4387,19 +4387,52 @@
     }
 
     
+    self.Expires = [properties valueForKey:@"Expires"];
+    
     self.LobbyID = [properties valueForKey:@"LobbyID"];
+    
+    self.PollWaitTimeMS = [properties valueForKey:@"PollWaitTimeMS"];
     
     self.ServerHostname = [properties valueForKey:@"ServerHostname"];
     
     self.ServerPort = [properties valueForKey:@"ServerPort"];
     
+    self.Status = (MatchmakeStatus)[properties valueForKey:@"Status"];
+    
     self.Ticket = [properties valueForKey:@"Ticket"];
     
-    self.Expires = [properties valueForKey:@"Expires"];
+
+    return self;
+}
+@end
+@implementation MembershipModel
+
+
+-(id)initWithDictionary:(NSDictionary*)properties
+{
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+
     
-    self.PollWaitTimeMS = [properties valueForKey:@"PollWaitTimeMS"];
+    self.IsActive = [[properties valueForKey:@"IsActive"] boolValue];
     
-    self.Status = (MatchmakeStatus)[properties valueForKey:@"Status"];
+    self.MembershipExpiration = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"MembershipExpiration"]];
+    
+    self.MembershipId = [properties valueForKey:@"MembershipId"];
+    
+    self.OverrideExpiration = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"OverrideExpiration"]];
+    
+    if ([properties objectForKey:@"Subscriptions"]){
+    NSArray* member_list = [properties objectForKey:@"Subscriptions"];
+    NSMutableArray* mutable_storage = [NSMutableArray new];
+    for(int i=0;i<[member_list count];i++){
+        [mutable_storage addObject:[[SubscriptionModel new] initWithDictionary:[member_list objectAtIndex:i]]];
+    }
+    self.Subscriptions = [mutable_storage copy];
+}
+
     
 
     return self;
@@ -4416,13 +4449,13 @@
     }
 
     
-    self.PlayFabId = [properties valueForKey:@"PlayFabId"];
-    
-    self.VirtualCurrency = [properties valueForKey:@"VirtualCurrency"];
+    self.Balance = [properties valueForKey:@"Balance"];
     
     self.BalanceChange = [properties valueForKey:@"BalanceChange"];
     
-    self.Balance = [properties valueForKey:@"Balance"];
+    self.PlayFabId = [properties valueForKey:@"PlayFabId"];
+    
+    self.VirtualCurrency = [properties valueForKey:@"VirtualCurrency"];
     
 
     return self;
@@ -4439,9 +4472,9 @@
     }
 
     
-    self.Name = [properties valueForKey:@"Name"];
-    
     self.Id = [properties valueForKey:@"Id"];
+    
+    self.Name = [properties valueForKey:@"Name"];
     
 
     return self;
@@ -4456,6 +4489,16 @@
     if (!self) {
         return nil;
     }
+
+    
+    if ([properties objectForKey:@"AllowedPlayerIds"]){
+    NSArray* member_list = [properties objectForKey:@"AllowedPlayerIds"];
+    NSMutableArray* mutable_storage = [NSMutableArray new];
+    for(int i=0;i<[member_list count];i++){
+        [mutable_storage addObject:[member_list objectAtIndex:i]];
+    }
+    self.AllowedPlayerIds = [mutable_storage copy];
+}
 
     
     if ([properties objectForKey:@"OfferedInventoryInstanceIds"]){
@@ -4475,16 +4518,6 @@
         [mutable_storage addObject:[member_list objectAtIndex:i]];
     }
     self.RequestedCatalogItemIds = [mutable_storage copy];
-}
-
-    
-    if ([properties objectForKey:@"AllowedPlayerIds"]){
-    NSArray* member_list = [properties objectForKey:@"AllowedPlayerIds"];
-    NSMutableArray* mutable_storage = [NSMutableArray new];
-    for(int i=0;i<[member_list count];i++){
-        [mutable_storage addObject:[member_list objectAtIndex:i]];
-    }
-    self.AllowedPlayerIds = [mutable_storage copy];
 }
 
     
@@ -4520,11 +4553,11 @@
     }
 
     
+    self.Currency = [properties valueForKey:@"Currency"];
+    
     self.OrderId = [properties valueForKey:@"OrderId"];
     
     self.ProviderName = [properties valueForKey:@"ProviderName"];
-    
-    self.Currency = [properties valueForKey:@"Currency"];
     
     self.ProviderTransactionId = [properties valueForKey:@"ProviderTransactionId"];
     
@@ -4543,7 +4576,19 @@
     }
 
     
+    self.CreditApplied = [properties valueForKey:@"CreditApplied"];
+    
     self.OrderId = [properties valueForKey:@"OrderId"];
+    
+    self.ProviderData = [properties valueForKey:@"ProviderData"];
+    
+    self.ProviderToken = [properties valueForKey:@"ProviderToken"];
+    
+    self.PurchaseConfirmationPageURL = [properties valueForKey:@"PurchaseConfirmationPageURL"];
+    
+    self.PurchaseCurrency = [properties valueForKey:@"PurchaseCurrency"];
+    
+    self.PurchasePrice = [properties valueForKey:@"PurchasePrice"];
     
     self.Status = (TransactionStatus)[properties valueForKey:@"Status"];
     
@@ -4557,16 +4602,6 @@
 }
 
     
-    self.PurchaseCurrency = [properties valueForKey:@"PurchaseCurrency"];
-    
-    self.PurchasePrice = [properties valueForKey:@"PurchasePrice"];
-    
-    self.CreditApplied = [properties valueForKey:@"CreditApplied"];
-    
-    self.ProviderData = [properties valueForKey:@"ProviderData"];
-    
-    self.PurchaseConfirmationPageURL = [properties valueForKey:@"PurchaseConfirmationPageURL"];
-    
     if ([properties objectForKey:@"VirtualCurrency"]){
     NSDictionary* member_list = [properties objectForKey:@"VirtualCurrency"];
     NSMutableDictionary* mutable_storage = [NSMutableDictionary new];
@@ -4576,8 +4611,6 @@
     self.VirtualCurrency = [mutable_storage copy];
 }
 
-    
-    self.ProviderToken = [properties valueForKey:@"ProviderToken"];
     
 
     return self;
@@ -4596,9 +4629,9 @@
     
     self.Currency = [properties valueForKey:@"Currency"];
     
-    self.ProviderName = [properties valueForKey:@"ProviderName"];
-    
     self.Price = [properties valueForKey:@"Price"];
+    
+    self.ProviderName = [properties valueForKey:@"ProviderName"];
     
     self.StoreCredit = [properties valueForKey:@"StoreCredit"];
     
@@ -4617,15 +4650,15 @@
     }
 
     
-    self.PlayFabId = [properties valueForKey:@"PlayFabId"];
-    
     self.DisplayName = [properties valueForKey:@"DisplayName"];
     
-    self.StatValue = [properties valueForKey:@"StatValue"];
+    self.PlayFabId = [properties valueForKey:@"PlayFabId"];
     
     self.Position = [properties valueForKey:@"Position"];
     
     self.Profile = [[PlayerProfileModel new] initWithDictionary:[properties objectForKey:@"Profile"]];
+    
+    self.StatValue = [properties valueForKey:@"StatValue"];
     
 
     return self;
@@ -4642,63 +4675,19 @@
     }
 
     
-    self.PublisherId = [properties valueForKey:@"PublisherId"];
-    
-    self.TitleId = [properties valueForKey:@"TitleId"];
-    
-    self.PlayerId = [properties valueForKey:@"PlayerId"];
-    
-    self.Created = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"Created"]];
-    
-    self.Origination = (LoginIdentityProvider)[properties valueForKey:@"Origination"];
-    
-    self.LastLogin = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"LastLogin"]];
-    
-    self.BannedUntil = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"BannedUntil"]];
-    
-    if ([properties objectForKey:@"Locations"]){
-    NSArray* member_list = [properties objectForKey:@"Locations"];
+    if ([properties objectForKey:@"AdCampaignAttributions"]){
+    NSArray* member_list = [properties objectForKey:@"AdCampaignAttributions"];
     NSMutableArray* mutable_storage = [NSMutableArray new];
     for(int i=0;i<[member_list count];i++){
-        [mutable_storage addObject:[[LocationModel new] initWithDictionary:[member_list objectAtIndex:i]]];
+        [mutable_storage addObject:[[AdCampaignAttributionModel new] initWithDictionary:[member_list objectAtIndex:i]]];
     }
-    self.Locations = [mutable_storage copy];
+    self.AdCampaignAttributions = [mutable_storage copy];
 }
 
-    
-    self.DisplayName = [properties valueForKey:@"DisplayName"];
     
     self.AvatarUrl = [properties valueForKey:@"AvatarUrl"];
     
-    if ([properties objectForKey:@"Tags"]){
-    NSArray* member_list = [properties objectForKey:@"Tags"];
-    NSMutableArray* mutable_storage = [NSMutableArray new];
-    for(int i=0;i<[member_list count];i++){
-        [mutable_storage addObject:[[TagModel new] initWithDictionary:[member_list objectAtIndex:i]]];
-    }
-    self.Tags = [mutable_storage copy];
-}
-
-    
-    if ([properties objectForKey:@"PushNotificationRegistrations"]){
-    NSArray* member_list = [properties objectForKey:@"PushNotificationRegistrations"];
-    NSMutableArray* mutable_storage = [NSMutableArray new];
-    for(int i=0;i<[member_list count];i++){
-        [mutable_storage addObject:[[PushNotificationRegistrationModel new] initWithDictionary:[member_list objectAtIndex:i]]];
-    }
-    self.PushNotificationRegistrations = [mutable_storage copy];
-}
-
-    
-    if ([properties objectForKey:@"LinkedAccounts"]){
-    NSArray* member_list = [properties objectForKey:@"LinkedAccounts"];
-    NSMutableArray* mutable_storage = [NSMutableArray new];
-    for(int i=0;i<[member_list count];i++){
-        [mutable_storage addObject:[[LinkedPlatformAccountModel new] initWithDictionary:[member_list objectAtIndex:i]]];
-    }
-    self.LinkedAccounts = [mutable_storage copy];
-}
-
+    self.BannedUntil = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"BannedUntil"]];
     
     if ([properties objectForKey:@"ContactEmailAddresses"]){
     NSArray* member_list = [properties objectForKey:@"ContactEmailAddresses"];
@@ -4710,15 +4699,79 @@
 }
 
     
-    if ([properties objectForKey:@"AdCampaignAttributions"]){
-    NSArray* member_list = [properties objectForKey:@"AdCampaignAttributions"];
+    self.Created = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"Created"]];
+    
+    self.DisplayName = [properties valueForKey:@"DisplayName"];
+    
+    self.LastLogin = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"LastLogin"]];
+    
+    if ([properties objectForKey:@"LinkedAccounts"]){
+    NSArray* member_list = [properties objectForKey:@"LinkedAccounts"];
     NSMutableArray* mutable_storage = [NSMutableArray new];
     for(int i=0;i<[member_list count];i++){
-        [mutable_storage addObject:[[AdCampaignAttributionModel new] initWithDictionary:[member_list objectAtIndex:i]]];
+        [mutable_storage addObject:[[LinkedPlatformAccountModel new] initWithDictionary:[member_list objectAtIndex:i]]];
     }
-    self.AdCampaignAttributions = [mutable_storage copy];
+    self.LinkedAccounts = [mutable_storage copy];
 }
 
+    
+    if ([properties objectForKey:@"Locations"]){
+    NSArray* member_list = [properties objectForKey:@"Locations"];
+    NSMutableArray* mutable_storage = [NSMutableArray new];
+    for(int i=0;i<[member_list count];i++){
+        [mutable_storage addObject:[[LocationModel new] initWithDictionary:[member_list objectAtIndex:i]]];
+    }
+    self.Locations = [mutable_storage copy];
+}
+
+    
+    if ([properties objectForKey:@"Memberships"]){
+    NSArray* member_list = [properties objectForKey:@"Memberships"];
+    NSMutableArray* mutable_storage = [NSMutableArray new];
+    for(int i=0;i<[member_list count];i++){
+        [mutable_storage addObject:[[MembershipModel new] initWithDictionary:[member_list objectAtIndex:i]]];
+    }
+    self.Memberships = [mutable_storage copy];
+}
+
+    
+    self.Origination = (LoginIdentityProvider)[properties valueForKey:@"Origination"];
+    
+    self.PlayerId = [properties valueForKey:@"PlayerId"];
+    
+    self.PublisherId = [properties valueForKey:@"PublisherId"];
+    
+    if ([properties objectForKey:@"PushNotificationRegistrations"]){
+    NSArray* member_list = [properties objectForKey:@"PushNotificationRegistrations"];
+    NSMutableArray* mutable_storage = [NSMutableArray new];
+    for(int i=0;i<[member_list count];i++){
+        [mutable_storage addObject:[[PushNotificationRegistrationModel new] initWithDictionary:[member_list objectAtIndex:i]]];
+    }
+    self.PushNotificationRegistrations = [mutable_storage copy];
+}
+
+    
+    if ([properties objectForKey:@"Statistics"]){
+    NSArray* member_list = [properties objectForKey:@"Statistics"];
+    NSMutableArray* mutable_storage = [NSMutableArray new];
+    for(int i=0;i<[member_list count];i++){
+        [mutable_storage addObject:[[StatisticModel new] initWithDictionary:[member_list objectAtIndex:i]]];
+    }
+    self.Statistics = [mutable_storage copy];
+}
+
+    
+    if ([properties objectForKey:@"Tags"]){
+    NSArray* member_list = [properties objectForKey:@"Tags"];
+    NSMutableArray* mutable_storage = [NSMutableArray new];
+    for(int i=0;i<[member_list count];i++){
+        [mutable_storage addObject:[[TagModel new] initWithDictionary:[member_list objectAtIndex:i]]];
+    }
+    self.Tags = [mutable_storage copy];
+}
+
+    
+    self.TitleId = [properties valueForKey:@"TitleId"];
     
     self.TotalValueToDateInUSD = [properties valueForKey:@"TotalValueToDateInUSD"];
     
@@ -4742,16 +4795,6 @@
 }
 
     
-    if ([properties objectForKey:@"Statistics"]){
-    NSArray* member_list = [properties objectForKey:@"Statistics"];
-    NSMutableArray* mutable_storage = [NSMutableArray new];
-    for(int i=0;i<[member_list count];i++){
-        [mutable_storage addObject:[[StatisticModel new] initWithDictionary:[member_list objectAtIndex:i]]];
-    }
-    self.Statistics = [mutable_storage copy];
-}
-
-    
 
     return self;
 }
@@ -4767,35 +4810,37 @@
     }
 
     
-    self.ShowDisplayName = [[properties valueForKey:@"ShowDisplayName"] boolValue];
-    
-    self.ShowCreated = [[properties valueForKey:@"ShowCreated"] boolValue];
-    
-    self.ShowOrigination = [[properties valueForKey:@"ShowOrigination"] boolValue];
-    
-    self.ShowLastLogin = [[properties valueForKey:@"ShowLastLogin"] boolValue];
+    self.ShowAvatarUrl = [[properties valueForKey:@"ShowAvatarUrl"] boolValue];
     
     self.ShowBannedUntil = [[properties valueForKey:@"ShowBannedUntil"] boolValue];
     
-    self.ShowStatistics = [[properties valueForKey:@"ShowStatistics"] boolValue];
-    
     self.ShowCampaignAttributions = [[properties valueForKey:@"ShowCampaignAttributions"] boolValue];
     
-    self.ShowPushNotificationRegistrations = [[properties valueForKey:@"ShowPushNotificationRegistrations"] boolValue];
+    self.ShowContactEmailAddresses = [[properties valueForKey:@"ShowContactEmailAddresses"] boolValue];
+    
+    self.ShowCreated = [[properties valueForKey:@"ShowCreated"] boolValue];
+    
+    self.ShowDisplayName = [[properties valueForKey:@"ShowDisplayName"] boolValue];
+    
+    self.ShowLastLogin = [[properties valueForKey:@"ShowLastLogin"] boolValue];
     
     self.ShowLinkedAccounts = [[properties valueForKey:@"ShowLinkedAccounts"] boolValue];
     
-    self.ShowContactEmailAddresses = [[properties valueForKey:@"ShowContactEmailAddresses"] boolValue];
+    self.ShowLocations = [[properties valueForKey:@"ShowLocations"] boolValue];
+    
+    self.ShowMemberships = [[properties valueForKey:@"ShowMemberships"] boolValue];
+    
+    self.ShowOrigination = [[properties valueForKey:@"ShowOrigination"] boolValue];
+    
+    self.ShowPushNotificationRegistrations = [[properties valueForKey:@"ShowPushNotificationRegistrations"] boolValue];
+    
+    self.ShowStatistics = [[properties valueForKey:@"ShowStatistics"] boolValue];
+    
+    self.ShowTags = [[properties valueForKey:@"ShowTags"] boolValue];
     
     self.ShowTotalValueToDateInUsd = [[properties valueForKey:@"ShowTotalValueToDateInUsd"] boolValue];
     
     self.ShowValuesToDate = [[properties valueForKey:@"ShowValuesToDate"] boolValue];
-    
-    self.ShowTags = [[properties valueForKey:@"ShowTags"] boolValue];
-    
-    self.ShowLocations = [[properties valueForKey:@"ShowLocations"] boolValue];
-    
-    self.ShowAvatarUrl = [[properties valueForKey:@"ShowAvatarUrl"] boolValue];
     
 
     return self;
@@ -4812,17 +4857,17 @@
     }
 
     
-    self.StatisticName = [properties valueForKey:@"StatisticName"];
+    self.ActivationTime = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"ActivationTime"]];
     
-    self.Version = [properties valueForKey:@"Version"];
+    self.DeactivationTime = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"DeactivationTime"]];
     
     self.ScheduledActivationTime = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"ScheduledActivationTime"]];
     
-    self.ActivationTime = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"ActivationTime"]];
-    
     self.ScheduledDeactivationTime = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"ScheduledDeactivationTime"]];
     
-    self.DeactivationTime = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"DeactivationTime"]];
+    self.StatisticName = [properties valueForKey:@"StatisticName"];
+    
+    self.Version = [properties valueForKey:@"Version"];
     
 
     return self;
@@ -4839,17 +4884,17 @@
     }
 
     
-    self.ItemId = [properties valueForKey:@"ItemId"];
+    self.CatalogVersion = [properties valueForKey:@"CatalogVersion"];
     
-    self.VirtualCurrency = [properties valueForKey:@"VirtualCurrency"];
+    self.CharacterId = [properties valueForKey:@"CharacterId"];
+    
+    self.ItemId = [properties valueForKey:@"ItemId"];
     
     self.Price = [properties valueForKey:@"Price"];
     
-    self.CatalogVersion = [properties valueForKey:@"CatalogVersion"];
-    
     self.StoreId = [properties valueForKey:@"StoreId"];
     
-    self.CharacterId = [properties valueForKey:@"CharacterId"];
+    self.VirtualCurrency = [properties valueForKey:@"VirtualCurrency"];
     
 
     return self;
@@ -4891,9 +4936,9 @@
     }
 
     
-    self.Platform = (PushNotificationPlatform)[properties valueForKey:@"Platform"];
-    
     self.NotificationEndpointARN = [properties valueForKey:@"NotificationEndpointARN"];
+    
+    self.Platform = (PushNotificationPlatform)[properties valueForKey:@"Platform"];
     
 
     return self;
@@ -4910,11 +4955,11 @@
     }
 
     
-    self.CouponCode = [properties valueForKey:@"CouponCode"];
-    
     self.CatalogVersion = [properties valueForKey:@"CatalogVersion"];
     
     self.CharacterId = [properties valueForKey:@"CharacterId"];
+    
+    self.CouponCode = [properties valueForKey:@"CouponCode"];
     
 
     return self;
@@ -4956,13 +5001,13 @@
     }
 
     
-    self.pfRegion = (Region)[properties valueForKey:@"Region"];
+    self.Available = [[properties valueForKey:@"Available"] boolValue];
     
     self.Name = [properties valueForKey:@"Name"];
     
-    self.Available = [[properties valueForKey:@"Available"] boolValue];
-    
     self.PingUrl = [properties valueForKey:@"PingUrl"];
+    
+    self.pfRegion = (Region)[properties valueForKey:@"Region"];
     
 
     return self;
@@ -4979,11 +5024,11 @@
     }
 
     
+    self.ConfirmationMessage = [properties valueForKey:@"ConfirmationMessage"];
+    
     self.DeviceToken = [properties valueForKey:@"DeviceToken"];
     
     self.SendPushNotificationConfirmation = [[properties valueForKey:@"SendPushNotificationConfirmation"] boolValue];
-    
-    self.ConfirmationMessage = [properties valueForKey:@"ConfirmationMessage"];
     
 
     return self;
@@ -5015,23 +5060,23 @@
     }
 
     
-    self.Username = [properties valueForKey:@"Username"];
+    self.DisplayName = [properties valueForKey:@"DisplayName"];
     
     self.Email = [properties valueForKey:@"Email"];
     
-    self.Password = [properties valueForKey:@"Password"];
-    
-    self.RequireBothUsernameAndEmail = [[properties valueForKey:@"RequireBothUsernameAndEmail"] boolValue];
-    
-    self.DisplayName = [properties valueForKey:@"DisplayName"];
-    
-    self.TitleId = [properties valueForKey:@"TitleId"];
-    
     self.EncryptedRequest = [properties valueForKey:@"EncryptedRequest"];
+    
+    self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
+    
+    self.Password = [properties valueForKey:@"Password"];
     
     self.PlayerSecret = [properties valueForKey:@"PlayerSecret"];
     
-    self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
+    self.RequireBothUsernameAndEmail = [[properties valueForKey:@"RequireBothUsernameAndEmail"] boolValue];
+    
+    self.TitleId = [properties valueForKey:@"TitleId"];
+    
+    self.Username = [properties valueForKey:@"Username"];
     
 
     return self;
@@ -5052,9 +5097,9 @@
     
     self.SessionTicket = [properties valueForKey:@"SessionTicket"];
     
-    self.Username = [properties valueForKey:@"Username"];
-    
     self.SettingsForUser = [[UserSettings new] initWithDictionary:[properties objectForKey:@"SettingsForUser"]];
+    
+    self.Username = [properties valueForKey:@"Username"];
     
 
     return self;
@@ -5071,19 +5116,19 @@
     }
 
     
-    self.UserName = [properties valueForKey:@"UserName"];
-    
-    self.PublicKey = [properties valueForKey:@"PublicKey"];
-    
     self.DeviceName = [properties valueForKey:@"DeviceName"];
-    
-    self.TitleId = [properties valueForKey:@"TitleId"];
     
     self.EncryptedRequest = [properties valueForKey:@"EncryptedRequest"];
     
+    self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
+    
     self.PlayerSecret = [properties valueForKey:@"PlayerSecret"];
     
-    self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
+    self.PublicKey = [properties valueForKey:@"PublicKey"];
+    
+    self.TitleId = [properties valueForKey:@"TitleId"];
+    
+    self.UserName = [properties valueForKey:@"UserName"];
     
 
     return self;
@@ -5164,8 +5209,6 @@
     }
 
     
-    self.SharedGroupId = [properties valueForKey:@"SharedGroupId"];
-    
     if ([properties objectForKey:@"PlayFabIds"]){
     NSArray* member_list = [properties objectForKey:@"PlayFabIds"];
     NSMutableArray* mutable_storage = [NSMutableArray new];
@@ -5175,6 +5218,8 @@
     self.PlayFabIds = [mutable_storage copy];
 }
 
+    
+    self.SharedGroupId = [properties valueForKey:@"SharedGroupId"];
     
 
     return self;
@@ -5206,9 +5251,9 @@
     }
 
     
-    self.ReporteeId = [properties valueForKey:@"ReporteeId"];
-    
     self.Comment = [properties valueForKey:@"Comment"];
+    
+    self.ReporteeId = [properties valueForKey:@"ReporteeId"];
     
 
     return self;
@@ -5371,9 +5416,9 @@
     }
 
     
-    self.PlayerSecret = [properties valueForKey:@"PlayerSecret"];
-    
     self.EncryptedRequest = [properties valueForKey:@"EncryptedRequest"];
+    
+    self.PlayerSecret = [properties valueForKey:@"PlayerSecret"];
     
 
     return self;
@@ -5405,13 +5450,13 @@
     }
 
     
-    self.Value = [properties valueForKey:@"Value"];
+    self.LastUpdated = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"LastUpdated"]];
     
     self.LastUpdatedBy = [properties valueForKey:@"LastUpdatedBy"];
     
-    self.LastUpdated = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"LastUpdated"]];
-    
     self.Permission = (UserDataPermission)[properties valueForKey:@"Permission"];
+    
+    self.Value = [properties valueForKey:@"Value"];
     
 
     return self;
@@ -5430,15 +5475,15 @@
     
     self.BuildVersion = [properties valueForKey:@"BuildVersion"];
     
-    self.pfRegion = (Region)[properties valueForKey:@"Region"];
-    
-    self.GameMode = [properties valueForKey:@"GameMode"];
-    
-    self.StatisticName = [properties valueForKey:@"StatisticName"];
-    
     self.CharacterId = [properties valueForKey:@"CharacterId"];
     
     self.CustomCommandLineData = [properties valueForKey:@"CustomCommandLineData"];
+    
+    self.GameMode = [properties valueForKey:@"GameMode"];
+    
+    self.pfRegion = (Region)[properties valueForKey:@"Region"];
+    
+    self.StatisticName = [properties valueForKey:@"StatisticName"];
     
 
     return self;
@@ -5455,17 +5500,17 @@
     }
 
     
+    self.Expires = [properties valueForKey:@"Expires"];
+    
     self.LobbyID = [properties valueForKey:@"LobbyID"];
+    
+    self.Password = [properties valueForKey:@"Password"];
     
     self.ServerHostname = [properties valueForKey:@"ServerHostname"];
     
     self.ServerPort = [properties valueForKey:@"ServerPort"];
     
     self.Ticket = [properties valueForKey:@"Ticket"];
-    
-    self.Expires = [properties valueForKey:@"Expires"];
-    
-    self.Password = [properties valueForKey:@"Password"];
     
 
     return self;
@@ -5484,8 +5529,6 @@
     
     self.CatalogVersion = [properties valueForKey:@"CatalogVersion"];
     
-    self.StoreId = [properties valueForKey:@"StoreId"];
-    
     if ([properties objectForKey:@"Items"]){
     NSArray* member_list = [properties objectForKey:@"Items"];
     NSMutableArray* mutable_storage = [NSMutableArray new];
@@ -5495,6 +5538,8 @@
     self.Items = [mutable_storage copy];
 }
 
+    
+    self.StoreId = [properties valueForKey:@"StoreId"];
     
 
     return self;
@@ -5511,8 +5556,6 @@
     }
 
     
-    self.OrderId = [properties valueForKey:@"OrderId"];
-    
     if ([properties objectForKey:@"Contents"]){
     NSArray* member_list = [properties objectForKey:@"Contents"];
     NSMutableArray* mutable_storage = [NSMutableArray new];
@@ -5522,6 +5565,8 @@
     self.Contents = [mutable_storage copy];
 }
 
+    
+    self.OrderId = [properties valueForKey:@"OrderId"];
     
     if ([properties objectForKey:@"PaymentOptions"]){
     NSArray* member_list = [properties objectForKey:@"PaymentOptions"];
@@ -5560,9 +5605,9 @@
     
     self.Name = [properties valueForKey:@"Name"];
     
-    self.Version = [properties valueForKey:@"Version"];
-    
     self.Value = [properties valueForKey:@"Value"];
+    
+    self.Version = [properties valueForKey:@"Version"];
     
 
     return self;
@@ -5600,9 +5645,9 @@
     
     self.StatisticName = [properties valueForKey:@"StatisticName"];
     
-    self.Version = [properties valueForKey:@"Version"];
-    
     self.Value = [properties valueForKey:@"Value"];
+    
+    self.Version = [properties valueForKey:@"Version"];
     
 
     return self;
@@ -5640,9 +5685,9 @@
     }
 
     
-    self.SteamStringId = [properties valueForKey:@"SteamStringId"];
-    
     self.PlayFabId = [properties valueForKey:@"PlayFabId"];
+    
+    self.SteamStringId = [properties valueForKey:@"SteamStringId"];
     
 
     return self;
@@ -5659,17 +5704,11 @@
     }
 
     
-    self.ItemId = [properties valueForKey:@"ItemId"];
+    self.CustomData = [properties valueForKey:@"CustomData"];
     
-    if ([properties objectForKey:@"VirtualCurrencyPrices"]){
-    NSDictionary* member_list = [properties objectForKey:@"VirtualCurrencyPrices"];
-    NSMutableDictionary* mutable_storage = [NSMutableDictionary new];
-    for(NSString* key in member_list){
-        [mutable_storage setValue:[member_list objectForKey:key] forKey:key];
-    }
-    self.VirtualCurrencyPrices = [mutable_storage copy];
-}
-
+    self.DisplayPosition = [properties valueForKey:@"DisplayPosition"];
+    
+    self.ItemId = [properties valueForKey:@"ItemId"];
     
     if ([properties objectForKey:@"RealCurrencyPrices"]){
     NSDictionary* member_list = [properties objectForKey:@"RealCurrencyPrices"];
@@ -5681,9 +5720,15 @@
 }
 
     
-    self.CustomData = [properties valueForKey:@"CustomData"];
-    
-    self.DisplayPosition = [properties valueForKey:@"DisplayPosition"];
+    if ([properties objectForKey:@"VirtualCurrencyPrices"]){
+    NSDictionary* member_list = [properties objectForKey:@"VirtualCurrencyPrices"];
+    NSMutableDictionary* mutable_storage = [NSMutableDictionary new];
+    for(NSString* key in member_list){
+        [mutable_storage setValue:[member_list objectForKey:key] forKey:key];
+    }
+    self.VirtualCurrencyPrices = [mutable_storage copy];
+}
+
     
 
     return self;
@@ -5700,11 +5745,40 @@
     }
 
     
-    self.DisplayName = [properties valueForKey:@"DisplayName"];
-    
     self.Description = [properties valueForKey:@"Description"];
     
+    self.DisplayName = [properties valueForKey:@"DisplayName"];
+    
     self.Metadata = [properties valueForKey:@"Metadata"];
+    
+
+    return self;
+}
+@end
+@implementation SubscriptionModel
+
+
+-(id)initWithDictionary:(NSDictionary*)properties
+{
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+
+    
+    self.Expiration = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"Expiration"]];
+    
+    self.InitialSubscriptionTime = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"InitialSubscriptionTime"]];
+    
+    self.IsActive = [[properties valueForKey:@"IsActive"] boolValue];
+    
+    self.Status = (SubscriptionProviderStatus)[properties valueForKey:@"Status"];
+    
+    self.SubscriptionId = [properties valueForKey:@"SubscriptionId"];
+    
+    self.SubscriptionItemId = [properties valueForKey:@"SubscriptionItemId"];
+    
+    self.SubscriptionProvider = [properties valueForKey:@"SubscriptionProvider"];
     
 
     return self;
@@ -5721,9 +5795,9 @@
     }
 
     
-    self.VirtualCurrency = [properties valueForKey:@"VirtualCurrency"];
-    
     self.Amount = [properties valueForKey:@"Amount"];
+    
+    self.VirtualCurrency = [properties valueForKey:@"VirtualCurrency"];
     
 
     return self;
@@ -5757,13 +5831,13 @@
     }
 
     
-    self.Timestamp = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"Timestamp"]];
+    self.Body = [properties valueForKey:@"Body"];
     
     self.NewsId = [properties valueForKey:@"NewsId"];
     
-    self.Title = [properties valueForKey:@"Title"];
+    self.Timestamp = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"Timestamp"]];
     
-    self.Body = [properties valueForKey:@"Body"];
+    self.Title = [properties valueForKey:@"Title"];
     
 
     return self;
@@ -5780,41 +5854,17 @@
     }
 
     
-    self.Status = (TradeStatus)[properties valueForKey:@"Status"];
-    
-    self.TradeId = [properties valueForKey:@"TradeId"];
-    
-    self.OfferingPlayerId = [properties valueForKey:@"OfferingPlayerId"];
-    
-    if ([properties objectForKey:@"OfferedInventoryInstanceIds"]){
-    NSArray* member_list = [properties objectForKey:@"OfferedInventoryInstanceIds"];
+    if ([properties objectForKey:@"AcceptedInventoryInstanceIds"]){
+    NSArray* member_list = [properties objectForKey:@"AcceptedInventoryInstanceIds"];
     NSMutableArray* mutable_storage = [NSMutableArray new];
     for(int i=0;i<[member_list count];i++){
         [mutable_storage addObject:[member_list objectAtIndex:i]];
     }
-    self.OfferedInventoryInstanceIds = [mutable_storage copy];
+    self.AcceptedInventoryInstanceIds = [mutable_storage copy];
 }
 
     
-    if ([properties objectForKey:@"OfferedCatalogItemIds"]){
-    NSArray* member_list = [properties objectForKey:@"OfferedCatalogItemIds"];
-    NSMutableArray* mutable_storage = [NSMutableArray new];
-    for(int i=0;i<[member_list count];i++){
-        [mutable_storage addObject:[member_list objectAtIndex:i]];
-    }
-    self.OfferedCatalogItemIds = [mutable_storage copy];
-}
-
-    
-    if ([properties objectForKey:@"RequestedCatalogItemIds"]){
-    NSArray* member_list = [properties objectForKey:@"RequestedCatalogItemIds"];
-    NSMutableArray* mutable_storage = [NSMutableArray new];
-    for(int i=0;i<[member_list count];i++){
-        [mutable_storage addObject:[member_list objectAtIndex:i]];
-    }
-    self.RequestedCatalogItemIds = [mutable_storage copy];
-}
-
+    self.AcceptedPlayerId = [properties valueForKey:@"AcceptedPlayerId"];
     
     if ([properties objectForKey:@"AllowedPlayerIds"]){
     NSArray* member_list = [properties objectForKey:@"AllowedPlayerIds"];
@@ -5826,25 +5876,49 @@
 }
 
     
-    self.AcceptedPlayerId = [properties valueForKey:@"AcceptedPlayerId"];
+    self.CancelledAt = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"CancelledAt"]];
     
-    if ([properties objectForKey:@"AcceptedInventoryInstanceIds"]){
-    NSArray* member_list = [properties objectForKey:@"AcceptedInventoryInstanceIds"];
+    self.FilledAt = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"FilledAt"]];
+    
+    self.InvalidatedAt = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"InvalidatedAt"]];
+    
+    if ([properties objectForKey:@"OfferedCatalogItemIds"]){
+    NSArray* member_list = [properties objectForKey:@"OfferedCatalogItemIds"];
     NSMutableArray* mutable_storage = [NSMutableArray new];
     for(int i=0;i<[member_list count];i++){
         [mutable_storage addObject:[member_list objectAtIndex:i]];
     }
-    self.AcceptedInventoryInstanceIds = [mutable_storage copy];
+    self.OfferedCatalogItemIds = [mutable_storage copy];
 }
 
     
+    if ([properties objectForKey:@"OfferedInventoryInstanceIds"]){
+    NSArray* member_list = [properties objectForKey:@"OfferedInventoryInstanceIds"];
+    NSMutableArray* mutable_storage = [NSMutableArray new];
+    for(int i=0;i<[member_list count];i++){
+        [mutable_storage addObject:[member_list objectAtIndex:i]];
+    }
+    self.OfferedInventoryInstanceIds = [mutable_storage copy];
+}
+
+    
+    self.OfferingPlayerId = [properties valueForKey:@"OfferingPlayerId"];
+    
     self.OpenedAt = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"OpenedAt"]];
     
-    self.FilledAt = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"FilledAt"]];
+    if ([properties objectForKey:@"RequestedCatalogItemIds"]){
+    NSArray* member_list = [properties objectForKey:@"RequestedCatalogItemIds"];
+    NSMutableArray* mutable_storage = [NSMutableArray new];
+    for(int i=0;i<[member_list count];i++){
+        [mutable_storage addObject:[member_list objectAtIndex:i]];
+    }
+    self.RequestedCatalogItemIds = [mutable_storage copy];
+}
+
     
-    self.CancelledAt = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"CancelledAt"]];
+    self.Status = (TradeStatus)[properties valueForKey:@"Status"];
     
-    self.InvalidatedAt = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"InvalidatedAt"]];
+    self.TradeId = [properties valueForKey:@"TradeId"];
     
 
     return self;
@@ -5861,9 +5935,9 @@
     }
 
     
-    self.TwitchId = [properties valueForKey:@"TwitchId"];
-    
     self.PlayFabId = [properties valueForKey:@"PlayFabId"];
+    
+    self.TwitchId = [properties valueForKey:@"TwitchId"];
     
 
     return self;
@@ -6188,13 +6262,13 @@
     }
 
     
+    self.CatalogVersion = [properties valueForKey:@"CatalogVersion"];
+    
     self.CharacterId = [properties valueForKey:@"CharacterId"];
     
     self.ContainerItemInstanceId = [properties valueForKey:@"ContainerItemInstanceId"];
     
     self.KeyItemInstanceId = [properties valueForKey:@"KeyItemInstanceId"];
-    
-    self.CatalogVersion = [properties valueForKey:@"CatalogVersion"];
     
 
     return self;
@@ -6211,11 +6285,11 @@
     }
 
     
-    self.ContainerItemId = [properties valueForKey:@"ContainerItemId"];
-    
     self.CatalogVersion = [properties valueForKey:@"CatalogVersion"];
     
     self.CharacterId = [properties valueForKey:@"CharacterId"];
+    
+    self.ContainerItemId = [properties valueForKey:@"ContainerItemId"];
     
 
     return self;
@@ -6232,10 +6306,6 @@
     }
 
     
-    self.UnlockedItemInstanceId = [properties valueForKey:@"UnlockedItemInstanceId"];
-    
-    self.UnlockedWithItemInstanceId = [properties valueForKey:@"UnlockedWithItemInstanceId"];
-    
     if ([properties objectForKey:@"GrantedItems"]){
     NSArray* member_list = [properties objectForKey:@"GrantedItems"];
     NSMutableArray* mutable_storage = [NSMutableArray new];
@@ -6245,6 +6315,10 @@
     self.GrantedItems = [mutable_storage copy];
 }
 
+    
+    self.UnlockedItemInstanceId = [properties valueForKey:@"UnlockedItemInstanceId"];
+    
+    self.UnlockedWithItemInstanceId = [properties valueForKey:@"UnlockedWithItemInstanceId"];
     
     if ([properties objectForKey:@"VirtualCurrency"]){
     NSDictionary* member_list = [properties objectForKey:@"VirtualCurrency"];
@@ -6426,8 +6500,6 @@
     }
 
     
-    self.SharedGroupId = [properties valueForKey:@"SharedGroupId"];
-    
     if ([properties objectForKey:@"Data"]){
     NSDictionary* member_list = [properties objectForKey:@"Data"];
     NSMutableDictionary* mutable_storage = [NSMutableDictionary new];
@@ -6449,6 +6521,8 @@
 
     
     self.Permission = (UserDataPermission)[properties valueForKey:@"Permission"];
+    
+    self.SharedGroupId = [properties valueForKey:@"SharedGroupId"];
     
 
     return self;
@@ -6568,37 +6642,37 @@
     }
 
     
-    self.PlayFabId = [properties valueForKey:@"PlayFabId"];
+    self.AndroidDeviceInfo = [[UserAndroidDeviceInfo new] initWithDictionary:[properties objectForKey:@"AndroidDeviceInfo"]];
     
     self.Created = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"Created"]];
     
-    self.Username = [properties valueForKey:@"Username"];
-    
-    self.TitleInfo = [[UserTitleInfo new] initWithDictionary:[properties objectForKey:@"TitleInfo"]];
-    
-    self.PrivateInfo = [[UserPrivateAccountInfo new] initWithDictionary:[properties objectForKey:@"PrivateInfo"]];
+    self.CustomIdInfo = [[UserCustomIdInfo new] initWithDictionary:[properties objectForKey:@"CustomIdInfo"]];
     
     self.FacebookInfo = [[UserFacebookInfo new] initWithDictionary:[properties objectForKey:@"FacebookInfo"]];
     
-    self.SteamInfo = [[UserSteamInfo new] initWithDictionary:[properties objectForKey:@"SteamInfo"]];
-    
     self.GameCenterInfo = [[UserGameCenterInfo new] initWithDictionary:[properties objectForKey:@"GameCenterInfo"]];
-    
-    self.IosDeviceInfo = [[UserIosDeviceInfo new] initWithDictionary:[properties objectForKey:@"IosDeviceInfo"]];
-    
-    self.AndroidDeviceInfo = [[UserAndroidDeviceInfo new] initWithDictionary:[properties objectForKey:@"AndroidDeviceInfo"]];
-    
-    self.KongregateInfo = [[UserKongregateInfo new] initWithDictionary:[properties objectForKey:@"KongregateInfo"]];
-    
-    self.TwitchInfo = [[UserTwitchInfo new] initWithDictionary:[properties objectForKey:@"TwitchInfo"]];
-    
-    self.PsnInfo = [[UserPsnInfo new] initWithDictionary:[properties objectForKey:@"PsnInfo"]];
     
     self.GoogleInfo = [[UserGoogleInfo new] initWithDictionary:[properties objectForKey:@"GoogleInfo"]];
     
-    self.XboxInfo = [[UserXboxInfo new] initWithDictionary:[properties objectForKey:@"XboxInfo"]];
+    self.IosDeviceInfo = [[UserIosDeviceInfo new] initWithDictionary:[properties objectForKey:@"IosDeviceInfo"]];
     
-    self.CustomIdInfo = [[UserCustomIdInfo new] initWithDictionary:[properties objectForKey:@"CustomIdInfo"]];
+    self.KongregateInfo = [[UserKongregateInfo new] initWithDictionary:[properties objectForKey:@"KongregateInfo"]];
+    
+    self.PlayFabId = [properties valueForKey:@"PlayFabId"];
+    
+    self.PrivateInfo = [[UserPrivateAccountInfo new] initWithDictionary:[properties objectForKey:@"PrivateInfo"]];
+    
+    self.PsnInfo = [[UserPsnInfo new] initWithDictionary:[properties objectForKey:@"PsnInfo"]];
+    
+    self.SteamInfo = [[UserSteamInfo new] initWithDictionary:[properties objectForKey:@"SteamInfo"]];
+    
+    self.TitleInfo = [[UserTitleInfo new] initWithDictionary:[properties objectForKey:@"TitleInfo"]];
+    
+    self.TwitchInfo = [[UserTwitchInfo new] initWithDictionary:[properties objectForKey:@"TwitchInfo"]];
+    
+    self.Username = [properties valueForKey:@"Username"];
+    
+    self.XboxInfo = [[UserXboxInfo new] initWithDictionary:[properties objectForKey:@"XboxInfo"]];
     
 
     return self;
@@ -6649,11 +6723,11 @@
     }
 
     
-    self.Value = [properties valueForKey:@"Value"];
-    
     self.LastUpdated = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"LastUpdated"]];
     
     self.Permission = (UserDataPermission)[properties valueForKey:@"Permission"];
+    
+    self.Value = [properties valueForKey:@"Value"];
     
 
     return self;
@@ -6706,13 +6780,13 @@
     }
 
     
-    self.GoogleId = [properties valueForKey:@"GoogleId"];
-    
     self.GoogleEmail = [properties valueForKey:@"GoogleEmail"];
     
-    self.GoogleLocale = [properties valueForKey:@"GoogleLocale"];
-    
     self.GoogleGender = [properties valueForKey:@"GoogleGender"];
+    
+    self.GoogleId = [properties valueForKey:@"GoogleId"];
+    
+    self.GoogleLocale = [properties valueForKey:@"GoogleLocale"];
     
 
     return self;
@@ -6801,6 +6875,8 @@
     }
 
     
+    self.GatherDeviceInfo = [[properties valueForKey:@"GatherDeviceInfo"] boolValue];
+    
     self.NeedsAttribution = [[properties valueForKey:@"NeedsAttribution"] boolValue];
     
 
@@ -6818,13 +6894,13 @@
     }
 
     
-    self.SteamId = [properties valueForKey:@"SteamId"];
+    self.SteamActivationStatus = (TitleActivationStatus)[properties valueForKey:@"SteamActivationStatus"];
     
     self.SteamCountry = [properties valueForKey:@"SteamCountry"];
     
     self.SteamCurrency = (Currency)[properties valueForKey:@"SteamCurrency"];
     
-    self.SteamActivationStatus = (TitleActivationStatus)[properties valueForKey:@"SteamActivationStatus"];
+    self.SteamId = [properties valueForKey:@"SteamId"];
     
 
     return self;
@@ -6841,19 +6917,19 @@
     }
 
     
-    self.DisplayName = [properties valueForKey:@"DisplayName"];
-    
-    self.Origination = (UserOrigination)[properties valueForKey:@"Origination"];
+    self.AvatarUrl = [properties valueForKey:@"AvatarUrl"];
     
     self.Created = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"Created"]];
     
-    self.LastLogin = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"LastLogin"]];
+    self.DisplayName = [properties valueForKey:@"DisplayName"];
     
     self.FirstLogin = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"FirstLogin"]];
     
     self.isBanned = [[properties valueForKey:@"isBanned"] boolValue];
     
-    self.AvatarUrl = [properties valueForKey:@"AvatarUrl"];
+    self.LastLogin = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"LastLogin"]];
+    
+    self.Origination = (UserOrigination)[properties valueForKey:@"Origination"];
     
 
     return self;
@@ -6906,15 +6982,15 @@
     }
 
     
-    self.ReceiptId = [properties valueForKey:@"ReceiptId"];
-    
-    self.UserId = [properties valueForKey:@"UserId"];
-    
     self.CatalogVersion = [properties valueForKey:@"CatalogVersion"];
     
     self.CurrencyCode = [properties valueForKey:@"CurrencyCode"];
     
     self.PurchasePrice = [properties valueForKey:@"PurchasePrice"];
+    
+    self.ReceiptId = [properties valueForKey:@"ReceiptId"];
+    
+    self.UserId = [properties valueForKey:@"UserId"];
     
 
     return self;
@@ -6946,13 +7022,13 @@
     }
 
     
-    self.ReceiptJson = [properties valueForKey:@"ReceiptJson"];
-    
-    self.Signature = [properties valueForKey:@"Signature"];
-    
     self.CurrencyCode = [properties valueForKey:@"CurrencyCode"];
     
     self.PurchasePrice = [properties valueForKey:@"PurchasePrice"];
+    
+    self.ReceiptJson = [properties valueForKey:@"ReceiptJson"];
+    
+    self.Signature = [properties valueForKey:@"Signature"];
     
 
     return self;
@@ -6984,11 +7060,11 @@
     }
 
     
-    self.ReceiptData = [properties valueForKey:@"ReceiptData"];
-    
     self.CurrencyCode = [properties valueForKey:@"CurrencyCode"];
     
     self.PurchasePrice = [properties valueForKey:@"PurchasePrice"];
+    
+    self.ReceiptData = [properties valueForKey:@"ReceiptData"];
     
 
     return self;
@@ -7020,13 +7096,13 @@
     }
 
     
-    self.Receipt = [properties valueForKey:@"Receipt"];
-    
     self.CatalogVersion = [properties valueForKey:@"CatalogVersion"];
     
     self.CurrencyCode = [properties valueForKey:@"CurrencyCode"];
     
     self.PurchasePrice = [properties valueForKey:@"PurchasePrice"];
+    
+    self.Receipt = [properties valueForKey:@"Receipt"];
     
 
     return self;
@@ -7098,11 +7174,11 @@
     }
 
     
-    self.SecondsToRecharge = [properties valueForKey:@"SecondsToRecharge"];
+    self.RechargeMax = [properties valueForKey:@"RechargeMax"];
     
     self.RechargeTime = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"RechargeTime"]];
     
-    self.RechargeMax = [properties valueForKey:@"RechargeMax"];
+    self.SecondsToRecharge = [properties valueForKey:@"SecondsToRecharge"];
     
 
     return self;
@@ -7119,12 +7195,6 @@
     }
 
     
-    self.CharacterId = [properties valueForKey:@"CharacterId"];
-    
-    self.EventName = [properties valueForKey:@"EventName"];
-    
-    self.Timestamp = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"Timestamp"]];
-    
     if ([properties objectForKey:@"Body"]){
     NSDictionary* member_list = [properties objectForKey:@"Body"];
     NSMutableDictionary* mutable_storage = [NSMutableDictionary new];
@@ -7134,6 +7204,12 @@
     self.Body = [mutable_storage copy];
 }
 
+    
+    self.CharacterId = [properties valueForKey:@"CharacterId"];
+    
+    self.EventName = [properties valueForKey:@"EventName"];
+    
+    self.Timestamp = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"Timestamp"]];
     
 
     return self;
@@ -7150,10 +7226,6 @@
     }
 
     
-    self.EventName = [properties valueForKey:@"EventName"];
-    
-    self.Timestamp = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"Timestamp"]];
-    
     if ([properties objectForKey:@"Body"]){
     NSDictionary* member_list = [properties objectForKey:@"Body"];
     NSMutableDictionary* mutable_storage = [NSMutableDictionary new];
@@ -7163,6 +7235,10 @@
     self.Body = [mutable_storage copy];
 }
 
+    
+    self.EventName = [properties valueForKey:@"EventName"];
+    
+    self.Timestamp = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"Timestamp"]];
     
 
     return self;
@@ -7196,10 +7272,6 @@
     }
 
     
-    self.EventName = [properties valueForKey:@"EventName"];
-    
-    self.Timestamp = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"Timestamp"]];
-    
     if ([properties objectForKey:@"Body"]){
     NSDictionary* member_list = [properties objectForKey:@"Body"];
     NSMutableDictionary* mutable_storage = [NSMutableDictionary new];
@@ -7209,6 +7281,10 @@
     self.Body = [mutable_storage copy];
 }
 
+    
+    self.EventName = [properties valueForKey:@"EventName"];
+    
+    self.Timestamp = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"Timestamp"]];
     
 
     return self;

@@ -471,15 +471,6 @@ typedef enum
 
 typedef enum
 {
-    TitleActivationStatusNone,
-    TitleActivationStatusActivatedTitleKey,
-    TitleActivationStatusPendingSteam,
-    TitleActivationStatusActivatedSteam,
-    TitleActivationStatusRevokedSteam
-} TitleActivationStatus;
-
-typedef enum
-{
     LoginIdentityProviderUnknown,
     LoginIdentityProviderPlayFab,
     LoginIdentityProviderCustom,
@@ -498,9 +489,30 @@ typedef enum
 
 typedef enum
 {
+    SubscriptionProviderStatusNoError,
+    SubscriptionProviderStatusCancelled,
+    SubscriptionProviderStatusUnknownError,
+    SubscriptionProviderStatusBillingError,
+    SubscriptionProviderStatusProductUnavailable,
+    SubscriptionProviderStatusCustomerDidNotAcceptPriceChange,
+    SubscriptionProviderStatusFreeTrial,
+    SubscriptionProviderStatusPaymentPending
+} SubscriptionProviderStatus;
+
+typedef enum
+{
     PushNotificationPlatformApplePushNotificationService,
     PushNotificationPlatformGoogleCloudMessaging
 } PushNotificationPlatform;
+
+typedef enum
+{
+    TitleActivationStatusNone,
+    TitleActivationStatusActivatedTitleKey,
+    TitleActivationStatusPendingSteam,
+    TitleActivationStatusActivatedSteam,
+    TitleActivationStatusRevokedSteam
+} TitleActivationStatus;
 
 typedef enum
 {
@@ -930,6 +942,8 @@ typedef enum
 
 @class MatchmakeResult;
 
+@class MembershipModel;
+
 @class ModifyUserVirtualCurrencyResult;
 
 @class NameIdentifier;
@@ -1031,6 +1045,8 @@ typedef enum
 @class StoreItem;
 
 @class StoreMarketingModel;
+
+@class SubscriptionModel;
 
 @class SubtractUserVirtualCurrencyRequest;
 
@@ -1182,6 +1198,11 @@ typedef enum
 
 
 /// <summary>
+/// Items from the accepting player's or guild's inventory in exchange for the offered items in the trade. In the case of a gift, this will be null.
+/// </summary>
+@property NSArray* AcceptedInventoryInstanceIds; 
+
+/// <summary>
 /// Player who opened the trade.
 /// </summary>
 @property NSString* OfferingPlayerId; 
@@ -1190,11 +1211,6 @@ typedef enum
 /// Trade identifier.
 /// </summary>
 @property NSString* TradeId; 
-
-/// <summary>
-/// Items from the accepting player's or guild's inventory in exchange for the offered items in the trade. In the case of a gift, this will be null.
-/// </summary>
-@property NSArray* AcceptedInventoryInstanceIds; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -1219,9 +1235,9 @@ typedef enum
 
 
 /// <summary>
-/// Attribution network name
+/// UTC time stamp of attribution
 /// </summary>
-@property NSString* Platform; 
+@property NSDate* AttributedAt; 
 
 /// <summary>
 /// Attribution campaign identifier
@@ -1229,9 +1245,9 @@ typedef enum
 @property NSString* CampaignId; 
 
 /// <summary>
-/// UTC time stamp of attribution
+/// Attribution network name
 /// </summary>
-@property NSDate* AttributedAt; 
+@property NSString* Platform; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -1241,24 +1257,24 @@ typedef enum
 
 
 /// <summary>
-/// PlayFab identifier of the user to attempt to add to the local user's friend list.
-/// </summary>
-@property NSString* FriendPlayFabId; 
-
-/// <summary>
-/// PlayFab username of the user to attempt to add to the local user's friend list.
-/// </summary>
-@property NSString* FriendUsername; 
-
-/// <summary>
 /// Email address of the user to attempt to add to the local user's friend list.
 /// </summary>
 @property NSString* FriendEmail; 
 
 /// <summary>
+/// PlayFab identifier of the user to attempt to add to the local user's friend list.
+/// </summary>
+@property NSString* FriendPlayFabId; 
+
+/// <summary>
 /// Title-specific display name of the user to attempt to add to the local user's friend list.
 /// </summary>
 @property NSString* FriendTitleDisplayName; 
+
+/// <summary>
+/// PlayFab username of the user to attempt to add to the local user's friend list.
+/// </summary>
+@property NSString* FriendUsername; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -1305,14 +1321,14 @@ typedef enum
 
 
 /// <summary>
-/// Unique identifier for the shared group.
-/// </summary>
-@property NSString* SharedGroupId; 
-
-/// <summary>
 /// An array of unique PlayFab assigned ID of the user on whom the operation will be performed.
 /// </summary>
 @property NSArray* PlayFabIds; 
+
+/// <summary>
+/// Unique identifier for the shared group.
+/// </summary>
+@property NSString* SharedGroupId; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -1332,11 +1348,6 @@ typedef enum
 
 
 /// <summary>
-/// PlayFab username for the account (3-20 characters)
-/// </summary>
-@property NSString* Username; 
-
-/// <summary>
 /// User email address attached to their account
 /// </summary>
 @property NSString* Email; 
@@ -1345,6 +1356,11 @@ typedef enum
 /// Password for the PlayFab account (6-100 characters)
 /// </summary>
 @property NSString* Password; 
+
+/// <summary>
+/// PlayFab username for the account (3-20 characters)
+/// </summary>
+@property NSString* Username; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -1369,14 +1385,14 @@ typedef enum
 
 
 /// <summary>
-/// Name of the virtual currency which is to be incremented.
-/// </summary>
-@property NSString* VirtualCurrency; 
-
-/// <summary>
 /// Amount to be added to the user balance of the specified virtual currency.
 /// </summary>
 @property NSNumber* Amount; 
+
+/// <summary>
+/// Name of the virtual currency which is to be incremented.
+/// </summary>
+@property NSString* VirtualCurrency; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -1384,6 +1400,11 @@ typedef enum
 
 @interface AndroidDevicePushNotificationRegistrationRequest : PlayFabBaseModel
 
+
+/// <summary>
+/// Message to display when confirming push notification.
+/// </summary>
+@property NSString* ConfirmationMessage; 
 
 /// <summary>
 /// Registration ID provided by the Google Cloud Messaging service when the title registered to receive push notifications (see the GCM documentation, here: http://developer.android.com/google/gcm/client.html).
@@ -1394,11 +1415,6 @@ typedef enum
 /// If true, send a test push message immediately after sucessful registration. Defaults to false.
 /// </summary>
 @property bool SendPushNotificationConfirmation; 
-
-/// <summary>
-/// Message to display when confirming push notification.
-/// </summary>
-@property NSString* ConfirmationMessage; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -1418,14 +1434,14 @@ typedef enum
 
 
 /// <summary>
-/// The IdentifierForAdvertisers for iOS Devices.
-/// </summary>
-@property NSString* Idfa; 
-
-/// <summary>
 /// The adid for this device.
 /// </summary>
 @property NSString* Adid; 
+
+/// <summary>
+/// The IdentifierForAdvertisers for iOS Devices.
+/// </summary>
+@property NSString* Idfa; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -1472,19 +1488,9 @@ typedef enum
 
 
 /// <summary>
-/// Unique identifier for the catalog item.
+/// Description of the catalog item.
 /// </summary>
-@property NSString* ItemId; 
-
-/// <summary>
-/// Class name to which catalog item belongs.
-/// </summary>
-@property NSString* ItemClass; 
-
-/// <summary>
-/// Unique instance identifier for this catalog item.
-/// </summary>
-@property NSString* ItemInstanceId; 
+@property NSString* Description; 
 
 /// <summary>
 /// Display name for the catalog item.
@@ -1492,14 +1498,19 @@ typedef enum
 @property NSString* DisplayName; 
 
 /// <summary>
-/// Description of the catalog item.
+/// Class name to which catalog item belongs.
 /// </summary>
-@property NSString* Description; 
+@property NSString* ItemClass; 
 
 /// <summary>
-/// Cost of the catalog item for each applicable virtual currency.
+/// Unique identifier for the catalog item.
 /// </summary>
-@property NSDictionary* VirtualCurrencyPrices; 
+@property NSString* ItemId; 
+
+/// <summary>
+/// Unique instance identifier for this catalog item.
+/// </summary>
+@property NSString* ItemInstanceId; 
 
 /// <summary>
 /// Cost of the catalog item for each applicable real world currency.
@@ -1510,6 +1521,11 @@ typedef enum
 /// Amount of each applicable virtual currency which will be received as a result of purchasing this catalog item.
 /// </summary>
 @property NSDictionary* VCAmount; 
+
+/// <summary>
+/// Cost of the catalog item for each applicable virtual currency.
+/// </summary>
+@property NSDictionary* VirtualCurrencyPrices; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -1522,49 +1538,19 @@ typedef enum
 
 
 /// <summary>
-/// unique identifier for this item
+/// defines the bundle properties for the item - bundles are items which contain other items, including random drop tables and virtual currencies
 /// </summary>
-@property NSString* ItemId; 
+@property CatalogItemBundleInfo* Bundle; 
 
 /// <summary>
-/// class to which the item belongs
+/// if true, then an item instance of this type can be used to grant a character to a user.
 /// </summary>
-@property NSString* ItemClass; 
+@property bool CanBecomeCharacter; 
 
 /// <summary>
 /// catalog version for this item
 /// </summary>
 @property NSString* CatalogVersion; 
-
-/// <summary>
-/// text name for the item, to show in-game
-/// </summary>
-@property NSString* DisplayName; 
-
-/// <summary>
-/// text description of item, to show in-game
-/// </summary>
-@property NSString* Description; 
-
-/// <summary>
-/// price of this item in virtual currencies and "RM" (the base Real Money purchase price, in USD pennies)
-/// </summary>
-@property NSDictionary* VirtualCurrencyPrices; 
-
-/// <summary>
-/// override prices for this item for specific currencies
-/// </summary>
-@property NSDictionary* RealCurrencyPrices; 
-
-/// <summary>
-/// list of item tags
-/// </summary>
-@property NSArray* Tags; 
-
-/// <summary>
-/// game specific custom data
-/// </summary>
-@property NSString* CustomData; 
 
 /// <summary>
 /// defines the consumable properties (number of uses, timeout) for the item
@@ -1577,14 +1563,29 @@ typedef enum
 @property CatalogItemContainerInfo* Container; 
 
 /// <summary>
-/// defines the bundle properties for the item - bundles are items which contain other items, including random drop tables and virtual currencies
+/// game specific custom data
 /// </summary>
-@property CatalogItemBundleInfo* Bundle; 
+@property NSString* CustomData; 
 
 /// <summary>
-/// if true, then an item instance of this type can be used to grant a character to a user.
+/// text description of item, to show in-game
 /// </summary>
-@property bool CanBecomeCharacter; 
+@property NSString* Description; 
+
+/// <summary>
+/// text name for the item, to show in-game
+/// </summary>
+@property NSString* DisplayName; 
+
+/// <summary>
+/// If the item has IsLImitedEdition set to true, and this is the first time this ItemId has been defined as a limited edition item, this value determines the total number of instances to allocate for the title. Once this limit has been reached, no more instances of this ItemId can be created, and attempts to purchase or grant it will return a Result of false for that ItemId. If the item has already been defined to have a limited edition count, or if this value is less than zero, it will be ignored.
+/// </summary>
+@property NSNumber* InitialLimitedEditionCount; 
+
+/// <summary>
+/// BETA: If true, then only a fixed number can ever be granted.
+/// </summary>
+@property bool IsLimitedEdition; 
 
 /// <summary>
 /// if true, then only one item instance of this type will exist and its remaininguses will be incremented instead. RemainingUses will cap out at Int32.Max (2,147,483,647). All subsequent increases will be discarded
@@ -1597,19 +1598,34 @@ typedef enum
 @property bool IsTradable; 
 
 /// <summary>
+/// class to which the item belongs
+/// </summary>
+@property NSString* ItemClass; 
+
+/// <summary>
+/// unique identifier for this item
+/// </summary>
+@property NSString* ItemId; 
+
+/// <summary>
 /// URL to the item image. For Facebook purchase to display the image on the item purchase page, this must be set to an HTTP URL.
 /// </summary>
 @property NSString* ItemImageUrl; 
 
 /// <summary>
-/// BETA: If true, then only a fixed number can ever be granted.
+/// override prices for this item for specific currencies
 /// </summary>
-@property bool IsLimitedEdition; 
+@property NSDictionary* RealCurrencyPrices; 
 
 /// <summary>
-/// If the item has IsLImitedEdition set to true, and this is the first time this ItemId has been defined as a limited edition item, this value determines the total number of instances to allocate for the title. Once this limit has been reached, no more instances of this ItemId can be created, and attempts to purchase or grant it will return a Result of false for that ItemId. If the item has already been defined to have a limited edition count, or if this value is less than zero, it will be ignored.
+/// list of item tags
 /// </summary>
-@property NSNumber* InitialLimitedEditionCount; 
+@property NSArray* Tags; 
+
+/// <summary>
+/// price of this item in virtual currencies and "RM" (the base Real Money purchase price, in USD pennies)
+/// </summary>
+@property NSDictionary* VirtualCurrencyPrices; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -1666,14 +1682,14 @@ typedef enum
 
 
 /// <summary>
-/// ItemId for the catalog item used to unlock the container, if any (if not specified, a call to UnlockContainerItem will open the container, adding the contents to the player inventory and currency balances)
-/// </summary>
-@property NSString* KeyItemId; 
-
-/// <summary>
 /// unique ItemId values for all items which will be added to the player inventory, once the container has been unlocked
 /// </summary>
 @property NSArray* ItemContents; 
+
+/// <summary>
+/// ItemId for the catalog item used to unlock the container, if any (if not specified, a call to UnlockContainerItem will open the container, adding the contents to the player inventory and currency balances)
+/// </summary>
+@property NSString* KeyItemId; 
 
 /// <summary>
 /// unique TableId values for all RandomResultTable objects which are part of the container (once unlocked, random tables will be resolved and add the relevant items to the player inventory)
@@ -1710,11 +1726,6 @@ typedef enum
 
 
 /// <summary>
-/// PlayFab unique identifier of the user for this leaderboard entry.
-/// </summary>
-@property NSString* PlayFabId; 
-
-/// <summary>
 /// PlayFab unique identifier of the character that belongs to the user for this leaderboard entry.
 /// </summary>
 @property NSString* CharacterId; 
@@ -1725,24 +1736,29 @@ typedef enum
 @property NSString* CharacterName; 
 
 /// <summary>
-/// Title-specific display name of the user for this leaderboard entry.
-/// </summary>
-@property NSString* DisplayName; 
-
-/// <summary>
 /// Name of the character class for this entry.
 /// </summary>
 @property NSString* CharacterType; 
 
 /// <summary>
-/// Specific value of the user's statistic.
+/// Title-specific display name of the user for this leaderboard entry.
 /// </summary>
-@property NSNumber* StatValue; 
+@property NSString* DisplayName; 
+
+/// <summary>
+/// PlayFab unique identifier of the user for this leaderboard entry.
+/// </summary>
+@property NSString* PlayFabId; 
 
 /// <summary>
 /// User's overall position in the leaderboard.
 /// </summary>
 @property NSNumber* Position; 
+
+/// <summary>
+/// Specific value of the user's statistic.
+/// </summary>
+@property NSNumber* StatValue; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -1780,14 +1796,14 @@ typedef enum
 
 
 /// <summary>
-/// List of Include rules, with any of which if a collection matches, it is included by the filter, unless it is excluded by one of the Exclude rule
-/// </summary>
-@property NSArray* Includes; 
-
-/// <summary>
 /// List of Exclude rules, with any of which if a collection matches, it is excluded by the filter.
 /// </summary>
 @property NSArray* Excludes; 
+
+/// <summary>
+/// List of Include rules, with any of which if a collection matches, it is included by the filter, unless it is excluded by one of the Exclude rule
+/// </summary>
+@property NSArray* Includes; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -1809,6 +1825,11 @@ typedef enum
 
 
 /// <summary>
+/// Array of items purchased.
+/// </summary>
+@property NSArray* Items; 
+
+/// <summary>
 /// Purchase order identifier.
 /// </summary>
 @property NSString* OrderId; 
@@ -1817,11 +1838,6 @@ typedef enum
 /// Date and time of the purchase.
 /// </summary>
 @property NSDate* PurchaseDate; 
-
-/// <summary>
-/// Array of items purchased.
-/// </summary>
-@property NSArray* Items; 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
@@ -1834,9 +1850,9 @@ typedef enum
 
 
 /// <summary>
-/// Unique instance identifier of the item to be consumed.
+/// Unique PlayFab assigned ID for a specific character owned by a user
 /// </summary>
-@property NSString* ItemInstanceId; 
+@property NSString* CharacterId; 
 
 /// <summary>
 /// Number of uses to consume from the item.
@@ -1844,9 +1860,9 @@ typedef enum
 @property NSNumber* ConsumeCount; 
 
 /// <summary>
-/// Unique PlayFab assigned ID for a specific character owned by a user
+/// Unique instance identifier of the item to be consumed.
 /// </summary>
-@property NSString* CharacterId; 
+@property NSString* ItemInstanceId; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -1876,14 +1892,14 @@ typedef enum
 
 
 /// <summary>
-/// The name of the email info data
-/// </summary>
-@property NSString* Name; 
-
-/// <summary>
 /// The email address
 /// </summary>
 @property NSString* EmailAddress; 
+
+/// <summary>
+/// The name of the email info data
+/// </summary>
+@property NSString* Name; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -1935,11 +1951,6 @@ typedef enum
 
 
 /// <summary>
-/// Region to check for Game Server Instances.
-/// </summary>
-@property Region pfRegion; 
-
-/// <summary>
 /// Build to match against.
 /// </summary>
 @property NSString* BuildVersion; 
@@ -1948,6 +1959,11 @@ typedef enum
 /// Game mode to look for.
 /// </summary>
 @property NSString* GameMode; 
+
+/// <summary>
+/// Region to check for Game Server Instances.
+/// </summary>
+@property Region pfRegion; 
 
 /// <summary>
 /// Statistic name to find statistic-based matches.
@@ -1967,6 +1983,11 @@ typedef enum
 
 
 /// <summary>
+/// number of games running
+/// </summary>
+@property NSNumber* GameCount; 
+
+/// <summary>
 /// array of games found
 /// </summary>
 @property NSArray* Games; 
@@ -1975,11 +1996,6 @@ typedef enum
 /// total number of players across all servers
 /// </summary>
 @property NSNumber* PlayerCount; 
-
-/// <summary>
-/// number of games running
-/// </summary>
-@property NSNumber* GameCount; 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
@@ -2012,6 +2028,11 @@ typedef enum
 @property NSDictionary* FunctionParameter; 
 
 /// <summary>
+/// Generate a 'player_executed_cloudscript' PlayStream event containing the results of the function execution and other contextual information. This event will show up in the PlayStream debugger console for the player in Game Manager.
+/// </summary>
+@property bool GeneratePlayStreamEvent; 
+
+/// <summary>
 /// Option for which revision of the CloudScript to execute. 'Latest' executes the most recently created revision, 'Live' executes the current live, published revision, and 'Specific' executes the specified revision. The default value is 'Specific', if the SpeificRevision parameter is specified, otherwise it is 'Live'.
 /// </summary>
 @property CloudScriptRevisionOption RevisionSelection; 
@@ -2020,11 +2041,6 @@ typedef enum
 /// The specivic revision to execute, when RevisionSelection is set to 'Specific'
 /// </summary>
 @property NSNumber* SpecificRevision; 
-
-/// <summary>
-/// Generate a 'player_executed_cloudscript' PlayStream event containing the results of the function execution and other contextual information. This event will show up in the PlayStream debugger console for the player in Game Manager.
-/// </summary>
-@property bool GeneratePlayStreamEvent; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -2034,14 +2050,21 @@ typedef enum
 
 
 /// <summary>
+/// Number of PlayFab API requests issued by the CloudScript function
+/// </summary>
+@property NSNumber* APIRequestsIssued; 
+
+/// <summary>
+/// Information about the error, if any, that occurred during execution
+/// </summary>
+@property ScriptExecutionError* Error; 
+
+@property NSNumber* ExecutionTimeSeconds; 
+
+/// <summary>
 /// The name of the function that executed
 /// </summary>
 @property NSString* FunctionName; 
-
-/// <summary>
-/// The revision of the CloudScript that executed
-/// </summary>
-@property NSNumber* Revision; 
 
 /// <summary>
 /// The object returned from the CloudScript function, if any
@@ -2054,6 +2077,11 @@ typedef enum
 @property bool FunctionResultTooLarge; 
 
 /// <summary>
+/// Number of external HTTP requests issued by the CloudScript function
+/// </summary>
+@property NSNumber* HttpRequestsIssued; 
+
+/// <summary>
 /// Entries logged during the function execution. These include both entries logged in the function code using log.info() and log.error() and error entries for API and HTTP request failures.
 /// </summary>
 @property NSArray* Logs; 
@@ -2063,29 +2091,17 @@ typedef enum
 /// </summary>
 @property bool LogsTooLarge; 
 
-@property NSNumber* ExecutionTimeSeconds; 
+@property NSNumber* MemoryConsumedBytes; 
 
 /// <summary>
 /// Processor time consumed while executing the function. This does not include time spent waiting on API calls or HTTP requests.
 /// </summary>
 @property NSNumber* ProcessorTimeSeconds; 
 
-@property NSNumber* MemoryConsumedBytes; 
-
 /// <summary>
-/// Number of PlayFab API requests issued by the CloudScript function
+/// The revision of the CloudScript that executed
 /// </summary>
-@property NSNumber* APIRequestsIssued; 
-
-/// <summary>
-/// Number of external HTTP requests issued by the CloudScript function
-/// </summary>
-@property NSNumber* HttpRequestsIssued; 
-
-/// <summary>
-/// Information about the error, if any, that occurred during execution
-/// </summary>
-@property ScriptExecutionError* Error; 
+@property NSNumber* Revision; 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
@@ -2115,26 +2131,6 @@ typedef enum
 
 
 /// <summary>
-/// PlayFab unique identifier for this friend.
-/// </summary>
-@property NSString* FriendPlayFabId; 
-
-/// <summary>
-/// PlayFab unique username for this friend.
-/// </summary>
-@property NSString* Username; 
-
-/// <summary>
-/// Title-specific display name for this friend.
-/// </summary>
-@property NSString* TitleDisplayName; 
-
-/// <summary>
-/// Tags which have been associated with this friend.
-/// </summary>
-@property NSArray* Tags; 
-
-/// <summary>
 /// Unique lobby identifier of the Game Server Instance to which this player is currently connected.
 /// </summary>
 @property NSString* CurrentMatchmakerLobbyId; 
@@ -2145,9 +2141,9 @@ typedef enum
 @property UserFacebookInfo* FacebookInfo; 
 
 /// <summary>
-/// Available Steam information (if the user and PlayFab friend are also connected in Steam).
+/// PlayFab unique identifier for this friend.
 /// </summary>
-@property UserSteamInfo* SteamInfo; 
+@property NSString* FriendPlayFabId; 
 
 /// <summary>
 /// Available Game Center information (if the user and PlayFab friend are also connected in Game Center).
@@ -2158,6 +2154,26 @@ typedef enum
 /// The profile of the user, if requested.
 /// </summary>
 @property PlayerProfileModel* Profile; 
+
+/// <summary>
+/// Available Steam information (if the user and PlayFab friend are also connected in Steam).
+/// </summary>
+@property UserSteamInfo* SteamInfo; 
+
+/// <summary>
+/// Tags which have been associated with this friend.
+/// </summary>
+@property NSArray* Tags; 
+
+/// <summary>
+/// Title-specific display name for this friend.
+/// </summary>
+@property NSString* TitleDisplayName; 
+
+/// <summary>
+/// PlayFab unique username for this friend.
+/// </summary>
+@property NSString* Username; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -2184,16 +2200,6 @@ typedef enum
 
 
 /// <summary>
-/// region to which this server is associated
-/// </summary>
-@property Region pfRegion; 
-
-/// <summary>
-/// unique lobby identifier for this game server
-/// </summary>
-@property NSString* LobbyID; 
-
-/// <summary>
 /// build version this server is running
 /// </summary>
 @property NSString* BuildVersion; 
@@ -2204,24 +2210,9 @@ typedef enum
 @property NSString* GameMode; 
 
 /// <summary>
-/// stastic used to match this game in player statistic matchmaking
+/// game session custom data
 /// </summary>
-@property NSString* StatisticName; 
-
-/// <summary>
-/// maximum players this server can support
-/// </summary>
-@property NSNumber* MaxPlayers; 
-
-/// <summary>
-/// array of current player IDs on this server
-/// </summary>
-@property NSArray* PlayerUserIds; 
-
-/// <summary>
-/// duration in seconds this server has been running
-/// </summary>
-@property NSNumber* RunTime; 
+@property NSString* GameServerData; 
 
 /// <summary>
 /// game specific string denoting server configuration
@@ -2234,19 +2225,34 @@ typedef enum
 @property GameInstanceState GameServerStateEnum; 
 
 /// <summary>
-/// game session custom data
-/// </summary>
-@property NSString* GameServerData; 
-
-/// <summary>
-/// game session tags
-/// </summary>
-@property NSDictionary* Tags; 
-
-/// <summary>
 /// last heartbeat of the game server instance, used in external game server provider mode
 /// </summary>
 @property NSDate* LastHeartbeat; 
+
+/// <summary>
+/// unique lobby identifier for this game server
+/// </summary>
+@property NSString* LobbyID; 
+
+/// <summary>
+/// maximum players this server can support
+/// </summary>
+@property NSNumber* MaxPlayers; 
+
+/// <summary>
+/// array of current player IDs on this server
+/// </summary>
+@property NSArray* PlayerUserIds; 
+
+/// <summary>
+/// region to which this server is associated
+/// </summary>
+@property Region pfRegion; 
+
+/// <summary>
+/// duration in seconds this server has been running
+/// </summary>
+@property NSNumber* RunTime; 
 
 /// <summary>
 /// IP address of the server
@@ -2257,6 +2263,16 @@ typedef enum
 /// port number to use for non-http communications with the server
 /// </summary>
 @property NSNumber* ServerPort; 
+
+/// <summary>
+/// stastic used to match this game in player statistic matchmaking
+/// </summary>
+@property NSString* StatisticName; 
+
+/// <summary>
+/// game session tags
+/// </summary>
+@property NSDictionary* Tags; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -2332,24 +2348,24 @@ typedef enum
 
 
 /// <summary>
-/// Unique PlayFab identifier of the user whose info is being requested. Optional, defaults to the authenticated user if no other lookup identifier set.
-/// </summary>
-@property NSString* PlayFabId; 
-
-/// <summary>
-/// PlayFab Username for the account to find (if no PlayFabId is specified).
-/// </summary>
-@property NSString* Username; 
-
-/// <summary>
 /// User email address for the account to find (if no Username is specified).
 /// </summary>
 @property NSString* Email; 
 
 /// <summary>
+/// Unique PlayFab identifier of the user whose info is being requested. Optional, defaults to the authenticated user if no other lookup identifier set.
+/// </summary>
+@property NSString* PlayFabId; 
+
+/// <summary>
 /// Title-specific username for the account to find (if no Email is set). Note that if the non-unique Title Display Names option is enabled for the title, attempts to look up users by Title Display Name will always return AccountNotFound.
 /// </summary>
 @property NSString* TitleDisplayName; 
+
+/// <summary>
+/// PlayFab Username for the account to find (if no PlayFabId is specified).
+/// </summary>
+@property NSString* Username; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -2401,14 +2417,14 @@ typedef enum
 
 
 /// <summary>
-/// Unique PlayFab identifier of the user to load data for. Optional, defaults to yourself if not set.
-/// </summary>
-@property NSString* PlayFabId; 
-
-/// <summary>
 /// Unique PlayFab assigned ID for a specific character owned by a user
 /// </summary>
 @property NSString* CharacterId; 
+
+/// <summary>
+/// The version that currently exists according to the caller. The call will return the data for all of the keys if the version in the system is greater than this.
+/// </summary>
+@property NSNumber* IfChangedFromDataVersion; 
 
 /// <summary>
 /// Specific keys to search for in the custom user data.
@@ -2416,9 +2432,9 @@ typedef enum
 @property NSArray* Keys; 
 
 /// <summary>
-/// The version that currently exists according to the caller. The call will return the data for all of the keys if the version in the system is greater than this.
+/// Unique PlayFab identifier of the user to load data for. Optional, defaults to yourself if not set.
 /// </summary>
-@property NSNumber* IfChangedFromDataVersion; 
+@property NSString* PlayFabId; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -2453,14 +2469,14 @@ typedef enum
 
 
 /// <summary>
-/// Unique PlayFab assigned ID for a specific character owned by a user
-/// </summary>
-@property NSString* CharacterId; 
-
-/// <summary>
 /// Used to limit results to only those from a specific catalog version.
 /// </summary>
 @property NSString* CatalogVersion; 
+
+/// <summary>
+/// Unique PlayFab assigned ID for a specific character owned by a user
+/// </summary>
+@property NSString* CharacterId; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -2505,9 +2521,9 @@ typedef enum
 @property NSString* CharacterType; 
 
 /// <summary>
-/// Unique identifier for the title-specific statistic for the leaderboard.
+/// Maximum number of entries to retrieve. Default 10, maximum 100.
 /// </summary>
-@property NSString* StatisticName; 
+@property NSNumber* MaxResultsCount; 
 
 /// <summary>
 /// First entry in the leaderboard to be retrieved.
@@ -2515,9 +2531,9 @@ typedef enum
 @property NSNumber* StartPosition; 
 
 /// <summary>
-/// Maximum number of entries to retrieve. Default 10, maximum 100.
+/// Unique identifier for the title-specific statistic for the leaderboard.
 /// </summary>
-@property NSNumber* MaxResultsCount; 
+@property NSString* StatisticName; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -2569,14 +2585,14 @@ typedef enum
 
 
 /// <summary>
-/// Key of the content item to fetch, usually formatted as a path, e.g. images/a.png
-/// </summary>
-@property NSString* Key; 
-
-/// <summary>
 /// HTTP method to fetch item - GET or HEAD. Use HEAD when only fetching metadata. Default is GET.
 /// </summary>
 @property NSString* HttpMethod; 
+
+/// <summary>
+/// Key of the content item to fetch, usually formatted as a path, e.g. images/a.png
+/// </summary>
+@property NSString* Key; 
 
 /// <summary>
 /// True if download through CDN. CDN provides better download bandwidth and time. However, if you want latest, non-cached version of the content, set this to false. Default is true.
@@ -2606,9 +2622,14 @@ typedef enum
 
 
 /// <summary>
-/// Statistic used to rank players for this leaderboard.
+/// Indicates whether Facebook friends should be included in the response. Default is true.
 /// </summary>
-@property NSString* StatisticName; 
+@property bool IncludeFacebookFriends; 
+
+/// <summary>
+/// Indicates whether Steam service friends should be included in the response. Default is true.
+/// </summary>
+@property bool IncludeSteamFriends; 
 
 /// <summary>
 /// Maximum number of entries to retrieve. Default 10, maximum 100.
@@ -2621,24 +2642,19 @@ typedef enum
 @property NSString* PlayFabId; 
 
 /// <summary>
-/// Indicates whether Steam service friends should be included in the response. Default is true.
+/// If non-null, this determines which properties of the resulting player profiles to return. For API calls from the client, only the allowed client profile properties for the title may be requested. These allowed properties are configured in the Game Manager "Client Profile Options" tab in the "Settings" section.
 /// </summary>
-@property bool IncludeSteamFriends; 
+@property PlayerProfileViewConstraints* ProfileConstraints; 
 
 /// <summary>
-/// Indicates whether Facebook friends should be included in the response. Default is true.
+/// Statistic used to rank players for this leaderboard.
 /// </summary>
-@property bool IncludeFacebookFriends; 
+@property NSString* StatisticName; 
 
 /// <summary>
 /// The version of the leaderboard to get.
 /// </summary>
 @property NSNumber* Version; 
-
-/// <summary>
-/// If non-null, this determines which properties of the resulting player profiles to return. For API calls from the client, only the allowed client profile properties for the title may be requested. These allowed properties are configured in the Game Manager "Client Profile Options" tab in the "Settings" section.
-/// </summary>
-@property PlayerProfileViewConstraints* ProfileConstraints; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -2653,14 +2669,14 @@ typedef enum
 @property NSArray* Leaderboard; 
 
 /// <summary>
-/// The version of the leaderboard returned.
-/// </summary>
-@property NSNumber* Version; 
-
-/// <summary>
 /// The time the next scheduled reset will occur. Null if the leaderboard does not reset on a schedule.
 /// </summary>
 @property NSDate* NextReset; 
+
+/// <summary>
+/// The version of the leaderboard returned.
+/// </summary>
+@property NSNumber* Version; 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
@@ -2673,19 +2689,9 @@ typedef enum
 
 
 /// <summary>
-/// Statistic used to rank friends for this leaderboard.
+/// Indicates whether Facebook friends should be included in the response. Default is true.
 /// </summary>
-@property NSString* StatisticName; 
-
-/// <summary>
-/// Position in the leaderboard to start this listing (defaults to the first entry).
-/// </summary>
-@property NSNumber* StartPosition; 
-
-/// <summary>
-/// Maximum number of entries to retrieve. Default 10, maximum 100.
-/// </summary>
-@property NSNumber* MaxResultsCount; 
+@property bool IncludeFacebookFriends; 
 
 /// <summary>
 /// Indicates whether Steam service friends should be included in the response. Default is true.
@@ -2693,19 +2699,29 @@ typedef enum
 @property bool IncludeSteamFriends; 
 
 /// <summary>
-/// Indicates whether Facebook friends should be included in the response. Default is true.
+/// Maximum number of entries to retrieve. Default 10, maximum 100.
 /// </summary>
-@property bool IncludeFacebookFriends; 
-
-/// <summary>
-/// The version of the leaderboard to get.
-/// </summary>
-@property NSNumber* Version; 
+@property NSNumber* MaxResultsCount; 
 
 /// <summary>
 /// If non-null, this determines which properties of the resulting player profiles to return. For API calls from the client, only the allowed client profile properties for the title may be requested. These allowed properties are configured in the Game Manager "Client Profile Options" tab in the "Settings" section.
 /// </summary>
 @property PlayerProfileViewConstraints* ProfileConstraints; 
+
+/// <summary>
+/// Position in the leaderboard to start this listing (defaults to the first entry).
+/// </summary>
+@property NSNumber* StartPosition; 
+
+/// <summary>
+/// Statistic used to rank friends for this leaderboard.
+/// </summary>
+@property NSString* StatisticName; 
+
+/// <summary>
+/// The version of the leaderboard to get.
+/// </summary>
+@property NSNumber* Version; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -2715,14 +2731,14 @@ typedef enum
 
 
 /// <summary>
-/// Indicates whether Steam service friends should be included in the response. Default is true.
-/// </summary>
-@property bool IncludeSteamFriends; 
-
-/// <summary>
 /// Indicates whether Facebook friends should be included in the response. Default is true.
 /// </summary>
 @property bool IncludeFacebookFriends; 
+
+/// <summary>
+/// Indicates whether Steam service friends should be included in the response. Default is true.
+/// </summary>
+@property bool IncludeSteamFriends; 
 
 /// <summary>
 /// If non-null, this determines which properties of the resulting player profiles to return. For API calls from the client, only the allowed client profile properties for the title may be requested. These allowed properties are configured in the Game Manager "Client Profile Options" tab in the "Settings" section.
@@ -2752,11 +2768,6 @@ typedef enum
 
 
 /// <summary>
-/// Unique identifier for the title-specific statistic for the leaderboard.
-/// </summary>
-@property NSString* StatisticName; 
-
-/// <summary>
 /// Unique PlayFab assigned ID for a specific character on which to center the leaderboard.
 /// </summary>
 @property NSString* CharacterId; 
@@ -2770,6 +2781,11 @@ typedef enum
 /// Maximum number of entries to retrieve. Default 10, maximum 100.
 /// </summary>
 @property NSNumber* MaxResultsCount; 
+
+/// <summary>
+/// Unique identifier for the title-specific statistic for the leaderboard.
+/// </summary>
+@property NSString* StatisticName; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -2794,9 +2810,19 @@ typedef enum
 
 
 /// <summary>
+/// Maximum number of entries to retrieve. Default 10, maximum 100.
+/// </summary>
+@property NSNumber* MaxResultsCount; 
+
+/// <summary>
 /// PlayFab unique identifier of the user to center the leaderboard around. If null will center on the logged in user.
 /// </summary>
 @property NSString* PlayFabId; 
+
+/// <summary>
+/// If non-null, this determines which properties of the resulting player profiles to return. For API calls from the client, only the allowed client profile properties for the title may be requested. These allowed properties are configured in the Game Manager "Client Profile Options" tab in the "Settings" section.
+/// </summary>
+@property PlayerProfileViewConstraints* ProfileConstraints; 
 
 /// <summary>
 /// Statistic used to rank players for this leaderboard.
@@ -2804,19 +2830,9 @@ typedef enum
 @property NSString* StatisticName; 
 
 /// <summary>
-/// Maximum number of entries to retrieve. Default 10, maximum 100.
-/// </summary>
-@property NSNumber* MaxResultsCount; 
-
-/// <summary>
 /// The version of the leaderboard to get.
 /// </summary>
 @property NSNumber* Version; 
-
-/// <summary>
-/// If non-null, this determines which properties of the resulting player profiles to return. For API calls from the client, only the allowed client profile properties for the title may be requested. These allowed properties are configured in the Game Manager "Client Profile Options" tab in the "Settings" section.
-/// </summary>
-@property PlayerProfileViewConstraints* ProfileConstraints; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -2831,14 +2847,14 @@ typedef enum
 @property NSArray* Leaderboard; 
 
 /// <summary>
-/// The version of the leaderboard returned.
-/// </summary>
-@property NSNumber* Version; 
-
-/// <summary>
 /// The time the next scheduled reset will occur. Null if the leaderboard does not reset on a schedule.
 /// </summary>
 @property NSDate* NextReset; 
+
+/// <summary>
+/// The version of the leaderboard returned.
+/// </summary>
+@property NSNumber* Version; 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
@@ -2851,14 +2867,14 @@ typedef enum
 
 
 /// <summary>
-/// Unique identifier for the title-specific statistic for the leaderboard.
-/// </summary>
-@property NSString* StatisticName; 
-
-/// <summary>
 /// Maximum number of entries to retrieve.
 /// </summary>
 @property NSNumber* MaxResultsCount; 
+
+/// <summary>
+/// Unique identifier for the title-specific statistic for the leaderboard.
+/// </summary>
+@property NSString* StatisticName; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -2883,9 +2899,14 @@ typedef enum
 
 
 /// <summary>
-/// Statistic used to rank players for this leaderboard.
+/// Maximum number of entries to retrieve. Default 10, maximum 100.
 /// </summary>
-@property NSString* StatisticName; 
+@property NSNumber* MaxResultsCount; 
+
+/// <summary>
+/// If non-null, this determines which properties of the resulting player profiles to return. For API calls from the client, only the allowed client profile properties for the title may be requested. These allowed properties are configured in the Game Manager "Client Profile Options" tab in the "Settings" section.
+/// </summary>
+@property PlayerProfileViewConstraints* ProfileConstraints; 
 
 /// <summary>
 /// Position in the leaderboard to start this listing (defaults to the first entry).
@@ -2893,19 +2914,14 @@ typedef enum
 @property NSNumber* StartPosition; 
 
 /// <summary>
-/// Maximum number of entries to retrieve. Default 10, maximum 100.
+/// Statistic used to rank players for this leaderboard.
 /// </summary>
-@property NSNumber* MaxResultsCount; 
+@property NSString* StatisticName; 
 
 /// <summary>
 /// The version of the leaderboard to get.
 /// </summary>
 @property NSNumber* Version; 
-
-/// <summary>
-/// If non-null, this determines which properties of the resulting player profiles to return. For API calls from the client, only the allowed client profile properties for the title may be requested. These allowed properties are configured in the Game Manager "Client Profile Options" tab in the "Settings" section.
-/// </summary>
-@property PlayerProfileViewConstraints* ProfileConstraints; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -2920,14 +2936,14 @@ typedef enum
 @property NSArray* Leaderboard; 
 
 /// <summary>
-/// The version of the leaderboard returned.
-/// </summary>
-@property NSNumber* Version; 
-
-/// <summary>
 /// The time the next scheduled reset will occur. Null if the leaderboard does not reset on a schedule.
 /// </summary>
 @property NSDate* NextReset; 
+
+/// <summary>
+/// The version of the leaderboard returned.
+/// </summary>
+@property NSNumber* Version; 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
@@ -2967,14 +2983,14 @@ typedef enum
 
 
 /// <summary>
-/// PlayFabId of the user whose data will be returned. If not filled included, we return the data for the calling player. 
-/// </summary>
-@property NSString* PlayFabId; 
-
-/// <summary>
 /// Flags for which pieces of info to return for the user.
 /// </summary>
 @property GetPlayerCombinedInfoRequestParams InfoRequestParameters; 
+
+/// <summary>
+/// PlayFabId of the user whose data will be returned. If not filled included, we return the data for the calling player. 
+/// </summary>
+@property NSString* PlayFabId; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -2982,41 +2998,6 @@ typedef enum
 
 @interface GetPlayerCombinedInfoRequestParams : PlayFabBaseModel
 
-
-/// <summary>
-/// Whether to get the player's account Info. Defaults to false
-/// </summary>
-@property bool GetUserAccountInfo; 
-
-/// <summary>
-/// Whether to get the player's inventory. Defaults to false
-/// </summary>
-@property bool GetUserInventory; 
-
-/// <summary>
-/// Whether to get the player's virtual currency balances. Defaults to false
-/// </summary>
-@property bool GetUserVirtualCurrency; 
-
-/// <summary>
-/// Whether to get the player's custom data. Defaults to false
-/// </summary>
-@property bool GetUserData; 
-
-/// <summary>
-/// Specific keys to search for in the custom data. Leave null to get all keys. Has no effect if GetUserData is false
-/// </summary>
-@property NSArray* UserDataKeys; 
-
-/// <summary>
-/// Whether to get the player's read only data. Defaults to false
-/// </summary>
-@property bool GetUserReadOnlyData; 
-
-/// <summary>
-/// Specific keys to search for in the custom data. Leave null to get all keys. Has no effect if GetUserReadOnlyData is false
-/// </summary>
-@property NSArray* UserReadOnlyDataKeys; 
 
 /// <summary>
 /// Whether to get character inventories. Defaults to false.
@@ -3029,14 +3010,9 @@ typedef enum
 @property bool GetCharacterList; 
 
 /// <summary>
-/// Whether to get title data. Defaults to false.
+/// Whether to get player profile. Defaults to false.
 /// </summary>
-@property bool GetTitleData; 
-
-/// <summary>
-/// Specific keys to search for in the custom data. Leave null to get all keys. Has no effect if GetTitleData is false
-/// </summary>
-@property NSArray* TitleDataKeys; 
+@property bool GetPlayerProfile; 
 
 /// <summary>
 /// Whether to get player statistics. Defaults to false.
@@ -3044,19 +3020,59 @@ typedef enum
 @property bool GetPlayerStatistics; 
 
 /// <summary>
+/// Whether to get title data. Defaults to false.
+/// </summary>
+@property bool GetTitleData; 
+
+/// <summary>
+/// Whether to get the player's account Info. Defaults to false
+/// </summary>
+@property bool GetUserAccountInfo; 
+
+/// <summary>
+/// Whether to get the player's custom data. Defaults to false
+/// </summary>
+@property bool GetUserData; 
+
+/// <summary>
+/// Whether to get the player's inventory. Defaults to false
+/// </summary>
+@property bool GetUserInventory; 
+
+/// <summary>
+/// Whether to get the player's read only data. Defaults to false
+/// </summary>
+@property bool GetUserReadOnlyData; 
+
+/// <summary>
+/// Whether to get the player's virtual currency balances. Defaults to false
+/// </summary>
+@property bool GetUserVirtualCurrency; 
+
+/// <summary>
 /// Specific statistics to retrieve. Leave null to get all keys. Has no effect if GetPlayerStatistics is false
 /// </summary>
 @property NSArray* PlayerStatisticNames; 
 
 /// <summary>
-/// Whether to get player profile. Defaults to false.
-/// </summary>
-@property bool GetPlayerProfile; 
-
-/// <summary>
 /// Specifies the properties to return from the player profile. Defaults to returning the player's display name.
 /// </summary>
 @property PlayerProfileViewConstraints* ProfileConstraints; 
+
+/// <summary>
+/// Specific keys to search for in the custom data. Leave null to get all keys. Has no effect if GetTitleData is false
+/// </summary>
+@property NSArray* TitleDataKeys; 
+
+/// <summary>
+/// Specific keys to search for in the custom data. Leave null to get all keys. Has no effect if GetUserData is false
+/// </summary>
+@property NSArray* UserDataKeys; 
+
+/// <summary>
+/// Specific keys to search for in the custom data. Leave null to get all keys. Has no effect if GetUserReadOnlyData is false
+/// </summary>
+@property NSArray* UserReadOnlyDataKeys; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -3066,14 +3082,14 @@ typedef enum
 
 
 /// <summary>
-/// Unique PlayFab assigned ID of the user on whom the operation will be performed.
-/// </summary>
-@property NSString* PlayFabId; 
-
-/// <summary>
 /// Results for requested info.
 /// </summary>
 @property GetPlayerCombinedInfoResultPayload* InfoResultPayload; 
+
+/// <summary>
+/// Unique PlayFab assigned ID of the user on whom the operation will be performed.
+/// </summary>
+@property NSString* PlayFabId; 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
@@ -3091,19 +3107,29 @@ typedef enum
 @property UserAccountInfo* AccountInfo; 
 
 /// <summary>
-/// Array of inventory items in the user's current inventory.
+/// Inventories for each character for the user.
 /// </summary>
-@property NSArray* UserInventory; 
+@property NSArray* CharacterInventories; 
 
 /// <summary>
-/// Dictionary of virtual currency balance(s) belonging to the user.
+/// List of characters for the user.
 /// </summary>
-@property NSDictionary* UserVirtualCurrency; 
+@property NSArray* CharacterList; 
 
 /// <summary>
-/// Dictionary of remaining times and timestamps for virtual currencies.
+/// The profile of the players. This profile is not guaranteed to be up-to-date. For a new player, this profile will not exist.
 /// </summary>
-@property NSDictionary* UserVirtualCurrencyRechargeTimes; 
+@property PlayerProfileModel* PlayerProfile; 
+
+/// <summary>
+/// List of statistics for this player.
+/// </summary>
+@property NSArray* PlayerStatistics; 
+
+/// <summary>
+/// Title data for this title.
+/// </summary>
+@property NSDictionary* TitleData; 
 
 /// <summary>
 /// User specific custom data.
@@ -3116,6 +3142,11 @@ typedef enum
 @property NSNumber* UserDataVersion; 
 
 /// <summary>
+/// Array of inventory items in the user's current inventory.
+/// </summary>
+@property NSArray* UserInventory; 
+
+/// <summary>
 /// User specific read-only data.
 /// </summary>
 @property NSDictionary* UserReadOnlyData; 
@@ -3126,29 +3157,14 @@ typedef enum
 @property NSNumber* UserReadOnlyDataVersion; 
 
 /// <summary>
-/// List of characters for the user.
+/// Dictionary of virtual currency balance(s) belonging to the user.
 /// </summary>
-@property NSArray* CharacterList; 
+@property NSDictionary* UserVirtualCurrency; 
 
 /// <summary>
-/// Inventories for each character for the user.
+/// Dictionary of remaining times and timestamps for virtual currencies.
 /// </summary>
-@property NSArray* CharacterInventories; 
-
-/// <summary>
-/// Title data for this title.
-/// </summary>
-@property NSDictionary* TitleData; 
-
-/// <summary>
-/// List of statistics for this player.
-/// </summary>
-@property NSArray* PlayerStatistics; 
-
-/// <summary>
-/// The profile of the players. This profile is not guaranteed to be up-to-date. For a new player, this profile will not exist.
-/// </summary>
-@property PlayerProfileModel* PlayerProfile; 
+@property NSDictionary* UserVirtualCurrencyRechargeTimes; 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
@@ -3274,14 +3290,14 @@ typedef enum
 
 
 /// <summary>
-/// Unique PlayFab assigned ID of the user on whom the operation will be performed.
-/// </summary>
-@property NSString* PlayFabId; 
-
-/// <summary>
 /// Optional namespace to filter results by
 /// </summary>
 @property NSString* Namespace; 
+
+/// <summary>
+/// Unique PlayFab assigned ID of the user on whom the operation will be performed.
+/// </summary>
+@property NSString* PlayFabId; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -3323,14 +3339,14 @@ typedef enum
 
 
 /// <summary>
-/// The trades for this player which are currently available to be accepted.
-/// </summary>
-@property NSArray* OpenedTrades; 
-
-/// <summary>
 /// History of trades which this player has accepted.
 /// </summary>
 @property NSArray* AcceptedTrades; 
+
+/// <summary>
+/// The trades for this player which are currently available to be accepted.
+/// </summary>
+@property NSArray* OpenedTrades; 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
@@ -3581,6 +3597,11 @@ typedef enum
 @property NSString* PaymentProvider; 
 
 /// <summary>
+/// Date and time of the purchase.
+/// </summary>
+@property NSDate* PurchaseDate; 
+
+/// <summary>
 /// Provider transaction ID (If not VC)
 /// </summary>
 @property NSString* TransactionId; 
@@ -3589,11 +3610,6 @@ typedef enum
 /// PlayFab transaction status
 /// </summary>
 @property NSString* TransactionStatus; 
-
-/// <summary>
-/// Date and time of the purchase.
-/// </summary>
-@property NSDate* PurchaseDate; 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
@@ -3606,6 +3622,11 @@ typedef enum
 
 
 /// <summary>
+/// Identifier of the segments AB Test, if it is attached to one.
+/// </summary>
+@property NSString* ABTestParent; 
+
+/// <summary>
 /// Unique identifier for this segment.
 /// </summary>
 @property NSString* Id; 
@@ -3614,11 +3635,6 @@ typedef enum
 /// Segment name.
 /// </summary>
 @property NSString* Name; 
-
-/// <summary>
-/// Identifier of the segments AB Test, if it is attached to one.
-/// </summary>
-@property NSString* ABTestParent; 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
@@ -3631,9 +3647,9 @@ typedef enum
 
 
 /// <summary>
-/// Unique identifier for the shared group.
+/// If true, return the list of all members of the shared group.
 /// </summary>
-@property NSString* SharedGroupId; 
+@property bool GetMembers; 
 
 /// <summary>
 /// Specific keys to retrieve from the shared group (if not specified, all keys will be returned, while an empty array indicates that no keys should be returned).
@@ -3641,9 +3657,9 @@ typedef enum
 @property NSArray* Keys; 
 
 /// <summary>
-/// If true, return the list of all members of the shared group.
+/// Unique identifier for the shared group.
 /// </summary>
-@property bool GetMembers; 
+@property NSString* SharedGroupId; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -3690,9 +3706,14 @@ typedef enum
 
 
 /// <summary>
-/// Array of items which can be purchased from this store.
+/// The base catalog that this store is a part of.
 /// </summary>
-@property NSArray* Store; 
+@property NSString* CatalogVersion; 
+
+/// <summary>
+/// Additional data about the store.
+/// </summary>
+@property StoreMarketingModel* MarketingData; 
 
 /// <summary>
 /// How the store was last updated (Admin or a third party).
@@ -3700,19 +3721,14 @@ typedef enum
 @property SourceType Source; 
 
 /// <summary>
-/// The base catalog that this store is a part of.
+/// Array of items which can be purchased from this store.
 /// </summary>
-@property NSString* CatalogVersion; 
+@property NSArray* Store; 
 
 /// <summary>
 /// The ID of this store.
 /// </summary>
 @property NSString* StoreId; 
-
-/// <summary>
-/// Additional data about the store.
-/// </summary>
-@property StoreMarketingModel* MarketingData; 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
@@ -3865,6 +3881,11 @@ typedef enum
 
 
 /// <summary>
+/// The version that currently exists according to the caller. The call will return the data for all of the keys if the version in the system is greater than this.
+/// </summary>
+@property NSNumber* IfChangedFromDataVersion; 
+
+/// <summary>
 /// Specific keys to search for in the custom data. Leave null to get all keys.
 /// </summary>
 @property NSArray* Keys; 
@@ -3873,11 +3894,6 @@ typedef enum
 /// Unique PlayFab identifier of the user to load data for. Optional, defaults to yourself if not set. When specified to a PlayFab id of another player, then this will only return public keys for that account.
 /// </summary>
 @property NSString* PlayFabId; 
-
-/// <summary>
-/// The version that currently exists according to the caller. The call will return the data for all of the keys if the version in the system is greater than this.
-/// </summary>
-@property NSNumber* IfChangedFromDataVersion; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -3939,14 +3955,14 @@ typedef enum
 
 
 /// <summary>
-/// Unique identifier for the title, found in the Settings > Game Properties section of the PlayFab developer site when a title has been selected.
-/// </summary>
-@property NSString* TitleId; 
-
-/// <summary>
 /// SHA256 hash of the PublicKey generated by Windows Hello.
 /// </summary>
 @property NSString* PublicKeyHint; 
+
+/// <summary>
+/// Unique identifier for the title, found in the Settings > Game Properties section of the PlayFab developer site when a title has been selected.
+/// </summary>
+@property NSString* TitleId; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -3993,14 +4009,14 @@ typedef enum
 @property NSString* CatalogVersion; 
 
 /// <summary>
-/// Catalog item identifier of the item in the user's inventory that corresponds to the character in the catalog to be created.
-/// </summary>
-@property NSString* ItemId; 
-
-/// <summary>
 /// Non-unique display name of the character being granted (1-20 characters in length).
 /// </summary>
 @property NSString* CharacterName; 
+
+/// <summary>
+/// Catalog item identifier of the item in the user's inventory that corresponds to the character in the catalog to be created.
+/// </summary>
+@property NSString* ItemId; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -4038,6 +4054,46 @@ typedef enum
 
 
 /// <summary>
+/// Game specific comment associated with this instance when it was added to the user inventory.
+/// </summary>
+@property NSString* Annotation; 
+
+/// <summary>
+/// Array of unique items that were awarded when this catalog item was purchased.
+/// </summary>
+@property NSArray* BundleContents; 
+
+/// <summary>
+/// Unique identifier for the parent inventory item, as defined in the catalog, for object which were added from a bundle or container.
+/// </summary>
+@property NSString* BundleParent; 
+
+/// <summary>
+/// Catalog version for the inventory item, when this instance was created.
+/// </summary>
+@property NSString* CatalogVersion; 
+
+/// <summary>
+/// A set of custom key-value pairs on the inventory item.
+/// </summary>
+@property NSDictionary* CustomData; 
+
+/// <summary>
+/// CatalogItem.DisplayName at the time this item was purchased.
+/// </summary>
+@property NSString* DisplayName; 
+
+/// <summary>
+/// Timestamp for when this instance will expire.
+/// </summary>
+@property NSDate* Expiration; 
+
+/// <summary>
+/// Class name for the inventory item, as defined in the catalog.
+/// </summary>
+@property NSString* ItemClass; 
+
+/// <summary>
 /// Unique identifier for the inventory item, as defined in the catalog.
 /// </summary>
 @property NSString* ItemId; 
@@ -4048,49 +4104,14 @@ typedef enum
 @property NSString* ItemInstanceId; 
 
 /// <summary>
-/// Class name for the inventory item, as defined in the catalog.
-/// </summary>
-@property NSString* ItemClass; 
-
-/// <summary>
 /// Timestamp for when this instance was purchased.
 /// </summary>
 @property NSDate* PurchaseDate; 
 
 /// <summary>
-/// Timestamp for when this instance will expire.
-/// </summary>
-@property NSDate* Expiration; 
-
-/// <summary>
 /// Total number of remaining uses, if this is a consumable item.
 /// </summary>
 @property NSNumber* RemainingUses; 
-
-/// <summary>
-/// The number of uses that were added or removed to this item in this call.
-/// </summary>
-@property NSNumber* UsesIncrementedBy; 
-
-/// <summary>
-/// Game specific comment associated with this instance when it was added to the user inventory.
-/// </summary>
-@property NSString* Annotation; 
-
-/// <summary>
-/// Catalog version for the inventory item, when this instance was created.
-/// </summary>
-@property NSString* CatalogVersion; 
-
-/// <summary>
-/// Unique identifier for the parent inventory item, as defined in the catalog, for object which were added from a bundle or container.
-/// </summary>
-@property NSString* BundleParent; 
-
-/// <summary>
-/// CatalogItem.DisplayName at the time this item was purchased.
-/// </summary>
-@property NSString* DisplayName; 
 
 /// <summary>
 /// Currency type for the cost of the catalog item.
@@ -4103,14 +4124,9 @@ typedef enum
 @property NSNumber* UnitPrice; 
 
 /// <summary>
-/// Array of unique items that were awarded when this catalog item was purchased.
+/// The number of uses that were added or removed to this item in this call.
 /// </summary>
-@property NSArray* BundleContents; 
-
-/// <summary>
-/// A set of custom key-value pairs on the inventory item.
-/// </summary>
-@property NSDictionary* CustomData; 
+@property NSNumber* UsesIncrementedBy; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -4118,6 +4134,11 @@ typedef enum
 
 @interface ItemPurchaseRequest : PlayFabBaseModel
 
+
+/// <summary>
+/// Title-specific text concerning this purchase.
+/// </summary>
+@property NSString* Annotation; 
 
 /// <summary>
 /// Unique ItemId of the item to purchase.
@@ -4128,11 +4149,6 @@ typedef enum
 /// How many of this item to purchase.
 /// </summary>
 @property NSNumber* Quantity; 
-
-/// <summary>
-/// Title-specific text concerning this purchase.
-/// </summary>
-@property NSString* Annotation; 
 
 /// <summary>
 /// Items to be upgraded as a result of this purchase (upgraded items are hidden, as they are "replaced" by the new items).
@@ -4164,24 +4180,24 @@ typedef enum
 
 
 /// <summary>
-/// Android device identifier for the user's device.
-/// </summary>
-@property NSString* AndroidDeviceId; 
-
-/// <summary>
-/// Specific Operating System version for the user's device.
-/// </summary>
-@property NSString* OS; 
-
-/// <summary>
 /// Specific model of the user's device.
 /// </summary>
 @property NSString* AndroidDevice; 
 
 /// <summary>
+/// Android device identifier for the user's device.
+/// </summary>
+@property NSString* AndroidDeviceId; 
+
+/// <summary>
 /// If another user is already linked to the device, unlink the other user and re-link.
 /// </summary>
 @property bool ForceLink; 
+
+/// <summary>
+/// Specific Operating System version for the user's device.
+/// </summary>
+@property NSString* OS; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -4228,6 +4244,11 @@ typedef enum
 
 
 /// <summary>
+/// Linked account email of the user on the platform, if available
+/// </summary>
+@property NSString* Email; 
+
+/// <summary>
 /// Authentication platform
 /// </summary>
 @property LoginIdentityProvider Platform; 
@@ -4241,11 +4262,6 @@ typedef enum
 /// Linked account username of the user on the platform, if available
 /// </summary>
 @property NSString* Username; 
-
-/// <summary>
-/// Linked account email of the user on the platform, if available
-/// </summary>
-@property NSString* Email; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -4282,14 +4298,14 @@ typedef enum
 
 
 /// <summary>
-/// Game Center identifier for the player account to be linked.
-/// </summary>
-@property NSString* GameCenterId; 
-
-/// <summary>
 /// If another user is already linked to the account, unlink the other user and re-link.
 /// </summary>
 @property bool ForceLink; 
+
+/// <summary>
+/// Game Center identifier for the player account to be linked.
+/// </summary>
+@property NSString* GameCenterId; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -4309,14 +4325,14 @@ typedef enum
 
 
 /// <summary>
-/// Server authentication code obtained on the client by calling getServerAuthCode() (https://developers.google.com/identity/sign-in/android/offline-access) from Google Play for the user.
-/// </summary>
-@property NSString* ServerAuthCode; 
-
-/// <summary>
 /// If another user is already linked to the account, unlink the other user and re-link.
 /// </summary>
 @property bool ForceLink; 
+
+/// <summary>
+/// Server authentication code obtained on the client by calling getServerAuthCode() (https://developers.google.com/identity/sign-in/android/offline-access) from Google Play for the user.
+/// </summary>
+@property NSString* ServerAuthCode; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -4341,11 +4357,6 @@ typedef enum
 @property NSString* DeviceId; 
 
 /// <summary>
-/// Specific Operating System version for the user's device.
-/// </summary>
-@property NSString* OS; 
-
-/// <summary>
 /// Specific model of the user's device.
 /// </summary>
 @property NSString* DeviceModel; 
@@ -4354,6 +4365,11 @@ typedef enum
 /// If another user is already linked to the device, unlink the other user and re-link.
 /// </summary>
 @property bool ForceLink; 
+
+/// <summary>
+/// Specific Operating System version for the user's device.
+/// </summary>
+@property NSString* OS; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -4373,11 +4389,6 @@ typedef enum
 
 
 /// <summary>
-/// Numeric user ID assigned by Kongregate
-/// </summary>
-@property NSString* KongregateId; 
-
-/// <summary>
 /// Valid session auth ticket issued by Kongregate
 /// </summary>
 @property NSString* AuthTicket; 
@@ -4386,6 +4397,11 @@ typedef enum
 /// If another user is already linked to the account, unlink the other user and re-link.
 /// </summary>
 @property bool ForceLink; 
+
+/// <summary>
+/// Numeric user ID assigned by Kongregate
+/// </summary>
+@property NSString* KongregateId; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -4405,14 +4421,14 @@ typedef enum
 
 
 /// <summary>
-/// Authentication token for the user, returned as a byte array from Steam, and converted to a string (for example, the byte 0x08 should become "08").
-/// </summary>
-@property NSString* SteamTicket; 
-
-/// <summary>
 /// If another user is already linked to the account, unlink the other user and re-link.
 /// </summary>
 @property bool ForceLink; 
+
+/// <summary>
+/// Authentication token for the user, returned as a byte array from Steam, and converted to a string (for example, the byte 0x08 should become "08").
+/// </summary>
+@property NSString* SteamTicket; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -4459,16 +4475,6 @@ typedef enum
 
 
 /// <summary>
-/// Player's user named used by Windows Hello.
-/// </summary>
-@property NSString* UserName; 
-
-/// <summary>
-/// PublicKey generated by Windows Hello.
-/// </summary>
-@property NSString* PublicKey; 
-
-/// <summary>
 /// Device name.
 /// </summary>
 @property NSString* DeviceName; 
@@ -4477,6 +4483,16 @@ typedef enum
 /// If another user is already linked to the account, unlink the other user and re-link.
 /// </summary>
 @property bool ForceLink; 
+
+/// <summary>
+/// PublicKey generated by Windows Hello.
+/// </summary>
+@property NSString* PublicKey; 
+
+/// <summary>
+/// Player's user named used by Windows Hello.
+/// </summary>
+@property NSString* UserName; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -4523,6 +4539,11 @@ typedef enum
 
 
 /// <summary>
+/// City name.
+/// </summary>
+@property NSString* City; 
+
+/// <summary>
 /// The two-character continent code for this location
 /// </summary>
 @property ContinentCode pfContinentCode; 
@@ -4531,11 +4552,6 @@ typedef enum
 /// The two-character ISO 3166-1 country code for the country associated with the location
 /// </summary>
 @property CountryCode pfCountryCode; 
-
-/// <summary>
-/// City name.
-/// </summary>
-@property NSString* City; 
 
 /// <summary>
 /// Latitude coordinate of the geographic location.
@@ -4555,24 +4571,9 @@ typedef enum
 
 
 /// <summary>
-/// Unique token authorizing the user and game at the server level, for the current session.
+/// Results for requested info.
 /// </summary>
-@property NSString* SessionTicket; 
-
-/// <summary>
-/// Player's unique PlayFabId.
-/// </summary>
-@property NSString* PlayFabId; 
-
-/// <summary>
-/// True if the account was newly created on this login.
-/// </summary>
-@property bool NewlyCreated; 
-
-/// <summary>
-/// Settings specific to this user.
-/// </summary>
-@property UserSettings* SettingsForUser; 
+@property GetPlayerCombinedInfoResultPayload* InfoResultPayload; 
 
 /// <summary>
 /// The time of this user's previous login. If there was no previous login, then it's DateTime.MinValue
@@ -4580,9 +4581,24 @@ typedef enum
 @property NSDate* LastLoginTime; 
 
 /// <summary>
-/// Results for requested info.
+/// True if the account was newly created on this login.
 /// </summary>
-@property GetPlayerCombinedInfoResultPayload* InfoResultPayload; 
+@property bool NewlyCreated; 
+
+/// <summary>
+/// Player's unique PlayFabId.
+/// </summary>
+@property NSString* PlayFabId; 
+
+/// <summary>
+/// Unique token authorizing the user and game at the server level, for the current session.
+/// </summary>
+@property NSString* SessionTicket; 
+
+/// <summary>
+/// Settings specific to this user.
+/// </summary>
+@property UserSettings* SettingsForUser; 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
@@ -4595,19 +4611,14 @@ typedef enum
 
 
 /// <summary>
-/// Android device identifier for the user's device.
-/// </summary>
-@property NSString* AndroidDeviceId; 
-
-/// <summary>
-/// Specific Operating System version for the user's device.
-/// </summary>
-@property NSString* OS; 
-
-/// <summary>
 /// Specific model of the user's device.
 /// </summary>
 @property NSString* AndroidDevice; 
+
+/// <summary>
+/// Android device identifier for the user's device.
+/// </summary>
+@property NSString* AndroidDeviceId; 
 
 /// <summary>
 /// Automatically create a PlayFab account if one is not currently linked to this ID.
@@ -4615,14 +4626,19 @@ typedef enum
 @property bool CreateAccount; 
 
 /// <summary>
-/// Unique identifier for the title, found in the Settings > Game Properties section of the PlayFab developer site when a title has been selected.
-/// </summary>
-@property NSString* TitleId; 
-
-/// <summary>
 /// Base64 encoded body that is encrypted with the Title's public RSA key (Enterprise Only).
 /// </summary>
 @property NSString* EncryptedRequest; 
+
+/// <summary>
+/// Flags for which pieces of info to return for the user.
+/// </summary>
+@property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
+
+/// <summary>
+/// Specific Operating System version for the user's device.
+/// </summary>
+@property NSString* OS; 
 
 /// <summary>
 /// Player secret that is used to verify API request signatures (Enterprise Only).
@@ -4630,9 +4646,9 @@ typedef enum
 @property NSString* PlayerSecret; 
 
 /// <summary>
-/// Flags for which pieces of info to return for the user.
+/// Unique identifier for the title, found in the Settings > Game Properties section of the PlayFab developer site when a title has been selected.
 /// </summary>
-@property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
+@property NSString* TitleId; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -4642,19 +4658,14 @@ typedef enum
 
 
 /// <summary>
-/// Custom unique identifier for the user, generated by the title.
-/// </summary>
-@property NSString* CustomId; 
-
-/// <summary>
 /// Automatically create a PlayFab account if one is not currently linked to this ID.
 /// </summary>
 @property bool CreateAccount; 
 
 /// <summary>
-/// Unique identifier for the title, found in the Settings > Game Properties section of the PlayFab developer site when a title has been selected.
+/// Custom unique identifier for the user, generated by the title.
 /// </summary>
-@property NSString* TitleId; 
+@property NSString* CustomId; 
 
 /// <summary>
 /// Base64 encoded body that is encrypted with the Title's public RSA key (Enterprise Only).
@@ -4662,14 +4673,19 @@ typedef enum
 @property NSString* EncryptedRequest; 
 
 /// <summary>
+/// Flags for which pieces of info to return for the user.
+/// </summary>
+@property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
+
+/// <summary>
 /// Player secret that is used to verify API request signatures (Enterprise Only).
 /// </summary>
 @property NSString* PlayerSecret; 
 
 /// <summary>
-/// Flags for which pieces of info to return for the user.
+/// Unique identifier for the title, found in the Settings > Game Properties section of the PlayFab developer site when a title has been selected.
 /// </summary>
-@property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
+@property NSString* TitleId; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -4679,14 +4695,14 @@ typedef enum
 
 
 /// <summary>
-/// Unique identifier for the title, found in the Settings > Game Properties section of the PlayFab developer site when a title has been selected.
-/// </summary>
-@property NSString* TitleId; 
-
-/// <summary>
 /// Email address for the account.
 /// </summary>
 @property NSString* Email; 
+
+/// <summary>
+/// Flags for which pieces of info to return for the user.
+/// </summary>
+@property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
 
 /// <summary>
 /// Password for the PlayFab account (6-100 characters)
@@ -4694,9 +4710,9 @@ typedef enum
 @property NSString* Password; 
 
 /// <summary>
-/// Flags for which pieces of info to return for the user.
+/// Unique identifier for the title, found in the Settings > Game Properties section of the PlayFab developer site when a title has been selected.
 /// </summary>
-@property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
+@property NSString* TitleId; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -4716,14 +4732,14 @@ typedef enum
 @property bool CreateAccount; 
 
 /// <summary>
-/// Unique identifier for the title, found in the Settings > Game Properties section of the PlayFab developer site when a title has been selected.
-/// </summary>
-@property NSString* TitleId; 
-
-/// <summary>
 /// Base64 encoded body that is encrypted with the Title's public RSA key (Enterprise Only).
 /// </summary>
 @property NSString* EncryptedRequest; 
+
+/// <summary>
+/// Flags for which pieces of info to return for the user.
+/// </summary>
+@property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
 
 /// <summary>
 /// Player secret that is used to verify API request signatures (Enterprise Only).
@@ -4731,9 +4747,9 @@ typedef enum
 @property NSString* PlayerSecret; 
 
 /// <summary>
-/// Flags for which pieces of info to return for the user.
+/// Unique identifier for the title, found in the Settings > Game Properties section of the PlayFab developer site when a title has been selected.
 /// </summary>
-@property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
+@property NSString* TitleId; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -4743,19 +4759,9 @@ typedef enum
 
 
 /// <summary>
-/// Unique Game Center player id.
-/// </summary>
-@property NSString* PlayerId; 
-
-/// <summary>
 /// Automatically create a PlayFab account if one is not currently linked to this ID.
 /// </summary>
 @property bool CreateAccount; 
-
-/// <summary>
-/// Unique identifier for the title, found in the Settings > Game Properties section of the PlayFab developer site when a title has been selected.
-/// </summary>
-@property NSString* TitleId; 
 
 /// <summary>
 /// Base64 encoded body that is encrypted with the Title's public RSA key (Enterprise Only).
@@ -4763,14 +4769,24 @@ typedef enum
 @property NSString* EncryptedRequest; 
 
 /// <summary>
+/// Flags for which pieces of info to return for the user.
+/// </summary>
+@property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
+
+/// <summary>
+/// Unique Game Center player id.
+/// </summary>
+@property NSString* PlayerId; 
+
+/// <summary>
 /// Player secret that is used to verify API request signatures (Enterprise Only).
 /// </summary>
 @property NSString* PlayerSecret; 
 
 /// <summary>
-/// Flags for which pieces of info to return for the user.
+/// Unique identifier for the title, found in the Settings > Game Properties section of the PlayFab developer site when a title has been selected.
 /// </summary>
-@property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
+@property NSString* TitleId; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -4780,19 +4796,9 @@ typedef enum
 
 
 /// <summary>
-/// OAuth 2.0 server authentication code obtained on the client by calling the getServerAuthCode() (https://developers.google.com/identity/sign-in/android/offline-access) Google client API.
-/// </summary>
-@property NSString* ServerAuthCode; 
-
-/// <summary>
 /// Automatically create a PlayFab account if one is not currently linked to this ID.
 /// </summary>
 @property bool CreateAccount; 
-
-/// <summary>
-/// Unique identifier for the title, found in the Settings > Game Properties section of the PlayFab developer site when a title has been selected.
-/// </summary>
-@property NSString* TitleId; 
 
 /// <summary>
 /// Base64 encoded body that is encrypted with the Title's public RSA key (Enterprise Only).
@@ -4800,14 +4806,24 @@ typedef enum
 @property NSString* EncryptedRequest; 
 
 /// <summary>
+/// Flags for which pieces of info to return for the user.
+/// </summary>
+@property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
+
+/// <summary>
 /// Player secret that is used to verify API request signatures (Enterprise Only).
 /// </summary>
 @property NSString* PlayerSecret; 
 
 /// <summary>
-/// Flags for which pieces of info to return for the user.
+/// OAuth 2.0 server authentication code obtained on the client by calling the getServerAuthCode() (https://developers.google.com/identity/sign-in/android/offline-access) Google client API.
 /// </summary>
-@property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
+@property NSString* ServerAuthCode; 
+
+/// <summary>
+/// Unique identifier for the title, found in the Settings > Game Properties section of the PlayFab developer site when a title has been selected.
+/// </summary>
+@property NSString* TitleId; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -4817,14 +4833,14 @@ typedef enum
 
 
 /// <summary>
+/// Automatically create a PlayFab account if one is not currently linked to this ID.
+/// </summary>
+@property bool CreateAccount; 
+
+/// <summary>
 /// Vendor-specific iOS identifier for the user's device.
 /// </summary>
 @property NSString* DeviceId; 
-
-/// <summary>
-/// Specific Operating System version for the user's device.
-/// </summary>
-@property NSString* OS; 
 
 /// <summary>
 /// Specific model of the user's device.
@@ -4832,19 +4848,19 @@ typedef enum
 @property NSString* DeviceModel; 
 
 /// <summary>
-/// Automatically create a PlayFab account if one is not currently linked to this ID.
-/// </summary>
-@property bool CreateAccount; 
-
-/// <summary>
-/// Unique identifier for the title, found in the Settings > Game Properties section of the PlayFab developer site when a title has been selected.
-/// </summary>
-@property NSString* TitleId; 
-
-/// <summary>
 /// Base64 encoded body that is encrypted with the Title's public RSA key (Enterprise Only).
 /// </summary>
 @property NSString* EncryptedRequest; 
+
+/// <summary>
+/// Flags for which pieces of info to return for the user.
+/// </summary>
+@property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
+
+/// <summary>
+/// Specific Operating System version for the user's device.
+/// </summary>
+@property NSString* OS; 
 
 /// <summary>
 /// Player secret that is used to verify API request signatures (Enterprise Only).
@@ -4852,9 +4868,9 @@ typedef enum
 @property NSString* PlayerSecret; 
 
 /// <summary>
-/// Flags for which pieces of info to return for the user.
+/// Unique identifier for the title, found in the Settings > Game Properties section of the PlayFab developer site when a title has been selected.
 /// </summary>
-@property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
+@property NSString* TitleId; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -4862,11 +4878,6 @@ typedef enum
 
 @interface LoginWithKongregateRequest : PlayFabBaseModel
 
-
-/// <summary>
-/// Numeric user ID assigned by Kongregate
-/// </summary>
-@property NSString* KongregateId; 
 
 /// <summary>
 /// Token issued by Kongregate's client API for the user.
@@ -4879,24 +4890,29 @@ typedef enum
 @property bool CreateAccount; 
 
 /// <summary>
-/// Flags for which pieces of info to return for the user.
-/// </summary>
-@property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
-
-/// <summary>
-/// Unique identifier for the title, found in the Settings > Game Properties section of the PlayFab developer site when a title has been selected.
-/// </summary>
-@property NSString* TitleId; 
-
-/// <summary>
 /// Base64 encoded body that is encrypted with the Title's public RSA key (Enterprise Only).
 /// </summary>
 @property NSString* EncryptedRequest; 
 
 /// <summary>
+/// Flags for which pieces of info to return for the user.
+/// </summary>
+@property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
+
+/// <summary>
+/// Numeric user ID assigned by Kongregate
+/// </summary>
+@property NSString* KongregateId; 
+
+/// <summary>
 /// Player secret that is used to verify API request signatures (Enterprise Only).
 /// </summary>
 @property NSString* PlayerSecret; 
+
+/// <summary>
+/// Unique identifier for the title, found in the Settings > Game Properties section of the PlayFab developer site when a title has been selected.
+/// </summary>
+@property NSString* TitleId; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -4904,6 +4920,16 @@ typedef enum
 
 @interface LoginWithPlayFabRequest : PlayFabBaseModel
 
+
+/// <summary>
+/// Flags for which pieces of info to return for the user.
+/// </summary>
+@property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
+
+/// <summary>
+/// Password for the PlayFab account (6-100 characters)
+/// </summary>
+@property NSString* Password; 
 
 /// <summary>
 /// Unique identifier for the title, found in the Settings > Game Properties section of the PlayFab developer site when a title has been selected.
@@ -4914,16 +4940,6 @@ typedef enum
 /// PlayFab username for the account.
 /// </summary>
 @property NSString* Username; 
-
-/// <summary>
-/// Password for the PlayFab account (6-100 characters)
-/// </summary>
-@property NSString* Password; 
-
-/// <summary>
-/// Flags for which pieces of info to return for the user.
-/// </summary>
-@property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -4933,19 +4949,9 @@ typedef enum
 
 
 /// <summary>
-/// Authentication token for the user, returned as a byte array from Steam, and converted to a string (for example, the byte 0x08 should become "08").
-/// </summary>
-@property NSString* SteamTicket; 
-
-/// <summary>
 /// Automatically create a PlayFab account if one is not currently linked to this ID.
 /// </summary>
 @property bool CreateAccount; 
-
-/// <summary>
-/// Unique identifier for the title, found in the Settings > Game Properties section of the PlayFab developer site when a title has been selected.
-/// </summary>
-@property NSString* TitleId; 
 
 /// <summary>
 /// Base64 encoded body that is encrypted with the Title's public RSA key (Enterprise Only).
@@ -4953,14 +4959,24 @@ typedef enum
 @property NSString* EncryptedRequest; 
 
 /// <summary>
+/// Flags for which pieces of info to return for the user.
+/// </summary>
+@property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
+
+/// <summary>
 /// Player secret that is used to verify API request signatures (Enterprise Only).
 /// </summary>
 @property NSString* PlayerSecret; 
 
 /// <summary>
-/// Flags for which pieces of info to return for the user.
+/// Authentication token for the user, returned as a byte array from Steam, and converted to a string (for example, the byte 0x08 should become "08").
 /// </summary>
-@property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
+@property NSString* SteamTicket; 
+
+/// <summary>
+/// Unique identifier for the title, found in the Settings > Game Properties section of the PlayFab developer site when a title has been selected.
+/// </summary>
+@property NSString* TitleId; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -4980,14 +4996,14 @@ typedef enum
 @property bool CreateAccount; 
 
 /// <summary>
-/// Unique identifier for the title, found in the Settings > Game Properties section of the PlayFab developer site when a title has been selected.
-/// </summary>
-@property NSString* TitleId; 
-
-/// <summary>
 /// Base64 encoded body that is encrypted with the Title's public RSA key (Enterprise Only).
 /// </summary>
 @property NSString* EncryptedRequest; 
+
+/// <summary>
+/// Flags for which pieces of info to return for the user.
+/// </summary>
+@property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
 
 /// <summary>
 /// Player secret that is used to verify API request signatures (Enterprise Only).
@@ -4995,9 +5011,9 @@ typedef enum
 @property NSString* PlayerSecret; 
 
 /// <summary>
-/// Flags for which pieces of info to return for the user.
+/// Unique identifier for the title, found in the Settings > Game Properties section of the PlayFab developer site when a title has been selected.
 /// </summary>
-@property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
+@property NSString* TitleId; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -5007,14 +5023,14 @@ typedef enum
 
 
 /// <summary>
-/// Unique identifier for the title, found in the Settings > Game Properties section of the PlayFab developer site when a title has been selected.
-/// </summary>
-@property NSString* TitleId; 
-
-/// <summary>
 /// The signed response from the user for the Challenge.
 /// </summary>
 @property NSString* ChallengeSignature; 
+
+/// <summary>
+/// Flags for which pieces of info to return for the user.
+/// </summary>
+@property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
 
 /// <summary>
 /// SHA256 hash of the PublicKey generated by Windows Hello.
@@ -5022,9 +5038,9 @@ typedef enum
 @property NSString* PublicKeyHint; 
 
 /// <summary>
-/// Flags for which pieces of info to return for the user.
+/// Unique identifier for the title, found in the Settings > Game Properties section of the PlayFab developer site when a title has been selected.
 /// </summary>
-@property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
+@property NSString* TitleId; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -5034,16 +5050,16 @@ typedef enum
 
 
 /// <summary>
+/// Optional object accompanying the message as contextual information
+/// </summary>
+@property NSDictionary* Data; 
+
+/// <summary>
 /// 'Debug', 'Info', or 'Error'
 /// </summary>
 @property NSString* Level; 
 
 @property NSString* Message; 
-
-/// <summary>
-/// Optional object accompanying the message as contextual information
-/// </summary>
-@property NSDictionary* Data; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -5058,9 +5074,9 @@ typedef enum
 @property NSString* BuildVersion; 
 
 /// <summary>
-/// Region to match make against. [Note: Required if LobbyId is not specified]
+/// Character to use for stats based matching. Leave null to use account stats.
 /// </summary>
-@property Region pfRegion; 
+@property NSString* CharacterId; 
 
 /// <summary>
 /// Game mode to match make against. [Note: Required if LobbyId is not specified]
@@ -5073,19 +5089,19 @@ typedef enum
 @property NSString* LobbyId; 
 
 /// <summary>
-/// Player statistic to use in finding a match. May be null for no stat-based matching.
+/// Region to match make against. [Note: Required if LobbyId is not specified]
 /// </summary>
-@property NSString* StatisticName; 
-
-/// <summary>
-/// Character to use for stats based matching. Leave null to use account stats.
-/// </summary>
-@property NSString* CharacterId; 
+@property Region pfRegion; 
 
 /// <summary>
 /// Start a game session if one with an open slot is not found. Defaults to true.
 /// </summary>
 @property bool StartNewIfNoneFound; 
+
+/// <summary>
+/// Player statistic to use in finding a match. May be null for no stat-based matching.
+/// </summary>
+@property NSString* StatisticName; 
 
 /// <summary>
 /// Filter to include and/or exclude Game Server Instances associated with certain Tags
@@ -5100,9 +5116,19 @@ typedef enum
 
 
 /// <summary>
+/// timestamp for when the server will expire, if applicable
+/// </summary>
+@property NSString* Expires; 
+
+/// <summary>
 /// unique lobby identifier of the server matched
 /// </summary>
 @property NSString* LobbyID; 
+
+/// <summary>
+/// time in milliseconds the application is configured to wait on matchmaking results
+/// </summary>
+@property NSNumber* PollWaitTimeMS; 
 
 /// <summary>
 /// IP address of the server
@@ -5115,24 +5141,14 @@ typedef enum
 @property NSNumber* ServerPort; 
 
 /// <summary>
-/// server authorization ticket (used by RedeemMatchmakerTicket to validate user insertion into the game)
-/// </summary>
-@property NSString* Ticket; 
-
-/// <summary>
-/// timestamp for when the server will expire, if applicable
-/// </summary>
-@property NSString* Expires; 
-
-/// <summary>
-/// time in milliseconds the application is configured to wait on matchmaking results
-/// </summary>
-@property NSNumber* PollWaitTimeMS; 
-
-/// <summary>
 /// result of match making process
 /// </summary>
 @property MatchmakeStatus Status; 
+
+/// <summary>
+/// server authorization ticket (used by RedeemMatchmakerTicket to validate user insertion into the game)
+/// </summary>
+@property NSString* Ticket; 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
@@ -5141,8 +5157,50 @@ typedef enum
 @end
 
 
+@interface MembershipModel : PlayFabBaseModel
+
+
+/// <summary>
+/// Whether this membership is active. That is, whether the MembershipExpiration time has been reached.
+/// </summary>
+@property bool IsActive; 
+
+/// <summary>
+/// The time this membership expires
+/// </summary>
+@property NSDate* MembershipExpiration; 
+
+/// <summary>
+/// The id of the membership
+/// </summary>
+@property NSString* MembershipId; 
+
+/// <summary>
+/// Membership expirations can be explicitly overridden (via game manager or the admin api). If this membership has been overridden, this will be the new expiration time.
+/// </summary>
+@property NSDate* OverrideExpiration; 
+
+/// <summary>
+/// The list of subscriptions that this player has for this membership
+/// </summary>
+@property NSArray* Subscriptions; 
+/**/
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
 @interface ModifyUserVirtualCurrencyResult : PlayFabBaseModel
 
+
+/// <summary>
+/// Balance of the virtual currency after modification.
+/// </summary>
+@property NSNumber* Balance; 
+
+/// <summary>
+/// Amount added or subtracted from the user's virtual currency. Maximum VC balance is Int32 (2,147,483,647). Any increase over this value will be discarded.
+/// </summary>
+@property NSNumber* BalanceChange; 
 
 /// <summary>
 /// User currency was subtracted from.
@@ -5153,16 +5211,6 @@ typedef enum
 /// Name of the virtual currency which was modified.
 /// </summary>
 @property NSString* VirtualCurrency; 
-
-/// <summary>
-/// Amount added or subtracted from the user's virtual currency. Maximum VC balance is Int32 (2,147,483,647). Any increase over this value will be discarded.
-/// </summary>
-@property NSNumber* BalanceChange; 
-
-/// <summary>
-/// Balance of the virtual currency after modification.
-/// </summary>
-@property NSNumber* Balance; 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
@@ -5177,9 +5225,9 @@ typedef enum
 @interface NameIdentifier : PlayFabBaseModel
 
 
-@property NSString* Name; 
-
 @property NSString* Id; 
+
+@property NSString* Name; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -5187,6 +5235,11 @@ typedef enum
 
 @interface OpenTradeRequest : PlayFabBaseModel
 
+
+/// <summary>
+/// Players who are allowed to accept the trade. If null, the trade may be accepted by any player. If empty, the trade may not be accepted by any player.
+/// </summary>
+@property NSArray* AllowedPlayerIds; 
 
 /// <summary>
 /// Player inventory items offered for trade. If not set, the trade is effectively a gift request
@@ -5197,11 +5250,6 @@ typedef enum
 /// Catalog items accepted for the trade. If not set, the trade is effectively a gift.
 /// </summary>
 @property NSArray* RequestedCatalogItemIds; 
-
-/// <summary>
-/// Players who are allowed to accept the trade. If null, the trade may be accepted by any player. If empty, the trade may not be accepted by any player.
-/// </summary>
-@property NSArray* AllowedPlayerIds; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -5226,6 +5274,11 @@ typedef enum
 
 
 /// <summary>
+/// Currency to use to fund the purchase.
+/// </summary>
+@property NSString* Currency; 
+
+/// <summary>
 /// Purchase order identifier returned from StartPurchase.
 /// </summary>
 @property NSString* OrderId; 
@@ -5234,11 +5287,6 @@ typedef enum
 /// Payment provider to use to fund the purchase.
 /// </summary>
 @property NSString* ProviderName; 
-
-/// <summary>
-/// Currency to use to fund the purchase.
-/// </summary>
-@property NSString* Currency; 
 
 /// <summary>
 /// Payment provider transaction identifier. Required for Facebook Payments.
@@ -5253,19 +5301,29 @@ typedef enum
 
 
 /// <summary>
+/// Local credit applied to the transaction (provider specific).
+/// </summary>
+@property NSNumber* CreditApplied; 
+
+/// <summary>
 /// Purchase order identifier.
 /// </summary>
 @property NSString* OrderId; 
 
 /// <summary>
-/// Status of the transaction.
+/// Provider used for the transaction.
 /// </summary>
-@property TransactionStatus Status; 
+@property NSString* ProviderData; 
 
 /// <summary>
-/// Virtual currency cost of the transaction.
+/// A token generated by the provider to authenticate the request (provider-specific).
 /// </summary>
-@property NSDictionary* VCAmount; 
+@property NSString* ProviderToken; 
+
+/// <summary>
+/// URL to the purchase provider page that details the purchase.
+/// </summary>
+@property NSString* PurchaseConfirmationPageURL; 
 
 /// <summary>
 /// Real world currency for the transaction.
@@ -5278,29 +5336,19 @@ typedef enum
 @property NSNumber* PurchasePrice; 
 
 /// <summary>
-/// Local credit applied to the transaction (provider specific).
+/// Status of the transaction.
 /// </summary>
-@property NSNumber* CreditApplied; 
+@property TransactionStatus Status; 
 
 /// <summary>
-/// Provider used for the transaction.
+/// Virtual currency cost of the transaction.
 /// </summary>
-@property NSString* ProviderData; 
-
-/// <summary>
-/// URL to the purchase provider page that details the purchase.
-/// </summary>
-@property NSString* PurchaseConfirmationPageURL; 
+@property NSDictionary* VCAmount; 
 
 /// <summary>
 /// Current virtual currency totals for the user.
 /// </summary>
 @property NSDictionary* VirtualCurrency; 
-
-/// <summary>
-/// A token generated by the provider to authenticate the request (provider-specific).
-/// </summary>
-@property NSString* ProviderToken; 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
@@ -5318,14 +5366,14 @@ typedef enum
 @property NSString* Currency; 
 
 /// <summary>
-/// Name of the purchase provider for this option.
-/// </summary>
-@property NSString* ProviderName; 
-
-/// <summary>
 /// Amount of the specified currency needed for the purchase.
 /// </summary>
 @property NSNumber* Price; 
+
+/// <summary>
+/// Name of the purchase provider for this option.
+/// </summary>
+@property NSString* ProviderName; 
 
 /// <summary>
 /// Amount of existing credit the user has with the provider.
@@ -5340,19 +5388,14 @@ typedef enum
 
 
 /// <summary>
-/// PlayFab unique identifier of the user for this leaderboard entry.
-/// </summary>
-@property NSString* PlayFabId; 
-
-/// <summary>
 /// Title-specific display name of the user for this leaderboard entry.
 /// </summary>
 @property NSString* DisplayName; 
 
 /// <summary>
-/// Specific value of the user's statistic.
+/// PlayFab unique identifier of the user for this leaderboard entry.
 /// </summary>
-@property NSNumber* StatValue; 
+@property NSString* PlayFabId; 
 
 /// <summary>
 /// User's overall position in the leaderboard.
@@ -5363,6 +5406,11 @@ typedef enum
 /// The profile of the user, if requested.
 /// </summary>
 @property PlayerProfileModel* Profile; 
+
+/// <summary>
+/// Specific value of the user's statistic.
+/// </summary>
+@property NSNumber* StatValue; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -5372,49 +5420,9 @@ typedef enum
 
 
 /// <summary>
-/// Publisher this player belongs to
+/// List of advertising campaigns the player has been attributed to
 /// </summary>
-@property NSString* PublisherId; 
-
-/// <summary>
-/// Title ID this player profile applies to
-/// </summary>
-@property NSString* TitleId; 
-
-/// <summary>
-/// PlayFab player account unique identifier
-/// </summary>
-@property NSString* PlayerId; 
-
-/// <summary>
-/// Player record created
-/// </summary>
-@property NSDate* Created; 
-
-/// <summary>
-/// Player account origination
-/// </summary>
-@property LoginIdentityProvider Origination; 
-
-/// <summary>
-/// UTC time when the player most recently logged in to the title
-/// </summary>
-@property NSDate* LastLogin; 
-
-/// <summary>
-/// If the player is currently banned, the UTC Date when the ban expires
-/// </summary>
-@property NSDate* BannedUntil; 
-
-/// <summary>
-/// List of geographic locations from which the player has logged in to the title
-/// </summary>
-@property NSArray* Locations; 
-
-/// <summary>
-/// Player display name
-/// </summary>
-@property NSString* DisplayName; 
+@property NSArray* AdCampaignAttributions; 
 
 /// <summary>
 /// URL of the player's avatar image
@@ -5422,19 +5430,9 @@ typedef enum
 @property NSString* AvatarUrl; 
 
 /// <summary>
-/// List of player's tags for segmentation
+/// If the player is currently banned, the UTC Date when the ban expires
 /// </summary>
-@property NSArray* Tags; 
-
-/// <summary>
-/// List of configured end points registered for sending the player push notifications
-/// </summary>
-@property NSArray* PushNotificationRegistrations; 
-
-/// <summary>
-/// List of all authentication systems linked to this player account
-/// </summary>
-@property NSArray* LinkedAccounts; 
+@property NSDate* BannedUntil; 
 
 /// <summary>
 /// List of all contact email info associated with the player account
@@ -5442,9 +5440,69 @@ typedef enum
 @property NSArray* ContactEmailAddresses; 
 
 /// <summary>
-/// List of advertising campaigns the player has been attributed to
+/// Player record created
 /// </summary>
-@property NSArray* AdCampaignAttributions; 
+@property NSDate* Created; 
+
+/// <summary>
+/// Player display name
+/// </summary>
+@property NSString* DisplayName; 
+
+/// <summary>
+/// UTC time when the player most recently logged in to the title
+/// </summary>
+@property NSDate* LastLogin; 
+
+/// <summary>
+/// List of all authentication systems linked to this player account
+/// </summary>
+@property NSArray* LinkedAccounts; 
+
+/// <summary>
+/// List of geographic locations from which the player has logged in to the title
+/// </summary>
+@property NSArray* Locations; 
+
+/// <summary>
+/// List of memberships for the player, along with whether are expired.
+/// </summary>
+@property NSArray* Memberships; 
+
+/// <summary>
+/// Player account origination
+/// </summary>
+@property LoginIdentityProvider Origination; 
+
+/// <summary>
+/// PlayFab player account unique identifier
+/// </summary>
+@property NSString* PlayerId; 
+
+/// <summary>
+/// Publisher this player belongs to
+/// </summary>
+@property NSString* PublisherId; 
+
+/// <summary>
+/// List of configured end points registered for sending the player push notifications
+/// </summary>
+@property NSArray* PushNotificationRegistrations; 
+
+/// <summary>
+/// List of leaderboard statistic values for the player
+/// </summary>
+@property NSArray* Statistics; 
+
+/// <summary>
+/// List of player's tags for segmentation
+/// </summary>
+@property NSArray* Tags; 
+
+/// <summary>
+/// Title ID this player profile applies to
+/// </summary>
+@property NSString* TitleId; 
 
 /// <summary>
 /// Sum of the player's purchases made with real-money currencies, converted to US dollars equivalent and represented as a whole number of cents (1/100 USD).              For example, 999 indicates nine dollars and ninety-nine cents.
@@ -5460,11 +5518,6 @@ typedef enum
 /// List of the player's virtual currency balances
 /// </summary>
 @property NSArray* VirtualCurrencyBalances; 
-
-/// <summary>
-/// List of leaderboard statistic values for the player
-/// </summary>
-@property NSArray* Statistics; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -5474,24 +5527,9 @@ typedef enum
 
 
 /// <summary>
-/// Whether to show the display name. Defaults to false
+/// Whether to show player's avatar URL. Defaults to false
 /// </summary>
-@property bool ShowDisplayName; 
-
-/// <summary>
-/// Whether to show the created date. Defaults to false
-/// </summary>
-@property bool ShowCreated; 
-
-/// <summary>
-/// Whether to show origination. Defaults to false
-/// </summary>
-@property bool ShowOrigination; 
-
-/// <summary>
-/// Whether to show the last login time. Defaults to false
-/// </summary>
-@property bool ShowLastLogin; 
+@property bool ShowAvatarUrl; 
 
 /// <summary>
 /// Whether to show the banned until time. Defaults to false
@@ -5499,19 +5537,29 @@ typedef enum
 @property bool ShowBannedUntil; 
 
 /// <summary>
-/// Reserved for future development
-/// </summary>
-@property bool ShowStatistics; 
-
-/// <summary>
 /// Whether to show campaign attributions. Defaults to false
 /// </summary>
 @property bool ShowCampaignAttributions; 
 
 /// <summary>
-/// Whether to show push notification registrations. Defaults to false
+/// Whether to show contact email addresses. Defaults to false
 /// </summary>
-@property bool ShowPushNotificationRegistrations; 
+@property bool ShowContactEmailAddresses; 
+
+/// <summary>
+/// Whether to show the created date. Defaults to false
+/// </summary>
+@property bool ShowCreated; 
+
+/// <summary>
+/// Whether to show the display name. Defaults to false
+/// </summary>
+@property bool ShowDisplayName; 
+
+/// <summary>
+/// Whether to show the last login time. Defaults to false
+/// </summary>
+@property bool ShowLastLogin; 
 
 /// <summary>
 /// Whether to show the linked accounts. Defaults to false
@@ -5519,9 +5567,34 @@ typedef enum
 @property bool ShowLinkedAccounts; 
 
 /// <summary>
-/// Whether to show contact email addresses. Defaults to false
+/// Whether to show player's locations. Defaults to false
 /// </summary>
-@property bool ShowContactEmailAddresses; 
+@property bool ShowLocations; 
+
+/// <summary>
+/// Whether to show player's membership information. Defaults to false
+/// </summary>
+@property bool ShowMemberships; 
+
+/// <summary>
+/// Whether to show origination. Defaults to false
+/// </summary>
+@property bool ShowOrigination; 
+
+/// <summary>
+/// Whether to show push notification registrations. Defaults to false
+/// </summary>
+@property bool ShowPushNotificationRegistrations; 
+
+/// <summary>
+/// Reserved for future development
+/// </summary>
+@property bool ShowStatistics; 
+
+/// <summary>
+/// Whether to show tags. Defaults to false
+/// </summary>
+@property bool ShowTags; 
 
 /// <summary>
 /// Whether to show the total value to date in usd. Defaults to false
@@ -5532,21 +5605,6 @@ typedef enum
 /// Whether to show the values to date. Defaults to false
 /// </summary>
 @property bool ShowValuesToDate; 
-
-/// <summary>
-/// Whether to show tags. Defaults to false
-/// </summary>
-@property bool ShowTags; 
-
-/// <summary>
-/// Whether to show player's locations. Defaults to false
-/// </summary>
-@property bool ShowLocations; 
-
-/// <summary>
-/// Whether to show player's avatar URL. Defaults to false
-/// </summary>
-@property bool ShowAvatarUrl; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -5554,6 +5612,26 @@ typedef enum
 
 @interface PlayerStatisticVersion : PlayFabBaseModel
 
+
+/// <summary>
+/// time when the statistic version became active
+/// </summary>
+@property NSDate* ActivationTime; 
+
+/// <summary>
+/// time when the statistic version became inactive due to statistic version incrementing
+/// </summary>
+@property NSDate* DeactivationTime; 
+
+/// <summary>
+/// time at which the statistic version was scheduled to become active, based on the configured ResetInterval
+/// </summary>
+@property NSDate* ScheduledActivationTime; 
+
+/// <summary>
+/// time at which the statistic version was scheduled to become inactive, based on the configured ResetInterval
+/// </summary>
+@property NSDate* ScheduledDeactivationTime; 
 
 /// <summary>
 /// name of the statistic when the version became active
@@ -5564,26 +5642,6 @@ typedef enum
 /// version of the statistic
 /// </summary>
 @property NSNumber* Version; 
-
-/// <summary>
-/// time at which the statistic version was scheduled to become active, based on the configured ResetInterval
-/// </summary>
-@property NSDate* ScheduledActivationTime; 
-
-/// <summary>
-/// time when the statistic version became active
-/// </summary>
-@property NSDate* ActivationTime; 
-
-/// <summary>
-/// time at which the statistic version was scheduled to become inactive, based on the configured ResetInterval
-/// </summary>
-@property NSDate* ScheduledDeactivationTime; 
-
-/// <summary>
-/// time when the statistic version became inactive due to statistic version incrementing
-/// </summary>
-@property NSDate* DeactivationTime; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -5593,14 +5651,19 @@ typedef enum
 
 
 /// <summary>
+/// Catalog version for the items to be purchased (defaults to most recent version.
+/// </summary>
+@property NSString* CatalogVersion; 
+
+/// <summary>
+/// Unique PlayFab assigned ID for a specific character owned by a user
+/// </summary>
+@property NSString* CharacterId; 
+
+/// <summary>
 /// Unique identifier of the item to purchase.
 /// </summary>
 @property NSString* ItemId; 
-
-/// <summary>
-/// Virtual currency to use to purchase the item.
-/// </summary>
-@property NSString* VirtualCurrency; 
 
 /// <summary>
 /// Price the client expects to pay for the item (in case a new catalog or store was uploaded, with new prices).
@@ -5608,19 +5671,14 @@ typedef enum
 @property NSNumber* Price; 
 
 /// <summary>
-/// Catalog version for the items to be purchased (defaults to most recent version.
-/// </summary>
-@property NSString* CatalogVersion; 
-
-/// <summary>
 /// Store to buy this item through. If not set, prices default to those in the catalog.
 /// </summary>
 @property NSString* StoreId; 
 
 /// <summary>
-/// Unique PlayFab assigned ID for a specific character owned by a user
+/// Virtual currency to use to purchase the item.
 /// </summary>
-@property NSString* CharacterId; 
+@property NSString* VirtualCurrency; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -5645,14 +5703,14 @@ typedef enum
 
 
 /// <summary>
-/// Push notification platform
-/// </summary>
-@property PushNotificationPlatform Platform; 
-
-/// <summary>
 /// Notification configured endpoint
 /// </summary>
 @property NSString* NotificationEndpointARN; 
+
+/// <summary>
+/// Push notification platform
+/// </summary>
+@property PushNotificationPlatform Platform; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -5660,11 +5718,6 @@ typedef enum
 
 @interface RedeemCouponRequest : PlayFabBaseModel
 
-
-/// <summary>
-/// Generated coupon code to redeem.
-/// </summary>
-@property NSString* CouponCode; 
 
 /// <summary>
 /// Catalog version of the coupon. If null, uses the default catalog
@@ -5675,6 +5728,11 @@ typedef enum
 /// Optional identifier for the Character that should receive the item. If null, item is added to the player
 /// </summary>
 @property NSString* CharacterId; 
+
+/// <summary>
+/// Generated coupon code to redeem.
+/// </summary>
+@property NSString* CouponCode; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -5699,9 +5757,9 @@ typedef enum
 
 
 /// <summary>
-/// unique identifier for the region
+/// indicates whether the server specified is available in this region
 /// </summary>
-@property Region pfRegion; 
+@property bool Available; 
 
 /// <summary>
 /// name of the region
@@ -5709,14 +5767,14 @@ typedef enum
 @property NSString* Name; 
 
 /// <summary>
-/// indicates whether the server specified is available in this region
-/// </summary>
-@property bool Available; 
-
-/// <summary>
 /// url to ping to get roundtrip time
 /// </summary>
 @property NSString* PingUrl; 
+
+/// <summary>
+/// unique identifier for the region
+/// </summary>
+@property Region pfRegion; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -5724,6 +5782,11 @@ typedef enum
 
 @interface RegisterForIOSPushNotificationRequest : PlayFabBaseModel
 
+
+/// <summary>
+/// Message to display when confirming push notification.
+/// </summary>
+@property NSString* ConfirmationMessage; 
 
 /// <summary>
 /// Unique token generated by the Apple Push Notification service when the title registered to receive push notifications.
@@ -5734,11 +5797,6 @@ typedef enum
 /// If true, send a test push message immediately after sucessful registration. Defaults to false.
 /// </summary>
 @property bool SendPushNotificationConfirmation; 
-
-/// <summary>
-/// Message to display when confirming push notification.
-/// </summary>
-@property NSString* ConfirmationMessage; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -5758,9 +5816,9 @@ typedef enum
 
 
 /// <summary>
-/// PlayFab username for the account (3-20 characters)
+/// An optional parameter for setting the display name for this title (3-25 characters).
 /// </summary>
-@property NSString* Username; 
+@property NSString* DisplayName; 
 
 /// <summary>
 /// User email address attached to their account
@@ -5768,29 +5826,19 @@ typedef enum
 @property NSString* Email; 
 
 /// <summary>
-/// Password for the PlayFab account (6-100 characters)
-/// </summary>
-@property NSString* Password; 
-
-/// <summary>
-/// An optional parameter that specifies whether both the username and email parameters are required. If true, both parameters are required; if false, the user must supply either the username or email parameter. The default value is true.
-/// </summary>
-@property bool RequireBothUsernameAndEmail; 
-
-/// <summary>
-/// An optional parameter for setting the display name for this title (3-25 characters).
-/// </summary>
-@property NSString* DisplayName; 
-
-/// <summary>
-/// Unique identifier for the title, found in the Settings > Game Properties section of the PlayFab developer site when a title has been selected.
-/// </summary>
-@property NSString* TitleId; 
-
-/// <summary>
 /// Base64 encoded body that is encrypted with the Title's public RSA key (Enterprise Only).
 /// </summary>
 @property NSString* EncryptedRequest; 
+
+/// <summary>
+/// Flags for which pieces of info to return for the user.
+/// </summary>
+@property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
+
+/// <summary>
+/// Password for the PlayFab account (6-100 characters)
+/// </summary>
+@property NSString* Password; 
 
 /// <summary>
 /// Player secret that is used to verify API request signatures (Enterprise Only).
@@ -5798,9 +5846,19 @@ typedef enum
 @property NSString* PlayerSecret; 
 
 /// <summary>
-/// Flags for which pieces of info to return for the user.
+/// An optional parameter that specifies whether both the username and email parameters are required. If true, both parameters are required; if false, the user must supply either the username or email parameter. The default value is true.
 /// </summary>
-@property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
+@property bool RequireBothUsernameAndEmail; 
+
+/// <summary>
+/// Unique identifier for the title, found in the Settings > Game Properties section of the PlayFab developer site when a title has been selected.
+/// </summary>
+@property NSString* TitleId; 
+
+/// <summary>
+/// PlayFab username for the account (3-20 characters)
+/// </summary>
+@property NSString* Username; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -5820,14 +5878,14 @@ typedef enum
 @property NSString* SessionTicket; 
 
 /// <summary>
-/// PlayFab unique user name.
-/// </summary>
-@property NSString* Username; 
-
-/// <summary>
 /// Settings specific to this user.
 /// </summary>
 @property UserSettings* SettingsForUser; 
+
+/// <summary>
+/// PlayFab unique user name.
+/// </summary>
+@property NSString* Username; 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
@@ -5840,24 +5898,9 @@ typedef enum
 
 
 /// <summary>
-/// Player's user name used by Windows Hello.
-/// </summary>
-@property NSString* UserName; 
-
-/// <summary>
-/// PublicKey generated by Windows Hello.
-/// </summary>
-@property NSString* PublicKey; 
-
-/// <summary>
 /// Device name.
 /// </summary>
 @property NSString* DeviceName; 
-
-/// <summary>
-/// Unique identifier for the title, found in the Settings > Game Properties section of the PlayFab developer site when a title has been selected.
-/// </summary>
-@property NSString* TitleId; 
 
 /// <summary>
 /// Base64 encoded body that is encrypted with the Title's public RSA key (Enterprise Only).
@@ -5865,14 +5908,29 @@ typedef enum
 @property NSString* EncryptedRequest; 
 
 /// <summary>
+/// Flags for which pieces of info to return for the user.
+/// </summary>
+@property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
+
+/// <summary>
 /// Player secret that is used to verify API request signatures (Enterprise Only).
 /// </summary>
 @property NSString* PlayerSecret; 
 
 /// <summary>
-/// Flags for which pieces of info to return for the user.
+/// PublicKey generated by Windows Hello.
 /// </summary>
-@property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
+@property NSString* PublicKey; 
+
+/// <summary>
+/// Unique identifier for the title, found in the Settings > Game Properties section of the PlayFab developer site when a title has been selected.
+/// </summary>
+@property NSString* TitleId; 
+
+/// <summary>
+/// Player's user name used by Windows Hello.
+/// </summary>
+@property NSString* UserName; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -5926,14 +5984,14 @@ typedef enum
 
 
 /// <summary>
-/// Unique identifier for the shared group.
-/// </summary>
-@property NSString* SharedGroupId; 
-
-/// <summary>
 /// An array of unique PlayFab assigned ID of the user on whom the operation will be performed.
 /// </summary>
 @property NSArray* PlayFabIds; 
+
+/// <summary>
+/// Unique identifier for the shared group.
+/// </summary>
+@property NSString* SharedGroupId; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -5953,14 +6011,14 @@ typedef enum
 
 
 /// <summary>
-/// Unique PlayFab identifier of the reported player.
-/// </summary>
-@property NSString* ReporteeId; 
-
-/// <summary>
 /// Optional additional comment by reporting player.
 /// </summary>
 @property NSString* Comment; 
+
+/// <summary>
+/// Unique PlayFab identifier of the reported player.
+/// </summary>
+@property NSString* ReporteeId; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -6083,14 +6141,14 @@ typedef enum
 
 
 /// <summary>
-/// Player secret that is used to verify API request signatures (Enterprise Only).
-/// </summary>
-@property NSString* PlayerSecret; 
-
-/// <summary>
 /// Base64 encoded body that is encrypted with the Title's public RSA key (Enterprise Only).
 /// </summary>
 @property NSString* EncryptedRequest; 
+
+/// <summary>
+/// Player secret that is used to verify API request signatures (Enterprise Only).
+/// </summary>
+@property NSString* PlayerSecret; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -6110,9 +6168,9 @@ typedef enum
 
 
 /// <summary>
-/// Data stored for the specified group data key.
+/// Timestamp for when this data was last updated.
 /// </summary>
-@property NSString* Value; 
+@property NSDate* LastUpdated; 
 
 /// <summary>
 /// Unique PlayFab identifier of the user to last update this value.
@@ -6120,14 +6178,14 @@ typedef enum
 @property NSString* LastUpdatedBy; 
 
 /// <summary>
-/// Timestamp for when this data was last updated.
-/// </summary>
-@property NSDate* LastUpdated; 
-
-/// <summary>
 /// Indicates whether this data can be read by all users (public) or only members of the group (private).
 /// </summary>
 @property UserDataPermission Permission; 
+
+/// <summary>
+/// Data stored for the specified group data key.
+/// </summary>
+@property NSString* Value; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -6142,21 +6200,6 @@ typedef enum
 @property NSString* BuildVersion; 
 
 /// <summary>
-/// the region to associate this server with for match filtering
-/// </summary>
-@property Region pfRegion; 
-
-/// <summary>
-/// the title-defined game mode this server is to be running (defaults to 0 if there is only one mode)
-/// </summary>
-@property NSString* GameMode; 
-
-/// <summary>
-/// player statistic for others to use in finding this game. May be null for no stat-based matching
-/// </summary>
-@property NSString* StatisticName; 
-
-/// <summary>
 /// character to use for stats based matching. Leave null to use account stats
 /// </summary>
 @property NSString* CharacterId; 
@@ -6165,6 +6208,21 @@ typedef enum
 /// custom command line argument when starting game server process
 /// </summary>
 @property NSString* CustomCommandLineData; 
+
+/// <summary>
+/// the title-defined game mode this server is to be running (defaults to 0 if there is only one mode)
+/// </summary>
+@property NSString* GameMode; 
+
+/// <summary>
+/// the region to associate this server with for match filtering
+/// </summary>
+@property Region pfRegion; 
+
+/// <summary>
+/// player statistic for others to use in finding this game. May be null for no stat-based matching
+/// </summary>
+@property NSString* StatisticName; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -6174,9 +6232,19 @@ typedef enum
 
 
 /// <summary>
+/// timestamp for when the server should expire, if applicable
+/// </summary>
+@property NSString* Expires; 
+
+/// <summary>
 /// unique identifier for the lobby of the server started
 /// </summary>
 @property NSString* LobbyID; 
+
+/// <summary>
+/// password required to log into the server
+/// </summary>
+@property NSString* Password; 
 
 /// <summary>
 /// server IP address
@@ -6192,16 +6260,6 @@ typedef enum
 /// unique identifier for the server
 /// </summary>
 @property NSString* Ticket; 
-
-/// <summary>
-/// timestamp for when the server should expire, if applicable
-/// </summary>
-@property NSString* Expires; 
-
-/// <summary>
-/// password required to log into the server
-/// </summary>
-@property NSString* Password; 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
@@ -6219,14 +6277,14 @@ typedef enum
 @property NSString* CatalogVersion; 
 
 /// <summary>
-/// Store through which to purchase items. If not set, prices will be pulled from the catalog itself.
-/// </summary>
-@property NSString* StoreId; 
-
-/// <summary>
 /// Array of items to purchase.
 /// </summary>
 @property NSArray* Items; 
+
+/// <summary>
+/// Store through which to purchase items. If not set, prices will be pulled from the catalog itself.
+/// </summary>
+@property NSString* StoreId; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -6236,14 +6294,14 @@ typedef enum
 
 
 /// <summary>
-/// Purchase order identifier.
-/// </summary>
-@property NSString* OrderId; 
-
-/// <summary>
 /// Cart items to be purchased.
 /// </summary>
 @property NSArray* Contents; 
+
+/// <summary>
+/// Purchase order identifier.
+/// </summary>
+@property NSString* OrderId; 
 
 /// <summary>
 /// Available methods by which the user can pay.
@@ -6271,14 +6329,14 @@ typedef enum
 @property NSString* Name; 
 
 /// <summary>
-/// Statistic version (0 if not a versioned statistic)
-/// </summary>
-@property NSNumber* Version; 
-
-/// <summary>
 /// Statistic value
 /// </summary>
 @property NSNumber* Value; 
+
+/// <summary>
+/// Statistic version (0 if not a versioned statistic)
+/// </summary>
+@property NSNumber* Version; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -6310,14 +6368,14 @@ typedef enum
 @property NSString* StatisticName; 
 
 /// <summary>
-/// for updates to an existing statistic value for a player, the version of the statistic when it was loaded. Null when setting the statistic value for the first time.
-/// </summary>
-@property NSNumber* Version; 
-
-/// <summary>
 /// statistic value for the player
 /// </summary>
 @property NSNumber* Value; 
+
+/// <summary>
+/// for updates to an existing statistic value for a player, the version of the statistic when it was loaded. Null when setting the statistic value for the first time.
+/// </summary>
+@property NSNumber* Version; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -6349,14 +6407,14 @@ typedef enum
 
 
 /// <summary>
-/// Unique Steam identifier for a user.
-/// </summary>
-@property NSString* SteamStringId; 
-
-/// <summary>
 /// Unique PlayFab identifier for a user, or null if no PlayFab account is linked to the Steam identifier.
 /// </summary>
 @property NSString* PlayFabId; 
+
+/// <summary>
+/// Unique Steam identifier for a user.
+/// </summary>
+@property NSString* SteamStringId; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -6369,21 +6427,6 @@ typedef enum
 
 
 /// <summary>
-/// Unique identifier of the item as it exists in the catalog - note that this must exactly match the ItemId from the catalog
-/// </summary>
-@property NSString* ItemId; 
-
-/// <summary>
-/// Override prices for this item in virtual currencies and "RM" (the base Real Money purchase price, in USD pennies)
-/// </summary>
-@property NSDictionary* VirtualCurrencyPrices; 
-
-/// <summary>
-/// Override prices for this item for specific currencies
-/// </summary>
-@property NSDictionary* RealCurrencyPrices; 
-
-/// <summary>
 /// Store specific custom data. The data only exists as part of this store; it is not transferred to item instances
 /// </summary>
 @property NSDictionary* CustomData; 
@@ -6392,6 +6435,21 @@ typedef enum
 /// Intended display position for this item. Note that 0 is the first position
 /// </summary>
 @property NSNumber* DisplayPosition; 
+
+/// <summary>
+/// Unique identifier of the item as it exists in the catalog - note that this must exactly match the ItemId from the catalog
+/// </summary>
+@property NSString* ItemId; 
+
+/// <summary>
+/// Override prices for this item for specific currencies
+/// </summary>
+@property NSDictionary* RealCurrencyPrices; 
+
+/// <summary>
+/// Override prices for this item in virtual currencies and "RM" (the base Real Money purchase price, in USD pennies)
+/// </summary>
+@property NSDictionary* VirtualCurrencyPrices; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -6404,14 +6462,14 @@ typedef enum
 
 
 /// <summary>
-/// Display name of a store as it will appear to users.
-/// </summary>
-@property NSString* DisplayName; 
-
-/// <summary>
 /// Tagline for a store.
 /// </summary>
 @property NSString* Description; 
+
+/// <summary>
+/// Display name of a store as it will appear to users.
+/// </summary>
+@property NSString* DisplayName; 
 
 /// <summary>
 /// Custom data about a store.
@@ -6422,18 +6480,60 @@ typedef enum
 @end
 
 
-@interface SubtractUserVirtualCurrencyRequest : PlayFabBaseModel
+@interface SubscriptionModel : PlayFabBaseModel
 
 
 /// <summary>
-/// Name of the virtual currency which is to be decremented.
+/// When this subscription expires.
 /// </summary>
-@property NSString* VirtualCurrency; 
+@property NSDate* Expiration; 
+
+/// <summary>
+/// The time the subscription was orignially purchased
+/// </summary>
+@property NSDate* InitialSubscriptionTime; 
+
+/// <summary>
+/// Whether this subscription is currently active. That is, if Expiration > now.
+/// </summary>
+@property bool IsActive; 
+
+/// <summary>
+/// The status of this subscription, according to the subscription provider.
+/// </summary>
+@property SubscriptionProviderStatus Status; 
+
+/// <summary>
+/// The id for this subscription
+/// </summary>
+@property NSString* SubscriptionId; 
+
+/// <summary>
+/// The item id for this subscription from the primary catalog
+/// </summary>
+@property NSString* SubscriptionItemId; 
+
+/// <summary>
+/// The provider for this subscription. Apple or Google Play are supported today.
+/// </summary>
+@property NSString* SubscriptionProvider; 
+/**/
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
+@interface SubtractUserVirtualCurrencyRequest : PlayFabBaseModel
+
 
 /// <summary>
 /// Amount to be subtracted from the user balance of the specified virtual currency.
 /// </summary>
 @property NSNumber* Amount; 
+
+/// <summary>
+/// Name of the virtual currency which is to be decremented.
+/// </summary>
+@property NSString* VirtualCurrency; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -6455,9 +6555,9 @@ typedef enum
 
 
 /// <summary>
-/// Date and time when the news items was posted.
+/// News item text.
 /// </summary>
-@property NSDate* Timestamp; 
+@property NSString* Body; 
 
 /// <summary>
 /// Unique identifier of news item.
@@ -6465,14 +6565,14 @@ typedef enum
 @property NSString* NewsId; 
 
 /// <summary>
+/// Date and time when the news items was posted.
+/// </summary>
+@property NSDate* Timestamp; 
+
+/// <summary>
 /// Title of the news item.
 /// </summary>
 @property NSString* Title; 
-
-/// <summary>
-/// News item text.
-/// </summary>
-@property NSString* Body; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -6480,6 +6580,61 @@ typedef enum
 
 @interface TradeInfo : PlayFabBaseModel
 
+
+/// <summary>
+/// Item instances from the accepting player that are used to fulfill the trade. If null, no one has accepted the trade.
+/// </summary>
+@property NSArray* AcceptedInventoryInstanceIds; 
+
+/// <summary>
+/// The PlayFab ID of the player who accepted the trade. If null, no one has accepted the trade.
+/// </summary>
+@property NSString* AcceptedPlayerId; 
+
+/// <summary>
+/// An optional list of players allowed to complete this trade.  If null, anybody can complete the trade.
+/// </summary>
+@property NSArray* AllowedPlayerIds; 
+
+/// <summary>
+/// If set, The UTC time when this trade was canceled.
+/// </summary>
+@property NSDate* CancelledAt; 
+
+/// <summary>
+/// If set, The UTC time when this trade was fulfilled.
+/// </summary>
+@property NSDate* FilledAt; 
+
+/// <summary>
+/// If set, The UTC time when this trade was made invalid.
+/// </summary>
+@property NSDate* InvalidatedAt; 
+
+/// <summary>
+/// The catalogItem Ids of the item instances being offered.
+/// </summary>
+@property NSArray* OfferedCatalogItemIds; 
+
+/// <summary>
+/// The itemInstance Ids that are being offered.
+/// </summary>
+@property NSArray* OfferedInventoryInstanceIds; 
+
+/// <summary>
+/// The PlayFabId for the offering player.
+/// </summary>
+@property NSString* OfferingPlayerId; 
+
+/// <summary>
+/// The UTC time when this trade was created.
+/// </summary>
+@property NSDate* OpenedAt; 
+
+/// <summary>
+/// The catalogItem Ids requested in exchange.
+/// </summary>
+@property NSArray* RequestedCatalogItemIds; 
 
 /// <summary>
 /// Describes the current state of this trade.
@@ -6490,61 +6645,6 @@ typedef enum
 /// The identifier for this trade.
 /// </summary>
 @property NSString* TradeId; 
-
-/// <summary>
-/// The PlayFabId for the offering player.
-/// </summary>
-@property NSString* OfferingPlayerId; 
-
-/// <summary>
-/// The itemInstance Ids that are being offered.
-/// </summary>
-@property NSArray* OfferedInventoryInstanceIds; 
-
-/// <summary>
-/// The catalogItem Ids of the item instances being offered.
-/// </summary>
-@property NSArray* OfferedCatalogItemIds; 
-
-/// <summary>
-/// The catalogItem Ids requested in exchange.
-/// </summary>
-@property NSArray* RequestedCatalogItemIds; 
-
-/// <summary>
-/// An optional list of players allowed to complete this trade.  If null, anybody can complete the trade.
-/// </summary>
-@property NSArray* AllowedPlayerIds; 
-
-/// <summary>
-/// The PlayFab ID of the player who accepted the trade. If null, no one has accepted the trade.
-/// </summary>
-@property NSString* AcceptedPlayerId; 
-
-/// <summary>
-/// Item instances from the accepting player that are used to fulfill the trade. If null, no one has accepted the trade.
-/// </summary>
-@property NSArray* AcceptedInventoryInstanceIds; 
-
-/// <summary>
-/// The UTC time when this trade was created.
-/// </summary>
-@property NSDate* OpenedAt; 
-
-/// <summary>
-/// If set, The UTC time when this trade was fulfilled.
-/// </summary>
-@property NSDate* FilledAt; 
-
-/// <summary>
-/// If set, The UTC time when this trade was canceled.
-/// </summary>
-@property NSDate* CancelledAt; 
-
-/// <summary>
-/// If set, The UTC time when this trade was made invalid.
-/// </summary>
-@property NSDate* InvalidatedAt; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -6554,14 +6654,14 @@ typedef enum
 
 
 /// <summary>
-/// Unique Twitch identifier for a user.
-/// </summary>
-@property NSString* TwitchId; 
-
-/// <summary>
 /// Unique PlayFab identifier for a user, or null if no PlayFab account is linked to the Twitch identifier.
 /// </summary>
 @property NSString* PlayFabId; 
+
+/// <summary>
+/// Unique Twitch identifier for a user.
+/// </summary>
+@property NSString* TwitchId; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -6761,6 +6861,11 @@ typedef enum
 
 
 /// <summary>
+/// Specifies the catalog version that should be used to determine container contents.  If unspecified, uses catalog associated with the item instance.
+/// </summary>
+@property NSString* CatalogVersion; 
+
+/// <summary>
 /// Unique PlayFab assigned ID for a specific character owned by a user
 /// </summary>
 @property NSString* CharacterId; 
@@ -6774,11 +6879,6 @@ typedef enum
 /// ItemInstanceId of the key that will be consumed by unlocking this container.  If the container requires a key, this parameter is required.
 /// </summary>
 @property NSString* KeyItemInstanceId; 
-
-/// <summary>
-/// Specifies the catalog version that should be used to determine container contents.  If unspecified, uses catalog associated with the item instance.
-/// </summary>
-@property NSString* CatalogVersion; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -6786,11 +6886,6 @@ typedef enum
 
 @interface UnlockContainerItemRequest : PlayFabBaseModel
 
-
-/// <summary>
-/// Catalog ItemId of the container type to unlock.
-/// </summary>
-@property NSString* ContainerItemId; 
 
 /// <summary>
 /// Specifies the catalog version that should be used to determine container contents.  If unspecified, uses default/primary catalog.
@@ -6801,6 +6896,11 @@ typedef enum
 /// Unique PlayFab assigned ID for a specific character owned by a user
 /// </summary>
 @property NSString* CharacterId; 
+
+/// <summary>
+/// Catalog ItemId of the container type to unlock.
+/// </summary>
+@property NSString* ContainerItemId; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -6808,6 +6908,11 @@ typedef enum
 
 @interface UnlockContainerItemResult : PlayFabBaseModel
 
+
+/// <summary>
+/// Items granted to the player as a result of unlocking the container.
+/// </summary>
+@property NSArray* GrantedItems; 
 
 /// <summary>
 /// Unique instance identifier of the container unlocked.
@@ -6818,11 +6923,6 @@ typedef enum
 /// Unique instance identifier of the key used to unlock the container, if applicable.
 /// </summary>
 @property NSString* UnlockedWithItemInstanceId; 
-
-/// <summary>
-/// Items granted to the player as a result of unlocking the container.
-/// </summary>
-@property NSArray* GrantedItems; 
 
 /// <summary>
 /// Virtual currency granted to the player as a result of unlocking the container.
@@ -6943,11 +7043,6 @@ typedef enum
 
 
 /// <summary>
-/// Unique identifier for the shared group.
-/// </summary>
-@property NSString* SharedGroupId; 
-
-/// <summary>
 /// Key-value pairs to be written to the custom data. Note that keys are trimmed of whitespace, are limited in size, and may not begin with a '!' character or be null.
 /// </summary>
 @property NSDictionary* Data; 
@@ -6961,6 +7056,11 @@ typedef enum
 /// Permission to be applied to all user data keys in this request.
 /// </summary>
 @property UserDataPermission Permission; 
+
+/// <summary>
+/// Unique identifier for the shared group.
+/// </summary>
+@property NSString* SharedGroupId; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -7044,9 +7144,9 @@ typedef enum
 
 
 /// <summary>
-/// Unique identifier for the user account
+/// User Android device information, if an Android device has been linked
 /// </summary>
-@property NSString* PlayFabId; 
+@property UserAndroidDeviceInfo* AndroidDeviceInfo; 
 
 /// <summary>
 /// Timestamp indicating when the user account was created
@@ -7054,19 +7154,9 @@ typedef enum
 @property NSDate* Created; 
 
 /// <summary>
-/// User account name in the PlayFab service
+/// Custom ID information, if a custom ID has been assigned
 /// </summary>
-@property NSString* Username; 
-
-/// <summary>
-/// Title-specific information for the user account
-/// </summary>
-@property UserTitleInfo* TitleInfo; 
-
-/// <summary>
-/// Personal information for the user which is considered more sensitive
-/// </summary>
-@property UserPrivateAccountInfo* PrivateInfo; 
+@property UserCustomIdInfo* CustomIdInfo; 
 
 /// <summary>
 /// User Facebook information, if a Facebook account has been linked
@@ -7074,39 +7164,9 @@ typedef enum
 @property UserFacebookInfo* FacebookInfo; 
 
 /// <summary>
-/// User Steam information, if a Steam account has been linked
-/// </summary>
-@property UserSteamInfo* SteamInfo; 
-
-/// <summary>
 /// User Gamecenter information, if a Gamecenter account has been linked
 /// </summary>
 @property UserGameCenterInfo* GameCenterInfo; 
-
-/// <summary>
-/// User iOS device information, if an iOS device has been linked
-/// </summary>
-@property UserIosDeviceInfo* IosDeviceInfo; 
-
-/// <summary>
-/// User Android device information, if an Android device has been linked
-/// </summary>
-@property UserAndroidDeviceInfo* AndroidDeviceInfo; 
-
-/// <summary>
-/// User Kongregate account information, if a Kongregate account has been linked
-/// </summary>
-@property UserKongregateInfo* KongregateInfo; 
-
-/// <summary>
-/// User Twitch account information, if a Twitch account has been linked
-/// </summary>
-@property UserTwitchInfo* TwitchInfo; 
-
-/// <summary>
-/// User PSN account information, if a PSN account has been linked
-/// </summary>
-@property UserPsnInfo* PsnInfo; 
 
 /// <summary>
 /// User Google account information, if a Google account has been linked
@@ -7114,14 +7174,54 @@ typedef enum
 @property UserGoogleInfo* GoogleInfo; 
 
 /// <summary>
+/// User iOS device information, if an iOS device has been linked
+/// </summary>
+@property UserIosDeviceInfo* IosDeviceInfo; 
+
+/// <summary>
+/// User Kongregate account information, if a Kongregate account has been linked
+/// </summary>
+@property UserKongregateInfo* KongregateInfo; 
+
+/// <summary>
+/// Unique identifier for the user account
+/// </summary>
+@property NSString* PlayFabId; 
+
+/// <summary>
+/// Personal information for the user which is considered more sensitive
+/// </summary>
+@property UserPrivateAccountInfo* PrivateInfo; 
+
+/// <summary>
+/// User PSN account information, if a PSN account has been linked
+/// </summary>
+@property UserPsnInfo* PsnInfo; 
+
+/// <summary>
+/// User Steam information, if a Steam account has been linked
+/// </summary>
+@property UserSteamInfo* SteamInfo; 
+
+/// <summary>
+/// Title-specific information for the user account
+/// </summary>
+@property UserTitleInfo* TitleInfo; 
+
+/// <summary>
+/// User Twitch account information, if a Twitch account has been linked
+/// </summary>
+@property UserTwitchInfo* TwitchInfo; 
+
+/// <summary>
+/// User account name in the PlayFab service
+/// </summary>
+@property NSString* Username; 
+
+/// <summary>
 /// User XBox account information, if a XBox account has been linked
 /// </summary>
 @property UserXboxInfo* XboxInfo; 
-
-/// <summary>
-/// Custom ID information, if a custom ID has been assigned
-/// </summary>
-@property UserCustomIdInfo* CustomIdInfo; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -7155,11 +7255,6 @@ typedef enum
 
 
 /// <summary>
-/// Data stored for the specified user data key.
-/// </summary>
-@property NSString* Value; 
-
-/// <summary>
 /// Timestamp for when this data was last updated.
 /// </summary>
 @property NSDate* LastUpdated; 
@@ -7168,6 +7263,11 @@ typedef enum
 /// Indicates whether this data can be read by all users (public) or only the user (private). This is used for GetUserData requests being made by one player about another player.
 /// </summary>
 @property UserDataPermission Permission; 
+
+/// <summary>
+/// Data stored for the specified user data key.
+/// </summary>
+@property NSString* Value; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -7206,24 +7306,24 @@ typedef enum
 
 
 /// <summary>
-/// Google ID
-/// </summary>
-@property NSString* GoogleId; 
-
-/// <summary>
 /// Email address of the Google account
 /// </summary>
 @property NSString* GoogleEmail; 
 
 /// <summary>
-/// Locale of the Google account
-/// </summary>
-@property NSString* GoogleLocale; 
-
-/// <summary>
 /// Gender information of the Google account
 /// </summary>
 @property NSString* GoogleGender; 
+
+/// <summary>
+/// Google ID
+/// </summary>
+@property NSString* GoogleId; 
+
+/// <summary>
+/// Locale of the Google account
+/// </summary>
+@property NSString* GoogleLocale; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -7291,6 +7391,11 @@ typedef enum
 
 
 /// <summary>
+/// Boolean for whether this player is eligible for gathering device info.
+/// </summary>
+@property bool GatherDeviceInfo; 
+
+/// <summary>
 /// Boolean for whether this player is eligible for ad tracking.
 /// </summary>
 @property bool NeedsAttribution; 
@@ -7303,9 +7408,9 @@ typedef enum
 
 
 /// <summary>
-/// Steam identifier
+/// what stage of game ownership the user is listed as being in, from Steam
 /// </summary>
-@property NSString* SteamId; 
+@property TitleActivationStatus SteamActivationStatus; 
 
 /// <summary>
 /// the country in which the player resides, from Steam data
@@ -7318,9 +7423,9 @@ typedef enum
 @property Currency SteamCurrency; 
 
 /// <summary>
-/// what stage of game ownership the user is listed as being in, from Steam
+/// Steam identifier
 /// </summary>
-@property TitleActivationStatus SteamActivationStatus; 
+@property NSString* SteamId; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -7330,14 +7435,9 @@ typedef enum
 
 
 /// <summary>
-/// name of the user, as it is displayed in-game
+/// URL to the player's avatar.
 /// </summary>
-@property NSString* DisplayName; 
-
-/// <summary>
-/// source by which the user first joined the game, if known
-/// </summary>
-@property UserOrigination Origination; 
+@property NSString* AvatarUrl; 
 
 /// <summary>
 /// timestamp indicating when the user was first associated with this game (this can differ significantly from when the user first registered with PlayFab)
@@ -7345,9 +7445,9 @@ typedef enum
 @property NSDate* Created; 
 
 /// <summary>
-/// timestamp for the last user login for this title
+/// name of the user, as it is displayed in-game
 /// </summary>
-@property NSDate* LastLogin; 
+@property NSString* DisplayName; 
 
 /// <summary>
 /// timestamp indicating when the user first signed into this game (this can differ from the Created timestamp, as other events, such as issuing a beta key to the user, can associate the title to the user)
@@ -7360,9 +7460,14 @@ typedef enum
 @property bool isBanned; 
 
 /// <summary>
-/// URL to the player's avatar.
+/// timestamp for the last user login for this title
 /// </summary>
-@property NSString* AvatarUrl; 
+@property NSDate* LastLogin; 
+
+/// <summary>
+/// source by which the user first joined the game, if known
+/// </summary>
+@property UserOrigination Origination; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -7401,16 +7506,6 @@ typedef enum
 
 
 /// <summary>
-/// ReceiptId returned by the Amazon App Store in-app purchase API
-/// </summary>
-@property NSString* ReceiptId; 
-
-/// <summary>
-/// AmazonId of the user making the purchase as returned by the Amazon App Store in-app purchase API
-/// </summary>
-@property NSString* UserId; 
-
-/// <summary>
 /// Catalog version to use when granting receipt item. If null, defaults to primary catalog.
 /// </summary>
 @property NSString* CatalogVersion; 
@@ -7424,6 +7519,16 @@ typedef enum
 /// Amount of the stated currency paid for the object.
 /// </summary>
 @property NSNumber* PurchasePrice; 
+
+/// <summary>
+/// ReceiptId returned by the Amazon App Store in-app purchase API
+/// </summary>
+@property NSString* ReceiptId; 
+
+/// <summary>
+/// AmazonId of the user making the purchase as returned by the Amazon App Store in-app purchase API
+/// </summary>
+@property NSString* UserId; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -7443,16 +7548,6 @@ typedef enum
 
 
 /// <summary>
-/// Original JSON string returned by the Google Play IAB API.
-/// </summary>
-@property NSString* ReceiptJson; 
-
-/// <summary>
-/// Signature returned by the Google Play IAB API.
-/// </summary>
-@property NSString* Signature; 
-
-/// <summary>
 /// Currency used for the purchase.
 /// </summary>
 @property NSString* CurrencyCode; 
@@ -7461,6 +7556,16 @@ typedef enum
 /// Amount of the stated currency paid for the object.
 /// </summary>
 @property NSNumber* PurchasePrice; 
+
+/// <summary>
+/// Original JSON string returned by the Google Play IAB API.
+/// </summary>
+@property NSString* ReceiptJson; 
+
+/// <summary>
+/// Signature returned by the Google Play IAB API.
+/// </summary>
+@property NSString* Signature; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -7480,11 +7585,6 @@ typedef enum
 
 
 /// <summary>
-/// Base64 encoded receipt data, passed back by the App Store as a result of a successful purchase.
-/// </summary>
-@property NSString* ReceiptData; 
-
-/// <summary>
 /// Currency used for the purchase.
 /// </summary>
 @property NSString* CurrencyCode; 
@@ -7493,6 +7593,11 @@ typedef enum
 /// Amount of the stated currency paid for the object.
 /// </summary>
 @property NSNumber* PurchasePrice; 
+
+/// <summary>
+/// Base64 encoded receipt data, passed back by the App Store as a result of a successful purchase.
+/// </summary>
+@property NSString* ReceiptData; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -7512,11 +7617,6 @@ typedef enum
 
 
 /// <summary>
-/// XML Receipt returned by the Windows App Store in-app purchase API
-/// </summary>
-@property NSString* Receipt; 
-
-/// <summary>
 /// Catalog version to use when granting receipt item. If null, defaults to primary catalog.
 /// </summary>
 @property NSString* CatalogVersion; 
@@ -7530,6 +7630,11 @@ typedef enum
 /// Amount of the stated currency paid for the object.
 /// </summary>
 @property NSNumber* PurchasePrice; 
+
+/// <summary>
+/// XML Receipt returned by the Windows App Store in-app purchase API
+/// </summary>
+@property NSString* Receipt; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -7588,9 +7693,9 @@ typedef enum
 
 
 /// <summary>
-/// Time remaining (in seconds) before the next recharge increment of the virtual currency.
+/// Maximum value to which the regenerating currency will automatically increment. Note that it can exceed this value through use of the AddUserVirtualCurrency API call. However, it will not regenerate automatically until it has fallen below this value.
 /// </summary>
-@property NSNumber* SecondsToRecharge; 
+@property NSNumber* RechargeMax; 
 
 /// <summary>
 /// Server timestamp in UTC indicating the next time the virtual currency will be incremented.
@@ -7598,9 +7703,9 @@ typedef enum
 @property NSDate* RechargeTime; 
 
 /// <summary>
-/// Maximum value to which the regenerating currency will automatically increment. Note that it can exceed this value through use of the AddUserVirtualCurrency API call. However, it will not regenerate automatically until it has fallen below this value.
+/// Time remaining (in seconds) before the next recharge increment of the virtual currency.
 /// </summary>
-@property NSNumber* RechargeMax; 
+@property NSNumber* SecondsToRecharge; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -7608,6 +7713,11 @@ typedef enum
 
 @interface WriteClientCharacterEventRequest : PlayFabBaseModel
 
+
+/// <summary>
+/// Custom event properties. Each property consists of a name (string) and a value (JSON object).
+/// </summary>
+@property NSDictionary* Body; 
 
 /// <summary>
 /// Unique PlayFab assigned ID for a specific character owned by a user
@@ -7623,11 +7733,6 @@ typedef enum
 /// The time (in UTC) associated with this event. The value dafaults to the current time.
 /// </summary>
 @property NSDate* Timestamp; 
-
-/// <summary>
-/// Custom event properties. Each property consists of a name (string) and a value (JSON object).
-/// </summary>
-@property NSDictionary* Body; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -7635,6 +7740,11 @@ typedef enum
 
 @interface WriteClientPlayerEventRequest : PlayFabBaseModel
 
+
+/// <summary>
+/// Custom data properties associated with the event. Each property consists of a name (string) and a value (JSON object).
+/// </summary>
+@property NSDictionary* Body; 
 
 /// <summary>
 /// The name of the event, within the namespace scoped to the title. The naming convention is up to the caller, but it commonly follows the subject_verb_object pattern (e.g. player_logged_in).
@@ -7645,11 +7755,6 @@ typedef enum
 /// The time (in UTC) associated with this event. The value dafaults to the current time.
 /// </summary>
 @property NSDate* Timestamp; 
-
-/// <summary>
-/// Custom data properties associated with the event. Each property consists of a name (string) and a value (JSON object).
-/// </summary>
-@property NSDictionary* Body; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -7674,6 +7779,11 @@ typedef enum
 
 
 /// <summary>
+/// Custom event properties. Each property consists of a name (string) and a value (JSON object).
+/// </summary>
+@property NSDictionary* Body; 
+
+/// <summary>
 /// The name of the event, within the namespace scoped to the title. The naming convention is up to the caller, but it commonly follows the subject_verb_object pattern (e.g. player_logged_in).
 /// </summary>
 @property NSString* EventName; 
@@ -7682,11 +7792,6 @@ typedef enum
 /// The time (in UTC) associated with this event. The value dafaults to the current time.
 /// </summary>
 @property NSDate* Timestamp; 
-
-/// <summary>
-/// Custom event properties. Each property consists of a name (string) and a value (JSON object).
-/// </summary>
-@property NSDictionary* Body; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
