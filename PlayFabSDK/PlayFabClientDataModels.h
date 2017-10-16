@@ -2217,11 +2217,6 @@ typedef enum
 /// <summary>
 /// game specific string denoting server configuration
 /// </summary>
-@property NSNumber* GameServerState; 
-
-/// <summary>
-/// game specific string denoting server configuration
-/// </summary>
 @property GameInstanceState GameServerStateEnum; 
 
 /// <summary>

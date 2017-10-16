@@ -1099,8 +1099,6 @@
     
     self.GameServerData = [properties valueForKey:@"GameServerData"];
     
-    self.GameServerState = [properties valueForKey:@"GameServerState"];
-    
     self.GameServerStateEnum = (GameInstanceState)[properties valueForKey:@"GameServerStateEnum"];
     
     self.LastHeartbeat = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"LastHeartbeat"]];
