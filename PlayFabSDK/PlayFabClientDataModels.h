@@ -24,6 +24,13 @@ typedef enum
 
 typedef enum
 {
+    EmailVerificationStatusUnverified,
+    EmailVerificationStatusPending,
+    EmailVerificationStatusConfirmed
+} EmailVerificationStatus;
+
+typedef enum
+{
     ContinentCodeAF,
     ContinentCodeAN,
     ContinentCodeAS,
@@ -1900,6 +1907,11 @@ typedef enum
 /// The name of the email info data
 /// </summary>
 @property NSString* Name; 
+
+/// <summary>
+/// The verification status of the email
+/// </summary>
+@property EmailVerificationStatus VerificationStatus; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -2250,9 +2262,14 @@ typedef enum
 @property NSNumber* RunTime; 
 
 /// <summary>
-/// IP address of the server
+/// IPV4 address of the server
 /// </summary>
 @property NSString* ServerHostname; 
+
+/// <summary>
+/// IPV6 address of the server
+/// </summary>
+@property NSString* ServerIPV6Address; 
 
 /// <summary>
 /// port number to use for non-http communications with the server
@@ -2590,7 +2607,7 @@ typedef enum
 @property NSString* Key; 
 
 /// <summary>
-/// True if download through CDN. CDN provides better download bandwidth and time. However, if you want latest, non-cached version of the content, set this to false. Default is true.
+/// True to download through CDN. CDN provides higher download bandwidth and lower latency. However, if you want the latest, non-cached version of the content during development, set this to false. Default is true.
 /// </summary>
 @property bool ThruCDN; 
 /**/
@@ -2602,7 +2619,7 @@ typedef enum
 
 
 /// <summary>
-/// URL for downloading content via HTTP GET or HEAD method. The URL will expire in 1 hour.
+/// URL for downloading content via HTTP GET or HEAD method. The URL will expire in approximately one hour.
 /// </summary>
 @property NSString* URL; 
 /*
@@ -5126,9 +5143,14 @@ typedef enum
 @property NSNumber* PollWaitTimeMS; 
 
 /// <summary>
-/// IP address of the server
+/// IPV4 address of the server
 /// </summary>
 @property NSString* ServerHostname; 
+
+/// <summary>
+/// IPV6 address of the server
+/// </summary>
+@property NSString* ServerIPV6Address; 
 
 /// <summary>
 /// port number to use for non-http communications with the server
@@ -5321,12 +5343,12 @@ typedef enum
 @property NSString* PurchaseConfirmationPageURL; 
 
 /// <summary>
-/// Real world currency for the transaction.
+/// Currency for the transaction, may be a virtual currency or real money.
 /// </summary>
 @property NSString* PurchaseCurrency; 
 
 /// <summary>
-/// Real world cost of the transaction.
+/// Cost of the transaction.
 /// </summary>
 @property NSNumber* PurchasePrice; 
 
@@ -5336,12 +5358,12 @@ typedef enum
 @property TransactionStatus Status; 
 
 /// <summary>
-/// Virtual currency cost of the transaction.
+/// Virtual currencies granted by the transaction, if any.
 /// </summary>
 @property NSDictionary* VCAmount; 
 
 /// <summary>
-/// Current virtual currency totals for the user.
+/// Current virtual currency balances for the user.
 /// </summary>
 @property NSDictionary* VirtualCurrency; 
 /*
@@ -6242,9 +6264,14 @@ typedef enum
 @property NSString* Password; 
 
 /// <summary>
-/// server IP address
+/// server IPV4 address
 /// </summary>
 @property NSString* ServerHostname; 
+
+/// <summary>
+/// server IPV6 address
+/// </summary>
+@property NSString* ServerIPV6Address; 
 
 /// <summary>
 /// port on the server to be used for communication

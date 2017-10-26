@@ -799,6 +799,8 @@
     
     self.Name = [properties valueForKey:@"Name"];
     
+    self.VerificationStatus = (EmailVerificationStatus)[properties valueForKey:@"VerificationStatus"];
+    
 
     return self;
 }
@@ -1122,6 +1124,8 @@
     self.RunTime = [properties valueForKey:@"RunTime"];
     
     self.ServerHostname = [properties valueForKey:@"ServerHostname"];
+    
+    self.ServerIPV6Address = [properties valueForKey:@"ServerIPV6Address"];
     
     self.ServerPort = [properties valueForKey:@"ServerPort"];
     
@@ -4393,6 +4397,8 @@
     
     self.ServerHostname = [properties valueForKey:@"ServerHostname"];
     
+    self.ServerIPV6Address = [properties valueForKey:@"ServerIPV6Address"];
+    
     self.ServerPort = [properties valueForKey:@"ServerPort"];
     
     self.Status = (MatchmakeStatus)[properties valueForKey:@"Status"];
@@ -5505,6 +5511,8 @@
     self.Password = [properties valueForKey:@"Password"];
     
     self.ServerHostname = [properties valueForKey:@"ServerHostname"];
+    
+    self.ServerIPV6Address = [properties valueForKey:@"ServerIPV6Address"];
     
     self.ServerPort = [properties valueForKey:@"ServerPort"];
     
