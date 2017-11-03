@@ -140,6 +140,38 @@
     return self;
 }
 @end
+@implementation AddOrUpdateContactEmailRequest
+
+
+-(id)initWithDictionary:(NSDictionary*)properties
+{
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+
+    
+    self.EmailAddress = [properties valueForKey:@"EmailAddress"];
+    
+
+    return self;
+}
+@end
+@implementation AddOrUpdateContactEmailResult
+
+
+-(id)initWithDictionary:(NSDictionary*)properties
+{
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+
+    
+
+    return self;
+}
+@end
 @implementation AddSharedGroupMembersRequest
 
 
@@ -5133,6 +5165,36 @@
     self.TitleId = [properties valueForKey:@"TitleId"];
     
     self.UserName = [properties valueForKey:@"UserName"];
+    
+
+    return self;
+}
+@end
+@implementation RemoveContactEmailRequest
+
+
+-(id)initWithDictionary:(NSDictionary*)properties
+{
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+
+    
+
+    return self;
+}
+@end
+@implementation RemoveContactEmailResult
+
+
+-(id)initWithDictionary:(NSDictionary*)properties
+{
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+
     
 
     return self;

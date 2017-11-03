@@ -17,6 +17,8 @@ typedef void(^AddFriendCallback)(AddFriendResult* result, NSObject* userData);
 		
 typedef void(^AddGenericIDCallback)(AddGenericIDResult* result, NSObject* userData);
 		
+typedef void(^AddOrUpdateContactEmailCallback)(AddOrUpdateContactEmailResult* result, NSObject* userData);
+		
 typedef void(^AddSharedGroupMembersCallback)(AddSharedGroupMembersResult* result, NSObject* userData);
 		
 typedef void(^AddUsernamePasswordCallback)(AddUsernamePasswordResult* result, NSObject* userData);
@@ -195,6 +197,8 @@ typedef void(^RegisterPlayFabUserCallback)(RegisterPlayFabUserResult* result, NS
 		
 typedef void(^RegisterWithWindowsHelloCallback)(LoginResult* result, NSObject* userData);
 		
+typedef void(^RemoveContactEmailCallback)(RemoveContactEmailResult* result, NSObject* userData);
+		
 typedef void(^RemoveFriendCallback)(RemoveFriendResult* result, NSObject* userData);
 		
 typedef void(^RemoveGenericIDCallback)(RemoveGenericIDResult* result, NSObject* userData);
@@ -284,6 +288,8 @@ typedef void(^WriteTitleEventCallback)(WriteEventResponse* result, NSObject* use
 -(void) AddFriend:(AddFriendRequest*)request success:(AddFriendCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
 -(void) AddGenericID:(AddGenericIDRequest*)request success:(AddGenericIDCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
+		
+-(void) AddOrUpdateContactEmail:(AddOrUpdateContactEmailRequest*)request success:(AddOrUpdateContactEmailCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
 -(void) AddSharedGroupMembers:(AddSharedGroupMembersRequest*)request success:(AddSharedGroupMembersCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
@@ -463,6 +469,8 @@ typedef void(^WriteTitleEventCallback)(WriteEventResponse* result, NSObject* use
 		
 -(void) RegisterWithWindowsHello:(RegisterWithWindowsHelloRequest*)request success:(RegisterWithWindowsHelloCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
+-(void) RemoveContactEmail:(RemoveContactEmailCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*) userData;
+		
 -(void) RemoveFriend:(RemoveFriendRequest*)request success:(RemoveFriendCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
 -(void) RemoveGenericID:(RemoveGenericIDRequest*)request success:(RemoveGenericIDCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
@@ -549,6 +557,8 @@ typedef void(^WriteTitleEventCallback)(WriteEventResponse* result, NSObject* use
 + (void) OnAddFriendResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnAddGenericIDResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
+		
++ (void) OnAddOrUpdateContactEmailResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnAddSharedGroupMembersResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
@@ -727,6 +737,8 @@ typedef void(^WriteTitleEventCallback)(WriteEventResponse* result, NSObject* use
 + (void) OnRegisterPlayFabUserResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnRegisterWithWindowsHelloResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
+		
++ (void) OnRemoveContactEmailResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnRemoveFriendResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		

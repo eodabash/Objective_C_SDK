@@ -607,6 +607,10 @@ typedef enum
 
 @class AddGenericIDResult;
 
+@class AddOrUpdateContactEmailRequest;
+
+@class AddOrUpdateContactEmailResult;
+
 @class AddSharedGroupMembersRequest;
 
 @class AddSharedGroupMembersResult;
@@ -995,6 +999,10 @@ typedef enum
 
 @class RegisterWithWindowsHelloRequest;
 
+@class RemoveContactEmailRequest;
+
+@class RemoveContactEmailResult;
+
 @class RemoveFriendRequest;
 
 @class RemoveFriendResult;
@@ -1315,6 +1323,28 @@ typedef enum
 
 
 @interface AddGenericIDResult : PlayFabBaseModel
+
+/*
+@property NSObject* Request;
+@property NSObject* CustomData;
+*/
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
+@interface AddOrUpdateContactEmailRequest : PlayFabBaseModel
+
+
+/// <summary>
+/// The new contact email to associate with the player.
+/// </summary>
+@property NSString* EmailAddress; 
+/**/
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
+@interface AddOrUpdateContactEmailResult : PlayFabBaseModel
 
 /*
 @property NSObject* Request;
@@ -5949,6 +5979,23 @@ typedef enum
 /// </summary>
 @property NSString* UserName; 
 /**/
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
+@interface RemoveContactEmailRequest : PlayFabBaseModel
+
+/**/
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
+@interface RemoveContactEmailResult : PlayFabBaseModel
+
+/*
+@property NSObject* Request;
+@property NSObject* CustomData;
+*/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
 
