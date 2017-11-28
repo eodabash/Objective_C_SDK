@@ -75,6 +75,8 @@ typedef void(^GetLeaderboardAroundPlayerCallback)(GetLeaderboardAroundPlayerResu
 		
 typedef void(^GetLeaderboardForUserCharactersCallback)(GetLeaderboardForUsersCharactersResult* result, NSObject* userData);
 		
+typedef void(^GetPaymentTokenCallback)(GetPaymentTokenResult* result, NSObject* userData);
+		
 typedef void(^GetPhotonAuthenticationTokenCallback)(GetPhotonAuthenticationTokenResult* result, NSObject* userData);
 		
 typedef void(^GetPlayerCombinedInfoCallback)(GetPlayerCombinedInfoResult* result, NSObject* userData);
@@ -204,6 +206,8 @@ typedef void(^RemoveFriendCallback)(RemoveFriendResult* result, NSObject* userDa
 typedef void(^RemoveGenericIDCallback)(RemoveGenericIDResult* result, NSObject* userData);
 		
 typedef void(^RemoveSharedGroupMembersCallback)(RemoveSharedGroupMembersResult* result, NSObject* userData);
+		
+typedef void(^ReportDeviceInfoCallback)(EmptyResult* result, NSObject* userData);
 		
 typedef void(^ReportPlayerCallback)(ReportPlayerClientResult* result, NSObject* userData);
 		
@@ -347,6 +351,8 @@ typedef void(^WriteTitleEventCallback)(WriteEventResponse* result, NSObject* use
 		
 -(void) GetLeaderboardForUserCharacters:(GetLeaderboardForUsersCharactersRequest*)request success:(GetLeaderboardForUserCharactersCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
+-(void) GetPaymentToken:(GetPaymentTokenRequest*)request success:(GetPaymentTokenCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
+		
 -(void) GetPhotonAuthenticationToken:(GetPhotonAuthenticationTokenRequest*)request success:(GetPhotonAuthenticationTokenCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
 -(void) GetPlayerCombinedInfo:(GetPlayerCombinedInfoRequest*)request success:(GetPlayerCombinedInfoCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
@@ -476,6 +482,8 @@ typedef void(^WriteTitleEventCallback)(WriteEventResponse* result, NSObject* use
 -(void) RemoveGenericID:(RemoveGenericIDRequest*)request success:(RemoveGenericIDCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
 -(void) RemoveSharedGroupMembers:(RemoveSharedGroupMembersRequest*)request success:(RemoveSharedGroupMembersCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
+		
+-(void) ReportDeviceInfo:(DeviceInfoRequest*)request success:(ReportDeviceInfoCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
 -(void) ReportPlayer:(ReportPlayerClientRequest*)request success:(ReportPlayerCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
@@ -616,6 +624,8 @@ typedef void(^WriteTitleEventCallback)(WriteEventResponse* result, NSObject* use
 		
 + (void) OnGetLeaderboardForUserCharactersResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
++ (void) OnGetPaymentTokenResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
+		
 + (void) OnGetPhotonAuthenticationTokenResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnGetPlayerCombinedInfoResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
@@ -745,6 +755,8 @@ typedef void(^WriteTitleEventCallback)(WriteEventResponse* result, NSObject* use
 + (void) OnRemoveGenericIDResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnRemoveSharedGroupMembersResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
+		
++ (void) OnReportDeviceInfoResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnReportPlayerResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		

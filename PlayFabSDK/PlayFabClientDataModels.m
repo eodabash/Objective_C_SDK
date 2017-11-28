@@ -950,6 +950,31 @@
     return self;
 }
 @end
+@implementation DeviceInfoRequest
+
+
+-(id)initWithDictionary:(NSDictionary*)properties
+{
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+
+    
+    if ([properties objectForKey:@"Info"]){
+    NSDictionary* member_list = [properties objectForKey:@"Info"];
+    NSMutableDictionary* mutable_storage = [NSMutableDictionary new];
+    for(NSString* key in member_list){
+        [mutable_storage setValue:[member_list objectForKey:key] forKey:key];
+    }
+    self.Info = [mutable_storage copy];
+}
+
+    
+
+    return self;
+}
+@end
 @implementation EmptyResult
 
 
@@ -1923,6 +1948,42 @@
     self.NextReset = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"NextReset"]];
     
     self.Version = [properties valueForKey:@"Version"];
+    
+
+    return self;
+}
+@end
+@implementation GetPaymentTokenRequest
+
+
+-(id)initWithDictionary:(NSDictionary*)properties
+{
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+
+    
+    self.TokenProvider = [properties valueForKey:@"TokenProvider"];
+    
+
+    return self;
+}
+@end
+@implementation GetPaymentTokenResult
+
+
+-(id)initWithDictionary:(NSDictionary*)properties
+{
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+
+    
+    self.OrderId = [properties valueForKey:@"OrderId"];
+    
+    self.ProviderToken = [properties valueForKey:@"ProviderToken"];
     
 
     return self;
@@ -4821,16 +4882,6 @@
 }
 
     
-    if ([properties objectForKey:@"VirtualCurrencyBalances"]){
-    NSArray* member_list = [properties objectForKey:@"VirtualCurrencyBalances"];
-    NSMutableArray* mutable_storage = [NSMutableArray new];
-    for(int i=0;i<[member_list count];i++){
-        [mutable_storage addObject:[[VirtualCurrencyBalanceModel new] initWithDictionary:[member_list objectAtIndex:i]]];
-    }
-    self.VirtualCurrencyBalances = [mutable_storage copy];
-}
-
-    
 
     return self;
 }
@@ -7207,25 +7258,6 @@
     self.TotalValue = [properties valueForKey:@"TotalValue"];
     
     self.TotalValueAsDecimal = [properties valueForKey:@"TotalValueAsDecimal"];
-    
-
-    return self;
-}
-@end
-@implementation VirtualCurrencyBalanceModel
-
-
--(id)initWithDictionary:(NSDictionary*)properties
-{
-    self = [super init];
-    if (!self) {
-        return nil;
-    }
-
-    
-    self.Currency = [properties valueForKey:@"Currency"];
-    
-    self.TotalValue = [properties valueForKey:@"TotalValue"];
     
 
     return self;

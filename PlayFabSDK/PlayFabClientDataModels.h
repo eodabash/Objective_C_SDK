@@ -671,6 +671,8 @@ typedef enum
 
 @class CurrentGamesResult;
 
+@class DeviceInfoRequest;
+
 @class EmptyResult;
 
 @class ExecuteCloudScriptRequest;
@@ -746,6 +748,10 @@ typedef enum
 @class GetLeaderboardRequest;
 
 @class GetLeaderboardResult;
+
+@class GetPaymentTokenRequest;
+
+@class GetPaymentTokenResult;
 
 @class GetPhotonAuthenticationTokenRequest;
 
@@ -1194,8 +1200,6 @@ typedef enum
 @class ValidateWindowsReceiptResult;
 
 @class ValueToDateModel;
-
-@class VirtualCurrencyBalanceModel;
 
 @class VirtualCurrencyRechargeTime;
 
@@ -2042,6 +2046,18 @@ typedef enum
 @property NSObject* Request;
 @property NSObject* CustomData;
 */
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
+@interface DeviceInfoRequest : PlayFabBaseModel
+
+
+/// <summary>
+/// Information posted to the PlayStream Event. Currently arbitrary, and specific to the environment sending it.
+/// </summary>
+@property NSDictionary* Info; 
+/**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
 
@@ -2986,6 +3002,38 @@ typedef enum
 /// The version of the leaderboard returned.
 /// </summary>
 @property NSNumber* Version; 
+/*
+@property NSObject* Request;
+@property NSObject* CustomData;
+*/
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
+@interface GetPaymentTokenRequest : PlayFabBaseModel
+
+
+/// <summary>
+/// The name of service to provide the payment token. Allowed Values are: xsolla
+/// </summary>
+@property NSString* TokenProvider; 
+/**/
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
+@interface GetPaymentTokenResult : PlayFabBaseModel
+
+
+/// <summary>
+/// PlayFab's purchase order identifier.
+/// </summary>
+@property NSString* OrderId; 
+
+/// <summary>
+/// The token from provider.
+/// </summary>
+@property NSString* ProviderToken; 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
@@ -5560,11 +5608,6 @@ typedef enum
 /// List of the player's lifetime purchase totals, summed by real-money currency
 /// </summary>
 @property NSArray* ValuesToDate; 
-
-/// <summary>
-/// List of the player's virtual currency balances
-/// </summary>
-@property NSArray* VirtualCurrencyBalances; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -7736,23 +7779,6 @@ typedef enum
 /// Total value of the purchases in a string representation of decimal monetary units. For example, '9.99' indicates nine dollars and ninety-nine cents when Currency is 'USD'.
 /// </summary>
 @property NSString* TotalValueAsDecimal; 
-/**/
--(id)initWithDictionary:(NSDictionary*)properties;
-@end
-
-
-@interface VirtualCurrencyBalanceModel : PlayFabBaseModel
-
-
-/// <summary>
-/// Name of the virtual currency
-/// </summary>
-@property NSString* Currency; 
-
-/// <summary>
-/// Balance of the virtual currency
-/// </summary>
-@property NSNumber* TotalValue; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
