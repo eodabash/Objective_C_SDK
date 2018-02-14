@@ -990,6 +990,29 @@
     return self;
 }
 @end
+@implementation EntityTokenResponse
+
+
+-(id)initWithDictionary:(NSDictionary*)properties
+{
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+
+    
+    self.EntityId = [properties valueForKey:@"EntityId"];
+    
+    self.EntityToken = [properties valueForKey:@"EntityToken"];
+    
+    self.EntityType = [properties valueForKey:@"EntityType"];
+    
+    self.TokenExpiration = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"TokenExpiration"]];
+    
+
+    return self;
+}
+@end
 @implementation ExecuteCloudScriptRequest
 
 
@@ -4081,6 +4104,8 @@
     }
 
     
+    self.EntityToken = [[EntityTokenResponse new] initWithDictionary:[properties objectForKey:@"EntityToken"]];
+    
     self.InfoResultPayload = [[GetPlayerCombinedInfoResultPayload new] initWithDictionary:[properties objectForKey:@"InfoResultPayload"]];
     
     self.LastLoginTime = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"LastLoginTime"]];
@@ -4118,6 +4143,8 @@
     
     self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
     
+    self.LoginTitlePlayerAccountEntity = [[properties valueForKey:@"LoginTitlePlayerAccountEntity"] boolValue];
+    
     self.OS = [properties valueForKey:@"OS"];
     
     self.PlayerSecret = [properties valueForKey:@"PlayerSecret"];
@@ -4147,6 +4174,8 @@
     
     self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
     
+    self.LoginTitlePlayerAccountEntity = [[properties valueForKey:@"LoginTitlePlayerAccountEntity"] boolValue];
+    
     self.PlayerSecret = [properties valueForKey:@"PlayerSecret"];
     
     self.TitleId = [properties valueForKey:@"TitleId"];
@@ -4169,6 +4198,8 @@
     self.Email = [properties valueForKey:@"Email"];
     
     self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
+    
+    self.LoginTitlePlayerAccountEntity = [[properties valueForKey:@"LoginTitlePlayerAccountEntity"] boolValue];
     
     self.Password = [properties valueForKey:@"Password"];
     
@@ -4197,6 +4228,8 @@
     
     self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
     
+    self.LoginTitlePlayerAccountEntity = [[properties valueForKey:@"LoginTitlePlayerAccountEntity"] boolValue];
+    
     self.PlayerSecret = [properties valueForKey:@"PlayerSecret"];
     
     self.TitleId = [properties valueForKey:@"TitleId"];
@@ -4221,6 +4254,8 @@
     self.EncryptedRequest = [properties valueForKey:@"EncryptedRequest"];
     
     self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
+    
+    self.LoginTitlePlayerAccountEntity = [[properties valueForKey:@"LoginTitlePlayerAccountEntity"] boolValue];
     
     self.PlayerId = [properties valueForKey:@"PlayerId"];
     
@@ -4248,6 +4283,8 @@
     self.EncryptedRequest = [properties valueForKey:@"EncryptedRequest"];
     
     self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
+    
+    self.LoginTitlePlayerAccountEntity = [[properties valueForKey:@"LoginTitlePlayerAccountEntity"] boolValue];
     
     self.PlayerSecret = [properties valueForKey:@"PlayerSecret"];
     
@@ -4280,6 +4317,8 @@
     
     self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
     
+    self.LoginTitlePlayerAccountEntity = [[properties valueForKey:@"LoginTitlePlayerAccountEntity"] boolValue];
+    
     self.OS = [properties valueForKey:@"OS"];
     
     self.PlayerSecret = [properties valueForKey:@"PlayerSecret"];
@@ -4311,6 +4350,8 @@
     
     self.KongregateId = [properties valueForKey:@"KongregateId"];
     
+    self.LoginTitlePlayerAccountEntity = [[properties valueForKey:@"LoginTitlePlayerAccountEntity"] boolValue];
+    
     self.PlayerSecret = [properties valueForKey:@"PlayerSecret"];
     
     self.TitleId = [properties valueForKey:@"TitleId"];
@@ -4331,6 +4372,8 @@
 
     
     self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
+    
+    self.LoginTitlePlayerAccountEntity = [[properties valueForKey:@"LoginTitlePlayerAccountEntity"] boolValue];
     
     self.Password = [properties valueForKey:@"Password"];
     
@@ -4358,6 +4401,8 @@
     self.EncryptedRequest = [properties valueForKey:@"EncryptedRequest"];
     
     self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
+    
+    self.LoginTitlePlayerAccountEntity = [[properties valueForKey:@"LoginTitlePlayerAccountEntity"] boolValue];
     
     self.PlayerSecret = [properties valueForKey:@"PlayerSecret"];
     
@@ -4388,6 +4433,8 @@
     
     self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
     
+    self.LoginTitlePlayerAccountEntity = [[properties valueForKey:@"LoginTitlePlayerAccountEntity"] boolValue];
+    
     self.PlayerSecret = [properties valueForKey:@"PlayerSecret"];
     
     self.TitleId = [properties valueForKey:@"TitleId"];
@@ -4410,6 +4457,8 @@
     self.ChallengeSignature = [properties valueForKey:@"ChallengeSignature"];
     
     self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
+    
+    self.LoginTitlePlayerAccountEntity = [[properties valueForKey:@"LoginTitlePlayerAccountEntity"] boolValue];
     
     self.PublicKeyHint = [properties valueForKey:@"PublicKeyHint"];
     
@@ -5155,6 +5204,8 @@
     
     self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
     
+    self.LoginTitlePlayerAccountEntity = [[properties valueForKey:@"LoginTitlePlayerAccountEntity"] boolValue];
+    
     self.Password = [properties valueForKey:@"Password"];
     
     self.PlayerSecret = [properties valueForKey:@"PlayerSecret"];
@@ -5208,6 +5259,8 @@
     self.EncryptedRequest = [properties valueForKey:@"EncryptedRequest"];
     
     self.InfoRequestParameters = [[GetPlayerCombinedInfoRequestParams new] initWithDictionary:[properties objectForKey:@"InfoRequestParameters"]];
+    
+    self.LoginTitlePlayerAccountEntity = [[properties valueForKey:@"LoginTitlePlayerAccountEntity"] boolValue];
     
     self.PlayerSecret = [properties valueForKey:@"PlayerSecret"];
     
@@ -5458,6 +5511,8 @@
 
     
     self.Email = [properties valueForKey:@"Email"];
+    
+    self.EmailTemplateId = [properties valueForKey:@"EmailTemplateId"];
     
     self.TitleId = [properties valueForKey:@"TitleId"];
     

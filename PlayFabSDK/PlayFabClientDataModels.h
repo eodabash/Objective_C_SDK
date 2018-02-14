@@ -675,6 +675,8 @@ typedef enum
 
 @class EmptyResult;
 
+@class EntityTokenResponse;
+
 @class ExecuteCloudScriptRequest;
 
 @class ExecuteCloudScriptResult;
@@ -1217,7 +1219,7 @@ typedef enum
 
 
 /// <summary>
-/// Items from the accepting player's or guild's inventory in exchange for the offered items in the trade. In the case of a gift, this will be null.
+/// Items from the accepting player's inventory in exchange for the offered items in the trade. In the case of a gift, this will be null.
 /// </summary>
 @property NSArray* AcceptedInventoryInstanceIds; 
 
@@ -2064,6 +2066,36 @@ typedef enum
 
 @interface EmptyResult : PlayFabBaseModel
 
+/*
+@property NSObject* Request;
+@property NSObject* CustomData;
+*/
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
+@interface EntityTokenResponse : PlayFabBaseModel
+
+
+/// <summary>
+/// The identifier of the entity the token was issued for.
+/// </summary>
+@property NSString* EntityId; 
+
+/// <summary>
+/// The token used to set X-EntityToken for all entity based API calls.
+/// </summary>
+@property NSString* EntityToken; 
+
+/// <summary>
+/// The type of entity the token was issued for.
+/// </summary>
+@property NSString* EntityType; 
+
+/// <summary>
+/// The time the token will expire, if it is an expiring token, in UTC.
+/// </summary>
+@property NSDate* TokenExpiration; 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
@@ -4661,6 +4693,11 @@ typedef enum
 
 
 /// <summary>
+/// If LoginTitlePlayerAccountEntity flag is set on the login request the title_player_account will also be logged in and returned.
+/// </summary>
+@property EntityTokenResponse* EntityToken; 
+
+/// <summary>
 /// Results for requested info.
 /// </summary>
 @property GetPlayerCombinedInfoResultPayload* InfoResultPayload; 
@@ -4726,6 +4763,11 @@ typedef enum
 @property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
 
 /// <summary>
+/// Flag to automatically login the player's title_player_account and return the associated entity token.
+/// </summary>
+@property bool LoginTitlePlayerAccountEntity; 
+
+/// <summary>
 /// Specific Operating System version for the user's device.
 /// </summary>
 @property NSString* OS; 
@@ -4768,6 +4810,11 @@ typedef enum
 @property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
 
 /// <summary>
+/// Flag to automatically login the player's title_player_account and return the associated entity token.
+/// </summary>
+@property bool LoginTitlePlayerAccountEntity; 
+
+/// <summary>
 /// Player secret that is used to verify API request signatures (Enterprise Only).
 /// </summary>
 @property NSString* PlayerSecret; 
@@ -4793,6 +4840,11 @@ typedef enum
 /// Flags for which pieces of info to return for the user.
 /// </summary>
 @property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
+
+/// <summary>
+/// Flag to automatically login the player's title_player_account and return the associated entity token.
+/// </summary>
+@property bool LoginTitlePlayerAccountEntity; 
 
 /// <summary>
 /// Password for the PlayFab account (6-100 characters)
@@ -4832,6 +4884,11 @@ typedef enum
 @property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
 
 /// <summary>
+/// Flag to automatically login the player's title_player_account and return the associated entity token.
+/// </summary>
+@property bool LoginTitlePlayerAccountEntity; 
+
+/// <summary>
 /// Player secret that is used to verify API request signatures (Enterprise Only).
 /// </summary>
 @property NSString* PlayerSecret; 
@@ -4862,6 +4919,11 @@ typedef enum
 /// Flags for which pieces of info to return for the user.
 /// </summary>
 @property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
+
+/// <summary>
+/// Flag to automatically login the player's title_player_account and return the associated entity token.
+/// </summary>
+@property bool LoginTitlePlayerAccountEntity; 
 
 /// <summary>
 /// Unique Game Center player id.
@@ -4899,6 +4961,11 @@ typedef enum
 /// Flags for which pieces of info to return for the user.
 /// </summary>
 @property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
+
+/// <summary>
+/// Flag to automatically login the player's title_player_account and return the associated entity token.
+/// </summary>
+@property bool LoginTitlePlayerAccountEntity; 
 
 /// <summary>
 /// Player secret that is used to verify API request signatures (Enterprise Only).
@@ -4948,6 +5015,11 @@ typedef enum
 @property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
 
 /// <summary>
+/// Flag to automatically login the player's title_player_account and return the associated entity token.
+/// </summary>
+@property bool LoginTitlePlayerAccountEntity; 
+
+/// <summary>
 /// Specific Operating System version for the user's device.
 /// </summary>
 @property NSString* OS; 
@@ -4995,6 +5067,11 @@ typedef enum
 @property NSString* KongregateId; 
 
 /// <summary>
+/// Flag to automatically login the player's title_player_account and return the associated entity token.
+/// </summary>
+@property bool LoginTitlePlayerAccountEntity; 
+
+/// <summary>
 /// Player secret that is used to verify API request signatures (Enterprise Only).
 /// </summary>
 @property NSString* PlayerSecret; 
@@ -5015,6 +5092,11 @@ typedef enum
 /// Flags for which pieces of info to return for the user.
 /// </summary>
 @property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
+
+/// <summary>
+/// Flag to automatically login the player's title_player_account and return the associated entity token.
+/// </summary>
+@property bool LoginTitlePlayerAccountEntity; 
 
 /// <summary>
 /// Password for the PlayFab account (6-100 characters)
@@ -5052,6 +5134,11 @@ typedef enum
 /// Flags for which pieces of info to return for the user.
 /// </summary>
 @property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
+
+/// <summary>
+/// Flag to automatically login the player's title_player_account and return the associated entity token.
+/// </summary>
+@property bool LoginTitlePlayerAccountEntity; 
 
 /// <summary>
 /// Player secret that is used to verify API request signatures (Enterprise Only).
@@ -5096,6 +5183,11 @@ typedef enum
 @property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
 
 /// <summary>
+/// Flag to automatically login the player's title_player_account and return the associated entity token.
+/// </summary>
+@property bool LoginTitlePlayerAccountEntity; 
+
+/// <summary>
 /// Player secret that is used to verify API request signatures (Enterprise Only).
 /// </summary>
 @property NSString* PlayerSecret; 
@@ -5121,6 +5213,11 @@ typedef enum
 /// Flags for which pieces of info to return for the user.
 /// </summary>
 @property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
+
+/// <summary>
+/// Flag to automatically login the player's title_player_account and return the associated entity token.
+/// </summary>
+@property bool LoginTitlePlayerAccountEntity; 
 
 /// <summary>
 /// SHA256 hash of the PublicKey generated by Windows Hello.
@@ -5926,6 +6023,11 @@ typedef enum
 @property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
 
 /// <summary>
+/// Flag to automatically login the player's title_player_account and return the associated entity token.
+/// </summary>
+@property bool LoginTitlePlayerAccountEntity; 
+
+/// <summary>
 /// Password for the PlayFab account (6-100 characters)
 /// </summary>
 @property NSString* Password; 
@@ -6001,6 +6103,11 @@ typedef enum
 /// Flags for which pieces of info to return for the user.
 /// </summary>
 @property GetPlayerCombinedInfoRequestParams* InfoRequestParameters; 
+
+/// <summary>
+/// Flag to automatically login the player's title_player_account and return the associated entity token.
+/// </summary>
+@property bool LoginTitlePlayerAccountEntity; 
 
 /// <summary>
 /// Player secret that is used to verify API request signatures (Enterprise Only).
@@ -6197,6 +6304,11 @@ typedef enum
 /// User email address attached to their account
 /// </summary>
 @property NSString* Email; 
+
+/// <summary>
+/// The email template id of the account recovery email template to send.
+/// </summary>
+@property NSString* EmailTemplateId; 
 
 /// <summary>
 /// Unique identifier for the title, found in the Settings > Game Properties section of the PlayFab developer site when a title has been selected.
