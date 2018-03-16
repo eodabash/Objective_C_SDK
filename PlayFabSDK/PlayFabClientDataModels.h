@@ -478,6 +478,15 @@ typedef enum
 
 typedef enum
 {
+    EntityTypestitle,
+    EntityTypesmaster_player_account,
+    EntityTypestitle_player_account,
+    EntityTypescharacter,
+    EntityTypesgroup
+} EntityTypes;
+
+typedef enum
+{
     LoginIdentityProviderUnknown,
     LoginIdentityProviderPlayFab,
     LoginIdentityProviderCustom,
@@ -674,6 +683,8 @@ typedef enum
 @class DeviceInfoRequest;
 
 @class EmptyResult;
+
+@class EntityKey;
 
 @class EntityTokenResponse;
 
@@ -2074,23 +2085,43 @@ typedef enum
 @end
 
 
+/// <summary>
+/// Entity identifier class that contains both the ID and type.
+/// </summary>
+@interface EntityKey : PlayFabBaseModel
+
+
+/// <summary>
+/// Entity profile ID.
+/// </summary>
+@property NSString* Id; 
+
+/// <summary>
+/// Entity type. Optional to be used but one of EntityType or EntityTypeString must be set.
+/// </summary>
+@property EntityTypes Type; 
+
+/// <summary>
+/// Entity type. Optional to be used but one of EntityType or EntityTypeString must be set.
+/// </summary>
+@property NSString* TypeString; 
+/**/
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
 @interface EntityTokenResponse : PlayFabBaseModel
 
 
 /// <summary>
-/// The identifier of the entity the token was issued for.
+/// The entity id and type.
 /// </summary>
-@property NSString* EntityId; 
+@property EntityKey* Entity; 
 
 /// <summary>
 /// The token used to set X-EntityToken for all entity based API calls.
 /// </summary>
 @property NSString* EntityToken; 
-
-/// <summary>
-/// The type of entity the token was issued for.
-/// </summary>
-@property NSString* EntityType; 
 
 /// <summary>
 /// The time the token will expire, if it is an expiring token, in UTC.
@@ -4008,7 +4039,7 @@ typedef enum
 @property NSNumber* IfChangedFromDataVersion; 
 
 /// <summary>
-/// Specific keys to search for in the custom data. Leave null to get all keys.
+/// List of unique keys to load from.
 /// </summary>
 @property NSArray* Keys; 
 
@@ -5697,7 +5728,7 @@ typedef enum
 @property NSString* TitleId; 
 
 /// <summary>
-/// Sum of the player's purchases made with real-money currencies, converted to US dollars equivalent and represented as a whole number of cents (1/100 USD).              For example, 999 indicates nine dollars and ninety-nine cents.
+/// Sum of the player's purchases made with real-money currencies, converted to US dollars equivalent and represented as a whole number of cents (1/100 USD).       For example, 999 indicates nine dollars and ninety-nine cents.
 /// </summary>
 @property NSNumber* TotalValueToDateInUSD; 
 
@@ -6816,7 +6847,7 @@ typedef enum
 @property NSString* AcceptedPlayerId; 
 
 /// <summary>
-/// An optional list of players allowed to complete this trade.  If null, anybody can complete the trade.
+/// An optional list of players allowed to complete this trade. If null, anybody can complete the trade.
 /// </summary>
 @property NSArray* AllowedPlayerIds; 
 
@@ -7085,7 +7116,7 @@ typedef enum
 
 
 /// <summary>
-/// Specifies the catalog version that should be used to determine container contents.  If unspecified, uses catalog associated with the item instance.
+/// Specifies the catalog version that should be used to determine container contents. If unspecified, uses catalog associated with the item instance.
 /// </summary>
 @property NSString* CatalogVersion; 
 
@@ -7100,7 +7131,7 @@ typedef enum
 @property NSString* ContainerItemInstanceId; 
 
 /// <summary>
-/// ItemInstanceId of the key that will be consumed by unlocking this container.  If the container requires a key, this parameter is required.
+/// ItemInstanceId of the key that will be consumed by unlocking this container. If the container requires a key, this parameter is required.
 /// </summary>
 @property NSString* KeyItemInstanceId; 
 /**/
@@ -7112,7 +7143,7 @@ typedef enum
 
 
 /// <summary>
-/// Specifies the catalog version that should be used to determine container contents.  If unspecified, uses default/primary catalog.
+/// Specifies the catalog version that should be used to determine container contents. If unspecified, uses default/primary catalog.
 /// </summary>
 @property NSString* CatalogVersion; 
 
@@ -7186,7 +7217,7 @@ typedef enum
 @property NSDictionary* Data; 
 
 /// <summary>
-/// Optional list of Data-keys to remove from UserData.  Some SDKs cannot insert null-values into Data due to language constraints.  Use this to delete the keys directly.
+/// Optional list of Data-keys to remove from UserData. Some SDKs cannot insert null-values into Data due to language constraints. Use this to delete the keys directly.
 /// </summary>
 @property NSArray* KeysToRemove; 
 
@@ -7272,7 +7303,7 @@ typedef enum
 @property NSDictionary* Data; 
 
 /// <summary>
-/// Optional list of Data-keys to remove from UserData.  Some SDKs cannot insert null-values into Data due to language constraints.  Use this to delete the keys directly.
+/// Optional list of Data-keys to remove from UserData. Some SDKs cannot insert null-values into Data due to language constraints. Use this to delete the keys directly.
 /// </summary>
 @property NSArray* KeysToRemove; 
 
@@ -7309,7 +7340,7 @@ typedef enum
 @property NSDictionary* Data; 
 
 /// <summary>
-/// Optional list of Data-keys to remove from UserData.  Some SDKs cannot insert null-values into Data due to language constraints.  Use this to delete the keys directly.
+/// Optional list of Data-keys to remove from UserData. Some SDKs cannot insert null-values into Data due to language constraints. Use this to delete the keys directly.
 /// </summary>
 @property NSArray* KeysToRemove; 
 

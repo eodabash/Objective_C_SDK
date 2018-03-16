@@ -990,6 +990,27 @@
     return self;
 }
 @end
+@implementation EntityKey
+
+
+-(id)initWithDictionary:(NSDictionary*)properties
+{
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+
+    
+    self.Id = [properties valueForKey:@"Id"];
+    
+    self.Type = (EntityTypes)[properties valueForKey:@"Type"];
+    
+    self.TypeString = [properties valueForKey:@"TypeString"];
+    
+
+    return self;
+}
+@end
 @implementation EntityTokenResponse
 
 
@@ -1001,11 +1022,9 @@
     }
 
     
-    self.EntityId = [properties valueForKey:@"EntityId"];
+    self.Entity = [[EntityKey new] initWithDictionary:[properties objectForKey:@"Entity"]];
     
     self.EntityToken = [properties valueForKey:@"EntityToken"];
-    
-    self.EntityType = [properties valueForKey:@"EntityType"];
     
     self.TokenExpiration = [[PlayFabBaseModel timestampFormatter] dateFromString:[properties valueForKey:@"TokenExpiration"]];
     
