@@ -7124,6 +7124,8 @@
     
     self.Origination = (UserOrigination)[properties valueForKey:@"Origination"];
     
+    self.TitlePlayerAccount = [[EntityKey new] initWithDictionary:[properties objectForKey:@"TitlePlayerAccount"]];
+    
 
     return self;
 }

@@ -7723,6 +7723,11 @@ typedef enum
 /// source by which the user first joined the game, if known
 /// </summary>
 @property UserOrigination Origination; 
+
+/// <summary>
+/// Title player account entity for this user
+/// </summary>
+@property EntityKey* TitlePlayerAccount; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
