@@ -696,6 +696,58 @@
     return self;
 }
 @end
+@implementation GetEntityProfilesRequest
+
+
+-(id)initWithDictionary:(NSDictionary*)properties
+{
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+
+    
+    self.DataAsObject = [[properties valueForKey:@"DataAsObject"] boolValue];
+    
+    if ([properties objectForKey:@"Entities"]){
+    NSArray* member_list = [properties objectForKey:@"Entities"];
+    NSMutableArray* mutable_storage = [NSMutableArray new];
+    for(int i=0;i<[member_list count];i++){
+        [mutable_storage addObject:[[EntityKey new] initWithDictionary:[member_list objectAtIndex:i]]];
+    }
+    self.Entities = [mutable_storage copy];
+}
+
+    
+
+    return self;
+}
+@end
+@implementation GetEntityProfilesResponse
+
+
+-(id)initWithDictionary:(NSDictionary*)properties
+{
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+
+    
+    if ([properties objectForKey:@"Profiles"]){
+    NSArray* member_list = [properties objectForKey:@"Profiles"];
+    NSMutableArray* mutable_storage = [NSMutableArray new];
+    for(int i=0;i<[member_list count];i++){
+        [mutable_storage addObject:[[EntityProfileBody new] initWithDictionary:[member_list objectAtIndex:i]]];
+    }
+    self.Profiles = [mutable_storage copy];
+}
+
+    
+
+    return self;
+}
+@end
 @implementation GetEntityTokenRequest
 
 

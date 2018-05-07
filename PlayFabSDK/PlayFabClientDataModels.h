@@ -6091,6 +6091,11 @@ typedef enum
 
 
 /// <summary>
+/// If LoginTitlePlayerAccountEntity flag is set on the login request the title_player_account will also be logged in and returned.
+/// </summary>
+@property EntityTokenResponse* EntityToken; 
+
+/// <summary>
 /// PlayFab unique identifier for this newly created account.
 /// </summary>
 @property NSString* PlayFabId; 

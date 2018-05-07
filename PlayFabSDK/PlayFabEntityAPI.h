@@ -47,6 +47,8 @@ typedef void(^GetObjectsCallback)(GetObjectsResponse* result, NSObject* userData
 		
 typedef void(^GetProfileCallback)(GetEntityProfileResponse* result, NSObject* userData);
 		
+typedef void(^GetProfilesCallback)(GetEntityProfilesResponse* result, NSObject* userData);
+		
 typedef void(^InitiateFileUploadsCallback)(InitiateFileUploadsResponse* result, NSObject* userData);
 		
 typedef void(^InviteToGroupCallback)(InviteToGroupResponse* result, NSObject* userData);
@@ -129,6 +131,8 @@ typedef void(^UpdateRoleCallback)(UpdateGroupRoleResponse* result, NSObject* use
 		
 -(void) GetProfile:(GetEntityProfileRequest*)request success:(GetProfileCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
+-(void) GetProfiles:(GetEntityProfilesRequest*)request success:(GetProfilesCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
+		
 -(void) InitiateFileUploads:(InitiateFileUploadsRequest*)request success:(InitiateFileUploadsCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
 		
 -(void) InviteToGroup:(InviteToGroupRequest*)request success:(InviteToGroupCallback)callback failure:(ErrorCallback)errorCallback withUserData:(NSObject*)userData;
@@ -207,6 +211,8 @@ typedef void(^UpdateRoleCallback)(UpdateGroupRoleResponse* result, NSObject* use
 + (void) OnGetObjectsResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnGetProfileResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
+		
++ (void) OnGetProfilesResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		
 + (void) OnInitiateFileUploadsResult:(int)httpStatus withRequest:(HttpRequest*) request withUserData:(void*) userData;
 		

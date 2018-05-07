@@ -5250,6 +5250,8 @@
     }
 
     
+    self.EntityToken = [[EntityTokenResponse new] initWithDictionary:[properties objectForKey:@"EntityToken"]];
+    
     self.PlayFabId = [properties valueForKey:@"PlayFabId"];
     
     self.SessionTicket = [properties valueForKey:@"SessionTicket"];

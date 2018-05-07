@@ -87,6 +87,10 @@ typedef enum
 
 @class GetEntityProfileResponse;
 
+@class GetEntityProfilesRequest;
+
+@class GetEntityProfilesResponse;
+
 @class GetEntityTokenRequest;
 
 @class GetEntityTokenResponse;
@@ -837,6 +841,38 @@ typedef enum
 /// Entity profile
 /// </summary>
 @property EntityProfileBody* Profile; 
+/*
+@property NSObject* Request;
+@property NSObject* CustomData;
+*/
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
+@interface GetEntityProfilesRequest : PlayFabBaseModel
+
+
+/// <summary>
+/// Determines whether the objects will be returned as an escaped JSON string or as a un-escaped JSON object. Default is JSON string.
+/// </summary>
+@property bool DataAsObject; 
+
+/// <summary>
+/// Entity keys of the profiles to load. Must be between 1 and 25
+/// </summary>
+@property NSArray* Entities; 
+/**/
+-(id)initWithDictionary:(NSDictionary*)properties;
+@end
+
+
+@interface GetEntityProfilesResponse : PlayFabBaseModel
+
+
+/// <summary>
+/// Entity profiles
+/// </summary>
+@property NSArray* Profiles; 
 /*
 @property NSObject* Request;
 @property NSObject* CustomData;
