@@ -10,7 +10,8 @@ typedef enum
     EntityTypesmaster_player_account,
     EntityTypestitle_player_account,
     EntityTypescharacter,
-    EntityTypesgroup
+    EntityTypesgroup,
+    EntityTypesservice
 } EntityTypes;
 
 typedef enum

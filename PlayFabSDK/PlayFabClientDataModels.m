@@ -1144,6 +1144,8 @@
     
     self.Profile = [[PlayerProfileModel new] initWithDictionary:[properties objectForKey:@"Profile"]];
     
+    self.PSNInfo = [[UserPsnInfo new] initWithDictionary:[properties objectForKey:@"PSNInfo"]];
+    
     self.SteamInfo = [[UserSteamInfo new] initWithDictionary:[properties objectForKey:@"SteamInfo"]];
     
     if ([properties objectForKey:@"Tags"]){
@@ -1159,6 +1161,8 @@
     self.TitleDisplayName = [properties valueForKey:@"TitleDisplayName"];
     
     self.Username = [properties valueForKey:@"Username"];
+    
+    self.XboxInfo = [[UserXboxInfo new] initWithDictionary:[properties objectForKey:@"XboxInfo"]];
     
 
     return self;
@@ -1687,6 +1691,8 @@
     
     self.Version = [properties valueForKey:@"Version"];
     
+    self.XboxToken = [properties valueForKey:@"XboxToken"];
+    
 
     return self;
 }
@@ -1745,6 +1751,8 @@
     
     self.Version = [properties valueForKey:@"Version"];
     
+    self.XboxToken = [properties valueForKey:@"XboxToken"];
+    
 
     return self;
 }
@@ -1765,6 +1773,8 @@
     self.IncludeSteamFriends = [[properties valueForKey:@"IncludeSteamFriends"] boolValue];
     
     self.ProfileConstraints = [[PlayerProfileViewConstraints new] initWithDictionary:[properties objectForKey:@"ProfileConstraints"]];
+    
+    self.XboxToken = [properties valueForKey:@"XboxToken"];
     
 
     return self;

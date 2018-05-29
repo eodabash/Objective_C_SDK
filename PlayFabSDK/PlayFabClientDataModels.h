@@ -482,7 +482,8 @@ typedef enum
     EntityTypesmaster_player_account,
     EntityTypestitle_player_account,
     EntityTypescharacter,
-    EntityTypesgroup
+    EntityTypesgroup,
+    EntityTypesservice
 } EntityTypes;
 
 typedef enum
@@ -2277,6 +2278,11 @@ typedef enum
 @property PlayerProfileModel* Profile; 
 
 /// <summary>
+/// Available PSN information, if the user and PlayFab friend are both connected to PSN.
+/// </summary>
+@property UserPsnInfo* PSNInfo; 
+
+/// <summary>
 /// Available Steam information (if the user and PlayFab friend are also connected in Steam).
 /// </summary>
 @property UserSteamInfo* SteamInfo; 
@@ -2295,6 +2301,11 @@ typedef enum
 /// PlayFab unique username for this friend.
 /// </summary>
 @property NSString* Username; 
+
+/// <summary>
+/// Available Xbox information, if the user and PlayFab friend are both connected to Xbox Live.
+/// </summary>
+@property UserXboxInfo* XboxInfo; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -2776,6 +2787,11 @@ typedef enum
 /// The version of the leaderboard to get.
 /// </summary>
 @property NSNumber* Version; 
+
+/// <summary>
+/// Xbox token if Xbox friends should be included. Requires Xbox be configured on PlayFab.
+/// </summary>
+@property NSString* XboxToken; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -2843,6 +2859,11 @@ typedef enum
 /// The version of the leaderboard to get.
 /// </summary>
 @property NSNumber* Version; 
+
+/// <summary>
+/// Xbox token if Xbox friends should be included. Requires Xbox be configured on PlayFab.
+/// </summary>
+@property NSString* XboxToken; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -2865,6 +2886,11 @@ typedef enum
 /// If non-null, this determines which properties of the resulting player profiles to return. For API calls from the client, only the allowed client profile properties for the title may be requested. These allowed properties are configured in the Game Manager "Client Profile Options" tab in the "Settings" section.
 /// </summary>
 @property PlayerProfileViewConstraints* ProfileConstraints; 
+
+/// <summary>
+/// Xbox token if Xbox friends should be included. Requires Xbox be configured on PlayFab.
+/// </summary>
+@property NSString* XboxToken; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
