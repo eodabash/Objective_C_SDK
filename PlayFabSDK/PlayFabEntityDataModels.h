@@ -204,7 +204,7 @@ typedef enum
 /// <summary>
 /// The entity to perform this action on.
 /// </summary>
-@property EntityKey Entity; 
+@property EntityKey * Entity; 
 
 /// <summary>
 /// Names of the files to have their pending uploads aborted.
@@ -246,12 +246,12 @@ typedef enum
 /// <summary>
 /// Optional. Type of the entity to accept as. If specified, must be the same entity as the claimant or an entity that is a child of the claimant entity. Defaults to the claimant entity.
 /// </summary>
-@property EntityKey Entity; 
+@property EntityKey * Entity;
 
 /// <summary>
 /// The identifier of the group
 /// </summary>
-@property EntityKey Group; 
+@property EntityKey * Group;
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -268,7 +268,7 @@ typedef enum
 /// <summary>
 /// The identifier of the group
 /// </summary>
-@property EntityKey Group; 
+@property EntityKey * Group; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -280,7 +280,7 @@ typedef enum
 /// <summary>
 /// The identifier of the group
 /// </summary>
-@property EntityKey Group; 
+@property EntityKey * Group; 
 
 /// <summary>
 /// List of entities to add to the group. Only entities of type title_player_account and character may be added to groups.
@@ -312,7 +312,7 @@ typedef enum
 /// <summary>
 /// The identifier of the group
 /// </summary>
-@property EntityKey Group; 
+@property EntityKey * Group;
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -352,12 +352,12 @@ typedef enum
 /// <summary>
 /// The entity to perform this action on.
 /// </summary>
-@property EntityKey Entity; 
+@property EntityKey * Entity;
 
 /// <summary>
 /// The identifier of the group
 /// </summary>
-@property EntityKey Group; 
+@property EntityKey * Group;
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -374,7 +374,7 @@ typedef enum
 /// <summary>
 /// The identifier of the group
 /// </summary>
-@property EntityKey Group; 
+@property EntityKey * Group; 
 
 /// <summary>
 /// List of entities to move between roles in the group. All entities in this list must be members of the group and origin role.
@@ -423,7 +423,7 @@ typedef enum
 /// <summary>
 /// The identifier of the group
 /// </summary>
-@property EntityKey Group; 
+@property EntityKey * Group; 
 
 /// <summary>
 /// The name of the group.
@@ -458,7 +458,7 @@ typedef enum
 /// <summary>
 /// The identifier of the group
 /// </summary>
-@property EntityKey Group; 
+@property EntityKey * Group; 
 
 /// <summary>
 /// The ID of the role. This must be unique within the group and cannot be changed. Role IDs must be between 1 and 64 characters long.
@@ -505,7 +505,7 @@ typedef enum
 /// <summary>
 /// The entity to perform this action on.
 /// </summary>
-@property EntityKey Entity; 
+@property EntityKey * Entity;
 
 /// <summary>
 /// Names of the files to be deleted.
@@ -547,7 +547,7 @@ typedef enum
 /// <summary>
 /// ID of the group or role to remove
 /// </summary>
-@property EntityKey Group; 
+@property EntityKey * Group; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -559,7 +559,7 @@ typedef enum
 /// <summary>
 /// The identifier of the group
 /// </summary>
-@property EntityKey Group; 
+@property EntityKey * Group;
 
 /// <summary>
 /// The ID of the role to delete. Role IDs must be between 1 and 64 characters long.
@@ -782,7 +782,7 @@ typedef enum
 /// <summary>
 /// The entity to perform this action on.
 /// </summary>
-@property EntityKey Entity; 
+@property EntityKey * Entity; 
 
 /// <summary>
 /// Names of the files to be finalized. Restricted to a-Z, 0-9, '(', ')', '_', '-' and '.'
@@ -829,7 +829,7 @@ typedef enum
 /// <summary>
 /// The entity to perform this action on.
 /// </summary>
-@property EntityKey Entity; 
+@property EntityKey * Entity; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -957,7 +957,7 @@ typedef enum
 /// <summary>
 /// The entity to perform this action on.
 /// </summary>
-@property EntityKey Entity; 
+@property EntityKey * Entity; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -1043,7 +1043,7 @@ typedef enum
 /// <summary>
 /// The identifier of the group
 /// </summary>
-@property EntityKey Group; 
+@property EntityKey * Group;
 
 /// <summary>
 /// The name of the group.
@@ -1078,7 +1078,7 @@ typedef enum
 /// <summary>
 /// The entity to perform this action on.
 /// </summary>
-@property EntityKey Entity; 
+@property EntityKey * Entity; 
 
 /// <summary>
 /// Determines whether the object will be returned as an escaped JSON string or as a un-escaped JSON object. Default is JSON object.
@@ -1153,7 +1153,7 @@ typedef enum
 /// <summary>
 /// ID of the group that the entity is blocked from
 /// </summary>
-@property EntityKey Group; 
+@property EntityKey * Group; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -1267,7 +1267,7 @@ typedef enum
 /// <summary>
 /// The entity to perform this action on.
 /// </summary>
-@property EntityKey Entity; 
+@property EntityKey * Entity; 
 
 /// <summary>
 /// Names of the files to be set. Restricted to a-Z, 0-9, '(', ')', '_', '-' and '.'
@@ -1319,12 +1319,12 @@ typedef enum
 /// <summary>
 /// The entity to perform this action on.
 /// </summary>
-@property EntityKey Entity; 
+@property EntityKey * Entity;
 
 /// <summary>
 /// The identifier of the group
 /// </summary>
-@property EntityKey Group; 
+@property EntityKey * Group;
 
 /// <summary>
 /// Optional. ID of an existing a role in the group to assign the user to. The group's default member role is used if this is not specified. Role IDs must be between 1 and 64 characters long.
@@ -1379,12 +1379,12 @@ typedef enum
 /// <summary>
 /// The entity to perform this action on.
 /// </summary>
-@property EntityKey Entity; 
+@property EntityKey * Entity;
 
 /// <summary>
 /// The identifier of the group
 /// </summary>
-@property EntityKey Group; 
+@property EntityKey * Group;
 
 /// <summary>
 /// Optional: ID of the role to check membership of. Defaults to any role (that is, check to see if the entity is a member of the group in any capacity) if not specified.
@@ -1416,7 +1416,7 @@ typedef enum
 /// <summary>
 /// The identifier of the group
 /// </summary>
-@property EntityKey Group; 
+@property EntityKey * Group; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -1443,7 +1443,7 @@ typedef enum
 /// <summary>
 /// The identifier of the group
 /// </summary>
-@property EntityKey Group; 
+@property EntityKey * Group;
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -1470,7 +1470,7 @@ typedef enum
 /// <summary>
 /// The identifier of the group
 /// </summary>
-@property EntityKey Group; 
+@property EntityKey * Group;
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -1497,7 +1497,7 @@ typedef enum
 /// <summary>
 /// ID of the group to list the members and roles for
 /// </summary>
-@property EntityKey Group; 
+@property EntityKey * Group; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -1608,12 +1608,12 @@ typedef enum
 /// <summary>
 /// The entity to perform this action on.
 /// </summary>
-@property EntityKey Entity; 
+@property EntityKey * Entity;
 
 /// <summary>
 /// The identifier of the group
 /// </summary>
-@property EntityKey Group; 
+@property EntityKey * Group; 
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -1625,12 +1625,12 @@ typedef enum
 /// <summary>
 /// The entity to perform this action on.
 /// </summary>
-@property EntityKey Entity; 
+@property EntityKey * Entity;
 
 /// <summary>
 /// The identifier of the group
 /// </summary>
-@property EntityKey Group; 
+@property EntityKey * Group;
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -1642,7 +1642,7 @@ typedef enum
 /// <summary>
 /// The identifier of the group
 /// </summary>
-@property EntityKey Group; 
+@property EntityKey * Group;
 
 /// <summary>
 /// List of entities to remove
@@ -1664,7 +1664,7 @@ typedef enum
 /// <summary>
 /// The entity to perform this action on.
 /// </summary>
-@property EntityKey Entity; 
+@property EntityKey * Entity; 
 
 /// <summary>
 /// The statements to include in the access policy.
@@ -1767,7 +1767,7 @@ typedef enum
 /// <summary>
 /// The entity to perform this action on.
 /// </summary>
-@property EntityKey Entity; 
+@property EntityKey * Entity; 
 
 /// <summary>
 /// Optional field used for concurrency control. By specifying the previously returned value of ProfileVersion from GetProfile API, you can ensure that the object set will only be performed if the profile has not been updated by any other clients since the version you last loaded.
@@ -1809,12 +1809,12 @@ typedef enum
 /// <summary>
 /// The entity to perform this action on.
 /// </summary>
-@property EntityKey Entity; 
+@property EntityKey * Entity; 
 
 /// <summary>
 /// The identifier of the group
 /// </summary>
-@property EntityKey Group; 
+@property EntityKey * Group;
 /**/
 -(id)initWithDictionary:(NSDictionary*)properties;
 @end
@@ -1836,7 +1836,7 @@ typedef enum
 /// <summary>
 /// The identifier of the group
 /// </summary>
-@property EntityKey Group; 
+@property EntityKey * Group; 
 
 /// <summary>
 /// Optional: the new name of the group
@@ -1888,7 +1888,7 @@ typedef enum
 /// <summary>
 /// The identifier of the group
 /// </summary>
-@property EntityKey Group; 
+@property EntityKey * Group; 
 
 /// <summary>
 /// ID of the role to update. Role IDs must be between 1 and 64 characters long.
